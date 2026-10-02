@@ -1,0 +1,1982 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=1920, initial-scale=1.0">
+    <meta name="description" content="ระบบจัดการคิวผู้ป่วย - Hospital Queue Management System">
+    <title>ระบบคิวผู้ป่วย | Hospital Queue Management</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="app-layout">
+        <!-- ======== SIDEBAR ======== -->
+        <aside class="sidebar" id="sidebar">
+            <!-- Header: Logo, Brand Title, Collapse Toggle Button -->
+            <div class="sidebar-header">
+                <div class="sidebar-brand">
+                    <div class="brand-logo-icon">
+                        <svg viewBox="0 0 28 28" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M14 4.5c-4.5 0-8 3.5-8 8 0 5 8 11.5 8 11.5s8-6.5 8-11.5c0-4.5-3.5-8-8-8z" stroke="#4DD0E1" fill="none"/>
+                            <circle cx="14" cy="12.5" r="3" stroke="#80CBC4" fill="none"/>
+                        </svg>
+                    </div>
+                    <div class="brand-info">
+                        <span class="brand-title">ระบบคิวผู้ป่วย</span>
+                        <span class="brand-subtitle">Queue Management V.01</span>
+                    </div>
+                </div>
+                <button type="button" class="sidebar-collapse-btn" id="sidebar-collapse-btn" title="ย่อ / ขยาย เมนูด้านข้าง" aria-label="Toggle Sidebar">
+                    <svg class="chevron-collapse" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="15 18 9 12 15 6"></polyline>
+                    </svg>
+                </button>
+            </div>
+
+            <!-- Scrollable Nav Section -->
+            <div class="sidebar-scroll-area">
+                <div class="sidebar-section-header">
+                    <span>เมนูหลัก</span>
+                </div>
+                <nav class="sidebar-nav">
+                    <!-- 1. หน้าหลัก -->
+                    <a href="#" class="nav-item active" data-page="dashboard" data-tooltip="หน้าหลัก" id="nav-dashboard">
+                        <div class="nav-active-pill"></div>
+                        <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/>
+                            <polyline points="9 22 9 12 15 12 15 22"/>
+                        </svg>
+                        <span class="nav-label">หน้าหลัก</span>
+                    </a>
+
+                    <!-- 2. การจัดการนัดหมาย -->
+                    <a href="#" class="nav-item" data-page="appointments" data-tooltip="การจัดการนัดหมาย" id="nav-appointments">
+                        <div class="nav-active-pill"></div>
+                        <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+                            <line x1="16" y1="2" x2="16" y2="6"/>
+                            <line x1="8" y1="2" x2="8" y2="6"/>
+                            <line x1="3" y1="10" x2="21" y2="10"/>
+                            <path d="M8 14h.01M12 14h.01M16 14h.01M8 18h.01M12 18h.01M16 18h.01"/>
+                        </svg>
+                        <span class="nav-label">การจัดการนัดหมาย</span>
+                        <span class="nav-badge" id="nav-appointments-badge">8</span>
+                    </a>
+
+                    <!-- 3. ประวัติการเรียกคิว -->
+                    <a href="#" class="nav-item" data-page="history" data-tooltip="ประวัติการเรียกคิว" id="nav-history">
+                        <div class="nav-active-pill"></div>
+                        <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M12 8v4l3 3"/>
+                            <circle cx="12" cy="12" r="10"/>
+                        </svg>
+                        <span class="nav-label">ประวัติการเรียกคิว</span>
+                    </a>
+
+
+                    <!-- 4. รายงานสถิติ -->
+                    <a href="#" class="nav-item" data-page="reports" data-tooltip="รายงานสถิติ" id="nav-reports">
+                        <div class="nav-active-pill"></div>
+                        <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/>
+                            <polyline points="17 8 12 3 7 8"/>
+                            <line x1="12" y1="3" x2="12" y2="15"/>
+                        </svg>
+                        <span class="nav-label">รายงานสถิติ</span>
+                    </a>
+
+                    <!-- 5. ตั้งค่าระบบ -->
+                    <a href="#" class="nav-item" data-page="settings" data-tooltip="ตั้งค่าระบบ" id="nav-settings">
+                        <div class="nav-active-pill"></div>
+                        <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="12" r="3"/>
+                            <path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 012.83-2.83l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"/>
+                        </svg>
+                        <span class="nav-label">ตั้งค่าระบบ</span>
+                    </a>
+                </nav>
+            </div>
+
+            <!-- Sidebar Bottom Actions & Profile -->
+            <div class="sidebar-bottom">
+                <div class="sidebar-actions-grid">
+                    <button type="button" class="btn-generate-queue" id="btn-generate-queue" onclick="generateNewPatientQueue()" title="สุ่มสร้างคิวผู้ป่วยใหม่เข้าระบบทันที" data-tooltip="เจนคิวผู้ป่วย">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="15" height="15">
+                            <path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+                            <circle cx="9" cy="7" r="4"/>
+                            <line x1="19" y1="8" x2="19" y2="14"/>
+                            <line x1="22" y1="11" x2="16" y2="11"/>
+                        </svg>
+                        <span class="action-btn-text">+ เจนคิวผู้ป่วย</span>
+                    </button>
+                    <button type="button" class="btn-simulate" id="btn-simulate-late" title="จำลองเวลาผ่านไป 35 นาที" data-tooltip="จำลองมาสาย">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="15" height="15"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                        <span class="action-btn-text">จำลองมาสาย</span>
+                    </button>
+                </div>
+                <a href="doctor.html" class="btn-simulate btn-go-doctor" data-tooltip="ไปหน้าแพทย์" style="margin-top:8px;text-decoration:none;text-align:center;background:rgba(77,208,225,0.15);border-color:rgba(77,208,225,0.3);color:#4DD0E1;">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><path d="M20 6h-4V4c0-1.1-.9-2-2-2h-4c-1.1 0-2 .9-2 2v2H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2z"/><line x1="12" y1="11" x2="12" y2="17"/><line x1="9" y1="14" x2="15" y2="14"/></svg>
+                    <span class="action-btn-text">ไปหน้าแพทย์</span>
+                </a>
+
+                <!-- User Profile at bottom (Click to open Profile) -->
+                <div class="sidebar-user-profile" id="sidebar-user-profile" data-tooltip="คลิกเพื่อดูและแก้ไขโปรไฟล์">
+                    <div class="user-avatar-wrap">
+                        <span style="font-size:1.15rem;line-height:1;">👨‍💼</span>
+                    </div>
+                    <div class="user-profile-details">
+                        <span class="user-profile-name">ธนกฤต พิพัฒน์ชัย</span>
+                        <span class="user-profile-email">เจ้าหน้าที่ฝ่ายตรวจสอบ</span>
+                    </div>
+                    <div class="user-profile-arrow">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="14" height="14"><polyline points="9 18 15 12 9 6"/></svg>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- ======== MAIN CONTENT ======== -->
+        <main class="main-content">
+            <!-- Top Navigation Bar -->
+            <header class="top-bar" id="top-bar">
+                <div class="top-bar-left">
+                    <h1 class="page-title" id="page-title">หน้าจอหลัก</h1>
+                </div>
+                <div class="top-bar-stats" id="top-bar-stats">
+                    <div class="stat-card" id="stat-waiting">
+                        <div class="stat-icon waiting">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l6 6"/><circle cx="12" cy="12" r="10"/></svg>
+                            <!-- Hourglass -->
+                            <svg viewBox="0 0 24 24" fill="currentColor" width="22" height="22"><path d="M6 2v6l4 4-4 4v6h12v-6l-4-4 4-4V2H6zm10 15.5V20H8v-2.5l4-4 4 4zm-4-5l-4-4V4h8v4.5l-4 4z"/></svg>
+                        </div>
+                        <div class="stat-info">
+                            <span class="stat-label">รอเรียกตรวจ</span>
+                            <span class="stat-value" id="stat-waiting-count">0</span>
+                            <span class="stat-unit">คิว</span>
+                        </div>
+                    </div>
+                    <div class="stat-card" id="stat-lab">
+                        <div class="stat-icon lab">
+                            <svg viewBox="0 0 24 24" fill="currentColor" width="22" height="22"><path d="M7 2v2h1v7.15l-4.35 7.61C2.87 20.11 3.84 22 5.44 22h13.12c1.6 0 2.57-1.89 1.79-3.24L16 11.15V4h1V2H7zm6 9.68l3.82 6.68H7.18L11 11.68V4h2v7.68z"/></svg>
+                        </div>
+                        <div class="stat-info">
+                            <span class="stat-label">พักรอผลตรวจ/แล็บ</span>
+                            <span class="stat-value" id="stat-lab-count">0</span>
+                            <span class="stat-unit">คิว</span>
+                        </div>
+                    </div>
+                    <div class="stat-card" id="stat-examining">
+                        <div class="stat-icon examining">
+                            <svg viewBox="0 0 24 24" fill="currentColor" width="22" height="22"><path d="M20 2H4c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-2 12H6v-2h12v2zm0-4H6V8h12v2z"/></svg>
+                        </div>
+                        <div class="stat-info">
+                            <span class="stat-label">กำลังตรวจในห้อง</span>
+                            <span class="stat-value" id="stat-examining-count">0</span>
+                            <span class="stat-unit">ห้อง</span>
+                        </div>
+                    </div>
+                    <div class="stat-card" id="stat-done">
+                        <div class="stat-icon done">
+                            <svg viewBox="0 0 24 24" fill="currentColor" width="22" height="22"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+                        </div>
+                        <div class="stat-info">
+                            <span class="stat-label">ตรวจเสร็จวันนี้</span>
+                            <span class="stat-value" id="stat-done-count">0</span>
+                            <span class="stat-unit">ราย</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="top-bar-right">
+                    <div class="datetime-display">
+                        <div class="date-text" id="date-text"></div>
+                        <div class="time-display">
+                            <span class="time-text" id="time-text">00:00</span>
+                            <span class="time-period">น.</span>
+                        </div>
+                        <div class="timezone-text">เวลามาตรฐานประเทศไทย</div>
+                    </div>
+                    <button type="button" class="btn-sound-toggle" id="btn-sound-toggle" onclick="toggleSound()" title="เปิด/ปิดเสียงเรียกคิว">
+                        <svg class="sound-icon-on" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"/></svg>
+                        <svg class="sound-icon-off" style="display:none;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><line x1="23" y1="9" x2="17" y2="15"/><line x1="17" y1="9" x2="23" y2="15"/></svg>
+                        <span class="sound-status-text" id="sound-status-text">เสียง: เปิด</span>
+                    </button>
+                </div>
+            </header>
+
+            <!-- ======== PAGE: DASHBOARD (Kanban Board) ======== -->
+            <div class="page-content active" id="page-dashboard">
+                <!-- Department Filter Bar -->
+                <div class="department-filter-bar" id="dept-filter-bar">
+                    <div class="dept-bar-left">
+                        <div class="dept-bar-label">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18"><path d="M19 21l-7-5-7 5V5a2 2 0 012-2h10a2 2 0 012 2z"/></svg>
+                            <span>แผนกการรักษา:</span>
+                        </div>
+                        <div class="dept-pills-container" id="dept-pills">
+                            <button class="dept-pill active" data-dept="all">
+                                <span class="dept-pill-name">ทุกแผนก</span>
+                                <span class="dept-pill-count" id="count-dept-all">0</span>
+                            </button>
+                            <button class="dept-pill" data-dept="อายุรกรรม">
+                                <span class="dept-pill-icon">🩺</span>
+                                <span class="dept-pill-name">อายุรกรรม</span>
+                                <span class="dept-pill-count" id="count-dept-med">0</span>
+                            </button>
+                            <button class="dept-pill" data-dept="ทันตกรรม">
+                                <span class="dept-pill-icon">🦷</span>
+                                <span class="dept-pill-name">ทันตกรรม</span>
+                                <span class="dept-pill-count" id="count-dept-dental">0</span>
+                            </button>
+                            <button class="dept-pill" data-dept="ศัลยกรรม">
+                                <span class="dept-pill-icon">✂️</span>
+                                <span class="dept-pill-name">ศัลยกรรม</span>
+                                <span class="dept-pill-count" id="count-dept-surg">0</span>
+                            </button>
+                            <button class="dept-pill" data-dept="กุมารเวชกรรม">
+                                <span class="dept-pill-icon">👶</span>
+                                <span class="dept-pill-name">กุมารเวชกรรม</span>
+                                <span class="dept-pill-count" id="count-dept-pedia">0</span>
+                            </button>
+                            <button class="dept-pill" data-dept="จักษุวิทยา">
+                                <span class="dept-pill-icon">👁️</span>
+                                <span class="dept-pill-name">จักษุวิทยา</span>
+                                <span class="dept-pill-count" id="count-dept-eye">0</span>
+                            </button>
+                            <button class="dept-pill" data-dept="กระดูกและข้อ">
+                                <span class="dept-pill-icon">🦴</span>
+                                <span class="dept-pill-name">กระดูกและข้อ</span>
+                                <span class="dept-pill-count" id="count-dept-ortho">0</span>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="dept-bar-right">
+                        <div class="dept-search-box">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                            <input type="text" id="quick-search-input" placeholder="ค้นหาชื่อ, เลขคิว, HN...">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="kanban-board" id="kanban-board">
+                    <!-- Column 1: Waiting Queue -->
+                    <div class="kanban-column" id="col-waiting">
+                        <div class="column-header">
+                            <div class="column-title-group">
+                                <span class="column-number">1</span>
+                                <h2 class="column-title">รอเรียกตรวจ</h2>
+                                <span class="column-count" id="col-waiting-count">0</span>
+                            </div>
+                            <div style="display:flex; align-items:center; gap:8px;">
+                                <button type="button" class="btn-insert-urgent" onclick="openUrgentModal()" title="แทรกคิวด่วนกะทันหัน">
+                                    <svg viewBox="0 0 24 24" fill="currentColor" width="13" height="13"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+                                    + แทรกคิวด่วน
+                                </button>
+                                <div class="column-filters" id="queue-filters">
+                                    <button class="filter-btn active" data-filter="all">ทั้งหมด</button>
+                                    <button class="filter-btn" data-filter="appointment">นัดหมาย</button>
+                                    <button class="filter-btn" data-filter="walkin">Walk-in</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="column-body" id="waiting-list">
+                            <!-- Queue cards will be rendered by JS -->
+                        </div>
+                    </div>
+
+                    <!-- Column 2: Lab / Waiting Results -->
+                    <div class="kanban-column" id="col-lab">
+                        <div class="column-header">
+                            <div class="column-title-group">
+                                <span class="column-number">2</span>
+                                <h2 class="column-title">พักรอผลตรวจ</h2>
+                                <span class="column-count" id="col-lab-count">0</span>
+                            </div>
+                        </div>
+                        <div class="column-body" id="lab-list">
+                            <!-- Lab waiting cards will be rendered by JS -->
+                        </div>
+                    </div>
+
+                    <!-- Column 3: Examination Rooms -->
+                    <div class="kanban-column" id="col-rooms">
+                        <div class="column-header">
+                            <div class="column-title-group">
+                                <span class="column-number">3</span>
+                                <h2 class="column-title">กำลังตรวจในห้องตรวจ</h2>
+                                <span class="column-count-badge" id="col-rooms-active">Active 0 ห้อง</span>
+                            </div>
+                        </div>
+                        <div class="column-body rooms-grid" id="rooms-list">
+                            <!-- Room cards will be rendered by JS -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ======== PAGE: HISTORY ======== -->
+            <div class="page-content" id="page-history">
+                <div class="history-page">
+                    <div class="history-filters">
+                        <div class="filter-group">
+                            <label>เริ่มต้น</label>
+                            <input type="date" class="filter-input" id="history-date-start">
+                        </div>
+                        <div class="filter-group">
+                            <label>ถึง</label>
+                            <input type="date" class="filter-input" id="history-date-end">
+                        </div>
+                        <div class="filter-group">
+                            <label>ประเภท</label>
+                            <select class="filter-input" id="history-type-filter">
+                                <option value="all">ทั้งหมด</option>
+                                <option value="appointment">นัดหมาย</option>
+                                <option value="walkin">Walk-in</option>
+                            </select>
+                        </div>
+                        <div class="filter-group">
+                            <label>แผนก</label>
+                            <select class="filter-input" id="history-dept-filter">
+                                <option value="all">ทั้งหมด</option>
+                                <option value="อายุรกรรม">อายุรกรรม</option>
+                                <option value="ทันตกรรม">ทันตกรรม</option>
+                                <option value="ศัลยกรรม">ศัลยกรรม</option>
+                                <option value="กุมารเวชกรรม">กุมารเวชกรรม</option>
+                                <option value="จักษุวิทยา">จักษุวิทยา</option>
+                                <option value="กระดูกและข้อ">กระดูกและข้อ</option>
+                            </select>
+                        </div>
+                        <div class="filter-group">
+                            <label>สถานะ</label>
+                            <div class="filter-pills">
+                                <button class="filter-pill active" data-status="all">ทั้งหมด</button>
+                                <button class="filter-pill" data-status="done">สิ้นสุดการตรวจ</button>
+                                <button class="filter-pill" data-status="overdue">เกินกำหนด</button>
+                            </div>
+                        </div>
+                        <div class="history-summary-cards">
+                            <div class="summary-card teal">
+                                <span class="summary-label">สิ้นสุดการตรวจ</span>
+                                <span class="summary-value" id="history-done-count">0</span>
+                            </div>
+                            <div class="summary-card red">
+                                <span class="summary-label">เกินกำหนด</span>
+                                <span class="summary-value" id="history-overdue-count">0</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="history-table-wrap">
+                        <table class="history-table" id="history-table">
+                            <thead>
+                                <tr>
+                                    <th>เวลาเรียกคิว</th>
+                                    <th>หมายเลขคิว</th>
+                                    <th>ชื่อ - นามสกุล</th>
+                                    <th>ประเภท</th>
+                                    <th>เวลานัด</th>
+                                    <th>แผนก</th>
+                                    <th>สถานะ</th>
+                                    <th>จัดการ</th>
+                                </tr>
+                            </thead>
+                            <tbody id="history-tbody">
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ======== PAGE: OVERDUE ======== -->
+            <div class="page-content" id="page-overdue">
+                <div class="overdue-page">
+                    <div class="empty-state">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="#aaa" stroke-width="1.5" width="64" height="64"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+                        <h3>คิวเกินกำหนด</h3>
+                        <p>แสดงรายการคิวที่เกินเวลานัดหมายและถูกเลื่อนลำดับ</p>
+                        <div id="overdue-list-content"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ======== PAGE: REPORTS & STATS DASHBOARD ======== -->
+            <div class="page-content" id="page-reports">
+                <div class="reports-dashboard">
+                    <!-- Top Action & Filter Bar -->
+                    <div class="reports-header-bar">
+                        <div class="reports-title-area">
+                            <h2 class="reports-title">แดชบอร์ดรายงานสถิติการให้บริการ</h2>
+                            <p class="reports-subtitle">วิเคราะห์ข้อมูลปริมาณผู้ป่วย ระยะเวลาการรอคอย และประสิทธิภาพแต่ละแผนก</p>
+                        </div>
+                        <div class="reports-actions">
+                            <div class="reports-filter-group">
+                                <label for="reports-date-range">ช่วงเวลา:</label>
+                                <select id="reports-date-range" class="reports-select" onchange="renderReportsDashboard()">
+                                    <option value="today">วันนี้ (Today)</option>
+                                    <option value="week">สัปดาห์นี้ (This Week)</option>
+                                    <option value="month">เดือนนี้ (This Month)</option>
+                                </select>
+                            </div>
+                            <div class="reports-filter-group">
+                                <label for="reports-dept-filter">แผนก:</label>
+                                <select id="reports-dept-filter" class="reports-select" onchange="renderReportsDashboard()">
+                                    <option value="all">ทุกแผนก (All Departments)</option>
+                                    <option value="อายุรกรรม">🩺 อายุรกรรม</option>
+                                    <option value="ทันตกรรม">🦷 ทันตกรรม</option>
+                                    <option value="ศัลยกรรม">✂️ ศัลยกรรม</option>
+                                    <option value="กุมารเวชกรรม">👶 กุมารเวชกรรม</option>
+                                    <option value="จักษุวิทยา">👁️ จักษุวิทยา</option>
+                                    <option value="กระดูกและข้อ">🦴 กระดูกและข้อ</option>
+                                </select>
+                            </div>
+                            <div class="export-btn-group">
+                                <button type="button" class="btn-export btn-export-excel" onclick="exportReportCSV()" title="ดาวน์โหลดเป็นไฟล์ Excel/CSV">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                                    <span>Export Excel (CSV)</span>
+                                </button>
+                                <button type="button" class="btn-export btn-export-print" onclick="printReport()" title="พิมพ์หรือบันทึกเป็น PDF">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+                                    <span>พิมพ์ / PDF</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- KPI Metric Cards Grid -->
+                    <div class="reports-kpi-grid">
+                        <div class="kpi-card teal">
+                            <div class="kpi-icon-wrap">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                            </div>
+                            <div class="kpi-body">
+                                <span class="kpi-label">ผู้ป่วยเข้ารับบริการทั้งหมด</span>
+                                <div class="kpi-value-row">
+                                    <span class="kpi-value" id="kpi-total-patients">0</span>
+                                    <span class="kpi-unit">คน</span>
+                                </div>
+                                <span class="kpi-trend up">↗ +12.5% เทียบเมื่อวาน</span>
+                            </div>
+                        </div>
+
+                        <div class="kpi-card green">
+                            <div class="kpi-icon-wrap">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+                            </div>
+                            <div class="kpi-body">
+                                <span class="kpi-label">ตรวจเสร็จสิ้นแล้ว</span>
+                                <div class="kpi-value-row">
+                                    <span class="kpi-value" id="kpi-completed-patients">0</span>
+                                    <span class="kpi-unit">คน</span>
+                                </div>
+                                <span class="kpi-badge success" id="kpi-completion-rate">ความสำเร็จ 0%</span>
+                            </div>
+                        </div>
+
+                        <div class="kpi-card amber">
+                            <div class="kpi-icon-wrap">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                            </div>
+                            <div class="kpi-body">
+                                <span class="kpi-label">เวลารอคอยเฉลี่ย</span>
+                                <div class="kpi-value-row">
+                                    <span class="kpi-value" id="kpi-avg-waiting">16</span>
+                                    <span class="kpi-unit">นาที</span>
+                                </div>
+                                <span class="kpi-trend down">✓ อยู่ในเกณฑ์มาตรฐาน (&lt;30น.)</span>
+                            </div>
+                        </div>
+
+                        <div class="kpi-card blue">
+                            <div class="kpi-icon-wrap">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6h-4V4c0-1.1-.9-2-2-2h-4c-1.1 0-2 .9-2 2v2H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2z"/></svg>
+                            </div>
+                            <div class="kpi-body">
+                                <span class="kpi-label">เวลาตรวจเฉลี่ยต่อคน</span>
+                                <div class="kpi-value-row">
+                                    <span class="kpi-value" id="kpi-avg-exam">14</span>
+                                    <span class="kpi-unit">นาที</span>
+                                </div>
+                                <span class="kpi-badge info">ความพึงพอใจ 96.4%</span>
+                            </div>
+                        </div>
+
+                        <div class="kpi-card rose">
+                            <div class="kpi-icon-wrap">
+                                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+                            </div>
+                            <div class="kpi-body">
+                                <span class="kpi-label">คิวด่วนพิเศษ / แทรกคิว</span>
+                                <div class="kpi-value-row">
+                                    <span class="kpi-value" id="kpi-urgent-count">0</span>
+                                    <span class="kpi-unit">เคส</span>
+                                </div>
+                                <span class="kpi-badge urgent-badge">จัดการเสร็จ 100%</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Charts Section (Grid of 2 Cards) -->
+                    <div class="reports-charts-row">
+                        <!-- Chart 1: Hourly Queue Traffic (Bar Chart) -->
+                        <div class="chart-card">
+                            <div class="chart-header">
+                                <div class="chart-title-area">
+                                    <h3 class="chart-title">ปริมาณคิวผู้ป่วยตามช่วงเวลา (Hourly Patient Volume)</h3>
+                                    <p class="chart-desc">สถิติจำนวนคิวที่เข้ารับบริการในแต่ละชั่วโมง (08:00 - 17:00 น.)</p>
+                                </div>
+                                <div class="chart-badge">Peak: 09:00 - 11:00 น.</div>
+                            </div>
+                            <div class="chart-body">
+                                <div class="hourly-bars-container" id="hourly-bars-container">
+                                    <!-- Rendered dynamically by JS -->
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Chart 2: Queue Types & Department Distribution -->
+                        <div class="chart-card">
+                            <div class="chart-header">
+                                <div class="chart-title-area">
+                                    <h3 class="chart-title">สัดส่วนประเภทคิวและการส่งต่อ (Queue Types)</h3>
+                                    <p class="chart-desc">จำแนกตาม นัดหมาย, Walk-in, คิวด่วน และส่งต่อระหว่างแผนก</p>
+                                </div>
+                            </div>
+                            <div class="chart-body">
+                                <div class="queue-type-bars" id="queue-type-breakdown">
+                                    <!-- Rendered dynamically by JS -->
+                                </div>
+                                <div class="queue-dept-bars-title">สัดส่วนปริมาณผู้ป่วยแยกตามแผนก</div>
+                                <div class="dept-progress-list" id="dept-progress-list">
+                                    <!-- Rendered dynamically by JS -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Detailed Department Table -->
+                    <div class="reports-table-card">
+                        <div class="table-card-header">
+                            <div>
+                                <h3 class="table-card-title">สรุปสถิติประสิทธิภาพการให้บริการรายแผนก</h3>
+                                <p class="table-card-desc">ข้อมูลเปรียบเทียบจำนวนคิว เวลารอคอยเฉลี่ย และอัตราความสำเร็จในแต่ละแผนกการรักษา</p>
+                            </div>
+                            <button type="button" class="btn-sub-export" onclick="exportReportCSV()">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                                Export ตารางนี้
+                            </button>
+                        </div>
+                        <div class="table-responsive">
+                            <table class="reports-data-table" id="reports-dept-table">
+                                <thead>
+                                    <tr>
+                                        <th>แผนกการรักษา</th>
+                                        <th>คิวทั้งหมด</th>
+                                        <th>ตรวจเสร็จแล้ว</th>
+                                        <th>กำลังตรวจ</th>
+                                        <th>รอเรียกตรวจ</th>
+                                        <th>เวลารอเฉลี่ย</th>
+                                        <th>อัตราสำเร็จ</th>
+                                        <th>สถานะความหนาแน่น</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="reports-dept-tbody">
+                                    <!-- Rendered dynamically by JS -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ======== PAGE: APPOINTMENTS (การจัดการนัดหมาย) ======== -->
+            <div class="page-content" id="page-appointments">
+                <div class="appointments-page">
+                    <!-- Top Action & Info Bar -->
+                    <div class="appt-header-bar">
+                        <div class="appt-title-area">
+                            <h2 class="appt-title">ระบบการจัดการนัดหมายผู้ป่วย</h2>
+                            <p class="appt-subtitle">สร้างนัดหมายใหม่ ค้นหา ตรวจสอบ เลื่อนวันนัด และยกเลิกนัดหมาย</p>
+                        </div>
+                        <div class="appt-actions">
+                            <button type="button" class="btn-create-appt" onclick="openCreateApptModal()" id="btn-open-create-appt">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" width="16" height="16">
+                                    <path d="M12 5v14M5 12h14"/>
+                                </svg>
+                                <span>+ สร้างนัดหมายใหม่</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- KPI Metric Cards Grid -->
+                    <div class="appt-kpi-grid">
+                        <div class="appt-kpi-card teal">
+                            <div class="appt-kpi-icon-wrap">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+                                    <line x1="16" y1="2" x2="16" y2="6"/>
+                                    <line x1="8" y1="2" x2="8" y2="6"/>
+                                    <line x1="3" y1="10" x2="21" y2="10"/>
+                                </svg>
+                            </div>
+                            <div class="appt-kpi-body">
+                                <span class="appt-kpi-label">นัดหมายทั้งหมดในระบบ</span>
+                                <div class="appt-kpi-value-row">
+                                    <span class="appt-kpi-value" id="kpi-appt-total">0</span>
+                                    <span class="appt-kpi-unit">รายการ</span>
+                                </div>
+                                <span class="appt-kpi-badge primary">จัดการข้อมูลคิว</span>
+                            </div>
+                        </div>
+
+                        <div class="appt-kpi-card green">
+                            <div class="appt-kpi-icon-wrap">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                                    <polyline points="22 4 12 14.01 9 11.01"/>
+                                </svg>
+                            </div>
+                            <div class="appt-kpi-body">
+                                <span class="appt-kpi-label">นัดหมายยืนยันแล้ว / รอตรวจ</span>
+                                <div class="appt-kpi-value-row">
+                                    <span class="appt-kpi-value" id="kpi-appt-confirmed">0</span>
+                                    <span class="appt-kpi-unit">ราย</span>
+                                </div>
+                                <span class="appt-kpi-badge success">พร้อมให้บริการ</span>
+                            </div>
+                        </div>
+
+                        <div class="appt-kpi-card amber">
+                            <div class="appt-kpi-icon-wrap">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <polyline points="12 6 12 12 14 14"/>
+                                    <path d="M16 2v4M8 2v4"/>
+                                </svg>
+                            </div>
+                            <div class="appt-kpi-body">
+                                <span class="appt-kpi-label">ขอเลื่อนวันนัดหมายแล้ว</span>
+                                <div class="appt-kpi-value-row">
+                                    <span class="appt-kpi-value" id="kpi-appt-rescheduled">0</span>
+                                    <span class="appt-kpi-unit">เคส</span>
+                                </div>
+                                <span class="appt-kpi-badge warning">เปลี่ยนวัน/เวลา</span>
+                            </div>
+                        </div>
+
+                        <div class="appt-kpi-card red">
+                            <div class="appt-kpi-icon-wrap">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <line x1="15" y1="9" x2="9" y2="15"/>
+                                    <line x1="9" y1="9" x2="15" y2="15"/>
+                                </svg>
+                            </div>
+                            <div class="appt-kpi-body">
+                                <span class="appt-kpi-label">ยกเลิกนัดหมาย</span>
+                                <div class="appt-kpi-value-row">
+                                    <span class="appt-kpi-value" id="kpi-appt-cancelled">0</span>
+                                    <span class="appt-kpi-unit">เคส</span>
+                                </div>
+                                <span class="appt-kpi-badge danger">ยกเลิกแล้ว</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Filter & Search Toolbar -->
+                    <div class="appt-filters-container">
+                        <div class="appt-filter-row">
+                            <div class="appt-search-box">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16">
+                                    <circle cx="11" cy="11" r="8"/>
+                                    <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+                                </svg>
+                                <input type="text" id="appt-search-input" placeholder="ค้นหาตาม HN, ชื่อคนไข้, เบอร์โทร, หรือรหัสนัด...">
+                            </div>
+
+                            <div class="appt-filter-controls">
+                                <div class="appt-filter-select-wrap">
+                                    <label>ช่วงวัน:</label>
+                                    <select id="appt-date-filter" class="appt-select" onchange="renderAppointments()">
+                                        <option value="all">ทั้งหมด (All Dates)</option>
+                                        <option value="today" selected>นัดวันนี้ (Today)</option>
+                                        <option value="tomorrow">นัดพรุ่งนี้ (Tomorrow)</option>
+                                        <option value="week">สัปดาห์นี้ (This Week)</option>
+                                    </select>
+                                </div>
+
+                                <div class="appt-filter-select-wrap">
+                                    <label>แผนก:</label>
+                                    <select id="appt-dept-filter" class="appt-select" onchange="renderAppointments()">
+                                        <option value="all">ทุกแผนก (All)</option>
+                                        <option value="อายุรกรรม">🩺 อายุรกรรม</option>
+                                        <option value="ทันตกรรม">🦷 ทันตกรรม</option>
+                                        <option value="ศัลยกรรม">✂️ ศัลยกรรม</option>
+                                        <option value="กุมารเวชกรรม">👶 กุมารเวชกรรม</option>
+                                        <option value="จักษุวิทยา">👁️ จักษุวิทยา</option>
+                                        <option value="กระดูกและข้อ">🦴 กระดูกและข้อ</option>
+                                    </select>
+                                </div>
+
+                                <div class="appt-filter-select-wrap">
+                                    <label>สถานะ:</label>
+                                    <select id="appt-status-filter" class="appt-select" onchange="renderAppointments()">
+                                        <option value="all">ทุกสถานะ (All)</option>
+                                        <option value="confirmed">🟢 ยืนยันนัด</option>
+                                        <option value="rescheduled">🟡 เลื่อนนัดแล้ว</option>
+                                        <option value="cancelled">🔴 ยกเลิกแล้ว</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Appointments Table -->
+                    <div class="appt-table-card">
+                        <div class="table-responsive">
+                            <table class="appt-data-table" id="appt-table">
+                                <thead>
+                                    <tr>
+                                        <th>วัน-เวลานัดหมาย</th>
+                                        <th>รหัสนัด / HN</th>
+                                        <th>ชื่อ-นามสกุล / เบอร์โทร</th>
+                                        <th>แผนก / แพทย์ผู้ตรวจ</th>
+                                        <th>อาการ / สาเหตุการนัด</th>
+                                        <th>สถานะนัด</th>
+                                        <th style="text-align: right;">การจัดการ</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="appt-table-tbody">
+                                    <!-- Rendered dynamically by JS -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ======== PAGE: SETTINGS (ตั้งค่าระบบ) ======== -->
+            <div class="page-content" id="page-settings">
+                <div class="settings-container">
+                    <!-- Top Settings Header -->
+                    <div class="settings-header-banner">
+                        <div class="settings-header-text">
+                            <h2>
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="24" height="24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 012.83-2.83l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"/></svg>
+                                <span>ตั้งค่าระบบจัดการคิว (System Configuration)</span>
+                            </h2>
+                            <p>กำหนดค่าระบบเสียงเรียกคิว กฎการจัดการเวลา ข้อมูลสถานพยาบาล และการสำรองข้อมูล</p>
+                        </div>
+                        <div class="settings-header-actions">
+                            <button type="button" class="btn-settings-save" onclick="saveSystemSettingsFromUI()">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="16" height="16"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>
+                                <span>บันทึกการตั้งค่า</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Settings Category Grid -->
+                    <div class="settings-grid">
+                        <!-- 1. Sound & Announcement -->
+                        <div class="settings-card">
+                            <div class="settings-card-header">
+                                <div class="settings-card-icon teal">🔊</div>
+                                <div>
+                                    <h3>ระบบเสียงเรียกคิวและการประกาศ (Sound & Voice)</h3>
+                                    <p>ปรับแต่งเสียงกระดิ่งเตือน ระดับเสียง และการอ่านชื่อผู้ป่วย</p>
+                                </div>
+                            </div>
+                            <div class="settings-card-body">
+                                <div class="setting-item-row">
+                                    <div class="setting-item-info">
+                                        <label class="setting-label">เปิดใช้งานเสียงเรียกคิวอัตโนมัติ (Master Sound)</label>
+                                        <span class="setting-desc">ส่งเสียงเตือนและเสียงพูดเมื่อมีการกดเรียกคิวผู้ป่วย</span>
+                                    </div>
+                                    <label class="switch-toggle">
+                                        <input type="checkbox" id="setting-sound-enabled" onchange="soundManager.toggle(this.checked)">
+                                        <span class="slider-toggle"></span>
+                                    </label>
+                                </div>
+
+                                <div class="setting-item-row">
+                                    <div class="setting-item-info">
+                                        <label class="setting-label">ระดับความดังเสียง (Volume)</label>
+                                        <span class="setting-desc">ปรับความดังเสียงเตือนกระดิ่งและเสียงพูด (<span id="setting-vol-text">85%</span>)</span>
+                                    </div>
+                                    <input type="range" class="setting-range" id="setting-sound-volume" min="10" max="100" value="85" oninput="updateSettingVolumeText(this.value)">
+                                </div>
+
+                                <div class="setting-item-row">
+                                    <div class="setting-item-info">
+                                        <label class="setting-label">ความเร็วเสียงอ่าน (Speech Rate)</label>
+                                        <span class="setting-desc">ความเร็วในการออกเสียงอ่านภาษาไทย</span>
+                                    </div>
+                                    <select class="setting-select" id="setting-speech-rate">
+                                        <option value="0.8">ช้าชัดเจน (0.8x)</option>
+                                        <option value="1.0" selected>ความเร็วปกติ (1.0x)</option>
+                                        <option value="1.15">เร็วเล็กน้อย (1.15x)</option>
+                                    </select>
+                                </div>
+
+                                <div class="setting-item-row">
+                                    <div class="setting-item-info">
+                                        <label class="setting-label">รูปแบบเสียงสัญญาณกระดิ่ง (Chime Melodic Tone)</label>
+                                        <span class="setting-desc">เลือกโทนเสียงดนตรีก่อนเริ่มประกาศ</span>
+                                    </div>
+                                    <select class="setting-select" id="setting-chime-tone">
+                                        <option value="hospital" selected>🔔 ติ่งหน่อง 2 จังหวะ (Hospital Melodic)</option>
+                                        <option value="urgent">⚡ เสียงเตือนเร่งด่วน 3 โทน (Urgent Alert)</option>
+                                        <option value="classic">🎵 กระดิ่งซอฟต์คลาสสิก (Soft Classic)</option>
+                                    </select>
+                                </div>
+
+                                <div class="setting-item-row">
+                                    <div class="setting-item-info">
+                                        <label class="setting-label">อ่านชื่อผู้ป่วยตามหลังหมายเลขคิว</label>
+                                        <span class="setting-desc">เช่น "ขอเชิญหมายเลขคิว A001 คุณสมชาย..."</span>
+                                    </div>
+                                    <label class="switch-toggle">
+                                        <input type="checkbox" id="setting-announce-name" checked>
+                                        <span class="slider-toggle"></span>
+                                    </label>
+                                </div>
+
+                                <div class="setting-item-row">
+                                    <div class="setting-item-info">
+                                        <label class="setting-label">จำนวนครั้งในการประกาศซ้ำ</label>
+                                        <span class="setting-desc">จำนวนรอบการพูดประกาศต่อการกด 1 ครั้ง</span>
+                                    </div>
+                                    <select class="setting-select" id="setting-repeat-count">
+                                        <option value="1" selected>ประกาศ 1 รอบ</option>
+                                        <option value="2">ประกาศซ้ำ 2 รอบ</option>
+                                    </select>
+                                </div>
+
+                                <div class="setting-test-box">
+                                    <button type="button" class="btn-test-sound" onclick="testQueueSoundAnnouncement()">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"/></svg>
+                                        <span>ทดสอบฟังเสียงเรียกคิว (Test Call)</span>
+                                    </button>
+                                    <span class="test-sound-hint">กดเพื่อฟังตัวอย่างโทนเสียงและคำอ่านจำลอง</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 2. Queue Rules & Timing Thresholds -->
+                        <div class="settings-card">
+                            <div class="settings-card-header">
+                                <div class="settings-card-icon amber">⏱️</div>
+                                <div>
+                                    <h3>เกณฑ์เวลาและกฎการจัดการคิว (Queue Rules & Timing)</h3>
+                                    <p>กำหนดเกณฑ์การแจ้งเตือนคิวมาสายและการแทรกคิว</p>
+                                </div>
+                            </div>
+                            <div class="settings-card-body">
+                                <div class="setting-item-row">
+                                    <div class="setting-item-info">
+                                        <label class="setting-label">เกณฑ์เวลานับเป็น "คิวมาสาย" (Overdue Threshold)</label>
+                                        <span class="setting-desc">เวลารอคอยเกินกี่นาทีจะแสดงสถานะเตือนสีส้ม</span>
+                                    </div>
+                                    <select class="setting-select" id="setting-late-threshold">
+                                        <option value="15">15 นาที</option>
+                                        <option value="20">20 นาที</option>
+                                        <option value="30" selected>30 นาที (ค่ามาตรฐาน)</option>
+                                        <option value="45">45 นาที</option>
+                                        <option value="60">60 นาที</option>
+                                    </select>
+                                </div>
+
+                                <div class="setting-item-row">
+                                    <div class="setting-item-info">
+                                        <label class="setting-label">เวลาเฉลี่ยโดยประมาณต่อการตรวจ (Est. Service Time)</label>
+                                        <span class="setting-desc">ใช้ในการคำนวณเวลารอคอยเฉลี่ยให้ผู้ป่วย</span>
+                                    </div>
+                                    <select class="setting-select" id="setting-avg-service">
+                                        <option value="10">10 นาที / ท่าน</option>
+                                        <option value="15" selected>15 นาที / ท่าน (ค่าแนะนำ)</option>
+                                        <option value="20">20 นาที / ท่าน</option>
+                                        <option value="30">30 นาที / ท่าน</option>
+                                    </select>
+                                </div>
+
+                                <div class="setting-item-row">
+                                    <div class="setting-item-info">
+                                        <label class="setting-label">อนุญาตให้แทรกคิวด่วนฉุกเฉิน (Emergency Queues)</label>
+                                        <span class="setting-desc">เปิดให้มีปุ่มแทรกคิวด่วนเข้าสู่ระบบได้ทันที</span>
+                                    </div>
+                                    <label class="switch-toggle">
+                                        <input type="checkbox" id="setting-allow-urgent" checked>
+                                        <span class="slider-toggle"></span>
+                                    </label>
+                                </div>
+
+                                <div class="setting-item-row">
+                                    <div class="setting-item-info">
+                                        <label class="setting-label">ระบบจัดสรรห้องตรวจอัตโนมัติตามแผนก (Smart Room Match)</label>
+                                        <span class="setting-desc">แนะนำห้องตรวจที่ตรงกับแผนกและกำลังว่างเป็นลำดับแรก</span>
+                                    </div>
+                                    <label class="switch-toggle">
+                                        <input type="checkbox" id="setting-smart-room" checked>
+                                        <span class="slider-toggle"></span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 3. Hospital & Service Station Info -->
+                        <div class="settings-card">
+                            <div class="settings-card-header">
+                                <div class="settings-card-icon blue">🏥</div>
+                                <div>
+                                    <h3>ข้อมูลสถานพยาบาลและจุดบริการ (Hospital & Station)</h3>
+                                    <p>ข้อมูลที่จะแสดงบนหัวบัตรคิวและหน้าจอแสดงผล</p>
+                                </div>
+                            </div>
+                            <div class="settings-card-body">
+                                <div class="setting-form-group">
+                                    <label class="setting-label">ชื่อสถานพยาบาล / โรงพยาบาล</label>
+                                    <input type="text" class="setting-input" id="setting-hosp-name" value="โรงพยาบาลกรุงเทพเมดิคอล เซ็นเตอร์">
+                                </div>
+                                <div class="setting-form-group">
+                                    <label class="setting-label">สาขา / อาคาร</label>
+                                    <input type="text" class="setting-input" id="setting-hosp-branch" value="สาขาหลัก (อาคารผู้ป่วยนอก OPD)">
+                                </div>
+                                <div class="setting-form-group">
+                                    <label class="setting-label">ชื่อจุดบริการ / เคาน์เตอร์ประจำการ</label>
+                                    <input type="text" class="setting-input" id="setting-station-name" value="จุดคัดกรองและจัดการคิวกลาง (Counter 1)">
+                                </div>
+                                <div class="setting-form-group">
+                                    <label class="setting-label">เบอร์โทรศัพท์ติดต่อศูนย์ประชาสัมพันธ์</label>
+                                    <input type="text" class="setting-input" id="setting-hosp-phone" value="02-123-4567 ต่อ 101">
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 4. Display & Kiosk Configuration -->
+                        <div class="settings-card">
+                            <div class="settings-card-header">
+                                <div class="settings-card-icon green">🖥️</div>
+                                <div>
+                                    <h3>การแสดงผลและหน้าจอดิจิทัล (Display & Kiosk)</h3>
+                                    <p>การแสดงผลบนจอคีออสก์และป้ายข้อความวิ่ง</p>
+                                </div>
+                            </div>
+                            <div class="settings-card-body">
+                                <div class="setting-item-row">
+                                    <div class="setting-item-info">
+                                        <label class="setting-label">แสดงรายการคิวที่ตรวจเสร็จแล้วย้อนหลัง (History List)</label>
+                                        <span class="setting-desc">แสดงรายการคิวที่พึ่งเสร็จสิ้นในหน้าจอคิว</span>
+                                    </div>
+                                    <label class="switch-toggle">
+                                        <input type="checkbox" id="setting-show-completed" checked>
+                                        <span class="slider-toggle"></span>
+                                    </label>
+                                </div>
+
+                                <div class="setting-item-row">
+                                    <div class="setting-item-info">
+                                        <label class="setting-label">รอบเวลารีเฟรชข้อมูลหน้าจออัตโนมัติ</label>
+                                        <span class="setting-desc">ความถี่ในการอัปเดตเวลารอคิวและสถานะ</span>
+                                    </div>
+                                    <select class="setting-select" id="setting-refresh-interval">
+                                        <option value="15">ทุก 15 วินาที</option>
+                                        <option value="30" selected>ทุก 30 วินาที</option>
+                                        <option value="60">ทุก 1 นาที</option>
+                                    </select>
+                                </div>
+
+                                <div class="setting-form-group" style="margin-top:10px;">
+                                    <label class="setting-label">ข้อความประกาศบนแถบหน้าจอ (Announcement Banner)</label>
+                                    <input type="text" class="setting-input" id="setting-banner-text" value="กรุณารอเรียกหมายเลขคิวของท่าน และตรวจสอบห้องตรวจที่ระบุบนหน้าจอ">
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 5. Backup, Export & System Reset (Full Width) -->
+                        <div class="settings-card full-width">
+                            <div class="settings-card-header">
+                                <div class="settings-card-icon red">💾</div>
+                                <div>
+                                    <h3>การจัดการข้อมูลและการสำรองระบบ (Backup & System Reset)</h3>
+                                    <p>สำรองข้อมูลคิว นำเข้าข้อมูล หรือรีเซ็ตระบบเพื่อเริ่มต้นวันใหม่</p>
+                                </div>
+                            </div>
+                            <div class="settings-card-body">
+                                <div class="backup-actions-grid">
+                                    <div class="backup-action-card">
+                                        <div class="backup-info">
+                                            <h4>📤 ส่งออกข้อมูลสำรอง (Export System Data)</h4>
+                                            <p>ดาวน์โหลดข้อมูลคิว นัดหมาย และการตั้งค่าทั้งหมดเป็นไฟล์ JSON เพื่อสำรองเก็บไว้</p>
+                                        </div>
+                                        <button type="button" class="btn-backup-export" onclick="exportSystemDataBackup()">
+                                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                                            ดาวน์โหลดไฟล์สำรอง
+                                        </button>
+                                    </div>
+
+                                    <div class="backup-action-card">
+                                        <div class="backup-info">
+                                            <h4>📥 นำเข้าข้อมูลสำรอง (Import Data)</h4>
+                                            <p>กู้คืนข้อมูลระบบจากไฟล์ JSON สำรองที่เคยส่งออกไว้</p>
+                                        </div>
+                                        <input type="file" id="backup-import-file" accept=".json" style="display:none;" onchange="handleImportSystemData(event)">
+                                        <button type="button" class="btn-backup-import" onclick="document.getElementById('backup-import-file').click()">
+                                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+                                            เลือกไฟล์นำเข้า (.json)
+                                        </button>
+                                    </div>
+
+                                    <div class="backup-action-card warning-card">
+                                        <div class="backup-info">
+                                            <h4 style="color:#D97706;">🌅 รีเซ็ตคิวเริ่มวันใหม่ (Reset Daily Queue)</h4>
+                                            <p>ล้างคิวที่รอตรวจและนับจำนวนเสร็จสิ้นของวันนี้ใหม่เพื่อเริ่มรอบการทำงานวันใหม่</p>
+                                        </div>
+                                        <button type="button" class="btn-backup-reset-day" onclick="confirmResetDailyQueue()">
+                                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/></svg>
+                                            รีเซ็ตคิวประจำวัน
+                                        </button>
+                                    </div>
+
+                                    <div class="backup-action-card danger-card">
+                                        <div class="backup-info">
+                                            <h4 style="color:#DC2626;">⚠️ คืนค่าเริ่มต้นโรงงาน (Factory Reset)</h4>
+                                            <p>ลบข้อมูลทั้งหมดและคืนค่าระบบกลับสู่สถานะเริ่มต้นเหมือนติดตั้งใหม่</p>
+                                        </div>
+                                        <button type="button" class="btn-backup-factory-reset" onclick="confirmFactoryReset()">
+                                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>
+                                            คืนค่าโรงงาน
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ======== PAGE: USER PROFILE (ข้อมูลและแก้ไขโปรไฟล์) ======== -->
+            <div class="page-content" id="page-profile">
+                <div class="user-profile-page">
+                    <!-- Profile Hero Banner Card -->
+                    <div class="profile-hero-card">
+                        <div class="profile-hero-cover">
+                            <div class="profile-cover-pattern"></div>
+                            <div class="profile-status-badge">
+                                <span class="status-pulse-dot"></span>
+                                <span id="hero-profile-status-text">กำลังปฏิบัติหน้าที่</span>
+                            </div>
+                        </div>
+                        <div class="profile-hero-body">
+                            <div class="profile-avatar-wrapper">
+                                <div class="profile-main-avatar" id="profile-main-avatar" style="background:#006D6F;" onclick="openAvatarSelectorModal()" title="คลิกเพื่อเปลี่ยนรูป/ไอคอนโปรไฟล์">
+                                    <span class="avatar-emoji-display" id="avatar-emoji-display">👨‍💼</span>
+                                    <div class="avatar-edit-overlay">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16">
+                                            <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/>
+                                            <circle cx="12" cy="13" r="4"/>
+                                        </svg>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="profile-hero-info">
+                                <div class="profile-name-row">
+                                    <h2 class="profile-full-name" id="hero-profile-name">นาย ธนกฤต พิพัฒน์ชัย</h2>
+                                    <span class="profile-verified-badge" title="เจ้าหน้าที่ได้รับการยืนยันตัวตนในระบบ">
+                                        <svg viewBox="0 0 24 24" fill="currentColor" width="16" height="16">
+                                            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                                        </svg>
+                                        ยืนยันแล้ว
+                                    </span>
+                                    <span class="profile-staff-id" id="hero-profile-staff-id">ID: ST-4029</span>
+                                </div>
+                                <div class="profile-meta-tags">
+                                    <span class="meta-tag meta-role" id="hero-profile-role">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                                        เจ้าหน้าที่ฝ่ายตรวจสอบและคัดกรองคิว
+                                    </span>
+                                    <span class="meta-tag meta-dept" id="hero-profile-dept">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
+                                        ฝ่ายเวชระเบียนและจัดการคิวผู้ป่วย
+                                    </span>
+                                    <span class="meta-tag meta-shift" id="hero-profile-shift">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                                        กะเช้า (08:00 - 16:30 น.)
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="profile-hero-actions">
+                                <div class="profile-mode-toggle" id="profile-mode-toggle">
+                                    <button type="button" class="btn-mode-tab active" id="btn-mode-view" onclick="setProfileMode('view')">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="15" height="15"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+                                        ดูข้อมูลสรุป
+                                    </button>
+                                    <button type="button" class="btn-mode-tab" id="btn-mode-edit" onclick="setProfileMode('edit')">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="15" height="15"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+                                        แก้ไขข้อมูลโปรไฟล์
+                                    </button>
+                                </div>
+                                <button type="button" class="btn-copy-profile" onclick="copyProfileContactInfo()" title="คัดลอกนามบัตรข้อมูลติดต่อ">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="15" height="15"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+                                    คัดลอกข้อมูล
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Quick KPI Chips Bar -->
+                        <div class="profile-kpi-bar">
+                            <div class="profile-kpi-item">
+                                <div class="kpi-icon-bubble teal">📋</div>
+                                <div class="kpi-text-wrap">
+                                    <span class="kpi-label">คิวที่ให้บริการวันนี้</span>
+                                    <span class="kpi-value" id="kpi-served-today">28 คิว</span>
+                                </div>
+                            </div>
+                            <div class="profile-kpi-item">
+                                <div class="kpi-icon-bubble blue">⏱️</div>
+                                <div class="kpi-text-wrap">
+                                    <span class="kpi-label">เวลารอเฉลี่ยของระบบ</span>
+                                    <span class="kpi-value" id="kpi-avg-wait">14.2 นาที</span>
+                                </div>
+                            </div>
+                            <div class="profile-kpi-item">
+                                <div class="kpi-icon-bubble green">🏥</div>
+                                <div class="kpi-text-wrap">
+                                    <span class="kpi-label">จุดประจำการหลัก</span>
+                                    <span class="kpi-value" id="kpi-station">เคาน์เตอร์คัดกรอง 1</span>
+                                </div>
+                            </div>
+                            <div class="profile-kpi-item">
+                                <div class="kpi-icon-bubble amber">⭐</div>
+                                <div class="kpi-text-wrap">
+                                    <span class="kpi-label">สถานะและความพร้อม</span>
+                                    <span class="kpi-value" id="kpi-availability">พร้อมรับบริการ</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Profile Content Section with Navigation Tabs -->
+                    <div class="profile-tabs-nav">
+                        <button type="button" class="profile-nav-tab active" data-tab="tab-personal" onclick="switchProfileTab('tab-personal')">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                            <span>ข้อมูลทั่วไปและตำแหน่งงาน</span>
+                        </button>
+                        <button type="button" class="profile-nav-tab" data-tab="tab-contact" onclick="switchProfileTab('tab-contact')">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                            <span>ข้อมูลติดต่อและการปฏิบัติงาน</span>
+                        </button>
+                        <button type="button" class="profile-nav-tab" data-tab="tab-activity" onclick="switchProfileTab('tab-activity')">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><path d="M12 20v-6M6 20V10M18 20V4"/></svg>
+                            <span>ประวัติกิจกรรมและสิทธิ์ระบบ</span>
+                        </button>
+                    </div>
+
+                    <!-- TAB 1: Personal & Work Info -->
+                    <div class="profile-tab-content active" id="tab-personal">
+                        <!-- VIEW MODE: Personal & Work -->
+                        <div class="profile-view-container" id="view-mode-personal">
+                            <div class="profile-info-grid">
+                                <div class="info-card">
+                                    <div class="info-card-header">
+                                        <div class="info-card-icon teal">👤</div>
+                                        <div>
+                                            <h4 class="info-card-title">ข้อมูลส่วนตัว</h4>
+                                            <p class="info-card-subtitle">ข้อมูลพื้นฐานของเจ้าหน้าที่ในระบบ</p>
+                                        </div>
+                                    </div>
+                                    <div class="info-details-list">
+                                        <div class="detail-row">
+                                            <span class="detail-label">คำนำหน้า:</span>
+                                            <span class="detail-val" id="view-prefix">นาย</span>
+                                        </div>
+                                        <div class="detail-row">
+                                            <span class="detail-label">ชื่อ - นามสกุล:</span>
+                                            <span class="detail-val highlight" id="view-fullname">ธนกฤต พิพัฒน์ชัย</span>
+                                        </div>
+                                        <div class="detail-row">
+                                            <span class="detail-label">ชื่อเล่น:</span>
+                                            <span class="detail-val" id="view-nickname">กฤต</span>
+                                        </div>
+                                        <div class="detail-row">
+                                            <span class="detail-label">รหัสพนักงาน (Staff ID):</span>
+                                            <span class="detail-val code-badge" id="view-staff-id">ST-4029</span>
+                                        </div>
+                                        <div class="detail-row">
+                                            <span class="detail-label">วันที่เริ่มงาน:</span>
+                                            <span class="detail-val" id="view-start-date">15 มกราคม 2565</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="info-card">
+                                    <div class="info-card-header">
+                                        <div class="info-card-icon blue">💼</div>
+                                        <div>
+                                            <h4 class="info-card-title">ตำแหน่งและหน่วยงาน</h4>
+                                            <p class="info-card-subtitle">ข้อมูลฝ่ายงานและสถานีรับผิดชอบ</p>
+                                        </div>
+                                    </div>
+                                    <div class="info-details-list">
+                                        <div class="detail-row">
+                                            <span class="detail-label">ตำแหน่งทางการ:</span>
+                                            <span class="detail-val highlight" id="view-role">เจ้าหน้าที่ฝ่ายตรวจสอบและคัดกรองคิว</span>
+                                        </div>
+                                        <div class="detail-row">
+                                            <span class="detail-label">แผนก / สังกัด:</span>
+                                            <span class="detail-val" id="view-department">ฝ่ายเวชระเบียนและจัดการคิวผู้ป่วย</span>
+                                        </div>
+                                        <div class="detail-row">
+                                            <span class="detail-label">สถานีประจำการ:</span>
+                                            <span class="detail-val" id="view-station">เคาน์เตอร์คัดกรองจุดที่ 1</span>
+                                        </div>
+                                        <div class="detail-row">
+                                            <span class="detail-label">กะการทำงานหลัก:</span>
+                                            <span class="detail-val" id="view-shift">กะเช้า (08:00 - 16:30 น.)</span>
+                                        </div>
+                                        <div class="detail-row">
+                                            <span class="detail-label">สถานะปัจจุบัน:</span>
+                                            <span class="detail-val status-badge-online" id="view-status">กำลังปฏิบัติหน้าที่</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="info-card full-width" style="margin-top:16px;">
+                                <div class="info-card-header">
+                                    <div class="info-card-icon green">📝</div>
+                                    <div>
+                                        <h4 class="info-card-title">บันทึกย่อและหน้าที่ประจำวัน (Bio & Responsibilities)</h4>
+                                        <p class="info-card-subtitle">รายละเอียดภาระงานและคำแนะนำสำหรับเจ้าหน้าที่</p>
+                                    </div>
+                                </div>
+                                <div class="bio-display-box" id="view-bio">
+                                    ดูแลระบบจัดการคิว คัดกรองผู้ป่วยกลุ่มนัดหมายและ Walk-in ประจำจุดคัดกรองกลาง ประสานงานแพทย์และพยาบาลทุกห้องตรวจ พร้อมควบคุมการเรียกคิวผ่านระบบเสียงและหน้าจอแสดงผลดิจิทัล
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- EDIT MODE: Personal & Work -->
+                        <div class="profile-edit-container" id="edit-mode-personal" style="display:none;">
+                            <form class="profile-edit-form" id="form-profile-personal" onsubmit="event.preventDefault(); submitSaveUserProfile();">
+                                <div class="edit-form-card">
+                                    <h4 class="edit-section-title">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+                                        แก้ไขข้อมูลส่วนตัวและตำแหน่งงาน
+                                    </h4>
+                                    <div class="edit-form-grid">
+                                        <div class="form-group-custom">
+                                            <label for="input-prefix">คำนำหน้าชื่อ <span class="req">*</span></label>
+                                            <select class="form-control-custom" id="input-prefix">
+                                                <option value="นาย">นาย</option>
+                                                <option value="นาง">นาง</option>
+                                                <option value="นางสาว">นางสาว</option>
+                                                <option value="นพ.">นพ.</option>
+                                                <option value="พญ.">พญ.</option>
+                                                <option value="ทพ.">ทพ.</option>
+                                                <option value="ทพญ.">ทพญ.</option>
+                                                <option value="ดร.">ดร.</option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group-custom">
+                                            <label for="input-firstname">ชื่อจริง <span class="req">*</span></label>
+                                            <input type="text" class="form-control-custom" id="input-firstname" required placeholder="ชื่อ">
+                                        </div>
+                                        <div class="form-group-custom">
+                                            <label for="input-lastname">นามสกุล <span class="req">*</span></label>
+                                            <input type="text" class="form-control-custom" id="input-lastname" required placeholder="นามสกุล">
+                                        </div>
+                                        <div class="form-group-custom">
+                                            <label for="input-nickname">ชื่อเล่น</label>
+                                            <input type="text" class="form-control-custom" id="input-nickname" placeholder="ชื่อเล่น">
+                                        </div>
+                                        <div class="form-group-custom">
+                                            <label for="input-staff-id">รหัสพนักงาน (Staff ID) <span class="req">*</span></label>
+                                            <input type="text" class="form-control-custom" id="input-staff-id" required placeholder="เช่น ST-4029">
+                                        </div>
+                                        <div class="form-group-custom">
+                                            <label for="input-role">ตำแหน่งงาน <span class="req">*</span></label>
+                                            <input type="text" class="form-control-custom" id="input-role" required placeholder="เช่น เจ้าหน้าที่ฝ่ายตรวจสอบและคัดกรองคิว">
+                                        </div>
+                                        <div class="form-group-custom">
+                                            <label for="input-department">แผนก / สังกัด <span class="req">*</span></label>
+                                            <select class="form-control-custom" id="input-department">
+                                                <option value="ฝ่ายเวชระเบียนและจัดการคิวผู้ป่วย">ฝ่ายเวชระเบียนและจัดการคิวผู้ป่วย</option>
+                                                <option value="อายุรกรรม">อายุรกรรม</option>
+                                                <option value="ทันตกรรม">ทันตกรรม</option>
+                                                <option value="ศัลยกรรม">ศัลยกรรม</option>
+                                                <option value="กุมารเวชกรรม">กุมารเวชกรรม</option>
+                                                <option value="จักษุวิทยา">จักษุวิทยา</option>
+                                                <option value="กระดูกและข้อ">กระดูกและข้อ</option>
+                                                <option value="ฝ่ายตรวจทางห้องปฏิบัติการ (LAB)">ฝ่ายตรวจทางห้องปฏิบัติการ (LAB)</option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group-custom">
+                                            <label for="input-station">สถานีปฏิบัติงานหลัก</label>
+                                            <input type="text" class="form-control-custom" id="input-station" placeholder="เช่น เคาน์เตอร์คัดกรองจุดที่ 1">
+                                        </div>
+                                        <div class="form-group-custom full-span">
+                                            <label for="input-bio">บันทึกย่อประจำตัว / หน้าที่ความรับผิดชอบ</label>
+                                            <textarea class="form-control-custom" id="input-bio" rows="3" placeholder="ระบุรายละเอียดภาระงานหรือข้อความบันทึกย่อ..."></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+
+                    <!-- TAB 2: Contact & Shift Details -->
+                    <div class="profile-tab-content" id="tab-contact">
+                        <!-- VIEW MODE: Contact -->
+                        <div class="profile-view-container" id="view-mode-contact">
+                            <div class="profile-info-grid">
+                                <div class="info-card">
+                                    <div class="info-card-header">
+                                        <div class="info-card-icon teal">📞</div>
+                                        <div>
+                                            <h4 class="info-card-title">ช่องทางการติดต่อ</h4>
+                                            <p class="info-card-subtitle">ข้อมูลการติดต่อสำหรับประสานงาน</p>
+                                        </div>
+                                    </div>
+                                    <div class="info-details-list">
+                                        <div class="detail-row">
+                                            <span class="detail-label">อีเมลโรงพยาบาล:</span>
+                                            <span class="detail-val" id="view-email"><a href="mailto:thanakrit.p@hospital.mail" class="link-contact">thanakrit.p@hospital.mail</a></span>
+                                        </div>
+                                        <div class="detail-row">
+                                            <span class="detail-label">เบอร์โทรศัพท์ภายใน:</span>
+                                            <span class="detail-val" id="view-phone-ext">Ext. 2104</span>
+                                        </div>
+                                        <div class="detail-row">
+                                            <span class="detail-label">เบอร์โทรศัพท์มือถือ:</span>
+                                            <span class="detail-val" id="view-mobile">089-123-4567</span>
+                                        </div>
+                                        <div class="detail-row">
+                                            <span class="detail-label">ผู้ติดต่อกรณีฉุกเฉิน:</span>
+                                            <span class="detail-val emergency-text" id="view-emergency">คุณสมใจ พิพัฒน์ชัย (มารดา) - 081-987-6543</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="info-card">
+                                    <div class="info-card-header">
+                                        <div class="info-card-icon amber">⏰</div>
+                                        <div>
+                                            <h4 class="info-card-title">ตารางการทำงานและความพร้อม</h4>
+                                            <p class="info-card-subtitle">ข้อมูลเวลาปฏิบัติการและการแจ้งเตือน</p>
+                                        </div>
+                                    </div>
+                                    <div class="info-details-list">
+                                        <div class="detail-row">
+                                            <span class="detail-label">กะการทำงานปัจจุบัน:</span>
+                                            <span class="detail-val highlight" id="view-shift-detail">กะเช้า (08:00 - 16:30 น.)</span>
+                                        </div>
+                                        <div class="detail-row">
+                                            <span class="detail-label">วันปฏิบัติงาน:</span>
+                                            <span class="detail-val">จันทร์ - ศุกร์</span>
+                                        </div>
+                                        <div class="detail-row">
+                                            <span class="detail-label">ระบบแจ้งเตือนเสียง:</span>
+                                            <span class="detail-val" id="view-sound-setting">เปิดใช้งานเสียงเรียกคิวอัตโนมัติ</span>
+                                        </div>
+                                        <div class="detail-row">
+                                            <span class="detail-label">การเข้าสู่ระบบล่าสุด:</span>
+                                            <span class="detail-val" id="view-last-login">วันนี้ เวลา 07:55 น.</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- EDIT MODE: Contact -->
+                        <div class="profile-edit-container" id="edit-mode-contact" style="display:none;">
+                            <div class="edit-form-card">
+                                <h4 class="edit-section-title">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                                    แก้ไขข้อมูลติดต่อและกะการทำงาน
+                                </h4>
+                                <div class="edit-form-grid">
+                                    <div class="form-group-custom">
+                                        <label for="input-email">อีเมลโรงพยาบาล <span class="req">*</span></label>
+                                        <input type="email" class="form-control-custom" id="input-email" required placeholder="name@hospital.mail">
+                                    </div>
+                                    <div class="form-group-custom">
+                                        <label for="input-phone-ext">เบอร์โทรภายใน (Ext.)</label>
+                                        <input type="text" class="form-control-custom" id="input-phone-ext" placeholder="เช่น Ext. 2104">
+                                    </div>
+                                    <div class="form-group-custom">
+                                        <label for="input-mobile">เบอร์โทรศัพท์มือถือ</label>
+                                        <input type="text" class="form-control-custom" id="input-mobile" placeholder="เช่น 089-123-4567">
+                                    </div>
+                                    <div class="form-group-custom">
+                                        <label for="input-shift">กะการทำงาน</label>
+                                        <select class="form-control-custom" id="input-shift">
+                                            <option value="กะเช้า (08:00 - 16:30 น.)">กะเช้า (08:00 - 16:30 น.)</option>
+                                            <option value="กะบ่าย (12:00 - 20:30 น.)">กะบ่าย (12:00 - 20:30 น.)</option>
+                                            <option value="กะดึก (20:00 - 08:30 น.)">กะดึก (20:00 - 08:30 น.)</option>
+                                            <option value="กะพิเศษเสาร์-อาทิตย์">กะพิเศษเสาร์-อาทิตย์</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group-custom full-span">
+                                        <label for="input-emergency">ผู้ติดต่อกรณีฉุกเฉิน (ชื่อ ความสัมพันธ์ เบอร์โทร)</label>
+                                        <input type="text" class="form-control-custom" id="input-emergency" placeholder="เช่น คุณสมใจ พิพัฒน์ชัย (มารดา) - 081-987-6543">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- TAB 3: Activity & Access Permissions -->
+                    <div class="profile-tab-content" id="tab-activity">
+                        <div class="profile-info-grid">
+                            <div class="info-card">
+                                <div class="info-card-header">
+                                    <div class="info-card-icon green">🛡️</div>
+                                    <div>
+                                        <h4 class="info-card-title">สิทธิ์การเข้าถึงระบบที่ได้รับมอบหมาย</h4>
+                                        <p class="info-card-subtitle">สิทธิ์ของเจ้าหน้าที่ในระบบจัดการคิว</p>
+                                    </div>
+                                </div>
+                                <div class="permissions-badges-grid">
+                                    <div class="perm-badge active">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="16" height="16"><polyline points="20 6 9 17 4 12"/></svg>
+                                        <span>เรียกคิวผู้ป่วยทุกแผนก</span>
+                                    </div>
+                                    <div class="perm-badge active">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="16" height="16"><polyline points="20 6 9 17 4 12"/></svg>
+                                        <span>แทรกคิวด่วนฉุกเฉิน (Emergency)</span>
+                                    </div>
+                                    <div class="perm-badge active">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="16" height="16"><polyline points="20 6 9 17 4 12"/></svg>
+                                        <span>สร้าง / เลื่อนนัดหมายผู้ป่วย</span>
+                                    </div>
+                                    <div class="perm-badge active">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="16" height="16"><polyline points="20 6 9 17 4 12"/></svg>
+                                        <span>ดูรายงานและสถิติภาพรวม</span>
+                                    </div>
+                                    <div class="perm-badge active">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="16" height="16"><polyline points="20 6 9 17 4 12"/></svg>
+                                        <span>ควบคุมเสียงเรียกคิวอัตโนมัติ</span>
+                                    </div>
+                                    <div class="perm-badge inactive">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="16" height="16"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+                                        <span>แก้ไขสิทธิ์ระดับผู้ดูแลระบบ (Admin)</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="info-card">
+                                <div class="info-card-header">
+                                    <div class="info-card-icon blue">⚡</div>
+                                    <div>
+                                        <h4 class="info-card-title">ประวัติการปฏิบัติงานล่าสุด</h4>
+                                        <p class="info-card-subtitle">บันทึกกิจกรรมล่าสุดในเซสชันนี้</p>
+                                    </div>
+                                </div>
+                                <div class="timeline-activity-list" id="profile-activity-list">
+                                    <div class="timeline-item">
+                                        <div class="timeline-dot teal"></div>
+                                        <div class="timeline-info">
+                                            <span class="timeline-action">เรียกคิว A-004 เข้าห้องตรวจที่ 1</span>
+                                            <span class="timeline-time">วันนี้ 11:42 น.</span>
+                                        </div>
+                                    </div>
+                                    <div class="timeline-item">
+                                        <div class="timeline-dot blue"></div>
+                                        <div class="timeline-info">
+                                            <span class="timeline-action">สร้างคิวด่วนฉุกเฉิน EM-001 (ศัลยกรรม)</span>
+                                            <span class="timeline-time">วันนี้ 10:30 น.</span>
+                                        </div>
+                                    </div>
+                                    <div class="timeline-item">
+                                        <div class="timeline-dot green"></div>
+                                        <div class="timeline-info">
+                                            <span class="timeline-action">สร้างใบนัดหมายใหม่ผู้ป่วย HN 67-004912</span>
+                                            <span class="timeline-time">วันนี้ 09:15 น.</span>
+                                        </div>
+                                    </div>
+                                    <div class="timeline-item">
+                                        <div class="timeline-dot amber"></div>
+                                        <div class="timeline-info">
+                                            <span class="timeline-action">เข้าสู่ระบบประจำสถานีเคาน์เตอร์คัดกรอง 1</span>
+                                            <span class="timeline-time">วันนี้ 07:55 น.</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Bottom Action Controls Bar (shown in edit mode) -->
+                    <div class="profile-bottom-bar" id="profile-edit-actions" style="display:none;">
+                        <div class="bottom-bar-left">
+                            <span class="unsaved-hint">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+                                คุณกำลังอยู่ในโหมดแก้ไขข้อมูลโปรไฟล์
+                            </span>
+                        </div>
+                        <div class="bottom-bar-buttons">
+                            <button type="button" class="btn-profile-secondary" onclick="resetUserProfileForm()" title="คืนค่าเดิมก่อนแก้ไข">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="15" height="15"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/></svg>
+                                คืนค่าเดิม
+                            </button>
+                            <button type="button" class="btn-profile-secondary" onclick="setProfileMode('view')" title="ยกเลิกการแก้ไขและกลับสู่โหมดดูข้อมูล">
+                                ยกเลิก
+                            </button>
+                            <button type="button" class="btn-profile-primary" onclick="submitSaveUserProfile()" title="บันทึกข้อมูลและอัปเดตระบบ">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>
+                                บันทึกการเปลี่ยนแปลง
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Avatar Selector & Upload Modal -->
+    <div class="modal-overlay" id="avatar-modal" style="display:none;" onclick="handleAvatarModalBackdrop(event)">
+        <div class="modal-content avatar-modal-content" onclick="event.stopPropagation()">
+            <div class="modal-header">
+                <h3>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20" height="20">
+                        <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/>
+                        <circle cx="12" cy="13" r="4"/>
+                    </svg>
+                    <span>ปรับแต่งรูปภาพโปรไฟล์ (User Avatar)</span>
+                </h3>
+                <button type="button" class="modal-close" onclick="closeAvatarSelectorModal()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <!-- Modal Tabs -->
+                <div class="avatar-modal-tabs">
+                    <button type="button" class="avatar-modal-tab active" id="tab-btn-avatar-upload" onclick="switchAvatarModalTab('upload')">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16">
+                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                            <polyline points="17 8 12 3 7 8"/>
+                            <line x1="12" y1="3" x2="12" y2="15"/>
+                        </svg>
+                        <span>อัปโหลดรูปภาพส่วนตัว</span>
+                    </button>
+                    <button type="button" class="avatar-modal-tab" id="tab-btn-avatar-preset" onclick="switchAvatarModalTab('preset')">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16">
+                            <circle cx="12" cy="12" r="10"/>
+                            <path d="M8 14s1.5 2 4 2 4-2 4-2"/>
+                            <line x1="9" y1="9" x2="9.01" y2="9"/>
+                            <line x1="15" y1="9" x2="15.01" y2="9"/>
+                        </svg>
+                        <span>เลือกไอคอน & สีพื้นหลัง</span>
+                    </button>
+                </div>
+
+                <!-- Tab 1: Upload Photo -->
+                <div class="avatar-modal-pane active" id="avatar-pane-upload">
+                    <div class="avatar-upload-section">
+                        <!-- Preview Card -->
+                        <div class="avatar-current-preview-box">
+                            <div class="avatar-preview-circle" id="avatar-modal-preview" style="background:#006D6F;">
+                                <span class="avatar-preview-emoji" id="avatar-preview-emoji">👨‍💼</span>
+                                <img src="" alt="Avatar Preview" class="avatar-preview-img" id="avatar-preview-img" style="display:none;">
+                            </div>
+                            <div class="avatar-preview-details">
+                                <h4 class="avatar-preview-title" id="avatar-preview-title">รูปโปรไฟล์ปัจจุบัน</h4>
+                                <span class="avatar-preview-status" id="avatar-preview-status">ใช้ไอคอนอิโมจิ</span>
+                                <div class="avatar-preview-actions" style="margin-top:8px;">
+                                    <button type="button" class="btn-avatar-action remove" id="btn-remove-avatar-photo" onclick="removeCustomAvatarImage()" style="display:none;">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>
+                                        ลบรูป (เปลี่ยนใช้ไอคอน)
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Dropzone Area -->
+                        <input type="file" id="avatar-file-input" accept="image/png, image/jpeg, image/jpg, image/webp, image/gif" style="display:none;" onchange="handleAvatarFileUpload(event)">
+                        <div class="avatar-dropzone" id="avatar-dropzone" onclick="triggerAvatarFileInput()" ondragover="handleAvatarDragOver(event)" ondragleave="handleAvatarDragLeave(event)" ondrop="handleAvatarDrop(event)">
+                            <div class="dropzone-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" width="36" height="36">
+                                    <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
+                                    <circle cx="8.5" cy="8.5" r="1.5"/>
+                                    <polyline points="21 15 16 10 5 21"/>
+                                </svg>
+                            </div>
+                            <div class="dropzone-text">
+                                <strong>คลิกเพื่อเลือกไฟล์รูปภาพ</strong> หรือลากรูปมาวางที่นี่
+                            </div>
+                            <div class="dropzone-hint">
+                                รองรับไฟล์ JPG, PNG, WEBP หรือ GIF (ระบบปรับขนาดให้อัตโนมัติ)
+                            </div>
+                            <button type="button" class="btn-browse-file" onclick="event.stopPropagation(); triggerAvatarFileInput();">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+                                เลือกรูปภาพจากเครื่อง
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tab 2: Preset Emoji & Color -->
+                <div class="avatar-modal-pane" id="avatar-pane-preset" style="display:none;">
+                    <p class="modal-instruction">เลือกไอคอนตัวแทนและชุดสีพื้นหลังสำหรับโปรไฟล์ของคุณ:</p>
+                    <div class="avatar-presets-grid" id="avatar-presets-grid">
+                        <button type="button" class="avatar-option" data-emoji="👨‍💼" onclick="chooseAvatarPreset('👨‍💼')">
+                            <span class="avatar-option-icon">👨‍💼</span>
+                            <span class="avatar-option-name">เจ้าหน้าที่ชาย</span>
+                        </button>
+                        <button type="button" class="avatar-option" data-emoji="👩‍💼" onclick="chooseAvatarPreset('👩‍💼')">
+                            <span class="avatar-option-icon">👩‍💼</span>
+                            <span class="avatar-option-name">เจ้าหน้าที่หญิง</span>
+                        </button>
+                        <button type="button" class="avatar-option" data-emoji="👨‍⚕️" onclick="chooseAvatarPreset('👨‍⚕️')">
+                            <span class="avatar-option-icon">👨‍⚕️</span>
+                            <span class="avatar-option-name">แพทย์ชาย</span>
+                        </button>
+                        <button type="button" class="avatar-option" data-emoji="👩‍⚕️" onclick="chooseAvatarPreset('👩‍⚕️')">
+                            <span class="avatar-option-icon">👩‍⚕️</span>
+                            <span class="avatar-option-name">แพทย์หญิง</span>
+                        </button>
+                        <button type="button" class="avatar-option" data-emoji="🧑‍⚕️" onclick="chooseAvatarPreset('🧑‍⚕️')">
+                            <span class="avatar-option-icon">🧑‍⚕️</span>
+                            <span class="avatar-option-name">พยาบาล</span>
+                        </button>
+                        <button type="button" class="avatar-option" data-emoji="🏥" onclick="chooseAvatarPreset('🏥')">
+                            <span class="avatar-option-icon">🏥</span>
+                            <span class="avatar-option-name">โรงพยาบาล</span>
+                        </button>
+                        <button type="button" class="avatar-option" data-emoji="🩺" onclick="chooseAvatarPreset('🩺')">
+                            <span class="avatar-option-icon">🩺</span>
+                            <span class="avatar-option-name">หูฟังแพทย์</span>
+                        </button>
+                        <button type="button" class="avatar-option" data-emoji="ธพ" onclick="chooseAvatarPreset('ธพ')">
+                            <span class="avatar-option-icon text-initial">ธพ</span>
+                            <span class="avatar-option-name">ตัวย่อชื่อ</span>
+                        </button>
+                    </div>
+
+                    <div class="avatar-bg-selector" style="margin-top:20px;">
+                        <label class="avatar-bg-label">เลือกชุดสีพื้นหลัง:</label>
+                        <div class="color-palette-options" id="color-palette-options">
+                            <button type="button" class="color-dot active" style="background:#006D6F;" onclick="chooseAvatarBg('#006D6F')" title="Teal Primary"></button>
+                            <button type="button" class="color-dot" style="background:#00574B;" onclick="chooseAvatarBg('#00574B')" title="Deep Teal"></button>
+                            <button type="button" class="color-dot" style="background:#0284C7;" onclick="chooseAvatarBg('#0284C7')" title="Sky Blue"></button>
+                            <button type="button" class="color-dot" style="background:#4F46E5;" onclick="chooseAvatarBg('#4F46E5')" title="Indigo"></button>
+                            <button type="button" class="color-dot" style="background:#7C3AED;" onclick="chooseAvatarBg('#7C3AED')" title="Purple"></button>
+                            <button type="button" class="color-dot" style="background:#059669;" onclick="chooseAvatarBg('#059669')" title="Emerald"></button>
+                            <button type="button" class="color-dot" style="background:#EA580C;" onclick="chooseAvatarBg('#EA580C')" title="Warm Orange"></button>
+                            <button type="button" class="color-dot" style="background:#334155;" onclick="chooseAvatarBg('#334155')" title="Slate Dark"></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn-profile-primary" onclick="closeAvatarSelectorModal()">
+                    เสร็จสิ้น
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Floating Toast Notification Container -->
+    <div class="profile-toast-container" id="profile-toast-container"></div>
+
+    <!-- Room Selection Modal -->
+    <div class="modal-overlay" id="room-modal" style="display:none;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>กรุณาเลือกห้องตรวจ</h3>
+                <button class="modal-close" id="modal-close">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="room-grid" id="modal-room-grid">
+                    <!-- Room options rendered by JS -->
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn-confirm-room" id="btn-confirm-room" disabled>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="16" height="16"><polyline points="20 6 9 17 4 12"/></svg>
+                    ตกลง
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Urgent Queue Insertion Modal -->
+    <div class="modal-overlay" id="urgent-modal" style="display:none;" onclick="handleUrgentModalBackdrop(event)">
+        <div class="modal-content urgent-modal-content" onclick="event.stopPropagation()">
+            <div class="modal-header urgent-modal-header">
+                <h3>
+                    <svg viewBox="0 0 24 24" fill="currentColor" width="20" height="20"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+                    แทรกคิวด่วนฉุกเฉิน (กะทันหัน)
+                </h3>
+                <button type="button" class="modal-close" onclick="closeUrgentModal()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form class="urgent-form" onsubmit="event.preventDefault(); submitUrgentQueue();">
+                    <div class="urgent-form-row">
+                        <div class="urgent-form-group">
+                            <label>หมายเลขคิวด่วน <span style="color:#E11D48;">*</span></label>
+                            <input type="text" class="urgent-input" id="urgent-queue-number" placeholder="เช่น EM-001" required>
+                        </div>
+                        <div class="urgent-form-group">
+                            <label>รหัส HN ผู้ป่วย</label>
+                            <input type="text" class="urgent-input" id="urgent-hn" placeholder="เช่น HN 67-099999">
+                        </div>
+                    </div>
+                    <div class="urgent-form-group">
+                        <label>ชื่อ-นามสกุล ผู้ป่วย / รายละเอียด <span style="color:#E11D48;">*</span></label>
+                        <input type="text" class="urgent-input" id="urgent-patient-name" placeholder="ชื่อผู้ป่วย หรือ อาการด่วน..." required>
+                    </div>
+                    <div class="urgent-form-group">
+                        <label>แผนกที่ต้องการส่งตรวจ <span style="color:#E11D48;">*</span></label>
+                        <select class="urgent-input" id="urgent-department">
+                            <option value="อายุรกรรม">🩺 อายุรกรรม</option>
+                            <option value="ทันตกรรม">🦷 ทันตกรรม</option>
+                            <option value="ศัลยกรรม">✂️ ศัลยกรรม</option>
+                            <option value="กุมารเวชกรรม">👶 กุมารเวชกรรม</option>
+                            <option value="จักษุวิทยา">👁️ จักษุวิทยา</option>
+                            <option value="กระดูกและข้อ">🦴 กระดูกและข้อ</option>
+                        </select>
+                    </div>
+                    <div class="urgent-form-group">
+                        <label>การดำเนินการแทรกคิว:</label>
+                        <div class="urgent-radio-box">
+                            <label class="urgent-radio-label">
+                                <input type="radio" name="urgent-action-type" value="lab" checked>
+                                <span>⚡ <strong>เรียกคิวด่วนทันที</strong> (ส่งไปช่องรอผลตรวจ/สัญญาณชีพทันที เป็นคิวแรกสุด)</span>
+                            </label>
+                            <label class="urgent-radio-label">
+                                <input type="radio" name="urgent-action-type" value="queue">
+                                <span>📋 <strong>แทรกคิวไว้ลำดับที่ 1</strong> (ในช่องรอเรียกตรวจ พร้อมเรียกเป็นคิวถัดไป)</span>
+                            </label>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn-action" onclick="closeUrgentModal()" style="padding: 8px 16px;">ยกเลิก</button>
+                <button type="button" class="btn-confirm-urgent" onclick="submitUrgentQueue()">
+                    <svg viewBox="0 0 24 24" fill="currentColor" width="16" height="16"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+                    ยืนยันแทรกคิวด่วน
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==================== APPOINTMENT MODALS ==================== -->
+    <!-- 1. Modal: สร้างนัดหมายใหม่ -->
+    <div class="modal-overlay" id="modal-create-appt" style="display:none;" onclick="handleApptModalBackdrop(event, 'modal-create-appt')">
+        <div class="modal-content appt-modal-content" onclick="event.stopPropagation()">
+            <div class="modal-header appt-modal-header">
+                <h3>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20" height="20">
+                        <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+                        <line x1="16" y1="2" x2="16" y2="6"/>
+                        <line x1="8" y1="2" x2="8" y2="6"/>
+                        <line x1="3" y1="10" x2="21" y2="10"/>
+                    </svg>
+                    <span>สร้างนัดหมายผู้ป่วยใหม่</span>
+                </h3>
+                <button type="button" class="modal-close" onclick="closeCreateApptModal()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="form-create-appt" onsubmit="submitCreateAppt(event)">
+                    <div class="form-row-2">
+                        <div class="form-group">
+                            <label>หมายเลข HN <span class="required-star">*</span></label>
+                            <div style="display:flex; gap:6px;">
+                                <input type="text" class="appt-input" id="appt-hn" placeholder="เช่น HN 67-041920" required>
+                                <button type="button" class="btn-gen-hn" onclick="autoGenerateHN()" title="สุ่มสร้าง HN">สุ่ม</button>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>เบอร์โทรศัพท์ติดต่อ <span class="required-star">*</span></label>
+                            <input type="tel" class="appt-input" id="appt-phone" placeholder="เช่น 089-123-4567" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>ชื่อ-นามสกุล ผู้ป่วย <span class="required-star">*</span></label>
+                        <input type="text" class="appt-input" id="appt-patient-name" placeholder="ระบุคำนำหน้าและชื่อ-นามสกุล เช่น นายสมศักดิ์ มั่นคง" required>
+                    </div>
+                    <div class="form-row-2">
+                        <div class="form-group">
+                            <label>แผนกที่นัดตรวจ <span class="required-star">*</span></label>
+                            <select class="appt-input" id="appt-department" onchange="updateDoctorOptionsForDept()">
+                                <option value="อายุรกรรม">🩺 อายุรกรรม</option>
+                                <option value="ทันตกรรม">🦷 ทันตกรรม</option>
+                                <option value="ศัลยกรรม">✂️ ศัลยกรรม</option>
+                                <option value="กุมารเวชกรรม">👶 กุมารเวชกรรม</option>
+                                <option value="จักษุวิทยา">👁️ จักษุวิทยา</option>
+                                <option value="กระดูกและข้อ">🦴 กระดูกและข้อ</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>แพทย์ผู้ตรวจ</label>
+                            <select class="appt-input" id="appt-doctor">
+                                <!-- Populated dynamically based on dept -->
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-row-2">
+                        <div class="form-group">
+                            <label>วันที่นัดหมาย <span class="required-star">*</span></label>
+                            <input type="date" class="appt-input" id="appt-date" required>
+                        </div>
+                        <div class="form-group">
+                            <label>เวลานัดหมาย <span class="required-star">*</span></label>
+                            <select class="appt-input" id="appt-time" required>
+                                <option value="08:30">08:30 น.</option>
+                                <option value="09:00">09:00 น.</option>
+                                <option value="09:30" selected>09:30 น.</option>
+                                <option value="10:00">10:00 น.</option>
+                                <option value="10:30">10:30 น.</option>
+                                <option value="11:00">11:00 น.</option>
+                                <option value="13:00">13:00 น.</option>
+                                <option value="13:30">13:30 น.</option>
+                                <option value="14:00">14:00 น.</option>
+                                <option value="14:30">14:30 น.</option>
+                                <option value="15:00">15:00 น.</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>อาการ / สาเหตุหรือวัตถุประสงค์ในการนัด</label>
+                        <input type="text" class="appt-input" id="appt-reason" placeholder="เช่น นัดตรวจติดตามผลความดัน, นัดขูดหินปูน, ตรวจสายตา">
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn-action" onclick="closeCreateApptModal()">ยกเลิก</button>
+                        <button type="submit" class="btn-confirm-appt">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="16" height="16">
+                                <polyline points="20 6 9 17 4 12"/>
+                            </svg>
+                            บันทึกสร้างนัดหมาย
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- 2. Modal: เลื่อนวันนัดหมาย -->
+    <div class="modal-overlay" id="modal-reschedule-appt" style="display:none;" onclick="handleApptModalBackdrop(event, 'modal-reschedule-appt')">
+        <div class="modal-content appt-modal-content" onclick="event.stopPropagation()">
+            <div class="modal-header appt-modal-header warning">
+                <h3>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20" height="20">
+                        <circle cx="12" cy="12" r="10"/>
+                        <polyline points="12 6 12 12 14 14"/>
+                    </svg>
+                    <span>เลื่อนวันนัดหมายผู้ป่วย</span>
+                </h3>
+                <button type="button" class="modal-close" onclick="closeRescheduleApptModal()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="form-reschedule-appt" onsubmit="submitRescheduleAppt(event)">
+                    <input type="hidden" id="reschedule-appt-id">
+                    <div class="appt-info-box">
+                        <div class="info-row"><span>ผู้ป่วย:</span> <strong id="reschedule-patient-name">-</strong></div>
+                        <div class="info-row"><span>HN:</span> <strong id="reschedule-hn">-</strong></div>
+                        <div class="info-row"><span>แผนก:</span> <strong id="reschedule-dept">-</strong></div>
+                        <div class="info-row current-date"><span>กำหนดนัดเดิม:</span> <strong id="reschedule-old-datetime" style="color:#D97706;">-</strong></div>
+                    </div>
+                    <div class="form-row-2" style="margin-top:14px;">
+                        <div class="form-group">
+                            <label>วันที่นัดใหม่ <span class="required-star">*</span></label>
+                            <input type="date" class="appt-input" id="reschedule-new-date" required>
+                        </div>
+                        <div class="form-group">
+                            <label>เวลานัดใหม่ <span class="required-star">*</span></label>
+                            <select class="appt-input" id="reschedule-new-time" required>
+                                <option value="08:30">08:30 น.</option>
+                                <option value="09:00">09:00 น.</option>
+                                <option value="09:30">09:30 น.</option>
+                                <option value="10:00">10:00 น.</option>
+                                <option value="10:30">10:30 น.</option>
+                                <option value="11:00">11:00 น.</option>
+                                <option value="13:00">13:00 น.</option>
+                                <option value="13:30">13:30 น.</option>
+                                <option value="14:00">14:00 น.</option>
+                                <option value="14:30">14:30 น.</option>
+                                <option value="15:00">15:00 น.</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>สาเหตุที่ขอเลื่อนนัด <span class="required-star">*</span></label>
+                        <select class="appt-input" id="reschedule-reason-select" onchange="toggleCustomRescheduleReason()">
+                            <option value="ผู้ป่วยติดภารกิจด่วน / ไม่สะดวก">ผู้ป่วยติดภารกิจด่วน / ไม่สะดวก</option>
+                            <option value="แพทย์ติดเวรผ่าตัดฉุกเฉิน">แพทย์ติดเวรผ่าตัดฉุกเฉิน</option>
+                            <option value="ผู้ป่วยขอเลื่อนตรวจเร็วขึ้น">ผู้ป่วยขอเลื่อนตรวจเร็วขึ้น</option>
+                            <option value="รอผลแล็บหรือผลตรวจพิเศษเพิ่มเติม">รอผลแล็บหรือผลตรวจพิเศษเพิ่มเติม</option>
+                            <option value="custom">ระบุสาเหตุอื่นๆ...</option>
+                        </select>
+                        <input type="text" class="appt-input" id="reschedule-reason-custom" placeholder="ระบุเหตุผลการเลื่อนนัด..." style="display:none; margin-top:8px;">
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn-action" onclick="closeRescheduleApptModal()">ยกเลิก</button>
+                        <button type="submit" class="btn-confirm-reschedule">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16">
+                                <path d="M21 2v6h-6M3 12a9 9 0 0 1 15-6.7L21 8M3 22v-6h6M21 12a9 9 0 0 1-15 6.7L3 16"/>
+                            </svg>
+                            ยืนยันการเลื่อนนัด
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- 3. Modal: ยกเลิกนัดหมาย -->
+    <div class="modal-overlay" id="modal-cancel-appt" style="display:none;" onclick="handleApptModalBackdrop(event, 'modal-cancel-appt')">
+        <div class="modal-content appt-modal-content" onclick="event.stopPropagation()">
+            <div class="modal-header appt-modal-header danger">
+                <h3>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20" height="20">
+                        <circle cx="12" cy="12" r="10"/>
+                        <line x1="15" y1="9" x2="9" y2="15"/>
+                        <line x1="9" y1="9" x2="15" y2="15"/>
+                    </svg>
+                    <span>ยกเลิกนัดหมายผู้ป่วย</span>
+                </h3>
+                <button type="button" class="modal-close" onclick="closeCancelApptModal()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="form-cancel-appt" onsubmit="submitCancelAppt(event)">
+                    <input type="hidden" id="cancel-appt-id">
+                    <div class="appt-info-box danger-box">
+                        <div class="info-row"><span>ผู้ป่วย:</span> <strong id="cancel-patient-name">-</strong></div>
+                        <div class="info-row"><span>HN:</span> <strong id="cancel-hn">-</strong></div>
+                        <div class="info-row"><span>แผนก:</span> <strong id="cancel-dept">-</strong></div>
+                        <div class="info-row"><span>กำหนดนัดเดิม:</span> <strong id="cancel-datetime">-</strong></div>
+                    </div>
+                    <div class="form-group" style="margin-top:14px;">
+                        <label>เหตุผลในการขอยกเลิกนัดหมาย <span class="required-star">*</span></label>
+                        <select class="appt-input" id="cancel-reason-select" onchange="toggleCustomCancelReason()">
+                            <option value="ผู้ป่วยขอยกเลิกนัด">ผู้ป่วยขอยกเลิกนัด</option>
+                            <option value="ผู้ป่วยเข้ารับการรักษาที่สถานพยาบาลอื่นแล้ว">ผู้ป่วยเข้ารับการรักษาที่สถานพยาบาลอื่นแล้ว</option>
+                            <option value="อาการดีขึ้นหายเป็นปกติแล้ว">อาการดีขึ้นหายเป็นปกติแล้ว</option>
+                            <option value="ไม่สามารถติดต่อผู้ป่วยได้">ไม่สามารถติดต่อผู้ป่วยได้</option>
+                            <option value="custom">ระบุเหตุผลอื่นๆ...</option>
+                        </select>
+                        <input type="text" class="appt-input" id="cancel-reason-custom" placeholder="ระบุเหตุผลการยกเลิกนัด..." style="display:none; margin-top:8px;">
+                    </div>
+                    <p style="font-size:0.8rem; color:#EF4444; margin-top:8px;">
+                        ⚠️ เมื่อยืนยันแล้ว สถานะนัดหมายจะเปลี่ยนเป็น "ยกเลิกแล้ว" และสามารถดูประวัติได้ในระบบ
+                    </p>
+                    <div class="modal-footer">
+                        <button type="button" class="btn-action" onclick="closeCancelApptModal()">ย้อนกลับ</button>
+                        <button type="submit" class="btn-confirm-cancel">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16">
+                                <line x1="18" y1="6" x2="6" y2="18"/>
+                                <line x1="6" y1="6" x2="18" y2="18"/>
+                            </svg>
+                            ยืนยันยกเลิกนัดหมาย
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div class="toast-container" id="toast-container"></div>
+
+    <script src="app.js"></script>
+</body>
+</html>
