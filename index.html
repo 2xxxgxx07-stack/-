@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="th">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=1920, initial-scale=1.0">
@@ -7,29 +8,31 @@
     <title>ระบบคิวผู้ป่วย | Hospital Queue Management</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
     <div class="app-layout">
         <!-- ======== SIDEBAR ======== -->
-        <aside class="sidebar" id="sidebar">
-            <!-- Header: Logo, Brand Title, Collapse Toggle Button -->
+        <aside class="sidebar collapsed" id="sidebar">
+            <!-- Header: Mini Logo, Full Brand Title, Collapse Toggle Button -->
             <div class="sidebar-header">
                 <div class="sidebar-brand">
-                    <div class="brand-logo-icon">
-                        <svg viewBox="0 0 28 28" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M14 4.5c-4.5 0-8 3.5-8 8 0 5 8 11.5 8 11.5s8-6.5 8-11.5c0-4.5-3.5-8-8-8z" stroke="#4DD0E1" fill="none"/>
-                            <circle cx="14" cy="12.5" r="3" stroke="#80CBC4" fill="none"/>
-                        </svg>
+                    <div class="sidebar-mini-logo">
+                        <span class="mini-logo-title">LOGO</span>
+                        <span class="mini-logo-sub">V.01</span>
                     </div>
                     <div class="brand-info">
                         <span class="brand-title">ระบบคิวผู้ป่วย</span>
-                        <span class="brand-subtitle">Queue Management V.01</span>
+                        <span class="brand-subtitle">Queue System V.01</span>
                     </div>
                 </div>
-                <button type="button" class="sidebar-collapse-btn" id="sidebar-collapse-btn" title="ย่อ / ขยาย เมนูด้านข้าง" aria-label="Toggle Sidebar">
-                    <svg class="chevron-collapse" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round">
+                <button type="button" class="sidebar-collapse-btn" id="sidebar-collapse-btn"
+                    title="ย่อ / ขยาย เมนูด้านข้าง" aria-label="Toggle Sidebar">
+                    <svg class="chevron-collapse" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                        stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" width="13" height="13">
                         <polyline points="15 18 9 12 15 6"></polyline>
                     </svg>
                 </button>
@@ -41,25 +44,27 @@
                     <span>เมนูหลัก</span>
                 </div>
                 <nav class="sidebar-nav">
-                    <!-- 1. หน้าหลัก -->
-                    <a href="#" class="nav-item active" data-page="dashboard" data-tooltip="หน้าหลัก" id="nav-dashboard">
-                        <div class="nav-active-pill"></div>
-                        <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/>
-                            <polyline points="9 22 9 12 15 12 15 22"/>
+                    <!-- 1. หน้าหลัก (Active) -->
+                    <a href="#" class="nav-item active" data-page="dashboard" data-tooltip="หน้าจอหลัก"
+                        id="nav-dashboard">
+                        <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z" />
+                            <polyline points="9 22 9 12 15 12 15 22" />
                         </svg>
-                        <span class="nav-label">หน้าหลัก</span>
+                        <span class="nav-label">หน้าจอหลัก</span>
                     </a>
 
                     <!-- 2. การจัดการนัดหมาย -->
-                    <a href="#" class="nav-item" data-page="appointments" data-tooltip="การจัดการนัดหมาย" id="nav-appointments">
-                        <div class="nav-active-pill"></div>
-                        <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
-                            <line x1="16" y1="2" x2="16" y2="6"/>
-                            <line x1="8" y1="2" x2="8" y2="6"/>
-                            <line x1="3" y1="10" x2="21" y2="10"/>
-                            <path d="M8 14h.01M12 14h.01M16 14h.01M8 18h.01M12 18h.01M16 18h.01"/>
+                    <a href="#" class="nav-item" data-page="appointments" data-tooltip="การจัดการนัดหมาย"
+                        id="nav-appointments">
+                        <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="3" y="4" width="18" height="18" rx="2" ry="2" />
+                            <line x1="16" y1="2" x2="16" y2="6" />
+                            <line x1="8" y1="2" x2="8" y2="6" />
+                            <line x1="3" y1="10" x2="21" y2="10" />
+                            <path d="M8 14h.01M12 14h.01M16 14h.01M8 18h.01M12 18h.01M16 18h.01" />
                         </svg>
                         <span class="nav-label">การจัดการนัดหมาย</span>
                         <span class="nav-badge" id="nav-appointments-badge">8</span>
@@ -67,32 +72,37 @@
 
                     <!-- 3. ประวัติการเรียกคิว -->
                     <a href="#" class="nav-item" data-page="history" data-tooltip="ประวัติการเรียกคิว" id="nav-history">
-                        <div class="nav-active-pill"></div>
-                        <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M12 8v4l3 3"/>
-                            <circle cx="12" cy="12" r="10"/>
+                        <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="12" r="10" />
+                            <polyline points="12 6 12 12 16 14" />
                         </svg>
                         <span class="nav-label">ประวัติการเรียกคิว</span>
                     </a>
 
-
                     <!-- 4. รายงานสถิติ -->
                     <a href="#" class="nav-item" data-page="reports" data-tooltip="รายงานสถิติ" id="nav-reports">
-                        <div class="nav-active-pill"></div>
-                        <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/>
-                            <polyline points="17 8 12 3 7 8"/>
-                            <line x1="12" y1="3" x2="12" y2="15"/>
+                        <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="22 7 13.5 15.5 8.5 10.5 2 17" />
+                            <polyline points="16 7 22 7 22 13" />
                         </svg>
                         <span class="nav-label">รายงานสถิติ</span>
                     </a>
 
                     <!-- 5. ตั้งค่าระบบ -->
                     <a href="#" class="nav-item" data-page="settings" data-tooltip="ตั้งค่าระบบ" id="nav-settings">
-                        <div class="nav-active-pill"></div>
-                        <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <circle cx="12" cy="12" r="3"/>
-                            <path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 012.83-2.83l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"/>
+                        <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <line x1="4" x2="4" y1="21" y2="14" />
+                            <line x1="4" x2="4" y1="10" y2="3" />
+                            <line x1="12" x2="12" y1="21" y2="12" />
+                            <line x1="12" x2="12" y1="8" y2="3" />
+                            <line x1="20" x2="20" y1="21" y2="16" />
+                            <line x1="20" x2="20" y1="12" y2="3" />
+                            <line x1="1" x2="7" y1="14" y2="14" />
+                            <line x1="9" x2="15" y1="8" y2="8" />
+                            <line x1="17" x2="23" y1="16" y2="16" />
                         </svg>
                         <span class="nav-label">ตั้งค่าระบบ</span>
                     </a>
@@ -102,36 +112,54 @@
             <!-- Sidebar Bottom Actions & Profile -->
             <div class="sidebar-bottom">
                 <div class="sidebar-actions-grid">
-                    <button type="button" class="btn-generate-queue" id="btn-generate-queue" onclick="generateNewPatientQueue()" title="สุ่มสร้างคิวผู้ป่วยใหม่เข้าระบบทันที" data-tooltip="เจนคิวผู้ป่วย">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="15" height="15">
-                            <path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
-                            <circle cx="9" cy="7" r="4"/>
-                            <line x1="19" y1="8" x2="19" y2="14"/>
-                            <line x1="22" y1="11" x2="16" y2="11"/>
+                    <button type="button" class="btn-generate-queue" id="btn-generate-queue"
+                        onclick="generateNewPatientQueue()" title="สุ่มสร้างคิวผู้ป่วยใหม่เข้าระบบทันที"
+                        data-tooltip="เจนคิวผู้ป่วย">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="15"
+                            height="15">
+                            <path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+                            <circle cx="9" cy="7" r="4" />
+                            <line x1="19" y1="8" x2="19" y2="14" />
+                            <line x1="22" y1="11" x2="16" y2="11" />
                         </svg>
                         <span class="action-btn-text">+ เจนคิวผู้ป่วย</span>
                     </button>
-                    <button type="button" class="btn-simulate" id="btn-simulate-late" title="จำลองเวลาผ่านไป 35 นาที" data-tooltip="จำลองมาสาย">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="15" height="15"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                    <button type="button" class="btn-simulate" id="btn-simulate-late" title="จำลองเวลาผ่านไป 35 นาที"
+                        data-tooltip="จำลองมาสาย">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="15"
+                            height="15">
+                            <circle cx="12" cy="12" r="10" />
+                            <polyline points="12 6 12 12 16 14" />
+                        </svg>
                         <span class="action-btn-text">จำลองมาสาย</span>
                     </button>
                 </div>
-                <a href="doctor.html" class="btn-simulate btn-go-doctor" data-tooltip="ไปหน้าแพทย์" style="margin-top:8px;text-decoration:none;text-align:center;background:rgba(77,208,225,0.15);border-color:rgba(77,208,225,0.3);color:#4DD0E1;">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><path d="M20 6h-4V4c0-1.1-.9-2-2-2h-4c-1.1 0-2 .9-2 2v2H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2z"/><line x1="12" y1="11" x2="12" y2="17"/><line x1="9" y1="14" x2="15" y2="14"/></svg>
+                <a href="doctor.html" class="btn-simulate btn-go-doctor" data-tooltip="ไปหน้าแพทย์"
+                    style="margin-top:8px;text-decoration:none;text-align:center;background:rgba(77,208,225,0.15);border-color:rgba(77,208,225,0.3);color:#4DD0E1;">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16">
+                        <path
+                            d="M20 6h-4V4c0-1.1-.9-2-2-2h-4c-1.1 0-2 .9-2 2v2H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2z" />
+                        <line x1="12" y1="11" x2="12" y2="17" />
+                        <line x1="9" y1="14" x2="15" y2="14" />
+                    </svg>
                     <span class="action-btn-text">ไปหน้าแพทย์</span>
                 </a>
 
-                <!-- User Profile at bottom (Click to open Profile) -->
-                <div class="sidebar-user-profile" id="sidebar-user-profile" data-tooltip="คลิกเพื่อดูและแก้ไขโปรไฟล์">
+                <!-- User Profile at bottom -->
+                <div class="sidebar-user-profile" id="sidebar-user-profile" data-tooltip="คลิกเพื่อดูโปรไฟล์">
                     <div class="user-avatar-wrap">
-                        <span style="font-size:1.15rem;line-height:1;">👨‍💼</span>
+                        <svg viewBox="0 0 36 36" class="sidebar-avatar-svg" width="34" height="34">
+                            <circle cx="18" cy="18" r="17" fill="#005B60" stroke="rgba(255,255,255,0.4)"
+                                stroke-width="1.5" />
+                            <circle cx="18" cy="13" r="6" fill="#F8FAFC" />
+                            <path d="M7 32c0-6 5-11 11-11s11 5 11 11" fill="#E2E8F0" />
+                            <path d="M14 20l4 4 4-4" stroke="#4DD0E1" stroke-width="2" stroke-linecap="round"
+                                fill="none" />
+                        </svg>
                     </div>
                     <div class="user-profile-details">
                         <span class="user-profile-name">ธนกฤต พิพัฒน์ชัย</span>
                         <span class="user-profile-email">เจ้าหน้าที่ฝ่ายตรวจสอบ</span>
-                    </div>
-                    <div class="user-profile-arrow">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="14" height="14"><polyline points="9 18 15 12 9 6"/></svg>
                     </div>
                 </div>
             </div>
@@ -147,43 +175,60 @@
                 <div class="top-bar-stats" id="top-bar-stats">
                     <div class="stat-card" id="stat-waiting">
                         <div class="stat-icon waiting">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l6 6"/><circle cx="12" cy="12" r="10"/></svg>
-                            <!-- Hourglass -->
-                            <svg viewBox="0 0 24 24" fill="currentColor" width="22" height="22"><path d="M6 2v6l4 4-4 4v6h12v-6l-4-4 4-4V2H6zm10 15.5V20H8v-2.5l4-4 4 4zm-4-5l-4-4V4h8v4.5l-4 4z"/></svg>
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
+                                stroke-linecap="round" stroke-linejoin="round" width="22" height="22">
+                                <circle cx="12" cy="12" r="10" />
+                                <polyline points="12 6 12 12 16 14" />
+                            </svg>
                         </div>
                         <div class="stat-info">
                             <span class="stat-label">รอเรียกตรวจ</span>
-                            <span class="stat-value" id="stat-waiting-count">0</span>
+                            <span class="stat-value" id="stat-waiting-count">8</span>
                             <span class="stat-unit">คิว</span>
                         </div>
                     </div>
                     <div class="stat-card" id="stat-lab">
                         <div class="stat-icon lab">
-                            <svg viewBox="0 0 24 24" fill="currentColor" width="22" height="22"><path d="M7 2v2h1v7.15l-4.35 7.61C2.87 20.11 3.84 22 5.44 22h13.12c1.6 0 2.57-1.89 1.79-3.24L16 11.15V4h1V2H7zm6 9.68l3.82 6.68H7.18L11 11.68V4h2v7.68z"/></svg>
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
+                                stroke-linecap="round" stroke-linejoin="round" width="22" height="22">
+                                <path
+                                    d="M10 2v7.31L4.14 19.86A2 2 0 0 0 5.86 23h12.28a2 2 0 0 0 1.72-3.14L14 9.31V2h-4z" />
+                                <line x1="8.5" y1="2" x2="15.5" y2="2" />
+                                <line x1="7" y1="15" x2="17" y2="15" />
+                            </svg>
                         </div>
                         <div class="stat-info">
-                            <span class="stat-label">พักรอผลตรวจ/แล็บ</span>
-                            <span class="stat-value" id="stat-lab-count">0</span>
+                            <span class="stat-label">พักรอผลตรวจ</span>
+                            <span class="stat-value" id="stat-lab-count">3</span>
                             <span class="stat-unit">คิว</span>
                         </div>
                     </div>
                     <div class="stat-card" id="stat-examining">
                         <div class="stat-icon examining">
-                            <svg viewBox="0 0 24 24" fill="currentColor" width="22" height="22"><path d="M20 2H4c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-2 12H6v-2h12v2zm0-4H6V8h12v2z"/></svg>
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
+                                stroke-linecap="round" stroke-linejoin="round" width="22" height="22">
+                                <rect x="3" y="3" width="18" height="18" rx="4" />
+                                <path d="M12 8v8" />
+                                <path d="M8 12h8" />
+                            </svg>
                         </div>
                         <div class="stat-info">
                             <span class="stat-label">กำลังตรวจในห้อง</span>
-                            <span class="stat-value" id="stat-examining-count">0</span>
+                            <span class="stat-value" id="stat-examining-count">5</span>
                             <span class="stat-unit">ห้อง</span>
                         </div>
                     </div>
                     <div class="stat-card" id="stat-done">
                         <div class="stat-icon done">
-                            <svg viewBox="0 0 24 24" fill="currentColor" width="22" height="22"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
+                                stroke-linecap="round" stroke-linejoin="round" width="22" height="22">
+                                <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" />
+                                <polyline points="22 4 12 14.01 9 11.01" />
+                            </svg>
                         </div>
                         <div class="stat-info">
                             <span class="stat-label">ตรวจเสร็จวันนี้</span>
-                            <span class="stat-value" id="stat-done-count">0</span>
+                            <span class="stat-value" id="stat-done-count">28</span>
                             <span class="stat-unit">ราย</span>
                         </div>
                     </div>
@@ -192,14 +237,24 @@
                     <div class="datetime-display">
                         <div class="date-text" id="date-text"></div>
                         <div class="time-display">
-                            <span class="time-text" id="time-text">00:00</span>
+                            <span class="time-text" id="time-text">14:40</span>
                             <span class="time-period">น.</span>
                         </div>
                         <div class="timezone-text">เวลามาตรฐานประเทศไทย</div>
                     </div>
-                    <button type="button" class="btn-sound-toggle" id="btn-sound-toggle" onclick="toggleSound()" title="เปิด/ปิดเสียงเรียกคิว">
-                        <svg class="sound-icon-on" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"/></svg>
-                        <svg class="sound-icon-off" style="display:none;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><line x1="23" y1="9" x2="17" y2="15"/><line x1="17" y1="9" x2="23" y2="15"/></svg>
+                    <button type="button" class="btn-sound-toggle" id="btn-sound-toggle" onclick="toggleSound()"
+                        title="เปิด/ปิดเสียงเรียกคิว">
+                        <svg class="sound-icon-on" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2" width="16" height="16">
+                            <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5" />
+                            <path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07" />
+                        </svg>
+                        <svg class="sound-icon-off" style="display:none;" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" width="16" height="16">
+                            <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5" />
+                            <line x1="23" y1="9" x2="17" y2="15" />
+                            <line x1="17" y1="9" x2="23" y2="15" />
+                        </svg>
                         <span class="sound-status-text" id="sound-status-text">เสียง: เปิด</span>
                     </button>
                 </div>
@@ -211,49 +266,90 @@
                 <div class="department-filter-bar" id="dept-filter-bar">
                     <div class="dept-bar-left">
                         <div class="dept-bar-label">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18"><path d="M19 21l-7-5-7 5V5a2 2 0 012-2h10a2 2 0 012 2z"/></svg>
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18"
+                                height="18">
+                                <path d="M19 21l-7-5-7 5V5a2 2 0 012-2h10a2 2 0 012 2z" />
+                            </svg>
                             <span>แผนกการรักษา:</span>
                         </div>
                         <div class="dept-pills-container" id="dept-pills">
                             <button class="dept-pill active" data-dept="all">
                                 <span class="dept-pill-name">ทุกแผนก</span>
-                                <span class="dept-pill-count" id="count-dept-all">0</span>
+                                <span class="dept-pill-count" id="count-dept-all">16</span>
                             </button>
                             <button class="dept-pill" data-dept="อายุรกรรม">
-                                <span class="dept-pill-icon">🩺</span>
+                                <svg class="dept-svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="14"
+                                    height="14">
+                                    <path d="M4.5 3v5a4.5 4.5 0 0 0 9 0V3M9 12.5V17a3 3 0 0 0 3 3h1a3 3 0 0 0 3-3v-2" />
+                                    <circle cx="16" cy="15" r="2.5" />
+                                </svg>
                                 <span class="dept-pill-name">อายุรกรรม</span>
-                                <span class="dept-pill-count" id="count-dept-med">0</span>
+                                <span class="dept-pill-count" id="count-dept-med">4</span>
                             </button>
                             <button class="dept-pill" data-dept="ทันตกรรม">
-                                <span class="dept-pill-icon">🦷</span>
+                                <svg class="dept-svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="14"
+                                    height="14">
+                                    <path
+                                        d="M7 5c0-1.5 1.5-3 5-3s5 1.5 5 3c0 3 .8 7 1.5 10 .5 2 0 7-2.5 7s-2.5-3.5-3.5-3.5-1 3.5-3.5 3.5S6.5 17 7 15C7.7 12 8.5 8 8.5 5" />
+                                </svg>
                                 <span class="dept-pill-name">ทันตกรรม</span>
-                                <span class="dept-pill-count" id="count-dept-dental">0</span>
+                                <span class="dept-pill-count" id="count-dept-dental">5</span>
                             </button>
                             <button class="dept-pill" data-dept="ศัลยกรรม">
-                                <span class="dept-pill-icon">✂️</span>
+                                <svg class="dept-svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="14"
+                                    height="14">
+                                    <circle cx="6" cy="6" r="3" />
+                                    <circle cx="6" cy="18" r="3" />
+                                    <line x1="20" y1="4" x2="8.12" y2="15.88" />
+                                    <line x1="14.47" y1="14.48" x2="20" y2="20" />
+                                </svg>
                                 <span class="dept-pill-name">ศัลยกรรม</span>
-                                <span class="dept-pill-count" id="count-dept-surg">0</span>
+                                <span class="dept-pill-count" id="count-dept-surg">3</span>
                             </button>
                             <button class="dept-pill" data-dept="กุมารเวชกรรม">
-                                <span class="dept-pill-icon">👶</span>
+                                <svg class="dept-svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="14"
+                                    height="14">
+                                    <circle cx="12" cy="12" r="9" />
+                                    <circle cx="9" cy="10" r="1.2" fill="currentColor" />
+                                    <circle cx="15" cy="10" r="1.2" fill="currentColor" />
+                                    <path d="M9.5 15a3.5 3.5 0 0 0 5 0" />
+                                </svg>
                                 <span class="dept-pill-name">กุมารเวชกรรม</span>
-                                <span class="dept-pill-count" id="count-dept-pedia">0</span>
+                                <span class="dept-pill-count" id="count-dept-pedia">3</span>
                             </button>
                             <button class="dept-pill" data-dept="จักษุวิทยา">
-                                <span class="dept-pill-icon">👁️</span>
+                                <svg class="dept-svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="14"
+                                    height="14">
+                                    <path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7-10-7-10-7z" />
+                                    <circle cx="12" cy="12" r="3.2" />
+                                </svg>
                                 <span class="dept-pill-name">จักษุวิทยา</span>
-                                <span class="dept-pill-count" id="count-dept-eye">0</span>
+                                <span class="dept-pill-count" id="count-dept-eye">1</span>
                             </button>
                             <button class="dept-pill" data-dept="กระดูกและข้อ">
-                                <span class="dept-pill-icon">🦴</span>
+                                <svg class="dept-svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="14"
+                                    height="14">
+                                    <path
+                                        d="M17 3.5a2.5 2.5 0 0 0-2.3 3.5l-6.4 6.4A2.5 2.5 0 0 0 7 13a2.5 2.5 0 1 0-1.5 4.5 2.5 2.5 0 0 0 3.7.3l6.4-6.4A2.5 2.5 0 0 0 17 12a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0-3.5z" />
+                                </svg>
                                 <span class="dept-pill-name">กระดูกและข้อ</span>
-                                <span class="dept-pill-count" id="count-dept-ortho">0</span>
+                                <span class="dept-pill-count" id="count-dept-ortho">1</span>
                             </button>
                         </div>
                     </div>
                     <div class="dept-bar-right">
                         <div class="dept-search-box">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14"
+                                height="14">
+                                <circle cx="11" cy="11" r="8" />
+                                <line x1="21" y1="21" x2="16.65" y2="16.65" />
+                            </svg>
                             <input type="text" id="quick-search-input" placeholder="ค้นหาชื่อ, เลขคิว, HN...">
                         </div>
                     </div>
@@ -263,20 +359,25 @@
                     <!-- Column 1: Waiting Queue -->
                     <div class="kanban-column" id="col-waiting">
                         <div class="column-header">
-                            <div class="column-title-group">
-                                <span class="column-number">1</span>
+                            <div class="column-header-top">
                                 <h2 class="column-title">รอเรียกตรวจ</h2>
-                                <span class="column-count" id="col-waiting-count">0</span>
+                                <span class="column-pill-badge" id="col-waiting-count-badge">กำลังรอ 4 ราย</span>
                             </div>
-                            <div style="display:flex; align-items:center; gap:8px;">
-                                <button type="button" class="btn-insert-urgent" onclick="openUrgentModal()" title="แทรกคิวด่วนกะทันหัน">
-                                    <svg viewBox="0 0 24 24" fill="currentColor" width="13" height="13"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+                            <div class="column-header-sub">
+                                <button type="button" class="btn-insert-urgent-pill" onclick="openUrgentModal()"
+                                    title="แทรกคิวด่วนกะทันหัน">
+                                    <svg viewBox="0 0 24 24" fill="currentColor" width="13" height="13">
+                                        <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" />
+                                    </svg>
                                     + แทรกคิวด่วน
                                 </button>
-                                <div class="column-filters" id="queue-filters">
-                                    <button class="filter-btn active" data-filter="all">ทั้งหมด</button>
-                                    <button class="filter-btn" data-filter="appointment">นัดหมาย</button>
-                                    <button class="filter-btn" data-filter="walkin">Walk-in</button>
+                                <div class="column-filter-pills" id="waiting-filters">
+                                    <button class="filter-pill-btn active" data-filter="all"
+                                        onclick="setWaitingFilter('all')">ทั้งหมด</button>
+                                    <button class="filter-pill-btn" data-filter="appointment"
+                                        onclick="setWaitingFilter('appointment')">นัดหมาย</button>
+                                    <button class="filter-pill-btn" data-filter="walkin"
+                                        onclick="setWaitingFilter('walkin')">Walkin</button>
                                 </div>
                             </div>
                         </div>
@@ -288,10 +389,19 @@
                     <!-- Column 2: Lab / Waiting Results -->
                     <div class="kanban-column" id="col-lab">
                         <div class="column-header">
-                            <div class="column-title-group">
-                                <span class="column-number">2</span>
+                            <div class="column-header-top">
                                 <h2 class="column-title">พักรอผลตรวจ</h2>
-                                <span class="column-count" id="col-lab-count">0</span>
+                                <span class="column-pill-badge" id="col-lab-count-badge">กำลังตรวจ 3 ราย</span>
+                            </div>
+                            <div class="column-header-sub justify-end">
+                                <div class="column-filter-pills" id="lab-filters">
+                                    <button class="filter-pill-btn active" data-filter="all"
+                                        onclick="setLabFilter('all')">ทั้งหมด</button>
+                                    <button class="filter-pill-btn" data-filter="waiting_result"
+                                        onclick="setLabFilter('waiting_result')">รอผลตรวจ</button>
+                                    <button class="filter-pill-btn" data-filter="vitalsign"
+                                        onclick="setLabFilter('vitalsign')">กำลังตรวจ vitalsign</button>
+                                </div>
                             </div>
                         </div>
                         <div class="column-body" id="lab-list">
@@ -302,10 +412,19 @@
                     <!-- Column 3: Examination Rooms -->
                     <div class="kanban-column" id="col-rooms">
                         <div class="column-header">
-                            <div class="column-title-group">
-                                <span class="column-number">3</span>
+                            <div class="column-header-top">
                                 <h2 class="column-title">กำลังตรวจในห้องตรวจ</h2>
-                                <span class="column-count-badge" id="col-rooms-active">Active 0 ห้อง</span>
+                                <span class="column-pill-badge" id="col-rooms-count-badge">ว่าง 3/5 ห้อง</span>
+                            </div>
+                            <div class="column-header-sub justify-end">
+                                <div class="column-filter-pills" id="room-filters">
+                                    <button class="filter-pill-btn active" data-filter="all"
+                                        onclick="setRoomFilter('all')">ทั้งหมด</button>
+                                    <button class="filter-pill-btn" data-filter="vacant"
+                                        onclick="setRoomFilter('vacant')">ว่าง</button>
+                                    <button class="filter-pill-btn" data-filter="occupied"
+                                        onclick="setRoomFilter('occupied')">กำลังตรวจ</button>
+                                </div>
                             </div>
                         </div>
                         <div class="column-body rooms-grid" id="rooms-list">
@@ -391,7 +510,12 @@
             <div class="page-content" id="page-overdue">
                 <div class="overdue-page">
                     <div class="empty-state">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="#aaa" stroke-width="1.5" width="64" height="64"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="#aaa" stroke-width="1.5" width="64" height="64">
+                            <path
+                                d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z" />
+                            <line x1="12" y1="9" x2="12" y2="13" />
+                            <line x1="12" y1="17" x2="12.01" y2="17" />
+                        </svg>
                         <h3>คิวเกินกำหนด</h3>
                         <p>แสดงรายการคิวที่เกินเวลานัดหมายและถูกเลื่อนลำดับ</p>
                         <div id="overdue-list-content"></div>
@@ -406,12 +530,14 @@
                     <div class="reports-header-bar">
                         <div class="reports-title-area">
                             <h2 class="reports-title">แดชบอร์ดรายงานสถิติการให้บริการ</h2>
-                            <p class="reports-subtitle">วิเคราะห์ข้อมูลปริมาณผู้ป่วย ระยะเวลาการรอคอย และประสิทธิภาพแต่ละแผนก</p>
+                            <p class="reports-subtitle">วิเคราะห์ข้อมูลปริมาณผู้ป่วย ระยะเวลาการรอคอย
+                                และประสิทธิภาพแต่ละแผนก</p>
                         </div>
                         <div class="reports-actions">
                             <div class="reports-filter-group">
                                 <label for="reports-date-range">ช่วงเวลา:</label>
-                                <select id="reports-date-range" class="reports-select" onchange="renderReportsDashboard()">
+                                <select id="reports-date-range" class="reports-select"
+                                    onchange="renderReportsDashboard()">
                                     <option value="today">วันนี้ (Today)</option>
                                     <option value="week">สัปดาห์นี้ (This Week)</option>
                                     <option value="month">เดือนนี้ (This Month)</option>
@@ -419,7 +545,8 @@
                             </div>
                             <div class="reports-filter-group">
                                 <label for="reports-dept-filter">แผนก:</label>
-                                <select id="reports-dept-filter" class="reports-select" onchange="renderReportsDashboard()">
+                                <select id="reports-dept-filter" class="reports-select"
+                                    onchange="renderReportsDashboard()">
                                     <option value="all">ทุกแผนก (All Departments)</option>
                                     <option value="อายุรกรรม">🩺 อายุรกรรม</option>
                                     <option value="ทันตกรรม">🦷 ทันตกรรม</option>
@@ -430,12 +557,25 @@
                                 </select>
                             </div>
                             <div class="export-btn-group">
-                                <button type="button" class="btn-export btn-export-excel" onclick="exportReportCSV()" title="ดาวน์โหลดเป็นไฟล์ Excel/CSV">
-                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                                <button type="button" class="btn-export btn-export-excel" onclick="exportReportCSV()"
+                                    title="ดาวน์โหลดเป็นไฟล์ Excel/CSV">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                        width="16" height="16">
+                                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                                        <polyline points="7 10 12 15 17 10" />
+                                        <line x1="12" y1="15" x2="12" y2="3" />
+                                    </svg>
                                     <span>Export Excel (CSV)</span>
                                 </button>
-                                <button type="button" class="btn-export btn-export-print" onclick="printReport()" title="พิมพ์หรือบันทึกเป็น PDF">
-                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+                                <button type="button" class="btn-export btn-export-print" onclick="printReport()"
+                                    title="พิมพ์หรือบันทึกเป็น PDF">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                        width="16" height="16">
+                                        <polyline points="6 9 6 2 18 2 18 9" />
+                                        <path
+                                            d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2" />
+                                        <rect x="6" y="14" width="12" height="8" />
+                                    </svg>
                                     <span>พิมพ์ / PDF</span>
                                 </button>
                             </div>
@@ -446,7 +586,12 @@
                     <div class="reports-kpi-grid">
                         <div class="kpi-card teal">
                             <div class="kpi-icon-wrap">
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+                                    <circle cx="9" cy="7" r="4" />
+                                    <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
+                                    <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+                                </svg>
                             </div>
                             <div class="kpi-body">
                                 <span class="kpi-label">ผู้ป่วยเข้ารับบริการทั้งหมด</span>
@@ -460,7 +605,10 @@
 
                         <div class="kpi-card green">
                             <div class="kpi-icon-wrap">
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" />
+                                    <polyline points="22 4 12 14.01 9 11.01" />
+                                </svg>
                             </div>
                             <div class="kpi-body">
                                 <span class="kpi-label">ตรวจเสร็จสิ้นแล้ว</span>
@@ -474,7 +622,10 @@
 
                         <div class="kpi-card amber">
                             <div class="kpi-icon-wrap">
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10" />
+                                    <polyline points="12 6 12 12 16 14" />
+                                </svg>
                             </div>
                             <div class="kpi-body">
                                 <span class="kpi-label">เวลารอคอยเฉลี่ย</span>
@@ -488,7 +639,10 @@
 
                         <div class="kpi-card blue">
                             <div class="kpi-icon-wrap">
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6h-4V4c0-1.1-.9-2-2-2h-4c-1.1 0-2 .9-2 2v2H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2z"/></svg>
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path
+                                        d="M20 6h-4V4c0-1.1-.9-2-2-2h-4c-1.1 0-2 .9-2 2v2H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2z" />
+                                </svg>
                             </div>
                             <div class="kpi-body">
                                 <span class="kpi-label">เวลาตรวจเฉลี่ยต่อคน</span>
@@ -502,7 +656,9 @@
 
                         <div class="kpi-card rose">
                             <div class="kpi-icon-wrap">
-                                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+                                <svg viewBox="0 0 24 24" fill="currentColor">
+                                    <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" />
+                                </svg>
                             </div>
                             <div class="kpi-body">
                                 <span class="kpi-label">คิวด่วนพิเศษ / แทรกคิว</span>
@@ -522,7 +678,8 @@
                             <div class="chart-header">
                                 <div class="chart-title-area">
                                     <h3 class="chart-title">ปริมาณคิวผู้ป่วยตามช่วงเวลา (Hourly Patient Volume)</h3>
-                                    <p class="chart-desc">สถิติจำนวนคิวที่เข้ารับบริการในแต่ละชั่วโมง (08:00 - 17:00 น.)</p>
+                                    <p class="chart-desc">สถิติจำนวนคิวที่เข้ารับบริการในแต่ละชั่วโมง (08:00 - 17:00 น.)
+                                    </p>
                                 </div>
                                 <div class="chart-badge">Peak: 09:00 - 11:00 น.</div>
                             </div>
@@ -558,10 +715,16 @@
                         <div class="table-card-header">
                             <div>
                                 <h3 class="table-card-title">สรุปสถิติประสิทธิภาพการให้บริการรายแผนก</h3>
-                                <p class="table-card-desc">ข้อมูลเปรียบเทียบจำนวนคิว เวลารอคอยเฉลี่ย และอัตราความสำเร็จในแต่ละแผนกการรักษา</p>
+                                <p class="table-card-desc">ข้อมูลเปรียบเทียบจำนวนคิว เวลารอคอยเฉลี่ย
+                                    และอัตราความสำเร็จในแต่ละแผนกการรักษา</p>
                             </div>
                             <button type="button" class="btn-sub-export" onclick="exportReportCSV()">
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14"
+                                    height="14">
+                                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                                    <polyline points="7 10 12 15 17 10" />
+                                    <line x1="12" y1="15" x2="12" y2="3" />
+                                </svg>
                                 Export ตารางนี้
                             </button>
                         </div>
@@ -598,9 +761,11 @@
                             <p class="appt-subtitle">สร้างนัดหมายใหม่ ค้นหา ตรวจสอบ เลื่อนวันนัด และยกเลิกนัดหมาย</p>
                         </div>
                         <div class="appt-actions">
-                            <button type="button" class="btn-create-appt" onclick="openCreateApptModal()" id="btn-open-create-appt">
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" width="16" height="16">
-                                    <path d="M12 5v14M5 12h14"/>
+                            <button type="button" class="btn-create-appt" onclick="openCreateApptModal()"
+                                id="btn-open-create-appt">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" width="16"
+                                    height="16">
+                                    <path d="M12 5v14M5 12h14" />
                                 </svg>
                                 <span>+ สร้างนัดหมายใหม่</span>
                             </button>
@@ -612,10 +777,10 @@
                         <div class="appt-kpi-card teal">
                             <div class="appt-kpi-icon-wrap">
                                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                    <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
-                                    <line x1="16" y1="2" x2="16" y2="6"/>
-                                    <line x1="8" y1="2" x2="8" y2="6"/>
-                                    <line x1="3" y1="10" x2="21" y2="10"/>
+                                    <rect x="3" y="4" width="18" height="18" rx="2" ry="2" />
+                                    <line x1="16" y1="2" x2="16" y2="6" />
+                                    <line x1="8" y1="2" x2="8" y2="6" />
+                                    <line x1="3" y1="10" x2="21" y2="10" />
                                 </svg>
                             </div>
                             <div class="appt-kpi-body">
@@ -631,8 +796,8 @@
                         <div class="appt-kpi-card green">
                             <div class="appt-kpi-icon-wrap">
                                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
-                                    <polyline points="22 4 12 14.01 9 11.01"/>
+                                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" />
+                                    <polyline points="22 4 12 14.01 9 11.01" />
                                 </svg>
                             </div>
                             <div class="appt-kpi-body">
@@ -648,9 +813,9 @@
                         <div class="appt-kpi-card amber">
                             <div class="appt-kpi-icon-wrap">
                                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                    <circle cx="12" cy="12" r="10"/>
-                                    <polyline points="12 6 12 12 14 14"/>
-                                    <path d="M16 2v4M8 2v4"/>
+                                    <circle cx="12" cy="12" r="10" />
+                                    <polyline points="12 6 12 12 14 14" />
+                                    <path d="M16 2v4M8 2v4" />
                                 </svg>
                             </div>
                             <div class="appt-kpi-body">
@@ -666,9 +831,9 @@
                         <div class="appt-kpi-card red">
                             <div class="appt-kpi-icon-wrap">
                                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                    <circle cx="12" cy="12" r="10"/>
-                                    <line x1="15" y1="9" x2="9" y2="15"/>
-                                    <line x1="9" y1="9" x2="15" y2="15"/>
+                                    <circle cx="12" cy="12" r="10" />
+                                    <line x1="15" y1="9" x2="9" y2="15" />
+                                    <line x1="9" y1="9" x2="15" y2="15" />
                                 </svg>
                             </div>
                             <div class="appt-kpi-body">
@@ -686,11 +851,13 @@
                     <div class="appt-filters-container">
                         <div class="appt-filter-row">
                             <div class="appt-search-box">
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16">
-                                    <circle cx="11" cy="11" r="8"/>
-                                    <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16"
+                                    height="16">
+                                    <circle cx="11" cy="11" r="8" />
+                                    <line x1="21" y1="21" x2="16.65" y2="16.65" />
                                 </svg>
-                                <input type="text" id="appt-search-input" placeholder="ค้นหาตาม HN, ชื่อคนไข้, เบอร์โทร, หรือรหัสนัด...">
+                                <input type="text" id="appt-search-input"
+                                    placeholder="ค้นหาตาม HN, ชื่อคนไข้, เบอร์โทร, หรือรหัสนัด...">
                             </div>
 
                             <div class="appt-filter-controls">
@@ -761,14 +928,24 @@
                     <div class="settings-header-banner">
                         <div class="settings-header-text">
                             <h2>
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="24" height="24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 012.83-2.83l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"/></svg>
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="24"
+                                    height="24">
+                                    <circle cx="12" cy="12" r="3" />
+                                    <path
+                                        d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 012.83-2.83l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z" />
+                                </svg>
                                 <span>ตั้งค่าระบบจัดการคิว (System Configuration)</span>
                             </h2>
                             <p>กำหนดค่าระบบเสียงเรียกคิว กฎการจัดการเวลา ข้อมูลสถานพยาบาล และการสำรองข้อมูล</p>
                         </div>
                         <div class="settings-header-actions">
                             <button type="button" class="btn-settings-save" onclick="saveSystemSettingsFromUI()">
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="16" height="16"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="16"
+                                    height="16">
+                                    <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z" />
+                                    <polyline points="17 21 17 13 7 13 7 21" />
+                                    <polyline points="7 3 7 8 15 8" />
+                                </svg>
                                 <span>บันทึกการตั้งค่า</span>
                             </button>
                         </div>
@@ -788,11 +965,14 @@
                             <div class="settings-card-body">
                                 <div class="setting-item-row">
                                     <div class="setting-item-info">
-                                        <label class="setting-label">เปิดใช้งานเสียงเรียกคิวอัตโนมัติ (Master Sound)</label>
-                                        <span class="setting-desc">ส่งเสียงเตือนและเสียงพูดเมื่อมีการกดเรียกคิวผู้ป่วย</span>
+                                        <label class="setting-label">เปิดใช้งานเสียงเรียกคิวอัตโนมัติ (Master
+                                            Sound)</label>
+                                        <span
+                                            class="setting-desc">ส่งเสียงเตือนและเสียงพูดเมื่อมีการกดเรียกคิวผู้ป่วย</span>
                                     </div>
                                     <label class="switch-toggle">
-                                        <input type="checkbox" id="setting-sound-enabled" onchange="soundManager.toggle(this.checked)">
+                                        <input type="checkbox" id="setting-sound-enabled"
+                                            onchange="soundManager.toggle(this.checked)">
                                         <span class="slider-toggle"></span>
                                     </label>
                                 </div>
@@ -800,9 +980,11 @@
                                 <div class="setting-item-row">
                                     <div class="setting-item-info">
                                         <label class="setting-label">ระดับความดังเสียง (Volume)</label>
-                                        <span class="setting-desc">ปรับความดังเสียงเตือนกระดิ่งและเสียงพูด (<span id="setting-vol-text">85%</span>)</span>
+                                        <span class="setting-desc">ปรับความดังเสียงเตือนกระดิ่งและเสียงพูด (<span
+                                                id="setting-vol-text">85%</span>)</span>
                                     </div>
-                                    <input type="range" class="setting-range" id="setting-sound-volume" min="10" max="100" value="85" oninput="updateSettingVolumeText(this.value)">
+                                    <input type="range" class="setting-range" id="setting-sound-volume" min="10"
+                                        max="100" value="85" oninput="updateSettingVolumeText(this.value)">
                                 </div>
 
                                 <div class="setting-item-row">
@@ -819,11 +1001,13 @@
 
                                 <div class="setting-item-row">
                                     <div class="setting-item-info">
-                                        <label class="setting-label">รูปแบบเสียงสัญญาณกระดิ่ง (Chime Melodic Tone)</label>
+                                        <label class="setting-label">รูปแบบเสียงสัญญาณกระดิ่ง (Chime Melodic
+                                            Tone)</label>
                                         <span class="setting-desc">เลือกโทนเสียงดนตรีก่อนเริ่มประกาศ</span>
                                     </div>
                                     <select class="setting-select" id="setting-chime-tone">
-                                        <option value="hospital" selected>🔔 ติ่งหน่อง 2 จังหวะ (Hospital Melodic)</option>
+                                        <option value="hospital" selected>🔔 ติ่งหน่อง 2 จังหวะ (Hospital Melodic)
+                                        </option>
                                         <option value="urgent">⚡ เสียงเตือนเร่งด่วน 3 โทน (Urgent Alert)</option>
                                         <option value="classic">🎵 กระดิ่งซอฟต์คลาสสิก (Soft Classic)</option>
                                     </select>
@@ -853,7 +1037,11 @@
 
                                 <div class="setting-test-box">
                                     <button type="button" class="btn-test-sound" onclick="testQueueSoundAnnouncement()">
-                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"/></svg>
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                            width="16" height="16">
+                                            <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5" />
+                                            <path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07" />
+                                        </svg>
                                         <span>ทดสอบฟังเสียงเรียกคิว (Test Call)</span>
                                     </button>
                                     <span class="test-sound-hint">กดเพื่อฟังตัวอย่างโทนเสียงและคำอ่านจำลอง</span>
@@ -873,7 +1061,8 @@
                             <div class="settings-card-body">
                                 <div class="setting-item-row">
                                     <div class="setting-item-info">
-                                        <label class="setting-label">เกณฑ์เวลานับเป็น "คิวมาสาย" (Overdue Threshold)</label>
+                                        <label class="setting-label">เกณฑ์เวลานับเป็น "คิวมาสาย" (Overdue
+                                            Threshold)</label>
                                         <span class="setting-desc">เวลารอคอยเกินกี่นาทีจะแสดงสถานะเตือนสีส้ม</span>
                                     </div>
                                     <select class="setting-select" id="setting-late-threshold">
@@ -887,7 +1076,8 @@
 
                                 <div class="setting-item-row">
                                     <div class="setting-item-info">
-                                        <label class="setting-label">เวลาเฉลี่ยโดยประมาณต่อการตรวจ (Est. Service Time)</label>
+                                        <label class="setting-label">เวลาเฉลี่ยโดยประมาณต่อการตรวจ (Est. Service
+                                            Time)</label>
                                         <span class="setting-desc">ใช้ในการคำนวณเวลารอคอยเฉลี่ยให้ผู้ป่วย</span>
                                     </div>
                                     <select class="setting-select" id="setting-avg-service">
@@ -900,7 +1090,8 @@
 
                                 <div class="setting-item-row">
                                     <div class="setting-item-info">
-                                        <label class="setting-label">อนุญาตให้แทรกคิวด่วนฉุกเฉิน (Emergency Queues)</label>
+                                        <label class="setting-label">อนุญาตให้แทรกคิวด่วนฉุกเฉิน (Emergency
+                                            Queues)</label>
                                         <span class="setting-desc">เปิดให้มีปุ่มแทรกคิวด่วนเข้าสู่ระบบได้ทันที</span>
                                     </div>
                                     <label class="switch-toggle">
@@ -911,8 +1102,10 @@
 
                                 <div class="setting-item-row">
                                     <div class="setting-item-info">
-                                        <label class="setting-label">ระบบจัดสรรห้องตรวจอัตโนมัติตามแผนก (Smart Room Match)</label>
-                                        <span class="setting-desc">แนะนำห้องตรวจที่ตรงกับแผนกและกำลังว่างเป็นลำดับแรก</span>
+                                        <label class="setting-label">ระบบจัดสรรห้องตรวจอัตโนมัติตามแผนก (Smart Room
+                                            Match)</label>
+                                        <span
+                                            class="setting-desc">แนะนำห้องตรวจที่ตรงกับแผนกและกำลังว่างเป็นลำดับแรก</span>
                                     </div>
                                     <label class="switch-toggle">
                                         <input type="checkbox" id="setting-smart-room" checked>
@@ -934,19 +1127,23 @@
                             <div class="settings-card-body">
                                 <div class="setting-form-group">
                                     <label class="setting-label">ชื่อสถานพยาบาล / โรงพยาบาล</label>
-                                    <input type="text" class="setting-input" id="setting-hosp-name" value="โรงพยาบาลกรุงเทพเมดิคอล เซ็นเตอร์">
+                                    <input type="text" class="setting-input" id="setting-hosp-name"
+                                        value="โรงพยาบาลกรุงเทพเมดิคอล เซ็นเตอร์">
                                 </div>
                                 <div class="setting-form-group">
                                     <label class="setting-label">สาขา / อาคาร</label>
-                                    <input type="text" class="setting-input" id="setting-hosp-branch" value="สาขาหลัก (อาคารผู้ป่วยนอก OPD)">
+                                    <input type="text" class="setting-input" id="setting-hosp-branch"
+                                        value="สาขาหลัก (อาคารผู้ป่วยนอก OPD)">
                                 </div>
                                 <div class="setting-form-group">
                                     <label class="setting-label">ชื่อจุดบริการ / เคาน์เตอร์ประจำการ</label>
-                                    <input type="text" class="setting-input" id="setting-station-name" value="จุดคัดกรองและจัดการคิวกลาง (Counter 1)">
+                                    <input type="text" class="setting-input" id="setting-station-name"
+                                        value="จุดคัดกรองและจัดการคิวกลาง (Counter 1)">
                                 </div>
                                 <div class="setting-form-group">
                                     <label class="setting-label">เบอร์โทรศัพท์ติดต่อศูนย์ประชาสัมพันธ์</label>
-                                    <input type="text" class="setting-input" id="setting-hosp-phone" value="02-123-4567 ต่อ 101">
+                                    <input type="text" class="setting-input" id="setting-hosp-phone"
+                                        value="02-123-4567 ต่อ 101">
                                 </div>
                             </div>
                         </div>
@@ -963,7 +1160,8 @@
                             <div class="settings-card-body">
                                 <div class="setting-item-row">
                                     <div class="setting-item-info">
-                                        <label class="setting-label">แสดงรายการคิวที่ตรวจเสร็จแล้วย้อนหลัง (History List)</label>
+                                        <label class="setting-label">แสดงรายการคิวที่ตรวจเสร็จแล้วย้อนหลัง (History
+                                            List)</label>
                                         <span class="setting-desc">แสดงรายการคิวที่พึ่งเสร็จสิ้นในหน้าจอคิว</span>
                                     </div>
                                     <label class="switch-toggle">
@@ -986,7 +1184,8 @@
 
                                 <div class="setting-form-group" style="margin-top:10px;">
                                     <label class="setting-label">ข้อความประกาศบนแถบหน้าจอ (Announcement Banner)</label>
-                                    <input type="text" class="setting-input" id="setting-banner-text" value="กรุณารอเรียกหมายเลขคิวของท่าน และตรวจสอบห้องตรวจที่ระบุบนหน้าจอ">
+                                    <input type="text" class="setting-input" id="setting-banner-text"
+                                        value="กรุณารอเรียกหมายเลขคิวของท่าน และตรวจสอบห้องตรวจที่ระบุบนหน้าจอ">
                                 </div>
                             </div>
                         </div>
@@ -1005,10 +1204,17 @@
                                     <div class="backup-action-card">
                                         <div class="backup-info">
                                             <h4>📤 ส่งออกข้อมูลสำรอง (Export System Data)</h4>
-                                            <p>ดาวน์โหลดข้อมูลคิว นัดหมาย และการตั้งค่าทั้งหมดเป็นไฟล์ JSON เพื่อสำรองเก็บไว้</p>
+                                            <p>ดาวน์โหลดข้อมูลคิว นัดหมาย และการตั้งค่าทั้งหมดเป็นไฟล์ JSON
+                                                เพื่อสำรองเก็บไว้</p>
                                         </div>
-                                        <button type="button" class="btn-backup-export" onclick="exportSystemDataBackup()">
-                                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                                        <button type="button" class="btn-backup-export"
+                                            onclick="exportSystemDataBackup()">
+                                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                                width="16" height="16">
+                                                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                                                <polyline points="7 10 12 15 17 10" />
+                                                <line x1="12" y1="15" x2="12" y2="3" />
+                                            </svg>
                                             ดาวน์โหลดไฟล์สำรอง
                                         </button>
                                     </div>
@@ -1018,9 +1224,16 @@
                                             <h4>📥 นำเข้าข้อมูลสำรอง (Import Data)</h4>
                                             <p>กู้คืนข้อมูลระบบจากไฟล์ JSON สำรองที่เคยส่งออกไว้</p>
                                         </div>
-                                        <input type="file" id="backup-import-file" accept=".json" style="display:none;" onchange="handleImportSystemData(event)">
-                                        <button type="button" class="btn-backup-import" onclick="document.getElementById('backup-import-file').click()">
-                                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+                                        <input type="file" id="backup-import-file" accept=".json" style="display:none;"
+                                            onchange="handleImportSystemData(event)">
+                                        <button type="button" class="btn-backup-import"
+                                            onclick="document.getElementById('backup-import-file').click()">
+                                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                                width="16" height="16">
+                                                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                                                <polyline points="17 8 12 3 7 8" />
+                                                <line x1="12" y1="3" x2="12" y2="15" />
+                                            </svg>
                                             เลือกไฟล์นำเข้า (.json)
                                         </button>
                                     </div>
@@ -1028,10 +1241,16 @@
                                     <div class="backup-action-card warning-card">
                                         <div class="backup-info">
                                             <h4 style="color:#D97706;">🌅 รีเซ็ตคิวเริ่มวันใหม่ (Reset Daily Queue)</h4>
-                                            <p>ล้างคิวที่รอตรวจและนับจำนวนเสร็จสิ้นของวันนี้ใหม่เพื่อเริ่มรอบการทำงานวันใหม่</p>
+                                            <p>ล้างคิวที่รอตรวจและนับจำนวนเสร็จสิ้นของวันนี้ใหม่เพื่อเริ่มรอบการทำงานวันใหม่
+                                            </p>
                                         </div>
-                                        <button type="button" class="btn-backup-reset-day" onclick="confirmResetDailyQueue()">
-                                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/></svg>
+                                        <button type="button" class="btn-backup-reset-day"
+                                            onclick="confirmResetDailyQueue()">
+                                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                                width="16" height="16">
+                                                <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8" />
+                                                <path d="M3 3v5h5" />
+                                            </svg>
                                             รีเซ็ตคิวประจำวัน
                                         </button>
                                     </div>
@@ -1041,8 +1260,14 @@
                                             <h4 style="color:#DC2626;">⚠️ คืนค่าเริ่มต้นโรงงาน (Factory Reset)</h4>
                                             <p>ลบข้อมูลทั้งหมดและคืนค่าระบบกลับสู่สถานะเริ่มต้นเหมือนติดตั้งใหม่</p>
                                         </div>
-                                        <button type="button" class="btn-backup-factory-reset" onclick="confirmFactoryReset()">
-                                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>
+                                        <button type="button" class="btn-backup-factory-reset"
+                                            onclick="confirmFactoryReset()">
+                                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                                width="16" height="16">
+                                                <polyline points="3 6 5 6 21 6" />
+                                                <path
+                                                    d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2" />
+                                            </svg>
                                             คืนค่าโรงงาน
                                         </button>
                                     </div>
@@ -1067,12 +1292,15 @@
                         </div>
                         <div class="profile-hero-body">
                             <div class="profile-avatar-wrapper">
-                                <div class="profile-main-avatar" id="profile-main-avatar" style="background:#006D6F;" onclick="openAvatarSelectorModal()" title="คลิกเพื่อเปลี่ยนรูป/ไอคอนโปรไฟล์">
+                                <div class="profile-main-avatar" id="profile-main-avatar" style="background:#006D6F;"
+                                    onclick="openAvatarSelectorModal()" title="คลิกเพื่อเปลี่ยนรูป/ไอคอนโปรไฟล์">
                                     <span class="avatar-emoji-display" id="avatar-emoji-display">👨‍💼</span>
                                     <div class="avatar-edit-overlay">
-                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16">
-                                            <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/>
-                                            <circle cx="12" cy="13" r="4"/>
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                            width="16" height="16">
+                                            <path
+                                                d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z" />
+                                            <circle cx="12" cy="13" r="4" />
                                         </svg>
                                     </div>
                                 </div>
@@ -1082,7 +1310,8 @@
                                     <h2 class="profile-full-name" id="hero-profile-name">นาย ธนกฤต พิพัฒน์ชัย</h2>
                                     <span class="profile-verified-badge" title="เจ้าหน้าที่ได้รับการยืนยันตัวตนในระบบ">
                                         <svg viewBox="0 0 24 24" fill="currentColor" width="16" height="16">
-                                            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                                            <path
+                                                d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z" />
                                         </svg>
                                         ยืนยันแล้ว
                                     </span>
@@ -1090,32 +1319,59 @@
                                 </div>
                                 <div class="profile-meta-tags">
                                     <span class="meta-tag meta-role" id="hero-profile-role">
-                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                            width="14" height="14">
+                                            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+                                            <circle cx="12" cy="7" r="4" />
+                                        </svg>
                                         เจ้าหน้าที่ฝ่ายตรวจสอบและคัดกรองคิว
                                     </span>
                                     <span class="meta-tag meta-dept" id="hero-profile-dept">
-                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                            width="14" height="14">
+                                            <rect x="2" y="7" width="20" height="14" rx="2" ry="2" />
+                                            <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16" />
+                                        </svg>
                                         ฝ่ายเวชระเบียนและจัดการคิวผู้ป่วย
                                     </span>
                                     <span class="meta-tag meta-shift" id="hero-profile-shift">
-                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                            width="14" height="14">
+                                            <circle cx="12" cy="12" r="10" />
+                                            <polyline points="12 6 12 12 16 14" />
+                                        </svg>
                                         กะเช้า (08:00 - 16:30 น.)
                                     </span>
                                 </div>
                             </div>
                             <div class="profile-hero-actions">
                                 <div class="profile-mode-toggle" id="profile-mode-toggle">
-                                    <button type="button" class="btn-mode-tab active" id="btn-mode-view" onclick="setProfileMode('view')">
-                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="15" height="15"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+                                    <button type="button" class="btn-mode-tab active" id="btn-mode-view"
+                                        onclick="setProfileMode('view')">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                            width="15" height="15">
+                                            <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
+                                            <circle cx="12" cy="12" r="3" />
+                                        </svg>
                                         ดูข้อมูลสรุป
                                     </button>
-                                    <button type="button" class="btn-mode-tab" id="btn-mode-edit" onclick="setProfileMode('edit')">
-                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="15" height="15"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+                                    <button type="button" class="btn-mode-tab" id="btn-mode-edit"
+                                        onclick="setProfileMode('edit')">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                            width="15" height="15">
+                                            <path d="M12 20h9" />
+                                            <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z" />
+                                        </svg>
                                         แก้ไขข้อมูลโปรไฟล์
                                     </button>
                                 </div>
-                                <button type="button" class="btn-copy-profile" onclick="copyProfileContactInfo()" title="คัดลอกนามบัตรข้อมูลติดต่อ">
-                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="15" height="15"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+                                <button type="button" class="btn-copy-profile" onclick="copyProfileContactInfo()"
+                                    title="คัดลอกนามบัตรข้อมูลติดต่อ">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                        width="15" height="15">
+                                        <rect x="9" y="9" width="13" height="13" rx="2" ry="2" />
+                                        <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1" />
+                                    </svg>
                                     คัดลอกข้อมูล
                                 </button>
                             </div>
@@ -1156,16 +1412,30 @@
 
                     <!-- Profile Content Section with Navigation Tabs -->
                     <div class="profile-tabs-nav">
-                        <button type="button" class="profile-nav-tab active" data-tab="tab-personal" onclick="switchProfileTab('tab-personal')">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                        <button type="button" class="profile-nav-tab active" data-tab="tab-personal"
+                            onclick="switchProfileTab('tab-personal')">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16"
+                                height="16">
+                                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+                                <circle cx="12" cy="7" r="4" />
+                            </svg>
                             <span>ข้อมูลทั่วไปและตำแหน่งงาน</span>
                         </button>
-                        <button type="button" class="profile-nav-tab" data-tab="tab-contact" onclick="switchProfileTab('tab-contact')">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                        <button type="button" class="profile-nav-tab" data-tab="tab-contact"
+                            onclick="switchProfileTab('tab-contact')">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16"
+                                height="16">
+                                <path
+                                    d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
+                            </svg>
                             <span>ข้อมูลติดต่อและการปฏิบัติงาน</span>
                         </button>
-                        <button type="button" class="profile-nav-tab" data-tab="tab-activity" onclick="switchProfileTab('tab-activity')">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><path d="M12 20v-6M6 20V10M18 20V4"/></svg>
+                        <button type="button" class="profile-nav-tab" data-tab="tab-activity"
+                            onclick="switchProfileTab('tab-activity')">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16"
+                                height="16">
+                                <path d="M12 20v-6M6 20V10M18 20V4" />
+                            </svg>
                             <span>ประวัติกิจกรรมและสิทธิ์ระบบ</span>
                         </button>
                     </div>
@@ -1190,7 +1460,8 @@
                                         </div>
                                         <div class="detail-row">
                                             <span class="detail-label">ชื่อ - นามสกุล:</span>
-                                            <span class="detail-val highlight" id="view-fullname">ธนกฤต พิพัฒน์ชัย</span>
+                                            <span class="detail-val highlight" id="view-fullname">ธนกฤต
+                                                พิพัฒน์ชัย</span>
                                         </div>
                                         <div class="detail-row">
                                             <span class="detail-label">ชื่อเล่น:</span>
@@ -1218,11 +1489,13 @@
                                     <div class="info-details-list">
                                         <div class="detail-row">
                                             <span class="detail-label">ตำแหน่งทางการ:</span>
-                                            <span class="detail-val highlight" id="view-role">เจ้าหน้าที่ฝ่ายตรวจสอบและคัดกรองคิว</span>
+                                            <span class="detail-val highlight"
+                                                id="view-role">เจ้าหน้าที่ฝ่ายตรวจสอบและคัดกรองคิว</span>
                                         </div>
                                         <div class="detail-row">
                                             <span class="detail-label">แผนก / สังกัด:</span>
-                                            <span class="detail-val" id="view-department">ฝ่ายเวชระเบียนและจัดการคิวผู้ป่วย</span>
+                                            <span class="detail-val"
+                                                id="view-department">ฝ่ายเวชระเบียนและจัดการคิวผู้ป่วย</span>
                                         </div>
                                         <div class="detail-row">
                                             <span class="detail-label">สถานีประจำการ:</span>
@@ -1234,7 +1507,8 @@
                                         </div>
                                         <div class="detail-row">
                                             <span class="detail-label">สถานะปัจจุบัน:</span>
-                                            <span class="detail-val status-badge-online" id="view-status">กำลังปฏิบัติหน้าที่</span>
+                                            <span class="detail-val status-badge-online"
+                                                id="view-status">กำลังปฏิบัติหน้าที่</span>
                                         </div>
                                     </div>
                                 </div>
@@ -1244,22 +1518,30 @@
                                 <div class="info-card-header">
                                     <div class="info-card-icon green">📝</div>
                                     <div>
-                                        <h4 class="info-card-title">บันทึกย่อและหน้าที่ประจำวัน (Bio & Responsibilities)</h4>
+                                        <h4 class="info-card-title">บันทึกย่อและหน้าที่ประจำวัน (Bio & Responsibilities)
+                                        </h4>
                                         <p class="info-card-subtitle">รายละเอียดภาระงานและคำแนะนำสำหรับเจ้าหน้าที่</p>
                                     </div>
                                 </div>
                                 <div class="bio-display-box" id="view-bio">
-                                    ดูแลระบบจัดการคิว คัดกรองผู้ป่วยกลุ่มนัดหมายและ Walk-in ประจำจุดคัดกรองกลาง ประสานงานแพทย์และพยาบาลทุกห้องตรวจ พร้อมควบคุมการเรียกคิวผ่านระบบเสียงและหน้าจอแสดงผลดิจิทัล
+                                    ดูแลระบบจัดการคิว คัดกรองผู้ป่วยกลุ่มนัดหมายและ Walk-in ประจำจุดคัดกรองกลาง
+                                    ประสานงานแพทย์และพยาบาลทุกห้องตรวจ
+                                    พร้อมควบคุมการเรียกคิวผ่านระบบเสียงและหน้าจอแสดงผลดิจิทัล
                                 </div>
                             </div>
                         </div>
 
                         <!-- EDIT MODE: Personal & Work -->
                         <div class="profile-edit-container" id="edit-mode-personal" style="display:none;">
-                            <form class="profile-edit-form" id="form-profile-personal" onsubmit="event.preventDefault(); submitSaveUserProfile();">
+                            <form class="profile-edit-form" id="form-profile-personal"
+                                onsubmit="event.preventDefault(); submitSaveUserProfile();">
                                 <div class="edit-form-card">
                                     <h4 class="edit-section-title">
-                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                            width="18" height="18">
+                                            <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7" />
+                                            <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z" />
+                                        </svg>
                                         แก้ไขข้อมูลส่วนตัวและตำแหน่งงาน
                                     </h4>
                                     <div class="edit-form-grid">
@@ -1278,44 +1560,55 @@
                                         </div>
                                         <div class="form-group-custom">
                                             <label for="input-firstname">ชื่อจริง <span class="req">*</span></label>
-                                            <input type="text" class="form-control-custom" id="input-firstname" required placeholder="ชื่อ">
+                                            <input type="text" class="form-control-custom" id="input-firstname" required
+                                                placeholder="ชื่อ">
                                         </div>
                                         <div class="form-group-custom">
                                             <label for="input-lastname">นามสกุล <span class="req">*</span></label>
-                                            <input type="text" class="form-control-custom" id="input-lastname" required placeholder="นามสกุล">
+                                            <input type="text" class="form-control-custom" id="input-lastname" required
+                                                placeholder="นามสกุล">
                                         </div>
                                         <div class="form-group-custom">
                                             <label for="input-nickname">ชื่อเล่น</label>
-                                            <input type="text" class="form-control-custom" id="input-nickname" placeholder="ชื่อเล่น">
+                                            <input type="text" class="form-control-custom" id="input-nickname"
+                                                placeholder="ชื่อเล่น">
                                         </div>
                                         <div class="form-group-custom">
-                                            <label for="input-staff-id">รหัสพนักงาน (Staff ID) <span class="req">*</span></label>
-                                            <input type="text" class="form-control-custom" id="input-staff-id" required placeholder="เช่น ST-4029">
+                                            <label for="input-staff-id">รหัสพนักงาน (Staff ID) <span
+                                                    class="req">*</span></label>
+                                            <input type="text" class="form-control-custom" id="input-staff-id" required
+                                                placeholder="เช่น ST-4029">
                                         </div>
                                         <div class="form-group-custom">
                                             <label for="input-role">ตำแหน่งงาน <span class="req">*</span></label>
-                                            <input type="text" class="form-control-custom" id="input-role" required placeholder="เช่น เจ้าหน้าที่ฝ่ายตรวจสอบและคัดกรองคิว">
+                                            <input type="text" class="form-control-custom" id="input-role" required
+                                                placeholder="เช่น เจ้าหน้าที่ฝ่ายตรวจสอบและคัดกรองคิว">
                                         </div>
                                         <div class="form-group-custom">
-                                            <label for="input-department">แผนก / สังกัด <span class="req">*</span></label>
+                                            <label for="input-department">แผนก / สังกัด <span
+                                                    class="req">*</span></label>
                                             <select class="form-control-custom" id="input-department">
-                                                <option value="ฝ่ายเวชระเบียนและจัดการคิวผู้ป่วย">ฝ่ายเวชระเบียนและจัดการคิวผู้ป่วย</option>
+                                                <option value="ฝ่ายเวชระเบียนและจัดการคิวผู้ป่วย">
+                                                    ฝ่ายเวชระเบียนและจัดการคิวผู้ป่วย</option>
                                                 <option value="อายุรกรรม">อายุรกรรม</option>
                                                 <option value="ทันตกรรม">ทันตกรรม</option>
                                                 <option value="ศัลยกรรม">ศัลยกรรม</option>
                                                 <option value="กุมารเวชกรรม">กุมารเวชกรรม</option>
                                                 <option value="จักษุวิทยา">จักษุวิทยา</option>
                                                 <option value="กระดูกและข้อ">กระดูกและข้อ</option>
-                                                <option value="ฝ่ายตรวจทางห้องปฏิบัติการ (LAB)">ฝ่ายตรวจทางห้องปฏิบัติการ (LAB)</option>
+                                                <option value="ฝ่ายตรวจทางห้องปฏิบัติการ (LAB)">
+                                                    ฝ่ายตรวจทางห้องปฏิบัติการ (LAB)</option>
                                             </select>
                                         </div>
                                         <div class="form-group-custom">
                                             <label for="input-station">สถานีปฏิบัติงานหลัก</label>
-                                            <input type="text" class="form-control-custom" id="input-station" placeholder="เช่น เคาน์เตอร์คัดกรองจุดที่ 1">
+                                            <input type="text" class="form-control-custom" id="input-station"
+                                                placeholder="เช่น เคาน์เตอร์คัดกรองจุดที่ 1">
                                         </div>
                                         <div class="form-group-custom full-span">
                                             <label for="input-bio">บันทึกย่อประจำตัว / หน้าที่ความรับผิดชอบ</label>
-                                            <textarea class="form-control-custom" id="input-bio" rows="3" placeholder="ระบุรายละเอียดภาระงานหรือข้อความบันทึกย่อ..."></textarea>
+                                            <textarea class="form-control-custom" id="input-bio" rows="3"
+                                                placeholder="ระบุรายละเอียดภาระงานหรือข้อความบันทึกย่อ..."></textarea>
                                         </div>
                                     </div>
                                 </div>
@@ -1339,7 +1632,9 @@
                                     <div class="info-details-list">
                                         <div class="detail-row">
                                             <span class="detail-label">อีเมลโรงพยาบาล:</span>
-                                            <span class="detail-val" id="view-email"><a href="mailto:thanakrit.p@hospital.mail" class="link-contact">thanakrit.p@hospital.mail</a></span>
+                                            <span class="detail-val" id="view-email"><a
+                                                    href="mailto:thanakrit.p@hospital.mail"
+                                                    class="link-contact">thanakrit.p@hospital.mail</a></span>
                                         </div>
                                         <div class="detail-row">
                                             <span class="detail-label">เบอร์โทรศัพท์ภายใน:</span>
@@ -1351,7 +1646,8 @@
                                         </div>
                                         <div class="detail-row">
                                             <span class="detail-label">ผู้ติดต่อกรณีฉุกเฉิน:</span>
-                                            <span class="detail-val emergency-text" id="view-emergency">คุณสมใจ พิพัฒน์ชัย (มารดา) - 081-987-6543</span>
+                                            <span class="detail-val emergency-text" id="view-emergency">คุณสมใจ
+                                                พิพัฒน์ชัย (มารดา) - 081-987-6543</span>
                                         </div>
                                     </div>
                                 </div>
@@ -1367,7 +1663,8 @@
                                     <div class="info-details-list">
                                         <div class="detail-row">
                                             <span class="detail-label">กะการทำงานปัจจุบัน:</span>
-                                            <span class="detail-val highlight" id="view-shift-detail">กะเช้า (08:00 - 16:30 น.)</span>
+                                            <span class="detail-val highlight" id="view-shift-detail">กะเช้า (08:00 -
+                                                16:30 น.)</span>
                                         </div>
                                         <div class="detail-row">
                                             <span class="detail-label">วันปฏิบัติงาน:</span>
@@ -1375,7 +1672,8 @@
                                         </div>
                                         <div class="detail-row">
                                             <span class="detail-label">ระบบแจ้งเตือนเสียง:</span>
-                                            <span class="detail-val" id="view-sound-setting">เปิดใช้งานเสียงเรียกคิวอัตโนมัติ</span>
+                                            <span class="detail-val"
+                                                id="view-sound-setting">เปิดใช้งานเสียงเรียกคิวอัตโนมัติ</span>
                                         </div>
                                         <div class="detail-row">
                                             <span class="detail-label">การเข้าสู่ระบบล่าสุด:</span>
@@ -1390,21 +1688,28 @@
                         <div class="profile-edit-container" id="edit-mode-contact" style="display:none;">
                             <div class="edit-form-card">
                                 <h4 class="edit-section-title">
-                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                        width="18" height="18">
+                                        <path
+                                            d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
+                                    </svg>
                                     แก้ไขข้อมูลติดต่อและกะการทำงาน
                                 </h4>
                                 <div class="edit-form-grid">
                                     <div class="form-group-custom">
                                         <label for="input-email">อีเมลโรงพยาบาล <span class="req">*</span></label>
-                                        <input type="email" class="form-control-custom" id="input-email" required placeholder="name@hospital.mail">
+                                        <input type="email" class="form-control-custom" id="input-email" required
+                                            placeholder="name@hospital.mail">
                                     </div>
                                     <div class="form-group-custom">
                                         <label for="input-phone-ext">เบอร์โทรภายใน (Ext.)</label>
-                                        <input type="text" class="form-control-custom" id="input-phone-ext" placeholder="เช่น Ext. 2104">
+                                        <input type="text" class="form-control-custom" id="input-phone-ext"
+                                            placeholder="เช่น Ext. 2104">
                                     </div>
                                     <div class="form-group-custom">
                                         <label for="input-mobile">เบอร์โทรศัพท์มือถือ</label>
-                                        <input type="text" class="form-control-custom" id="input-mobile" placeholder="เช่น 089-123-4567">
+                                        <input type="text" class="form-control-custom" id="input-mobile"
+                                            placeholder="เช่น 089-123-4567">
                                     </div>
                                     <div class="form-group-custom">
                                         <label for="input-shift">กะการทำงาน</label>
@@ -1416,8 +1721,10 @@
                                         </select>
                                     </div>
                                     <div class="form-group-custom full-span">
-                                        <label for="input-emergency">ผู้ติดต่อกรณีฉุกเฉิน (ชื่อ ความสัมพันธ์ เบอร์โทร)</label>
-                                        <input type="text" class="form-control-custom" id="input-emergency" placeholder="เช่น คุณสมใจ พิพัฒน์ชัย (มารดา) - 081-987-6543">
+                                        <label for="input-emergency">ผู้ติดต่อกรณีฉุกเฉิน (ชื่อ ความสัมพันธ์
+                                            เบอร์โทร)</label>
+                                        <input type="text" class="form-control-custom" id="input-emergency"
+                                            placeholder="เช่น คุณสมใจ พิพัฒน์ชัย (มารดา) - 081-987-6543">
                                     </div>
                                 </div>
                             </div>
@@ -1437,27 +1744,46 @@
                                 </div>
                                 <div class="permissions-badges-grid">
                                     <div class="perm-badge active">
-                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="16" height="16"><polyline points="20 6 9 17 4 12"/></svg>
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                                            width="16" height="16">
+                                            <polyline points="20 6 9 17 4 12" />
+                                        </svg>
                                         <span>เรียกคิวผู้ป่วยทุกแผนก</span>
                                     </div>
                                     <div class="perm-badge active">
-                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="16" height="16"><polyline points="20 6 9 17 4 12"/></svg>
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                                            width="16" height="16">
+                                            <polyline points="20 6 9 17 4 12" />
+                                        </svg>
                                         <span>แทรกคิวด่วนฉุกเฉิน (Emergency)</span>
                                     </div>
                                     <div class="perm-badge active">
-                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="16" height="16"><polyline points="20 6 9 17 4 12"/></svg>
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                                            width="16" height="16">
+                                            <polyline points="20 6 9 17 4 12" />
+                                        </svg>
                                         <span>สร้าง / เลื่อนนัดหมายผู้ป่วย</span>
                                     </div>
                                     <div class="perm-badge active">
-                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="16" height="16"><polyline points="20 6 9 17 4 12"/></svg>
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                                            width="16" height="16">
+                                            <polyline points="20 6 9 17 4 12" />
+                                        </svg>
                                         <span>ดูรายงานและสถิติภาพรวม</span>
                                     </div>
                                     <div class="perm-badge active">
-                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="16" height="16"><polyline points="20 6 9 17 4 12"/></svg>
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                                            width="16" height="16">
+                                            <polyline points="20 6 9 17 4 12" />
+                                        </svg>
                                         <span>ควบคุมเสียงเรียกคิวอัตโนมัติ</span>
                                     </div>
                                     <div class="perm-badge inactive">
-                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="16" height="16"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                                            width="16" height="16">
+                                            <line x1="18" y1="6" x2="6" y2="18" />
+                                            <line x1="6" y1="6" x2="18" y2="18" />
+                                        </svg>
                                         <span>แก้ไขสิทธิ์ระดับผู้ดูแลระบบ (Admin)</span>
                                     </div>
                                 </div>
@@ -1496,7 +1822,8 @@
                                     <div class="timeline-item">
                                         <div class="timeline-dot amber"></div>
                                         <div class="timeline-info">
-                                            <span class="timeline-action">เข้าสู่ระบบประจำสถานีเคาน์เตอร์คัดกรอง 1</span>
+                                            <span class="timeline-action">เข้าสู่ระบบประจำสถานีเคาน์เตอร์คัดกรอง
+                                                1</span>
                                             <span class="timeline-time">วันนี้ 07:55 น.</span>
                                         </div>
                                     </div>
@@ -1509,20 +1836,37 @@
                     <div class="profile-bottom-bar" id="profile-edit-actions" style="display:none;">
                         <div class="bottom-bar-left">
                             <span class="unsaved-hint">
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16"
+                                    height="16">
+                                    <circle cx="12" cy="12" r="10" />
+                                    <line x1="12" y1="8" x2="12" y2="12" />
+                                    <line x1="12" y1="16" x2="12.01" y2="16" />
+                                </svg>
                                 คุณกำลังอยู่ในโหมดแก้ไขข้อมูลโปรไฟล์
                             </span>
                         </div>
                         <div class="bottom-bar-buttons">
-                            <button type="button" class="btn-profile-secondary" onclick="resetUserProfileForm()" title="คืนค่าเดิมก่อนแก้ไข">
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="15" height="15"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/></svg>
+                            <button type="button" class="btn-profile-secondary" onclick="resetUserProfileForm()"
+                                title="คืนค่าเดิมก่อนแก้ไข">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="15"
+                                    height="15">
+                                    <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8" />
+                                    <path d="M3 3v5h5" />
+                                </svg>
                                 คืนค่าเดิม
                             </button>
-                            <button type="button" class="btn-profile-secondary" onclick="setProfileMode('view')" title="ยกเลิกการแก้ไขและกลับสู่โหมดดูข้อมูล">
+                            <button type="button" class="btn-profile-secondary" onclick="setProfileMode('view')"
+                                title="ยกเลิกการแก้ไขและกลับสู่โหมดดูข้อมูล">
                                 ยกเลิก
                             </button>
-                            <button type="button" class="btn-profile-primary" onclick="submitSaveUserProfile()" title="บันทึกข้อมูลและอัปเดตระบบ">
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>
+                            <button type="button" class="btn-profile-primary" onclick="submitSaveUserProfile()"
+                                title="บันทึกข้อมูลและอัปเดตระบบ">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16"
+                                    height="16">
+                                    <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z" />
+                                    <polyline points="17 21 17 13 7 13 7 21" />
+                                    <polyline points="7 3 7 8 15 8" />
+                                </svg>
                                 บันทึกการเปลี่ยนแปลง
                             </button>
                         </div>
@@ -1538,8 +1882,8 @@
             <div class="modal-header">
                 <h3>
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20" height="20">
-                        <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/>
-                        <circle cx="12" cy="13" r="4"/>
+                        <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z" />
+                        <circle cx="12" cy="13" r="4" />
                     </svg>
                     <span>ปรับแต่งรูปภาพโปรไฟล์ (User Avatar)</span>
                 </h3>
@@ -1548,20 +1892,24 @@
             <div class="modal-body">
                 <!-- Modal Tabs -->
                 <div class="avatar-modal-tabs">
-                    <button type="button" class="avatar-modal-tab active" id="tab-btn-avatar-upload" onclick="switchAvatarModalTab('upload')">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16">
-                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
-                            <polyline points="17 8 12 3 7 8"/>
-                            <line x1="12" y1="3" x2="12" y2="15"/>
+                    <button type="button" class="avatar-modal-tab active" id="tab-btn-avatar-upload"
+                        onclick="switchAvatarModalTab('upload')">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16"
+                            height="16">
+                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                            <polyline points="17 8 12 3 7 8" />
+                            <line x1="12" y1="3" x2="12" y2="15" />
                         </svg>
                         <span>อัปโหลดรูปภาพส่วนตัว</span>
                     </button>
-                    <button type="button" class="avatar-modal-tab" id="tab-btn-avatar-preset" onclick="switchAvatarModalTab('preset')">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16">
-                            <circle cx="12" cy="12" r="10"/>
-                            <path d="M8 14s1.5 2 4 2 4-2 4-2"/>
-                            <line x1="9" y1="9" x2="9.01" y2="9"/>
-                            <line x1="15" y1="9" x2="15.01" y2="9"/>
+                    <button type="button" class="avatar-modal-tab" id="tab-btn-avatar-preset"
+                        onclick="switchAvatarModalTab('preset')">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16"
+                            height="16">
+                            <circle cx="12" cy="12" r="10" />
+                            <path d="M8 14s1.5 2 4 2 4-2 4-2" />
+                            <line x1="9" y1="9" x2="9.01" y2="9" />
+                            <line x1="15" y1="9" x2="15.01" y2="9" />
                         </svg>
                         <span>เลือกไอคอน & สีพื้นหลัง</span>
                     </button>
@@ -1574,14 +1922,21 @@
                         <div class="avatar-current-preview-box">
                             <div class="avatar-preview-circle" id="avatar-modal-preview" style="background:#006D6F;">
                                 <span class="avatar-preview-emoji" id="avatar-preview-emoji">👨‍💼</span>
-                                <img src="" alt="Avatar Preview" class="avatar-preview-img" id="avatar-preview-img" style="display:none;">
+                                <img src="" alt="Avatar Preview" class="avatar-preview-img" id="avatar-preview-img"
+                                    style="display:none;">
                             </div>
                             <div class="avatar-preview-details">
                                 <h4 class="avatar-preview-title" id="avatar-preview-title">รูปโปรไฟล์ปัจจุบัน</h4>
                                 <span class="avatar-preview-status" id="avatar-preview-status">ใช้ไอคอนอิโมจิ</span>
                                 <div class="avatar-preview-actions" style="margin-top:8px;">
-                                    <button type="button" class="btn-avatar-action remove" id="btn-remove-avatar-photo" onclick="removeCustomAvatarImage()" style="display:none;">
-                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>
+                                    <button type="button" class="btn-avatar-action remove" id="btn-remove-avatar-photo"
+                                        onclick="removeCustomAvatarImage()" style="display:none;">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                            width="14" height="14">
+                                            <polyline points="3 6 5 6 21 6" />
+                                            <path
+                                                d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2" />
+                                        </svg>
                                         ลบรูป (เปลี่ยนใช้ไอคอน)
                                     </button>
                                 </div>
@@ -1589,13 +1944,18 @@
                         </div>
 
                         <!-- Dropzone Area -->
-                        <input type="file" id="avatar-file-input" accept="image/png, image/jpeg, image/jpg, image/webp, image/gif" style="display:none;" onchange="handleAvatarFileUpload(event)">
-                        <div class="avatar-dropzone" id="avatar-dropzone" onclick="triggerAvatarFileInput()" ondragover="handleAvatarDragOver(event)" ondragleave="handleAvatarDragLeave(event)" ondrop="handleAvatarDrop(event)">
+                        <input type="file" id="avatar-file-input"
+                            accept="image/png, image/jpeg, image/jpg, image/webp, image/gif" style="display:none;"
+                            onchange="handleAvatarFileUpload(event)">
+                        <div class="avatar-dropzone" id="avatar-dropzone" onclick="triggerAvatarFileInput()"
+                            ondragover="handleAvatarDragOver(event)" ondragleave="handleAvatarDragLeave(event)"
+                            ondrop="handleAvatarDrop(event)">
                             <div class="dropzone-icon">
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" width="36" height="36">
-                                    <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
-                                    <circle cx="8.5" cy="8.5" r="1.5"/>
-                                    <polyline points="21 15 16 10 5 21"/>
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" width="36"
+                                    height="36">
+                                    <rect x="3" y="3" width="18" height="18" rx="2" ry="2" />
+                                    <circle cx="8.5" cy="8.5" r="1.5" />
+                                    <polyline points="21 15 16 10 5 21" />
                                 </svg>
                             </div>
                             <div class="dropzone-text">
@@ -1604,8 +1964,14 @@
                             <div class="dropzone-hint">
                                 รองรับไฟล์ JPG, PNG, WEBP หรือ GIF (ระบบปรับขนาดให้อัตโนมัติ)
                             </div>
-                            <button type="button" class="btn-browse-file" onclick="event.stopPropagation(); triggerAvatarFileInput();">
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+                            <button type="button" class="btn-browse-file"
+                                onclick="event.stopPropagation(); triggerAvatarFileInput();">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14"
+                                    height="14">
+                                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                                    <polyline points="17 8 12 3 7 8" />
+                                    <line x1="12" y1="3" x2="12" y2="15" />
+                                </svg>
                                 เลือกรูปภาพจากเครื่อง
                             </button>
                         </div>
@@ -1616,23 +1982,28 @@
                 <div class="avatar-modal-pane" id="avatar-pane-preset" style="display:none;">
                     <p class="modal-instruction">เลือกไอคอนตัวแทนและชุดสีพื้นหลังสำหรับโปรไฟล์ของคุณ:</p>
                     <div class="avatar-presets-grid" id="avatar-presets-grid">
-                        <button type="button" class="avatar-option" data-emoji="👨‍💼" onclick="chooseAvatarPreset('👨‍💼')">
+                        <button type="button" class="avatar-option" data-emoji="👨‍💼"
+                            onclick="chooseAvatarPreset('👨‍💼')">
                             <span class="avatar-option-icon">👨‍💼</span>
                             <span class="avatar-option-name">เจ้าหน้าที่ชาย</span>
                         </button>
-                        <button type="button" class="avatar-option" data-emoji="👩‍💼" onclick="chooseAvatarPreset('👩‍💼')">
+                        <button type="button" class="avatar-option" data-emoji="👩‍💼"
+                            onclick="chooseAvatarPreset('👩‍💼')">
                             <span class="avatar-option-icon">👩‍💼</span>
                             <span class="avatar-option-name">เจ้าหน้าที่หญิง</span>
                         </button>
-                        <button type="button" class="avatar-option" data-emoji="👨‍⚕️" onclick="chooseAvatarPreset('👨‍⚕️')">
+                        <button type="button" class="avatar-option" data-emoji="👨‍⚕️"
+                            onclick="chooseAvatarPreset('👨‍⚕️')">
                             <span class="avatar-option-icon">👨‍⚕️</span>
                             <span class="avatar-option-name">แพทย์ชาย</span>
                         </button>
-                        <button type="button" class="avatar-option" data-emoji="👩‍⚕️" onclick="chooseAvatarPreset('👩‍⚕️')">
+                        <button type="button" class="avatar-option" data-emoji="👩‍⚕️"
+                            onclick="chooseAvatarPreset('👩‍⚕️')">
                             <span class="avatar-option-icon">👩‍⚕️</span>
                             <span class="avatar-option-name">แพทย์หญิง</span>
                         </button>
-                        <button type="button" class="avatar-option" data-emoji="🧑‍⚕️" onclick="chooseAvatarPreset('🧑‍⚕️')">
+                        <button type="button" class="avatar-option" data-emoji="🧑‍⚕️"
+                            onclick="chooseAvatarPreset('🧑‍⚕️')">
                             <span class="avatar-option-icon">🧑‍⚕️</span>
                             <span class="avatar-option-name">พยาบาล</span>
                         </button>
@@ -1653,14 +2024,22 @@
                     <div class="avatar-bg-selector" style="margin-top:20px;">
                         <label class="avatar-bg-label">เลือกชุดสีพื้นหลัง:</label>
                         <div class="color-palette-options" id="color-palette-options">
-                            <button type="button" class="color-dot active" style="background:#006D6F;" onclick="chooseAvatarBg('#006D6F')" title="Teal Primary"></button>
-                            <button type="button" class="color-dot" style="background:#00574B;" onclick="chooseAvatarBg('#00574B')" title="Deep Teal"></button>
-                            <button type="button" class="color-dot" style="background:#0284C7;" onclick="chooseAvatarBg('#0284C7')" title="Sky Blue"></button>
-                            <button type="button" class="color-dot" style="background:#4F46E5;" onclick="chooseAvatarBg('#4F46E5')" title="Indigo"></button>
-                            <button type="button" class="color-dot" style="background:#7C3AED;" onclick="chooseAvatarBg('#7C3AED')" title="Purple"></button>
-                            <button type="button" class="color-dot" style="background:#059669;" onclick="chooseAvatarBg('#059669')" title="Emerald"></button>
-                            <button type="button" class="color-dot" style="background:#EA580C;" onclick="chooseAvatarBg('#EA580C')" title="Warm Orange"></button>
-                            <button type="button" class="color-dot" style="background:#334155;" onclick="chooseAvatarBg('#334155')" title="Slate Dark"></button>
+                            <button type="button" class="color-dot active" style="background:#006D6F;"
+                                onclick="chooseAvatarBg('#006D6F')" title="Teal Primary"></button>
+                            <button type="button" class="color-dot" style="background:#00574B;"
+                                onclick="chooseAvatarBg('#00574B')" title="Deep Teal"></button>
+                            <button type="button" class="color-dot" style="background:#0284C7;"
+                                onclick="chooseAvatarBg('#0284C7')" title="Sky Blue"></button>
+                            <button type="button" class="color-dot" style="background:#4F46E5;"
+                                onclick="chooseAvatarBg('#4F46E5')" title="Indigo"></button>
+                            <button type="button" class="color-dot" style="background:#7C3AED;"
+                                onclick="chooseAvatarBg('#7C3AED')" title="Purple"></button>
+                            <button type="button" class="color-dot" style="background:#059669;"
+                                onclick="chooseAvatarBg('#059669')" title="Emerald"></button>
+                            <button type="button" class="color-dot" style="background:#EA580C;"
+                                onclick="chooseAvatarBg('#EA580C')" title="Warm Orange"></button>
+                            <button type="button" class="color-dot" style="background:#334155;"
+                                onclick="chooseAvatarBg('#334155')" title="Slate Dark"></button>
                         </div>
                     </div>
                 </div>
@@ -1690,7 +2069,10 @@
             </div>
             <div class="modal-footer">
                 <button class="btn-confirm-room" id="btn-confirm-room" disabled>
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="16" height="16"><polyline points="20 6 9 17 4 12"/></svg>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="16"
+                        height="16">
+                        <polyline points="20 6 9 17 4 12" />
+                    </svg>
                     ตกลง
                 </button>
             </div>
@@ -1702,7 +2084,9 @@
         <div class="modal-content urgent-modal-content" onclick="event.stopPropagation()">
             <div class="modal-header urgent-modal-header">
                 <h3>
-                    <svg viewBox="0 0 24 24" fill="currentColor" width="20" height="20"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+                    <svg viewBox="0 0 24 24" fill="currentColor" width="20" height="20">
+                        <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" />
+                    </svg>
                     แทรกคิวด่วนฉุกเฉิน (กะทันหัน)
                 </h3>
                 <button type="button" class="modal-close" onclick="closeUrgentModal()">&times;</button>
@@ -1712,7 +2096,8 @@
                     <div class="urgent-form-row">
                         <div class="urgent-form-group">
                             <label>หมายเลขคิวด่วน <span style="color:#E11D48;">*</span></label>
-                            <input type="text" class="urgent-input" id="urgent-queue-number" placeholder="เช่น EM-001" required>
+                            <input type="text" class="urgent-input" id="urgent-queue-number" placeholder="เช่น EM-001"
+                                required>
                         </div>
                         <div class="urgent-form-group">
                             <label>รหัส HN ผู้ป่วย</label>
@@ -1721,7 +2106,8 @@
                     </div>
                     <div class="urgent-form-group">
                         <label>ชื่อ-นามสกุล ผู้ป่วย / รายละเอียด <span style="color:#E11D48;">*</span></label>
-                        <input type="text" class="urgent-input" id="urgent-patient-name" placeholder="ชื่อผู้ป่วย หรือ อาการด่วน..." required>
+                        <input type="text" class="urgent-input" id="urgent-patient-name"
+                            placeholder="ชื่อผู้ป่วย หรือ อาการด่วน..." required>
                     </div>
                     <div class="urgent-form-group">
                         <label>แผนกที่ต้องการส่งตรวจ <span style="color:#E11D48;">*</span></label>
@@ -1739,20 +2125,25 @@
                         <div class="urgent-radio-box">
                             <label class="urgent-radio-label">
                                 <input type="radio" name="urgent-action-type" value="lab" checked>
-                                <span>⚡ <strong>เรียกคิวด่วนทันที</strong> (ส่งไปช่องรอผลตรวจ/สัญญาณชีพทันที เป็นคิวแรกสุด)</span>
+                                <span>⚡ <strong>เรียกคิวด่วนทันที</strong> (ส่งไปช่องรอผลตรวจ/สัญญาณชีพทันที
+                                    เป็นคิวแรกสุด)</span>
                             </label>
                             <label class="urgent-radio-label">
                                 <input type="radio" name="urgent-action-type" value="queue">
-                                <span>📋 <strong>แทรกคิวไว้ลำดับที่ 1</strong> (ในช่องรอเรียกตรวจ พร้อมเรียกเป็นคิวถัดไป)</span>
+                                <span>📋 <strong>แทรกคิวไว้ลำดับที่ 1</strong> (ในช่องรอเรียกตรวจ
+                                    พร้อมเรียกเป็นคิวถัดไป)</span>
                             </label>
                         </div>
                     </div>
                 </form>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn-action" onclick="closeUrgentModal()" style="padding: 8px 16px;">ยกเลิก</button>
+                <button type="button" class="btn-action" onclick="closeUrgentModal()"
+                    style="padding: 8px 16px;">ยกเลิก</button>
                 <button type="button" class="btn-confirm-urgent" onclick="submitUrgentQueue()">
-                    <svg viewBox="0 0 24 24" fill="currentColor" width="16" height="16"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+                    <svg viewBox="0 0 24 24" fill="currentColor" width="16" height="16">
+                        <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" />
+                    </svg>
                     ยืนยันแทรกคิวด่วน
                 </button>
             </div>
@@ -1761,15 +2152,16 @@
 
     <!-- ==================== APPOINTMENT MODALS ==================== -->
     <!-- 1. Modal: สร้างนัดหมายใหม่ -->
-    <div class="modal-overlay" id="modal-create-appt" style="display:none;" onclick="handleApptModalBackdrop(event, 'modal-create-appt')">
+    <div class="modal-overlay" id="modal-create-appt" style="display:none;"
+        onclick="handleApptModalBackdrop(event, 'modal-create-appt')">
         <div class="modal-content appt-modal-content" onclick="event.stopPropagation()">
             <div class="modal-header appt-modal-header">
                 <h3>
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20" height="20">
-                        <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
-                        <line x1="16" y1="2" x2="16" y2="6"/>
-                        <line x1="8" y1="2" x2="8" y2="6"/>
-                        <line x1="3" y1="10" x2="21" y2="10"/>
+                        <rect x="3" y="4" width="18" height="18" rx="2" ry="2" />
+                        <line x1="16" y1="2" x2="16" y2="6" />
+                        <line x1="8" y1="2" x2="8" y2="6" />
+                        <line x1="3" y1="10" x2="21" y2="10" />
                     </svg>
                     <span>สร้างนัดหมายผู้ป่วยใหม่</span>
                 </h3>
@@ -1781,18 +2173,22 @@
                         <div class="form-group">
                             <label>หมายเลข HN <span class="required-star">*</span></label>
                             <div style="display:flex; gap:6px;">
-                                <input type="text" class="appt-input" id="appt-hn" placeholder="เช่น HN 67-041920" required>
-                                <button type="button" class="btn-gen-hn" onclick="autoGenerateHN()" title="สุ่มสร้าง HN">สุ่ม</button>
+                                <input type="text" class="appt-input" id="appt-hn" placeholder="เช่น HN 67-041920"
+                                    required>
+                                <button type="button" class="btn-gen-hn" onclick="autoGenerateHN()"
+                                    title="สุ่มสร้าง HN">สุ่ม</button>
                             </div>
                         </div>
                         <div class="form-group">
                             <label>เบอร์โทรศัพท์ติดต่อ <span class="required-star">*</span></label>
-                            <input type="tel" class="appt-input" id="appt-phone" placeholder="เช่น 089-123-4567" required>
+                            <input type="tel" class="appt-input" id="appt-phone" placeholder="เช่น 089-123-4567"
+                                required>
                         </div>
                     </div>
                     <div class="form-group">
                         <label>ชื่อ-นามสกุล ผู้ป่วย <span class="required-star">*</span></label>
-                        <input type="text" class="appt-input" id="appt-patient-name" placeholder="ระบุคำนำหน้าและชื่อ-นามสกุล เช่น นายสมศักดิ์ มั่นคง" required>
+                        <input type="text" class="appt-input" id="appt-patient-name"
+                            placeholder="ระบุคำนำหน้าและชื่อ-นามสกุล เช่น นายสมศักดิ์ มั่นคง" required>
                     </div>
                     <div class="form-row-2">
                         <div class="form-group">
@@ -1837,13 +2233,15 @@
                     </div>
                     <div class="form-group">
                         <label>อาการ / สาเหตุหรือวัตถุประสงค์ในการนัด</label>
-                        <input type="text" class="appt-input" id="appt-reason" placeholder="เช่น นัดตรวจติดตามผลความดัน, นัดขูดหินปูน, ตรวจสายตา">
+                        <input type="text" class="appt-input" id="appt-reason"
+                            placeholder="เช่น นัดตรวจติดตามผลความดัน, นัดขูดหินปูน, ตรวจสายตา">
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn-action" onclick="closeCreateApptModal()">ยกเลิก</button>
                         <button type="submit" class="btn-confirm-appt">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="16" height="16">
-                                <polyline points="20 6 9 17 4 12"/>
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="16"
+                                height="16">
+                                <polyline points="20 6 9 17 4 12" />
                             </svg>
                             บันทึกสร้างนัดหมาย
                         </button>
@@ -1854,13 +2252,14 @@
     </div>
 
     <!-- 2. Modal: เลื่อนวันนัดหมาย -->
-    <div class="modal-overlay" id="modal-reschedule-appt" style="display:none;" onclick="handleApptModalBackdrop(event, 'modal-reschedule-appt')">
+    <div class="modal-overlay" id="modal-reschedule-appt" style="display:none;"
+        onclick="handleApptModalBackdrop(event, 'modal-reschedule-appt')">
         <div class="modal-content appt-modal-content" onclick="event.stopPropagation()">
             <div class="modal-header appt-modal-header warning">
                 <h3>
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20" height="20">
-                        <circle cx="12" cy="12" r="10"/>
-                        <polyline points="12 6 12 12 14 14"/>
+                        <circle cx="12" cy="12" r="10" />
+                        <polyline points="12 6 12 12 14 14" />
                     </svg>
                     <span>เลื่อนวันนัดหมายผู้ป่วย</span>
                 </h3>
@@ -1870,10 +2269,12 @@
                 <form id="form-reschedule-appt" onsubmit="submitRescheduleAppt(event)">
                     <input type="hidden" id="reschedule-appt-id">
                     <div class="appt-info-box">
-                        <div class="info-row"><span>ผู้ป่วย:</span> <strong id="reschedule-patient-name">-</strong></div>
+                        <div class="info-row"><span>ผู้ป่วย:</span> <strong id="reschedule-patient-name">-</strong>
+                        </div>
                         <div class="info-row"><span>HN:</span> <strong id="reschedule-hn">-</strong></div>
                         <div class="info-row"><span>แผนก:</span> <strong id="reschedule-dept">-</strong></div>
-                        <div class="info-row current-date"><span>กำหนดนัดเดิม:</span> <strong id="reschedule-old-datetime" style="color:#D97706;">-</strong></div>
+                        <div class="info-row current-date"><span>กำหนดนัดเดิม:</span> <strong
+                                id="reschedule-old-datetime" style="color:#D97706;">-</strong></div>
                     </div>
                     <div class="form-row-2" style="margin-top:14px;">
                         <div class="form-group">
@@ -1899,20 +2300,23 @@
                     </div>
                     <div class="form-group">
                         <label>สาเหตุที่ขอเลื่อนนัด <span class="required-star">*</span></label>
-                        <select class="appt-input" id="reschedule-reason-select" onchange="toggleCustomRescheduleReason()">
+                        <select class="appt-input" id="reschedule-reason-select"
+                            onchange="toggleCustomRescheduleReason()">
                             <option value="ผู้ป่วยติดภารกิจด่วน / ไม่สะดวก">ผู้ป่วยติดภารกิจด่วน / ไม่สะดวก</option>
                             <option value="แพทย์ติดเวรผ่าตัดฉุกเฉิน">แพทย์ติดเวรผ่าตัดฉุกเฉิน</option>
                             <option value="ผู้ป่วยขอเลื่อนตรวจเร็วขึ้น">ผู้ป่วยขอเลื่อนตรวจเร็วขึ้น</option>
                             <option value="รอผลแล็บหรือผลตรวจพิเศษเพิ่มเติม">รอผลแล็บหรือผลตรวจพิเศษเพิ่มเติม</option>
                             <option value="custom">ระบุสาเหตุอื่นๆ...</option>
                         </select>
-                        <input type="text" class="appt-input" id="reschedule-reason-custom" placeholder="ระบุเหตุผลการเลื่อนนัด..." style="display:none; margin-top:8px;">
+                        <input type="text" class="appt-input" id="reschedule-reason-custom"
+                            placeholder="ระบุเหตุผลการเลื่อนนัด..." style="display:none; margin-top:8px;">
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn-action" onclick="closeRescheduleApptModal()">ยกเลิก</button>
                         <button type="submit" class="btn-confirm-reschedule">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16">
-                                <path d="M21 2v6h-6M3 12a9 9 0 0 1 15-6.7L21 8M3 22v-6h6M21 12a9 9 0 0 1-15 6.7L3 16"/>
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16"
+                                height="16">
+                                <path d="M21 2v6h-6M3 12a9 9 0 0 1 15-6.7L21 8M3 22v-6h6M21 12a9 9 0 0 1-15 6.7L3 16" />
                             </svg>
                             ยืนยันการเลื่อนนัด
                         </button>
@@ -1923,14 +2327,15 @@
     </div>
 
     <!-- 3. Modal: ยกเลิกนัดหมาย -->
-    <div class="modal-overlay" id="modal-cancel-appt" style="display:none;" onclick="handleApptModalBackdrop(event, 'modal-cancel-appt')">
+    <div class="modal-overlay" id="modal-cancel-appt" style="display:none;"
+        onclick="handleApptModalBackdrop(event, 'modal-cancel-appt')">
         <div class="modal-content appt-modal-content" onclick="event.stopPropagation()">
             <div class="modal-header appt-modal-header danger">
                 <h3>
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20" height="20">
-                        <circle cx="12" cy="12" r="10"/>
-                        <line x1="15" y1="9" x2="9" y2="15"/>
-                        <line x1="9" y1="9" x2="15" y2="15"/>
+                        <circle cx="12" cy="12" r="10" />
+                        <line x1="15" y1="9" x2="9" y2="15" />
+                        <line x1="9" y1="9" x2="15" y2="15" />
                     </svg>
                     <span>ยกเลิกนัดหมายผู้ป่วย</span>
                 </h3>
@@ -1949,12 +2354,14 @@
                         <label>เหตุผลในการขอยกเลิกนัดหมาย <span class="required-star">*</span></label>
                         <select class="appt-input" id="cancel-reason-select" onchange="toggleCustomCancelReason()">
                             <option value="ผู้ป่วยขอยกเลิกนัด">ผู้ป่วยขอยกเลิกนัด</option>
-                            <option value="ผู้ป่วยเข้ารับการรักษาที่สถานพยาบาลอื่นแล้ว">ผู้ป่วยเข้ารับการรักษาที่สถานพยาบาลอื่นแล้ว</option>
+                            <option value="ผู้ป่วยเข้ารับการรักษาที่สถานพยาบาลอื่นแล้ว">
+                                ผู้ป่วยเข้ารับการรักษาที่สถานพยาบาลอื่นแล้ว</option>
                             <option value="อาการดีขึ้นหายเป็นปกติแล้ว">อาการดีขึ้นหายเป็นปกติแล้ว</option>
                             <option value="ไม่สามารถติดต่อผู้ป่วยได้">ไม่สามารถติดต่อผู้ป่วยได้</option>
                             <option value="custom">ระบุเหตุผลอื่นๆ...</option>
                         </select>
-                        <input type="text" class="appt-input" id="cancel-reason-custom" placeholder="ระบุเหตุผลการยกเลิกนัด..." style="display:none; margin-top:8px;">
+                        <input type="text" class="appt-input" id="cancel-reason-custom"
+                            placeholder="ระบุเหตุผลการยกเลิกนัด..." style="display:none; margin-top:8px;">
                     </div>
                     <p style="font-size:0.8rem; color:#EF4444; margin-top:8px;">
                         ⚠️ เมื่อยืนยันแล้ว สถานะนัดหมายจะเปลี่ยนเป็น "ยกเลิกแล้ว" และสามารถดูประวัติได้ในระบบ
@@ -1962,9 +2369,10 @@
                     <div class="modal-footer">
                         <button type="button" class="btn-action" onclick="closeCancelApptModal()">ย้อนกลับ</button>
                         <button type="submit" class="btn-confirm-cancel">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16">
-                                <line x1="18" y1="6" x2="6" y2="18"/>
-                                <line x1="6" y1="6" x2="18" y2="18"/>
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16"
+                                height="16">
+                                <line x1="18" y1="6" x2="6" y2="18" />
+                                <line x1="6" y1="6" x2="18" y2="18" />
                             </svg>
                             ยืนยันยกเลิกนัดหมาย
                         </button>
@@ -1979,4 +2387,5 @@
 
     <script src="app.js"></script>
 </body>
+
 </html>

@@ -6,6 +6,9 @@
 const state = {
     currentPage: 'dashboard',
     currentFilter: 'all',          // 'all' | 'appointment' | 'walkin'
+    waitingFilter: 'all',          // 'all' | 'appointment' | 'walkin'
+    labFilter: 'all',              // 'all' | 'waiting_result' | 'vitalsign'
+    roomFilter: 'all',             // 'all' | 'vacant' | 'occupied'
     currentDepartment: 'all',      // 'all' | 'อายุรกรรม' | 'ทันตกรรม' | 'ศัลยกรรม' | 'กุมารเวชกรรม' | 'จักษุวิทยา' | 'กระดูกและข้อ'
     searchQuery: '',
     selectedRoomIndex: null,
@@ -22,22 +25,21 @@ const state = {
         { id: 3, name: 'ห้องตรวจที่ 3', department: 'อายุรกรรม', patient: null },
         { id: 4, name: 'ห้องตรวจที่ 4', department: 'อายุรกรรม', patient: null },
         { id: 5, name: 'ห้องตรวจที่ 5', department: 'ศัลยกรรม', patient: null },
-        { id: 6, name: 'ห้องตรวจที่ 6', department: 'กุมารเวชกรรม', patient: null },
     ],
 };
 
 // ============ DEPARTMENT HELPERS ============
 function getDeptBadge(dept) {
     const map = {
-        'ทันตกรรม': { icon: '🦷', cls: 'dept-dental' },
-        'อายุรกรรม': { icon: '🩺', cls: 'dept-med' },
-        'ศัลยกรรม': { icon: '✂️', cls: 'dept-surg' },
-        'กุมารเวชกรรม': { icon: '👶', cls: 'dept-pedia' },
-        'จักษุวิทยา': { icon: '👁️', cls: 'dept-eye' },
-        'กระดูกและข้อ': { icon: '🦴', cls: 'dept-ortho' },
+        'ทันตกรรม': { cls: 'dept-dental' },
+        'อายุรกรรม': { cls: 'dept-med' },
+        'ศัลยกรรม': { cls: 'dept-surg' },
+        'กุมารเวชกรรม': { cls: 'dept-pedia' },
+        'จักษุวิทยา': { cls: 'dept-eye' },
+        'กระดูกและข้อ': { cls: 'dept-ortho' },
     };
-    const d = map[dept] || { icon: '🏥', cls: 'dept-med' };
-    return `<span class="card-dept-badge ${d.cls}">${d.icon} ${dept}</span>`;
+    const d = map[dept] || { cls: 'dept-dental' };
+    return `<span class="card-dept-badge ${d.cls}">แผนก: ${dept || 'ทันตกรรม'}</span>`;
 }
 
 // ============ QUEUE SOUND NOTIFICATION SYSTEM ============
@@ -318,102 +320,53 @@ function toggleSound() {
 // ============ INITIAL DATA ============
 function initializeData() {
     const now = new Date();
-    const h = now.getHours();
-    const m = now.getMinutes();
 
     state.waitingQueue = [
         {
             id: 'q1',
-            queueNumber: 'M-041',
+            queueNumber: 'A-102',
             type: 'appointment',
-            appointmentTime: `${String(h).padStart(2,'0')}:${String(m + 10 < 60 ? m + 10 : 10).padStart(2,'0')}`,
-            patientName: 'คุณ อารีย์ พิทักษ์ไทย',
-            hn: 'HN 67-048123',
-            department: 'อายุรกรรม',
-            enteredAt: new Date(now.getTime() - 15 * 60000),
-            isLate: false,
-            lateMessage: '',
-        },
-        {
-            id: 'q2',
-            queueNumber: 'S-099',
-            type: 'appointment',
-            appointmentTime: `${String(h).padStart(2,'0')}:${String(m + 30 < 60 ? m + 30 : 30).padStart(2,'0')}`,
+            appointmentTime: '14:30',
             patientName: 'คุณ สมศักดิ์ ส***',
-            hn: 'HN 67-041901',
+            hn: 'HN 67-0419xx',
             department: 'ทันตกรรม',
-            enteredAt: new Date(now.getTime() - 20 * 60000),
-            isLate: false,
-            lateMessage: '',
-        },
-        {
-            id: 'q3',
-            queueNumber: 'M-042',
-            type: 'walkin',
-            appointmentTime: `${String(h).padStart(2,'0')}:${String(m + 30 < 60 ? m + 30 : 30).padStart(2,'0')}`,
-            patientName: 'คุณ นภัสวรรณ รักษาสิทธิ์',
-            hn: 'HN 67-049876',
-            department: 'อายุรกรรม',
-            enteredAt: new Date(now.getTime() - 5 * 60000),
-            isLate: false,
-            lateMessage: '',
-        },
-        {
-            id: 'q4',
-            queueNumber: 'W-100',
-            type: 'walkin',
-            appointmentTime: `${String(h).padStart(2,'0')}:${String(m + 30 < 60 ? m + 30 : 30).padStart(2,'0')}`,
-            patientName: 'คุณ มนตรีจันทร์ ส***',
-            hn: 'HN 67-041902',
-            department: 'ทันตกรรม',
-            enteredAt: new Date(now.getTime() - 2 * 60000),
-            isLate: false,
-            lateMessage: '',
-        },
-        {
-            id: 'q5',
-            queueNumber: 'SR-012',
-            type: 'appointment',
-            appointmentTime: `${String(h + 1 > 23 ? 0 : h + 1).padStart(2,'0')}:00`,
-            patientName: 'คุณ ธนากร วิเศษโสภา',
-            hn: 'HN 67-052341',
-            department: 'ศัลยกรรม',
             enteredAt: new Date(now.getTime() - 10 * 60000),
             isLate: false,
             lateMessage: '',
         },
         {
-            id: 'q6',
-            queueNumber: 'P-025',
+            id: 'q2',
+            queueNumber: 'W-100',
+            type: 'walkin',
+            appointmentTime: '14:30',
+            patientName: 'คุณ มนตรีจันทร์ ส***',
+            hn: 'HN 67-0419xx',
+            department: 'ทันตกรรม',
+            enteredAt: new Date(now.getTime() - 10 * 60000),
+            isLate: false,
+            lateMessage: '',
+        },
+        {
+            id: 'q3',
+            queueNumber: 'E-100',
             type: 'appointment',
-            appointmentTime: `${String(h + 1 > 23 ? 0 : h + 1).padStart(2,'0')}:15`,
-            patientName: 'ด.ช. ภูผา วงศ์สว่าง',
-            hn: 'HN 67-061122',
-            department: 'กุมารเวชกรรม',
-            enteredAt: new Date(now.getTime() - 8 * 60000),
+            appointmentTime: '15:00',
+            patientName: 'คุณ มนตรีจันทร์ ส***',
+            hn: 'HN 67-0419xx',
+            department: 'ทันตกรรม',
+            enteredAt: new Date(now.getTime() - 0 * 60000),
             isLate: false,
+            isUrgent: true,
             lateMessage: '',
         },
         {
-            id: 'q7',
-            queueNumber: 'E-015',
-            type: 'walkin',
-            appointmentTime: `${String(h + 1 > 23 ? 0 : h + 1).padStart(2,'0')}:30`,
-            patientName: 'คุณ วิชัย มณีฉาย',
-            hn: 'HN 67-074455',
-            department: 'จักษุวิทยา',
-            enteredAt: new Date(now.getTime() - 3 * 60000),
-            isLate: false,
-            lateMessage: '',
-        },
-        {
-            id: 'q8',
-            queueNumber: 'O-009',
-            type: 'walkin',
-            appointmentTime: `${String(h + 1 > 23 ? 0 : h + 1).padStart(2,'0')}:45`,
-            patientName: 'คุณ นพดล แก้วสุวรรณ',
-            hn: 'HN 67-083311',
-            department: 'กระดูกและข้อ',
+            id: 'q4',
+            queueNumber: 'A-102',
+            type: 'appointment',
+            appointmentTime: '15:00',
+            patientName: 'คุณ สมศักดิ์ ส***',
+            hn: 'HN 67-0419xx',
+            department: 'ทันตกรรม',
             enteredAt: new Date(now.getTime() - 1 * 60000),
             isLate: false,
             lateMessage: '',
@@ -423,47 +376,40 @@ function initializeData() {
     state.labQueue = [
         {
             id: 'lab1',
-            queueNumber: 'M-039',
-            patientName: 'คุณ ประสิทธิ์ เจริญพร',
-            hn: 'HN 67-047712',
-            department: 'อายุรกรรม',
-            labType: 'ตรวจเลือด CBC / น้ำตาล',
-            labStatus: 'รอผลแล็บ',
-            sentAt: new Date(now.getTime() - 35 * 60000),
+            queueNumber: 'S-098',
+            patientName: 'คุณ สมศักดิ์ ส***',
+            hn: 'HN 67-0419xx',
+            department: 'ทันตกรรม',
+            labType: 'Vitalsign / Lab',
+            labStatus: 'กำลังตรวจ Vitalsign / Lab',
+            sentAt: new Date(now.getTime() - 25 * 60000),
+            vitalsignChecked: false,
         },
         {
             id: 'lab2',
-            queueNumber: 'S-098',
+            queueNumber: 'S-097',
             patientName: 'คุณ สมศักดิ์ ส***',
-            hn: 'HN 67-041903',
+            hn: 'HN 67-0419xx',
             department: 'ทันตกรรม',
             labType: 'Vitalsign / Lab',
-            labStatus: 'กำลังตรวจ',
+            labStatus: 'รอผลตรวจ',
             sentAt: new Date(now.getTime() - 25 * 60000),
+            vitalsignChecked: true,
         },
         {
             id: 'lab3',
-            queueNumber: 'SR-010',
-            patientName: 'คุณ กมลวรรณ ปรีชา',
-            hn: 'HN 67-051890',
-            department: 'ศัลยกรรม',
-            labType: 'เอกซเรย์ช่องท้อง (X-Ray)',
-            labStatus: 'รอผล X-Ray',
-            sentAt: new Date(now.getTime() - 20 * 60000),
-        },
-        {
-            id: 'lab4',
-            queueNumber: 'P-023',
-            patientName: 'ด.ช. ภัทรกร มีทรัพย์',
-            hn: 'HN 67-060455',
-            department: 'กุมารเวชกรรม',
-            labType: 'พ่นยาขยายหลอดลม',
-            labStatus: 'กำลังตรวจ',
-            sentAt: new Date(now.getTime() - 12 * 60000),
+            queueNumber: 'W-099',
+            patientName: 'คุณ สมศักดิ์ ส***',
+            hn: 'HN 67-0419xx',
+            department: 'ทันตกรรม',
+            labType: 'Vitalsign / Lab',
+            labStatus: 'กำลังตรวจ Vitalsign / Lab',
+            sentAt: new Date(now.getTime() - 25 * 60000),
+            vitalsignChecked: false,
         },
     ];
 
-    // Pre-fill rooms
+    // Pre-fill rooms matching screenshot: Room 1 occupied, Rooms 2-5 vacant
     state.rooms = [
         {
             id: 1,
@@ -471,66 +417,36 @@ function initializeData() {
             department: 'ทันตกรรม',
             patient: {
                 id: 'r1',
-                queueNumber: 'S-095',
-                patientName: 'คุณ สมชาย มีสุข',
-                hn: 'HN 67-041904',
+                queueNumber: 'S-102',
+                patientName: 'คุณ สมศักดิ์ ส***',
+                hn: 'HN 67-0419xx',
                 department: 'ทันตกรรม',
                 sentAt: new Date(now.getTime() - 25 * 60000),
-                status: 'waiting',
+                status: 'examining',
             }
         },
         {
             id: 2,
             name: 'ห้องตรวจที่ 2',
             department: 'ทันตกรรม',
-            patient: {
-                id: 'r2',
-                queueNumber: 'S-096',
-                patientName: 'คุณ วิภาดา เจริญกุล',
-                hn: 'HN 67-041905',
-                department: 'ทันตกรรม',
-                sentAt: new Date(now.getTime() - 15 * 60000),
-                status: 'examining',
-            }
+            patient: null,
         },
         {
             id: 3,
             name: 'ห้องตรวจที่ 3',
-            department: 'อายุรกรรม',
-            patient: {
-                id: 'r3',
-                queueNumber: 'M-038',
-                patientName: 'คุณ พิมพ์ใจ แสงทอง',
-                hn: 'HN 67-046633',
-                department: 'อายุรกรรม',
-                sentAt: new Date(now.getTime() - 18 * 60000),
-                status: 'examining',
-            }
+            department: 'ทันตกรรม',
+            patient: null,
         },
         {
             id: 4,
             name: 'ห้องตรวจที่ 4',
-            department: 'อายุรกรรม',
+            department: 'ทันตกรรม',
             patient: null,
         },
         {
             id: 5,
             name: 'ห้องตรวจที่ 5',
-            department: 'ศัลยกรรม',
-            patient: {
-                id: 'r5',
-                queueNumber: 'SR-008',
-                patientName: 'คุณ วีระชาติ สุขสม',
-                hn: 'HN 67-050112',
-                department: 'ศัลยกรรม',
-                sentAt: new Date(now.getTime() - 10 * 60000),
-                status: 'waiting',
-            }
-        },
-        {
-            id: 6,
-            name: 'ห้องตรวจที่ 6',
-            department: 'กุมารเวชกรรม',
+            department: 'ทันตกรรม',
             patient: null,
         },
     ];
@@ -646,15 +562,16 @@ function updateStats() {
     const statDoneCountEl = document.getElementById('stat-done-count');
     if (statDoneCountEl) statDoneCountEl.textContent = state.completedToday;
 
-    // Column Headers
-    const colWaitCountEl = document.getElementById('col-waiting-count');
-    if (colWaitCountEl) colWaitCountEl.textContent = waitingFiltered.length;
+    // Column Badges
+    const colWaitBadge = document.getElementById('col-waiting-count-badge');
+    if (colWaitBadge) colWaitBadge.textContent = `กำลังรอ ${waitingFiltered.length} ราย`;
 
-    const colLabCountEl = document.getElementById('col-lab-count');
-    if (colLabCountEl) colLabCountEl.textContent = labFiltered.length;
+    const colLabBadge = document.getElementById('col-lab-count-badge');
+    if (colLabBadge) colLabBadge.textContent = `กำลังตรวจ ${labFiltered.length} ราย`;
 
-    const colRoomsActiveEl = document.getElementById('col-rooms-active');
-    if (colRoomsActiveEl) colRoomsActiveEl.textContent = `Active ${roomsFiltered.length} ห้อง`;
+    const vacantRoomsCount = state.rooms.filter(r => !r.patient).length;
+    const colRoomsBadge = document.getElementById('col-rooms-count-badge');
+    if (colRoomsBadge) colRoomsBadge.textContent = `ว่าง ${vacantRoomsCount}/${state.rooms.length} ห้อง`;
 
     // Department Pill Badge Counts (Total active in dept = waiting + lab + examining)
     const getDeptTotal = (deptName) => {
@@ -704,9 +621,12 @@ function renderWaitingQueue() {
 
     let filtered = state.waitingQueue;
 
-    // Filter by type (appointment / walkin)
-    if (state.currentFilter === 'appointment') filtered = filtered.filter(q => q.type === 'appointment');
-    if (state.currentFilter === 'walkin') filtered = filtered.filter(q => q.type === 'walkin');
+    // Filter by type filter pills (all / appointment / walkin)
+    if (state.waitingFilter === 'appointment') {
+        filtered = filtered.filter(q => q.type === 'appointment');
+    } else if (state.waitingFilter === 'walkin') {
+        filtered = filtered.filter(q => q.type === 'walkin');
+    }
 
     // Filter by department
     if (state.currentDepartment !== 'all') {
@@ -723,6 +643,12 @@ function renderWaitingQueue() {
         );
     }
 
+    // Update column badge
+    const badgeEl = document.getElementById('col-waiting-count-badge');
+    if (badgeEl) {
+        badgeEl.textContent = `กำลังรอ ${filtered.length} ราย`;
+    }
+
     if (filtered.length === 0) {
         container.innerHTML = `
         <div class="column-empty-state">
@@ -735,29 +661,33 @@ function renderWaitingQueue() {
     container.innerHTML = filtered.map((q) => {
         const waitMinutes = Math.floor((Date.now() - q.enteredAt.getTime()) / 60000);
         const isAppointment = q.type === 'appointment';
-        const isTransfer = q.type === 'transfer';
-        let tagTypeClass = isAppointment ? 'tag-appointment' : 'tag-walkin';
-        let tagTypeLabel = isAppointment ? 'นัดหมาย' : 'Walk-in';
-        if (isTransfer) {
-            tagTypeClass = 'tag-transfer';
-            tagTypeLabel = '🔀 ส่งต่อ';
-        }
+        const isUrgent = q.isUrgent;
         const lateClass = q.isLate ? 'late-arrival' : '';
-        const timeTagClass = q.isLate ? 'tag-appointment-time late' : 'tag-appointment-time';
+
+        // Badge pill
+        let typeBadgeHtml = '';
+        if (isUrgent) {
+            typeBadgeHtml = `<span class="card-badge-urgent">ด่วน</span>`;
+        } else if (isAppointment) {
+            typeBadgeHtml = `<span class="card-badge-apt">นัดหมาย</span>`;
+        } else {
+            typeBadgeHtml = `<span class="card-badge-walkin">Walk in</span>`;
+        }
 
         return `
-        <div class="queue-card ${lateClass}" data-id="${q.id}">
+        <div class="queue-card ${lateClass} ${isUrgent ? 'urgent-card' : ''}" data-id="${q.id}">
             <div class="card-header">
                 <span class="queue-number">${q.queueNumber}</span>
                 <div class="card-tags">
-                    <span class="${timeTagClass}">
-                        ${q.isLate ? '⚠️' : '🕐'} ${isTransfer ? 'ส่งต่อเมื่อ' : 'นัด'} ${q.appointmentTime} น.
+                    <span class="tag-appointment-time">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                        นัด ${q.appointmentTime} น.
                     </span>
-                    <span class="tag ${tagTypeClass}">${tagTypeLabel}</span>
+                    ${typeBadgeHtml}
                 </div>
             </div>
             <div class="card-patient-name">${q.patientName} (${q.hn})</div>
-            <div class="card-department">
+            <div class="card-meta-row">
                 ${getDeptBadge(q.department)}
                 <span class="card-wait-time">รอมาแล้ว ${waitMinutes} นาที</span>
             </div>
@@ -775,16 +705,16 @@ function renderWaitingQueue() {
                     ข้ามคิว
                 </button>
                 <button class="btn-action" onclick="recallQueue('${q.id}')" title="เรียกซ้ำ">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 5L6 9H2v6h4l5 4V5z"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"/></svg>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 4v6h6"/><path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"/></svg>
                     เรียกซ้ำ
                 </button>
-                <button class="btn-action btn-urgent" onclick="callUrgentQueue('${q.id}')" title="เรียกคิวด่วน / แทรกคิวกระทันหัน">
-                    <svg viewBox="0 0 24 24" fill="currentColor" width="13" height="13"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+                <button class="btn-action btn-urgent" onclick="callUrgentQueue('${q.id}')" title="เรียกคิวด่วน">
+                    <svg viewBox="0 0 24 24" fill="currentColor" width="13" height="13"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
                     เรียกด่วน
                 </button>
-                <button class="btn-action btn-call" onclick="callQueue('${q.id}')" title="เรียกคิว">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
-                    เรียกคิว
+                <button class="btn-action btn-call-lab" onclick="callQueue('${q.id}')" title="ส่งเข้าตรวจ Lab">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                    เข้าตรวจ lab
                 </button>
             </div>
         </div>`;
@@ -797,6 +727,13 @@ function renderLabQueue() {
     if (!container) return;
 
     let filtered = state.labQueue;
+
+    // Filter by labFilter pills (all / waiting_result / vitalsign)
+    if (state.labFilter === 'waiting_result') {
+        filtered = filtered.filter(q => q.vitalsignChecked === true || q.labStatus === 'รอผลตรวจ');
+    } else if (state.labFilter === 'vitalsign') {
+        filtered = filtered.filter(q => q.vitalsignChecked !== true || q.labStatus.includes('Vitalsign'));
+    }
 
     // Filter by department
     if (state.currentDepartment !== 'all') {
@@ -813,6 +750,12 @@ function renderLabQueue() {
         );
     }
 
+    // Update column badge
+    const badgeEl = document.getElementById('col-lab-count-badge');
+    if (badgeEl) {
+        badgeEl.textContent = `กำลังตรวจ ${filtered.length} ราย`;
+    }
+
     if (filtered.length === 0) {
         container.innerHTML = `
         <div class="column-empty-state">
@@ -826,28 +769,41 @@ function renderLabQueue() {
         const sentMinutes = Math.floor((Date.now() - q.sentAt.getTime()) / 60000);
         const sentTime = `${String(q.sentAt.getHours()).padStart(2,'0')}:${String(q.sentAt.getMinutes()).padStart(2,'0')}`;
         const isUrgent = q.isUrgent;
-        const statusClass = isUrgent ? 'lab-status-badge urgent' : (q.labStatus === 'รอผล X-Ray' ? 'lab-status-badge xray' : 'lab-status-badge');
         const cardUrgentClass = isUrgent ? 'urgent-card' : '';
+        const isVitalsignDone = !!q.vitalsignChecked;
+
+        // Label for time: if Vitalsign done -> ตรวจเสร็จ, else ส่งเก็บเมื่อ
+        const timePrefix = isVitalsignDone ? 'ตรวจเสร็จ' : 'ส่งเก็บเมื่อ';
 
         return `
         <div class="lab-card ${cardUrgentClass}" data-id="${q.id}">
             <div class="lab-card-header">
                 <span class="lab-queue-number">${q.queueNumber}</span>
-                <span class="${statusClass}">${q.labStatus}</span>
+                <span class="lab-status-badge ${isVitalsignDone ? 'waiting-result' : ''}">${q.labStatus}</span>
             </div>
             <div class="lab-card-body">
                 <div class="lab-patient-name">${q.patientName} (${q.hn})</div>
-                <div class="lab-dept" style="margin-bottom:6px;">
+                <div class="lab-meta-row">
                     ${getDeptBadge(q.department)}
+                    <span class="lab-meta-time">${timePrefix} ${sentTime} น. (ผ่านไป ${sentMinutes} นาที)</span>
                 </div>
-                <div class="lab-time-info">ส่งตรวจเมื่อ ${sentTime} น. (ผ่านไป ${sentMinutes} นาที)</div>
-                <div class="lab-test-type">การตรวจ: ${q.labType}</div>
             </div>
-            <div class="lab-card-actions">
-                <button class="btn-send-room" onclick="sendBackToQueue('${q.id}')">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><path d="M15 18l-6-6 6-6"/></svg>
+            <div class="lab-card-footer">
+                <label class="vitalsign-checkbox-label">
+                    <input type="checkbox" ${isVitalsignDone ? 'checked' : ''} onchange="toggleVitalsign('${q.id}', this.checked)">
+                    <span>ตรวจ Vitalsign แล้ว</span>
+                </label>
+                ${isVitalsignDone ? `
+                <button class="btn-send-room enabled active-enabled" onclick="sendBackToQueue('${q.id}')" title="ส่งเข้าห้องตรวจ">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="15" height="15"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 12h6"/></svg>
                     ส่งเข้าห้องตรวจ
                 </button>
+                ` : `
+                <button class="btn-send-room disabled" onclick="showVitalsignWarning('${q.id}')" title="กรุณาติ๊กตรวจ Vitalsign ก่อนส่งเข้าห้องตรวจ">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="15" height="15"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 12h6"/></svg>
+                    ส่งเข้าห้องตรวจ
+                </button>
+                `}
             </div>
         </div>`;
     }).join('');
@@ -859,18 +815,34 @@ function renderRooms() {
     if (!container) return;
 
     let displayRooms = state.rooms;
+
+    // Filter by department
     if (state.currentDepartment !== 'all') {
-        displayRooms = state.rooms.filter(r =>
+        displayRooms = displayRooms.filter(r =>
             r.department === state.currentDepartment ||
             (r.patient && r.patient.department === state.currentDepartment)
         );
+    }
+
+    // Filter by roomFilter pills (all / vacant / occupied)
+    if (state.roomFilter === 'vacant') {
+        displayRooms = displayRooms.filter(r => !r.patient);
+    } else if (state.roomFilter === 'occupied') {
+        displayRooms = displayRooms.filter(r => !!r.patient);
+    }
+
+    // Update column badge
+    const vacantCount = state.rooms.filter(r => !r.patient).length;
+    const badgeEl = document.getElementById('col-rooms-count-badge');
+    if (badgeEl) {
+        badgeEl.textContent = `ว่าง ${vacantCount}/${state.rooms.length} ห้อง`;
     }
 
     if (displayRooms.length === 0) {
         container.innerHTML = `
         <div class="column-empty-state">
             <div class="column-empty-icon">🏥</div>
-            <p>ไม่มีห้องตรวจสำหรับ<strong>แผนก${state.currentDepartment}</strong></p>
+            <p>ไม่มีห้องตรวจตามตัวกรองที่เลือก${state.currentDepartment !== 'all' ? `<br><strong>แผนก${state.currentDepartment}</strong>` : ''}</p>
         </div>`;
         return;
     }
@@ -879,39 +851,114 @@ function renderRooms() {
         if (room.patient) {
             const sentMinutes = Math.floor((Date.now() - room.patient.sentAt.getTime()) / 60000);
             const sentTime = `${String(room.patient.sentAt.getHours()).padStart(2,'0')}:${String(room.patient.sentAt.getMinutes()).padStart(2,'0')}`;
-            const isExamining = room.patient.status === 'examining';
-            const badgeClass = isExamining ? 'examining' : 'waiting';
-            const badgeText = isExamining ? 'แพทย์กำลังตรวจ' : 'รอแพทย์ตรวจ';
             return `
             <div class="room-card" data-room="${room.id}">
                 <div class="room-header">
-                    <span class="room-dot occupied"></span>
-                    <span class="room-name">${room.name}</span>
-                    <span class="room-dept-tag">${room.department}</span>
-                    <span class="room-doctor-badge ${badgeClass}">${badgeText}</span>
+                    <div class="room-title-left">
+                        <span class="room-dot-orange"></span>
+                        <span class="room-name">${room.name}</span>
+                    </div>
+                    <span class="room-doctor-badge examining">แพทย์กำลังตรวจ</span>
                 </div>
                 <div class="room-content">
                     <div class="room-queue-number">${room.patient.queueNumber}</div>
                     <div class="room-patient-name">${room.patient.patientName} (${room.patient.hn})</div>
-                    <div class="room-dept" style="margin-bottom:6px;">
+                    <div class="room-meta-row">
                         ${getDeptBadge(room.patient.department)}
+                        <span class="room-send-time">ส่งตรวจ ${sentTime} น. (ผ่านไป ${sentMinutes} นาที)</span>
                     </div>
-                    <div class="room-send-time">ส่งตรวจ ${sentTime} น. (ผ่านไป ${sentMinutes} นาที)</div>
                 </div>
             </div>`;
         } else {
             return `
-            <div class="room-card" data-room="${room.id}">
+            <div class="room-card vacant" data-room="${room.id}">
                 <div class="room-header">
-                    <span class="room-dot vacant"></span>
-                    <span class="room-name">${room.name}</span>
-                    <span class="room-dept-tag">${room.department}</span>
+                    <div class="room-title-left">
+                        <span class="room-dot-teal"></span>
+                        <span class="room-name">${room.name}</span>
+                    </div>
                 </div>
-                <div class="room-vacant-text">ว่าง</div>
+                <div class="room-vacant-watermark">ว่าง</div>
             </div>`;
         }
     }).join('');
 }
+
+// ============ COLUMN FILTERS ============
+function setWaitingFilter(filterType) {
+    state.waitingFilter = filterType;
+    const container = document.getElementById('waiting-filters');
+    if (container) {
+        container.querySelectorAll('.filter-pill-btn').forEach(btn => {
+            if (btn.dataset.filter === filterType) {
+                btn.classList.add('active');
+            } else {
+                btn.classList.remove('active');
+            }
+        });
+    }
+    renderWaitingQueue();
+}
+
+function setLabFilter(filterType) {
+    state.labFilter = filterType;
+    const container = document.getElementById('lab-filters');
+    if (container) {
+        container.querySelectorAll('.filter-pill-btn').forEach(btn => {
+            if (btn.dataset.filter === filterType) {
+                btn.classList.add('active');
+            } else {
+                btn.classList.remove('active');
+            }
+        });
+    }
+    renderLabQueue();
+}
+
+function setRoomFilter(filterType) {
+    state.roomFilter = filterType;
+    const container = document.getElementById('room-filters');
+    if (container) {
+        container.querySelectorAll('.filter-pill-btn').forEach(btn => {
+            if (btn.dataset.filter === filterType) {
+                btn.classList.add('active');
+            } else {
+                btn.classList.remove('active');
+            }
+        });
+    }
+    renderRooms();
+}
+
+// Toggle Vitalsign checked status for lab queue card
+function toggleVitalsign(labId, isChecked) {
+    const item = state.labQueue.find(q => q.id === labId);
+    if (!item) return;
+
+    item.vitalsignChecked = isChecked;
+    if (isChecked) {
+        item.labStatus = 'รอผลตรวจ';
+        showToast(`คิว ${item.queueNumber} ตรวจ Vitalsign เรียบร้อยแล้ว - สามารถส่งเข้าห้องตรวจได้`, 'success');
+    } else {
+        item.labStatus = 'กำลังตรวจ Vitalsign / Lab';
+        showToast(`ยกเลิกสถานะตรวจ Vitalsign ของคิว ${item.queueNumber}`, 'info');
+    }
+    renderLabQueue();
+    updateStats();
+}
+
+function showVitalsignWarning(labId) {
+    const item = state.labQueue.find(q => q.id === labId);
+    const qNum = item ? item.queueNumber : '';
+    showToast(`⚠️ คิว ${qNum} ยังไม่ได้ตรวจ Vitalsign กรุณาทำเครื่องหมายตรวจ Vitalsign ก่อนส่งเข้าห้องตรวจ`, 'warning');
+}
+
+// Expose handlers to window for inline onclick/onchange in HTML
+window.setWaitingFilter = setWaitingFilter;
+window.setLabFilter = setLabFilter;
+window.setRoomFilter = setRoomFilter;
+window.toggleVitalsign = toggleVitalsign;
+window.showVitalsignWarning = showVitalsignWarning;
 
 // ============ ACTIONS ============
 
