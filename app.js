@@ -28,7 +28,26 @@ const state = {
     ],
 };
 
-// ============ DEPARTMENT HELPERS ============
+// ============ DEPARTMENT SVG ICONS & HELPERS ============
+function getDeptIconSvg(dept) {
+    switch (dept) {
+        case 'ทันตกรรม':
+            return `<svg class="dept-svg-inline" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="13" height="13"><path d="M7 3C4.5 3 3 5 3 7.5C3 10.5 4.5 12 5.5 14L7.5 21C8 22 9.5 22 10 21L12 16L14 21C14.5 22 16 22 16.5 21L18.5 14C19.5 12 21 10.5 21 7.5C21 5 19.5 3 17 3C14.5 3 13.5 4.5 12 4.5C10.5 4.5 9.5 3 7 3Z"/></svg>`;
+        case 'อายุรกรรม':
+            return `<svg class="dept-svg-inline" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="13" height="13"><path d="M4.5 3v5a4.5 4.5 0 0 0 9 0V3"/><path d="M9 12.5v4a3 3 0 0 0 6 0v-2"/><circle cx="18" cy="14" r="2.5"/><path d="M3 3h3M12 3h3"/></svg>`;
+        case 'ศัลยกรรม':
+            return `<svg class="dept-svg-inline" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="13" height="13"><circle cx="6" cy="6" r="3"/><circle cx="6" cy="18" r="3"/><line x1="20" y1="4" x2="8.12" y2="15.88"/><line x1="14.47" y1="14.48" x2="20" y2="20"/><line x1="8.12" y1="8.12" x2="12" y2="12"/></svg>`;
+        case 'กุมารเวชกรรม':
+            return `<svg class="dept-svg-inline" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="13" height="13"><circle cx="12" cy="12" r="9"/><circle cx="9" cy="10" r="1.2" fill="currentColor"/><circle cx="15" cy="10" r="1.2" fill="currentColor"/><path d="M8 15s1.5 2 4 2 4-2 4-2"/><path d="M12 3a2.5 2.5 0 0 1 2 2.5"/></svg>`;
+        case 'จักษุวิทยา':
+            return `<svg class="dept-svg-inline" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="13" height="13"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7-10-7-10-7z"/><circle cx="12" cy="12" r="3"/></svg>`;
+        case 'กระดูกและข้อ':
+            return `<svg class="dept-svg-inline" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="13" height="13"><path d="M18 10a3 3 0 0 0-3-3l-6 6a3 3 0 1 0 4.24 4.24l6-6A3 3 0 0 0 18 10z"/><circle cx="19" cy="5" r="2.5"/><circle cx="15" cy="2" r="2.5"/><circle cx="5" cy="19" r="2.5"/><circle cx="9" cy="22" r="2.5"/></svg>`;
+        default:
+            return `<svg class="dept-svg-inline" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="13" height="13"><path d="M3 21h18M5 21V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v16"/><path d="M12 7v6M9 10h6"/></svg>`;
+    }
+}
+
 function getDeptBadge(dept) {
     const map = {
         'ทันตกรรม': { cls: 'dept-dental' },
@@ -39,7 +58,7 @@ function getDeptBadge(dept) {
         'กระดูกและข้อ': { cls: 'dept-ortho' },
     };
     const d = map[dept] || { cls: 'dept-dental' };
-    return `<span class="card-dept-badge ${d.cls}">แผนก: ${dept || 'ทันตกรรม'}</span>`;
+    return `<span class="card-dept-badge ${d.cls}">${getDeptIconSvg(dept)} <span>${dept || 'ทันตกรรม'}</span></span>`;
 }
 
 // ============ QUEUE SOUND NOTIFICATION SYSTEM ============
@@ -652,7 +671,9 @@ function renderWaitingQueue() {
     if (filtered.length === 0) {
         container.innerHTML = `
         <div class="column-empty-state">
-            <div class="column-empty-icon">✓</div>
+            <div class="column-empty-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="28" height="28"><polyline points="20 6 9 17 4 12"/></svg>
+            </div>
             <p>ไม่มีคิวรอเรียกตรวจ${state.currentDepartment !== 'all' ? `<br><strong>แผนก${state.currentDepartment}</strong>` : ''}</p>
         </div>`;
         return;
@@ -691,8 +712,8 @@ function renderWaitingQueue() {
                 ${getDeptBadge(q.department)}
                 <span class="card-wait-time">รอมาแล้ว ${waitMinutes} นาที</span>
             </div>
-            ${q.transferFrom ? `<div style="font-size:0.75rem; color:#1D4ED8; background:#EFF6FF; padding:3px 8px; border-radius:6px; margin:4px 0;">🔀 ส่งต่อจากแผนก${q.transferFrom}${q.transferReason ? `: ${q.transferReason}` : ''}</div>` : ''}
-            ${q.isLate ? `<div class="late-warning">⚠️ มาสาย > 30น. (ย้ายต่อท้าย)</div>` : ''}
+            ${q.transferFrom ? `<div style="font-size:0.75rem; color:#1D4ED8; background:#EFF6FF; padding:3px 8px; border-radius:6px; margin:4px 0; display:flex; align-items:center; gap:4px;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="13" height="13"><polyline points="16 3 21 3 21 8"/><line x1="4" y1="20" x2="21" y2="3"/><polyline points="21 16 21 21 16 21"/><line x1="15" y1="15" x2="21" y2="21"/><line x1="4" y1="4" x2="9" y2="9"/></svg><span>ส่งต่อจากแผนก${q.transferFrom}${q.transferReason ? `: ${q.transferReason}` : ''}</span></div>` : ''}
+            ${q.isLate ? `<div class="late-warning" style="display:flex; align-items:center; gap:4px;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="13" height="13"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg><span>มาสาย > 30น. (ย้ายต่อท้าย)</span></div>` : ''}
             <div class="card-actions">
                 <button class="btn-action btn-arrow" onclick="moveQueueUp('${q.id}')" title="เลื่อนคิวขึ้น">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="18 15 12 9 6 15"/></svg>
@@ -759,7 +780,9 @@ function renderLabQueue() {
     if (filtered.length === 0) {
         container.innerHTML = `
         <div class="column-empty-state">
-            <div class="column-empty-icon">✓</div>
+            <div class="column-empty-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="28" height="28"><polyline points="20 6 9 17 4 12"/></svg>
+            </div>
             <p>ไม่มีคิวรอผลตรวจ${state.currentDepartment !== 'all' ? `<br><strong>แผนก${state.currentDepartment}</strong>` : ''}</p>
         </div>`;
         return;
@@ -841,7 +864,9 @@ function renderRooms() {
     if (displayRooms.length === 0) {
         container.innerHTML = `
         <div class="column-empty-state">
-            <div class="column-empty-icon">🏥</div>
+            <div class="column-empty-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="28" height="28"><path d="M3 21h18"/><path d="M5 21V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v16"/><path d="M9 10h6"/><path d="M12 7v6"/></svg>
+            </div>
             <p>ไม่มีห้องตรวจตามตัวกรองที่เลือก${state.currentDepartment !== 'all' ? `<br><strong>แผนก${state.currentDepartment}</strong>` : ''}</p>
         </div>`;
         return;
@@ -1484,12 +1509,12 @@ function getReportsCalculatedData() {
     const multiplier = dateRange === 'week' ? 6 : (dateRange === 'month' ? 24 : 1);
 
     const depts = [
-        { name: 'อายุรกรรม', icon: '🩺', baseWait: 18, baseExam: 15, baseDone: 9 },
-        { name: 'ทันตกรรม', icon: '🦷', baseWait: 12, baseExam: 20, baseDone: 7 },
-        { name: 'ศัลยกรรม', icon: '✂️', baseWait: 22, baseExam: 18, baseDone: 4 },
-        { name: 'กุมารเวชกรรม', icon: '👶', baseWait: 14, baseExam: 12, baseDone: 5 },
-        { name: 'จักษุวิทยา', icon: '👁️', baseWait: 11, baseExam: 10, baseDone: 2 },
-        { name: 'กระดูกและข้อ', icon: '🦴', baseWait: 16, baseExam: 16, baseDone: 1 },
+        { name: 'อายุรกรรม', icon: getDeptIconSvg('อายุรกรรม'), baseWait: 18, baseExam: 15, baseDone: 9 },
+        { name: 'ทันตกรรม', icon: getDeptIconSvg('ทันตกรรม'), baseWait: 12, baseExam: 20, baseDone: 7 },
+        { name: 'ศัลยกรรม', icon: getDeptIconSvg('ศัลยกรรม'), baseWait: 22, baseExam: 18, baseDone: 4 },
+        { name: 'กุมารเวชกรรม', icon: getDeptIconSvg('กุมารเวชกรรม'), baseWait: 14, baseExam: 12, baseDone: 5 },
+        { name: 'จักษุวิทยา', icon: getDeptIconSvg('จักษุวิทยา'), baseWait: 11, baseExam: 10, baseDone: 2 },
+        { name: 'กระดูกและข้อ', icon: getDeptIconSvg('กระดูกและข้อ'), baseWait: 16, baseExam: 16, baseDone: 1 },
     ];
 
     const deptStats = depts.map(d => {
@@ -1504,13 +1529,13 @@ function getReportsCalculatedData() {
 
         const activeLoad = waiting + examining + lab;
         let density = 'normal';
-        let densityLabel = '🟢 ปกติ';
+        let densityLabel = 'ปกติ';
         if (activeLoad >= 4) {
             density = 'high';
-            densityLabel = '🔴 หนาแน่นสูง';
+            densityLabel = 'หนาแน่นสูง';
         } else if (activeLoad >= 2) {
             density = 'moderate';
-            densityLabel = '🟡 ปานกลาง';
+            densityLabel = 'ปานกลาง';
         }
 
         return {
@@ -1683,7 +1708,7 @@ function renderReportsDashboard() {
                 <td style="color:#D97706;"><strong>${totWaiting} คน</strong></td>
                 <td><strong>${avgWait} นาที</strong></td>
                 <td style="color:#15803D;"><strong>${completionRate}%</strong></td>
-                <td><span class="density-pill normal">🟢 ระบบคล่องตัว</span></td>
+                <td><span class="density-pill normal">ระบบคล่องตัว</span></td>
             </tr>`;
         }
     }
@@ -2008,7 +2033,9 @@ function renderAppointments() {
         tbody.innerHTML = `
             <tr>
                 <td colspan="7" style="text-align:center; padding: 42px 20px; color: var(--text-muted);">
-                    <div style="font-size: 1.8rem; margin-bottom: 8px;">📅</div>
+                    <div style="margin-bottom: 8px; color: var(--text-muted);">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" width="36" height="36"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+                    </div>
                     <div style="font-weight: 600; font-size: 0.95rem; color: var(--text-primary); margin-bottom: 4px;">ไม่พบรายการนัดหมายตามเงื่อนไขที่เลือก</div>
                     <div style="font-size: 0.82rem;">ลองปรับตัวกรอง หรือคลิก "+ สร้างนัดหมายใหม่" เพื่อเพิ่มนัดหมาย</div>
                 </td>
@@ -2033,13 +2060,13 @@ function renderAppointments() {
         // Status Badge
         let statusBadgeHtml = '';
         if (appt.checkedIn) {
-            statusBadgeHtml = `<span class="appt-status-pill checked-in">🟣 เช็คอินเข้าระบบแล้ว</span>`;
+            statusBadgeHtml = `<span class="appt-status-pill checked-in"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="12" height="12" style="vertical-align:middle;margin-right:4px;"><polyline points="20 6 9 17 4 12"/></svg>เช็คอินแล้ว</span>`;
         } else if (appt.status === 'confirmed') {
-            statusBadgeHtml = `<span class="appt-status-pill confirmed">🟢 ยืนยันนัด</span>`;
+            statusBadgeHtml = `<span class="appt-status-pill confirmed"><svg viewBox="0 0 24 24" fill="currentColor" width="10" height="10" style="vertical-align:middle;margin-right:4px;"><circle cx="6" cy="6" r="5"/></svg>ยืนยันนัด</span>`;
         } else if (appt.status === 'rescheduled') {
             statusBadgeHtml = `
                 <div>
-                    <span class="appt-status-pill rescheduled">🟡 เลื่อนนัดแล้ว</span>
+                    <span class="appt-status-pill rescheduled"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="12" height="12" style="vertical-align:middle;margin-right:4px;"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"/></svg>เลื่อนนัดแล้ว</span>
                     <div class="appt-sub-note">นัดเดิม: ${formatThaiDate(appt.oldDate)} ${appt.oldTime || ''} น.</div>
                     ${appt.rescheduleReason ? `<div class="appt-sub-note" style="color:var(--text-secondary)">เหตุผล: ${appt.rescheduleReason}</div>` : ''}
                 </div>
@@ -2047,7 +2074,7 @@ function renderAppointments() {
         } else if (appt.status === 'cancelled') {
             statusBadgeHtml = `
                 <div>
-                    <span class="appt-status-pill cancelled">🔴 ยกเลิกนัด</span>
+                    <span class="appt-status-pill cancelled"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="12" height="12" style="vertical-align:middle;margin-right:4px;"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>ยกเลิกนัด</span>
                     ${appt.cancelReason ? `<div class="appt-cancel-note">เหตุผล: ${appt.cancelReason}</div>` : ''}
                 </div>
             `;
@@ -2058,8 +2085,9 @@ function renderAppointments() {
         if (appt.checkedIn) {
             actionButtonsHtml = `
                 <div class="appt-action-buttons">
-                    <span style="font-size:0.78rem; font-weight:600; color:#4338CA; background:#EEF2FF; padding:4px 10px; border-radius:var(--radius-sm); border:1px solid #C7D2FE;">
-                        ✓ รอพบแพทย์
+                    <span style="font-size:0.78rem; font-weight:600; color:#4338CA; background:#EEF2FF; padding:4px 10px; border-radius:var(--radius-sm); border:1px solid #C7D2FE; display:inline-flex; align-items:center; gap:4px;">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="12" height="12"><polyline points="20 6 9 17 4 12"/></svg>
+                        รอพบแพทย์
                     </span>
                 </div>
             `;

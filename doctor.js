@@ -11,18 +11,37 @@ const doctorState = {
     doctorHistory: [],
 };
 
-// ============ DEPARTMENT HELPERS ============
+// ============ DEPARTMENT SVG ICONS & HELPERS ============
+function getDeptIconSvg(dept) {
+    switch (dept) {
+        case 'ทันตกรรม':
+            return `<svg class="dept-svg-inline" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="13" height="13"><path d="M7 3C4.5 3 3 5 3 7.5C3 10.5 4.5 12 5.5 14L7.5 21C8 22 9.5 22 10 21L12 16L14 21C14.5 22 16 22 16.5 21L18.5 14C19.5 12 21 10.5 21 7.5C21 5 19.5 3 17 3C14.5 3 13.5 4.5 12 4.5C10.5 4.5 9.5 3 7 3Z"/></svg>`;
+        case 'อายุรกรรม':
+            return `<svg class="dept-svg-inline" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="13" height="13"><path d="M4.5 3v5a4.5 4.5 0 0 0 9 0V3"/><path d="M9 12.5v4a3 3 0 0 0 6 0v-2"/><circle cx="18" cy="14" r="2.5"/><path d="M3 3h3M12 3h3"/></svg>`;
+        case 'ศัลยกรรม':
+            return `<svg class="dept-svg-inline" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="13" height="13"><circle cx="6" cy="6" r="3"/><circle cx="6" cy="18" r="3"/><line x1="20" y1="4" x2="8.12" y2="15.88"/><line x1="14.47" y1="14.48" x2="20" y2="20"/><line x1="8.12" y1="8.12" x2="12" y2="12"/></svg>`;
+        case 'กุมารเวชกรรม':
+            return `<svg class="dept-svg-inline" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="13" height="13"><circle cx="12" cy="12" r="9"/><circle cx="9" cy="10" r="1.2" fill="currentColor"/><circle cx="15" cy="10" r="1.2" fill="currentColor"/><path d="M8 15s1.5 2 4 2 4-2 4-2"/><path d="M12 3a2.5 2.5 0 0 1 2 2.5"/></svg>`;
+        case 'จักษุวิทยา':
+            return `<svg class="dept-svg-inline" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="13" height="13"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7-10-7-10-7z"/><circle cx="12" cy="12" r="3"/></svg>`;
+        case 'กระดูกและข้อ':
+            return `<svg class="dept-svg-inline" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="13" height="13"><path d="M18 10a3 3 0 0 0-3-3l-6 6a3 3 0 1 0 4.24 4.24l6-6A3 3 0 0 0 18 10z"/><circle cx="19" cy="5" r="2.5"/><circle cx="15" cy="2" r="2.5"/><circle cx="5" cy="19" r="2.5"/><circle cx="9" cy="22" r="2.5"/></svg>`;
+        default:
+            return `<svg class="dept-svg-inline" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="13" height="13"><path d="M3 21h18M5 21V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v16"/><path d="M12 7v6M9 10h6"/></svg>`;
+    }
+}
+
 function getDeptBadge(dept) {
     const map = {
-        'ทันตกรรม': { icon: '🦷', cls: 'dept-dental' },
-        'อายุรกรรม': { icon: '🩺', cls: 'dept-med' },
-        'ศัลยกรรม': { icon: '✂️', cls: 'dept-surg' },
-        'กุมารเวชกรรม': { icon: '👶', cls: 'dept-pedia' },
-        'จักษุวิทยา': { icon: '👁️', cls: 'dept-eye' },
-        'กระดูกและข้อ': { icon: '🦴', cls: 'dept-ortho' },
+        'ทันตกรรม': { cls: 'dept-dental' },
+        'อายุรกรรม': { cls: 'dept-med' },
+        'ศัลยกรรม': { cls: 'dept-surg' },
+        'กุมารเวชกรรม': { cls: 'dept-pedia' },
+        'จักษุวิทยา': { cls: 'dept-eye' },
+        'กระดูกและข้อ': { cls: 'dept-ortho' },
     };
-    const d = map[dept] || { icon: '🏥', cls: 'dept-med' };
-    return `<span class="card-dept-badge ${d.cls}">${d.icon} ${dept}</span>`;
+    const d = map[dept] || { cls: 'dept-med' };
+    return `<span class="card-dept-badge ${d.cls}">${getDeptIconSvg(dept)} <span>${dept}</span></span>`;
 }
 
 // ============ QUEUE SOUND NOTIFICATION SYSTEM ============
@@ -764,12 +783,12 @@ function doctorReturnPrevious(roomId) {
 
 // ---- Action 2: Transfer to Another Department (Modal & Logic) ----
 const DEPARTMENTS_LIST = [
-    { name: 'ทันตกรรม', icon: '🦷', desc: 'ทันตกรรมและศัลยกรรมช่องปาก' },
-    { name: 'อายุรกรรม', icon: '🩺', desc: 'ตรวจรักษาโรคทั่วไปและโรคเรื้อรัง' },
-    { name: 'ศัลยกรรม', icon: '✂️', desc: 'ตรวจรักษาโรคทางศัลยกรรมและผ่าตัด' },
-    { name: 'กุมารเวชกรรม', icon: '👶', desc: 'คลินิกเด็กและสุขภาพเด็ก' },
-    { name: 'จักษุวิทยา', icon: '👁️', desc: 'ตรวจรักษาโรคตาและสายตา' },
-    { name: 'กระดูกและข้อ', icon: '🦴', desc: 'ตรวจรักษาโรคกระดูก ข้อ และกล้ามเนื้อ' },
+    { name: 'ทันตกรรม', desc: 'ทันตกรรมและศัลยกรรมช่องปาก' },
+    { name: 'อายุรกรรม', desc: 'ตรวจรักษาโรคทั่วไปและโรคเรื้อรัง' },
+    { name: 'ศัลยกรรม', desc: 'ตรวจรักษาโรคทางศัลยกรรมและผ่าตัด' },
+    { name: 'กุมารเวชกรรม', desc: 'คลินิกเด็กและสุขภาพเด็ก' },
+    { name: 'จักษุวิทยา', desc: 'ตรวจรักษาโรคตาและสายตา' },
+    { name: 'กระดูกและข้อ', desc: 'ตรวจรักษาโรคกระดูก ข้อ และกล้ามเนื้อ' },
 ];
 
 let transferModalState = {
@@ -814,7 +833,7 @@ function openTransferModal(roomId) {
             return `
                 <div class="dept-choice-card ${disabledCls}" data-dept="${d.name}" ${isCurrent ? '' : `onclick="selectTransferDept('${d.name}')"`}>
                     <div class="dept-card-info">
-                        <span class="dept-card-icon">${d.icon}</span>
+                        <span class="dept-card-icon">${getDeptIconSvg(d.name)}</span>
                         <div class="dept-card-text">
                             <span class="dept-card-name">${d.name}</span>
                             <span class="dept-card-desc">${d.desc}</span>
@@ -1011,13 +1030,13 @@ function renderHistory() {
         tbody.innerHTML = records.map(rec => {
             let statusBadge = '';
             if (rec.status === 'done') {
-                statusBadge = '<span class="history-status done">✓ ตรวจเสร็จ</span>';
+                statusBadge = '<span class="history-status done"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="12" height="12" style="vertical-align:middle;margin-right:4px;"><polyline points="20 6 9 17 4 12"/></svg>ตรวจเสร็จ</span>';
             } else if (rec.status === 'sent-lab') {
-                statusBadge = '<span class="history-status sent-lab">🔬 ส่งแล็บ</span>';
+                statusBadge = '<span class="history-status sent-lab"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="12" height="12" style="vertical-align:middle;margin-right:4px;"><path d="M10 2v7.527a2 2 0 0 1-.211.896L4.72 20.55a1 1 0 0 0 .9 1.45h12.76a1 1 0 0 0 .9-1.45l-5.069-10.127A2 2 0 0 1 14 9.527V2"/><path d="M8.5 2h7"/><path d="M7 16h10"/></svg>ส่งแล็บ</span>';
             } else if (rec.status === 'returned') {
-                statusBadge = '<span class="history-status returned">↩️ ส่งกลับก่อนหน้า</span>';
+                statusBadge = '<span class="history-status returned"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="12" height="12" style="vertical-align:middle;margin-right:4px;"><polyline points="9 14 4 9 9 4"/><path d="M20 20v-7a4 4 0 0 0-4-4H4"/></svg>ส่งกลับก่อนหน้า</span>';
             } else if (rec.status === 'transfer') {
-                statusBadge = '<span class="history-status transfer">🔀 ส่งต่อแผนก</span>';
+                statusBadge = '<span class="history-status transfer"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="12" height="12" style="vertical-align:middle;margin-right:4px;"><polyline points="16 3 21 3 21 8"/><line x1="4" y1="20" x2="21" y2="3"/><polyline points="21 16 21 21 16 21"/><line x1="15" y1="15" x2="21" y2="21"/><line x1="4" y1="4" x2="9" y2="9"/></svg>ส่งต่อแผนก</span>';
             }
 
             return `<tr>

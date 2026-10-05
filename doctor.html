@@ -9,6 +9,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="doctor.css">
+    <link rel="stylesheet" href="mode-switcher.css">
 </head>
 <body>
     <div class="app-layout">
@@ -35,10 +36,6 @@
                 </a>
             </nav>
             <div class="sidebar-bottom">
-                <a href="index.html" class="btn-switch-role" title="กลับหน้าเจ้าหน้าที่">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><path d="M15 3h4a2 2 0 012 2v14a2 2 0 01-2 2h-4"/><polyline points="10 17 15 12 10 7"/><line x1="15" y1="12" x2="3" y2="12"/></svg>
-                    ไปหน้าเจ้าหน้าที่
-                </a>
             </div>
         </aside>
 
@@ -235,6 +232,8 @@
     <!-- Toast Container -->
     <div class="toast-container" id="toast-container"></div>
 
+    <!-- Mode Switcher (Floating Button at bottom-right) -->
+    <script src="mode-switcher.js"></script>
     <script src="doctor.js"></script>
 </body>
 </html>

@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=1920, initial-scale=1.0">
+    <meta name="description" content="ระบบตู้คีออสก์อัตโนมัติ ออกบัตรคิวผู้ป่วย - Smart Hospital Kiosk">
+    <title>ระบบตู้คีออสก์อัตโนมัติ | Smart Hospital Kiosk</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="mode-switcher.css">
+    <link rel="stylesheet" href="kios.css">
+</head>
+<body class="kios-body">
+    <div class="kios-screen-container">
+        <!-- Top Status Bar -->
+        <header class="kios-top-bar">
+            <div class="kios-brand-left">
+                <div class="kios-logo-badge">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" width="22" height="22" style="color:var(--kios-teal-dark);"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/><circle cx="12" cy="10" r="1.5"/></svg>
+                    <div class="badge-text">
+                        <strong>ระบบคิว.com</strong>
+                        <small>SMART HOSPITAL KIOSK</small>
+                    </div>
+                </div>
+                <div class="kios-hosp-divider"></div>
+                <div class="kios-hosp-info">
+                    <h1 class="hosp-name">โรงพยาบาลกรุงเทพเมดิคอลเซ็นเตอร์</h1>
+                    <span class="hosp-sub">Bangkok Medical Center • Smart Care Service</span>
+                </div>
+            </div>
+
+            <div class="kios-tools-right">
+                <button type="button" class="btn-kios-sound" onclick="toggleKiosSound()" id="btn-kios-sound" title="เปิด/ปิดเสียง">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20" height="20"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"/></svg>
+                </button>
+                <button type="button" class="btn-call-nurse" onclick="callNurseAlert()">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" width="18" height="18"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/><line x1="12" y1="2" x2="12" y2="4"/></svg>
+                    <span>เรียกพยาบาลด่วน</span>
+                </button>
+            </div>
+        </header>
+
+        <!-- Sub Status Bar (Service Status, Location, Real-Time Clock, Language) -->
+        <div class="kios-sub-bar">
+            <div class="sub-status-item">
+                <span class="status-indicator-dot online"></span>
+                <span>สถานะตู้บริการ: <strong>พร้อมให้บริการตามปกติ</strong></span>
+            </div>
+            <div class="sub-status-item">
+                <span>อาคาร 1 ชั้น G แผนกผู้ป่วยนอก (OPD)</span>
+            </div>
+            <div class="sub-status-item clock-item">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+                <span id="kios-live-datetime">10:42 AM | วันจันทร์ 24 พ.ย. 2568</span>
+            </div>
+            <div class="lang-switcher">
+                <button type="button" class="btn-lang active">ไทย TH</button>
+                <button type="button" class="btn-lang">English EN</button>
+            </div>
+        </div>
+
+        <!-- Main Step Flow Header -->
+        <div class="kios-step-banner">
+            <span class="step-badge">ขั้นตอนที่ 2 จาก 2</span>
+            <span class="step-title">ยืนยันตัวตนเข้ารับบริการ</span>
+            <div class="step-breadcrumbs">
+                <span class="breadcrumb-item passed">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="12" height="12" style="vertical-align:middle;margin-right:2px;"><polyline points="20 6 9 17 4 12"/></svg>
+                    <span>1. เลือกประเภทบริการ</span>
+                </span>
+                <span class="breadcrumb-arrow">›</span>
+                <span class="breadcrumb-item current">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14" style="vertical-align:middle;margin-right:2px;"><rect x="3" y="4" width="18" height="16" rx="2"/><circle cx="9" cy="10" r="2"/><line x1="15" y1="8" x2="17" y2="8"/><line x1="15" y1="12" x2="17" y2="12"/><line x1="7" y1="16" x2="17" y2="16"/></svg>
+                    <span>2. ยืนยันตัวตน (ปัจจุบัน)</span>
+                </span>
+            </div>
+        </div>
+
+        <!-- Main Content Area -->
+        <main class="kios-main-content">
+            <div class="hero-prompt-text">
+                <h2>กรุณาเสียบบัตรประจำตัวประชาชน</h2>
+                <p>เพื่อดึงข้อมูลสิทธิการรักษา และค้นหารอบนัดหมายแพทย์อัตโนมัติ</p>
+            </div>
+
+            <!-- Card Reader & Instructions Grid -->
+            <div class="kios-card-reader-grid">
+                <!-- Left: Interactive Card Slot Simulation -->
+                <div class="card-slot-box">
+                    <!-- Thai National ID Card Mockup -->
+                    <div class="thai-id-card" id="thai-id-card">
+                        <div class="card-chip-gold"></div>
+                        <div class="card-emblem-wrap">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="#D97706" stroke-width="2" width="22" height="22"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+                            <div class="card-gov-text">
+                                <strong>THAI NATIONAL ID CARD</strong>
+                                <span>บัตรประจำตัวประชาชนไทย</span>
+                            </div>
+                        </div>
+                        <div class="card-chip-arrow">
+                            <span>↑ ชิปสีทองหงายขึ้น</span>
+                        </div>
+                        <div class="card-citizen-id">1 1004 00XXX XX X</div>
+                        <div class="card-citizen-name">
+                            <small>ชื่อ - สกุล / Name - Surname</small>
+                            <strong>นายแพทย์ / ประชาชนผู้รับบริการ</strong>
+                        </div>
+                        <div class="card-footer-strip">
+                            <span>SMART CARD</span>
+                            <span>VALID: 2024-2032</span>
+                        </div>
+                    </div>
+
+                    <div class="slot-arrow-indicator">
+                        <span>เสียบบัตรเข้าช่องนี้ (Push Inward)</span>
+                        <div class="bouncing-arrows">vvv</div>
+                    </div>
+
+                    <!-- Slot Button Trigger -->
+                    <button type="button" class="btn-smart-card-slot" id="btn-insert-card" onclick="simulateInsertCard()">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="24" height="24"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg>
+                        <span>ช่องเสียบบัตรประชาชน (คลิกเพื่อทดสอบเสียบบัตร)</span>
+                    </button>
+                </div>
+
+                <!-- Right: 3 Clear Visual Steps -->
+                <div class="card-guidelines-box">
+                    <div class="guidelines-title">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20" height="20" style="vertical-align:middle;margin-right:6px;color:var(--kios-teal);"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+                        <span>คำแนะนำในการเสียบบัตร</span>
+                    </div>
+
+                    <div class="guide-step-row">
+                        <div class="guide-num">1</div>
+                        <div class="guide-desc">
+                            <strong>หงายด้านชิปสีทองขึ้น</strong>
+                            <p>ตรวจดูให้แน่ใจว่าแถบชิปการ์ดสีทองหงายขึ้นด้านบนและหันด้านชิปมุ่งตรงเข้าหาตัวเครื่อง</p>
+                        </div>
+                    </div>
+
+                    <div class="guide-step-row">
+                        <div class="guide-num">2</div>
+                        <div class="guide-desc">
+                            <strong>ดันบัตรเข้าไปจนสุดช่อง</strong>
+                            <p>เสียบบัตรเข้าไปในช่องอ่านจนรู้สึกว่าชนสุดระยะไฟเซ็นเซอร์หน้าช่องจะเริ่มกระพริบ</p>
+                        </div>
+                    </div>
+
+                    <div class="guide-step-row">
+                        <div class="guide-num">3</div>
+                        <div class="guide-desc">
+                            <strong>รออ่านข้อมูลประมาณ 3 วินาที</strong>
+                            <p>อย่าเพิ่งดึงบัตรออกระบบจะทำการเชื่อมโยงข้อมูลและแสดงชื่อของท่านบนหน้าจออัตโนมัติ</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Alternate Methods: Scan QR Code -->
+            <div class="kios-alt-bar" onclick="simulateScanAppointmentQR()">
+                <div class="alt-bar-left">
+                    <div class="qr-scan-icon-bubble">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="28" height="28">
+                            <path d="M3 7V5a2 2 0 0 1 2-2h2M17 3h2a2 2 0 0 1 2 2v2M21 17v2a2 2 0 0 1-2 2h-2M7 21H5a2 2 0 0 1-2-2v-2"/>
+                            <rect x="7" y="7" width="10" height="10"/>
+                        </svg>
+                    </div>
+                    <div class="alt-bar-text">
+                        <h3>สแกน QR Code ใบนัดหมาย</h3>
+                        <p>เปิดใบนัดจากแอปฯ หมอพร้อม, SMS หรือสลิปกระดาษจากโรงพยาบาล เพื่อดึงข้อมูลนัดหมายทันที</p>
+                    </div>
+                </div>
+                <div class="alt-bar-right">
+                    <span class="fast-tag">สะดวกรวดเร็ว</span>
+                    <button type="button" class="btn-action-alt">
+                        <span>สแกน QR Code</span>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="18" height="18"><polyline points="9 18 15 12 9 6"/></svg>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Bottom Assistive Buttons Bar -->
+            <div class="kios-bottom-actions">
+                <button type="button" class="btn-kios-assist help-btn" onclick="callNurseAlert()">
+                    <span class="assist-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="24" height="24"><path d="M3 18v-6a9 9 0 0 1 18 0v6"/><path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"/></svg>
+                    </span>
+                    <span>ต้องการความช่วยเหลือ? (Call Staff)</span>
+                </button>
+
+                <button type="button" class="btn-kios-assist manual-btn" onclick="openManualIdModal()">
+                    <span class="assist-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="24" height="24"><rect x="3" y="4" width="18" height="16" rx="2"/><line x1="7" y1="8" x2="7.01" y2="8"/><line x1="12" y1="8" x2="12.01" y2="8"/><line x1="17" y1="8" x2="17.01" y2="8"/><line x1="7" y1="12" x2="7.01" y2="12"/><line x1="12" y1="12" x2="12.01" y2="12"/><line x1="17" y1="12" x2="17.01" y2="12"/><line x1="7" y1="16" x2="7.01" y2="16"/><line x1="12" y1="16" x2="12.01" y2="16"/><line x1="17" y1="16" x2="17.01" y2="16"/></svg>
+                    </span>
+                    <div class="manual-btn-text">
+                        <strong>ไม่มีบัตรประชาชน? คีย์เลขบัตร 13 หลัก</strong>
+                        <small>Manual Input Thai Identification Number</small>
+                    </div>
+                </button>
+            </div>
+        </main>
+    </div>
+
+    <!-- Modal: Reading Smart Card Animation & Patient Identity Result -->
+    <div class="kios-modal-overlay" id="modal-card-reading" style="display:none;">
+        <div class="kios-modal-card">
+            <!-- State 1: Reading Spinner -->
+            <div id="state-reading-spinner" class="modal-state-content">
+                <div class="reading-card-spinner"></div>
+                <h3>กำลังอ่านข้อมูลชิปการ์ดบัตรประชาชน...</h3>
+                <p>กรุณาอย่าดึงบัตรประชาชนออกจากช่องเสียบ</p>
+            </div>
+
+            <!-- State 2: Patient Profile Found & Ticket Printed -->
+            <div id="state-reading-success" class="modal-state-content" style="display:none;">
+                <div class="success-badge-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="24" height="24"><polyline points="20 6 9 17 4 12"/></svg>
+                </div>
+                <h3 class="success-title">อ่านบัตรประชาชนสำเร็จเรียบร้อย</h3>
+                
+                <div class="patient-id-summary">
+                    <div class="summary-avatar">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="28" height="28" style="color:var(--kios-teal-dark);"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                    </div>
+                    <div class="summary-info">
+                        <h4 id="kios-result-name">นาย สมศักดิ์ มั่นคง</h4>
+                        <span>เลขบัตร: 1-1004-00123-45-6</span>
+                        <span id="kios-result-hn">รหัส HN: HN 67-048123</span>
+                        <span class="rights-badge">สิทธิการรักษา: บัตรทอง (UC) / สิทธิประกันสังคม</span>
+                    </div>
+                </div>
+
+                <div class="kios-ticket-print-box">
+                    <div class="print-ticket-badge">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16" style="vertical-align:middle;margin-right:4px;"><rect x="3" y="4" width="18" height="16" rx="2"/><line x1="3" y1="10" x2="21" y2="10"/><line x1="7" y1="15" x2="7.01" y2="15"/><line x1="11" y1="15" x2="13" y2="15"/></svg>
+                        <span>ออกบัตรคิวอัตโนมัติ</span>
+                    </div>
+                    <div class="print-queue-num" id="kios-print-queue">M-045</div>
+                    <div class="print-dept-name" id="kios-print-dept">แผนกอายุรกรรม • ห้องตรวจ 3-4</div>
+                    <div class="print-wait-info">คิวก่อนหน้า: 2 คิว • เวลารอโดยประมาณ 15 นาที</div>
+                </div>
+
+                <div class="modal-action-row">
+                    <button type="button" class="btn-finish-kios" onclick="finishKiosSession()">
+                        <span>เสร็จสิ้นและรับบัตรคิว</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal: Manual Thai ID Input Keypad -->
+    <div class="kios-modal-overlay" id="modal-manual-id" style="display:none;" onclick="handleKiosModalBackdrop(event)">
+        <div class="kios-modal-card manual-modal" onclick="event.stopPropagation()">
+            <div class="manual-modal-header">
+                <h3>กรอกเลขประจำตัวประชาชน 13 หลัก</h3>
+                <button type="button" class="btn-close-manual" onclick="closeManualIdModal()">&times;</button>
+            </div>
+            <div class="manual-modal-body">
+                <div class="id-display-screen" id="id-display-screen">
+                    <span id="id-display-text" class="placeholder">กรุณากดหมายเลข 13 หลัก</span>
+                </div>
+
+                <!-- Touch Screen Keypad -->
+                <div class="kios-keypad-grid">
+                    <button type="button" class="keypad-btn" onclick="pressKey('1')">1</button>
+                    <button type="button" class="keypad-btn" onclick="pressKey('2')">2</button>
+                    <button type="button" class="keypad-btn" onclick="pressKey('3')">3</button>
+                    <button type="button" class="keypad-btn" onclick="pressKey('4')">4</button>
+                    <button type="button" class="keypad-btn" onclick="pressKey('5')">5</button>
+                    <button type="button" class="keypad-btn" onclick="pressKey('6')">6</button>
+                    <button type="button" class="keypad-btn" onclick="pressKey('7')">7</button>
+                    <button type="button" class="keypad-btn" onclick="pressKey('8')">8</button>
+                    <button type="button" class="keypad-btn" onclick="pressKey('9')">9</button>
+                    <button type="button" class="keypad-btn clear-btn" onclick="clearKeypad()">ล้าง</button>
+                    <button type="button" class="keypad-btn" onclick="pressKey('0')">0</button>
+                    <button type="button" class="keypad-btn backspace-btn" onclick="backspaceKey()">⌫</button>
+                </div>
+
+                <div class="dept-select-group">
+                    <label>เลือกแผนกที่ต้องการเข้ารับการรักษา:</label>
+                    <select class="kios-dept-select" id="manual-kios-dept">
+                        <option value="อายุรกรรม">อายุรกรรม (ตรวจโรคทั่วไป)</option>
+                        <option value="ทันตกรรม">ทันตกรรม (ตรวจฟัน/ขูดหินปูน)</option>
+                        <option value="ศัลยกรรม">ศัลยกรรม (ตรวจแผล/ผ่าตัด)</option>
+                        <option value="กุมารเวชกรรม">กุมารเวชกรรม (คลินิกเด็ก)</option>
+                        <option value="จักษุวิทยา">จักษุวิทยา (ตรวจตา/สายตา)</option>
+                        <option value="กระดูกและข้อ">กระดูกและข้อ</option>
+                    </select>
+                </div>
+
+                <button type="button" class="btn-submit-manual-id" onclick="submitManualId()">
+                    <span>ยืนยันและออกบัตรคิว</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Kiosk Sound Toast -->
+    <div class="kios-toast" id="kios-toast"></div>
+
+    <!-- Mode Switcher (Floating Button at bottom-right) -->
+    <script src="mode-switcher.js"></script>
+    <script src="kios.js"></script>
+</body>
+</html>

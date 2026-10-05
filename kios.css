@@ -1,0 +1,945 @@
+/* ===================================================
+   SMART HOSPITAL KIOSK - STYLES
+   =================================================== */
+
+:root {
+    --kios-teal: #00796B;
+    --kios-teal-dark: #004D40;
+    --kios-teal-light: #E0F2F1;
+    --kios-teal-hover: #00695C;
+
+    --kios-bg: #F0F6FA;
+    --kios-card-bg: #FFFFFF;
+    
+    --kios-text-dark: #0F172A;
+    --kios-text-secondary: #475569;
+    --kios-text-muted: #94A3B8;
+
+    --kios-radius: 20px;
+    --kios-shadow: 0 10px 30px rgba(0, 77, 64, 0.08);
+}
+
+*, *::before, *::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body.kios-body {
+    font-family: 'IBM Plex Sans Thai', -apple-system, BlinkMacSystemFont, sans-serif;
+    background: var(--kios-bg);
+    color: var(--kios-text-dark);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    overflow-x: hidden;
+}
+
+.kios-screen-container {
+    width: 100%;
+    max-width: 1200px;
+    background: #FFFFFF;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 0 50px rgba(0, 0, 0, 0.08);
+}
+
+/* =========================================
+   TOP STATUS BAR
+   ========================================= */
+.kios-top-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px 36px;
+    border-bottom: 1px solid #E2E8F0;
+    background: #FFFFFF;
+}
+
+.kios-brand-left {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.kios-logo-badge {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 14px;
+    background: var(--kios-teal-light);
+    border-radius: 12px;
+}
+
+.badge-icon {
+    font-size: 1.5rem;
+}
+
+.badge-text strong {
+    display: block;
+    font-size: 0.95rem;
+    color: var(--kios-teal-dark);
+    line-height: 1.1;
+}
+
+.badge-text small {
+    font-size: 0.65rem;
+    color: var(--kios-teal);
+    font-weight: 700;
+    letter-spacing: 0.5px;
+}
+
+.kios-hosp-divider {
+    width: 1.5px;
+    height: 38px;
+    background: #CBD5E1;
+}
+
+.hosp-name {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--kios-teal-dark);
+    line-height: 1.2;
+}
+
+.hosp-sub {
+    font-size: 0.78rem;
+    color: var(--kios-text-secondary);
+}
+
+.kios-tools-right {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.btn-kios-sound {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    border: 1px solid #CBD5E1;
+    background: #F8FAFC;
+    color: var(--kios-teal-dark);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.btn-kios-sound:hover {
+    background: var(--kios-teal-light);
+    border-color: var(--kios-teal);
+}
+
+.btn-call-nurse {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 20px;
+    background: #FEE2E2;
+    color: #DC2626;
+    border: 1px solid #FCA5A5;
+    border-radius: 9999px;
+    font-family: inherit;
+    font-size: 0.92rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.btn-call-nurse:hover {
+    background: #F87171;
+    color: #FFFFFF;
+}
+
+/* =========================================
+   SUB STATUS BAR
+   ========================================= */
+.kios-sub-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 36px;
+    background: #F8FAFC;
+    border-bottom: 1px solid #E2E8F0;
+    font-size: 0.82rem;
+    color: var(--kios-text-secondary);
+}
+
+.sub-status-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.status-indicator-dot.online {
+    width: 8px;
+    height: 8px;
+    background: #10B981;
+    border-radius: 50%;
+    display: inline-block;
+}
+
+.clock-item {
+    font-weight: 600;
+    color: var(--kios-text-dark);
+}
+
+.lang-switcher {
+    display: flex;
+    background: #E2E8F0;
+    border-radius: 9999px;
+    padding: 2px;
+}
+
+.btn-lang {
+    padding: 4px 12px;
+    border-radius: 9999px;
+    border: none;
+    background: transparent;
+    font-family: inherit;
+    font-size: 0.76rem;
+    font-weight: 600;
+    color: var(--kios-text-secondary);
+    cursor: pointer;
+}
+
+.btn-lang.active {
+    background: #004D40;
+    color: #FFFFFF;
+}
+
+/* =========================================
+   STEP BANNER
+   ========================================= */
+.kios-step-banner {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin: 24px 36px 10px;
+    padding: 12px 20px;
+    background: #F0FDF4;
+    border: 1px solid #BBF7D0;
+    border-radius: 14px;
+}
+
+.step-badge {
+    padding: 4px 12px;
+    background: var(--kios-teal-dark);
+    color: #FFFFFF;
+    border-radius: 9999px;
+    font-size: 0.78rem;
+    font-weight: 700;
+}
+
+.step-title {
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: var(--kios-teal-dark);
+}
+
+.step-breadcrumbs {
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.82rem;
+}
+
+.breadcrumb-item.passed {
+    color: #15803D;
+    font-weight: 600;
+}
+
+.breadcrumb-item.current {
+    color: var(--kios-teal-dark);
+    font-weight: 700;
+    background: rgba(0, 121, 107, 0.12);
+    padding: 3px 10px;
+    border-radius: 8px;
+}
+
+/* =========================================
+   MAIN CONTENT
+   ========================================= */
+.kios-main-content {
+    flex: 1;
+    padding: 20px 36px 36px;
+    display: flex;
+    flex-direction: column;
+}
+
+.hero-prompt-text {
+    text-align: center;
+    margin: 10px 0 24px;
+}
+
+.hero-prompt-text h2 {
+    font-size: 2.2rem;
+    font-weight: 800;
+    color: var(--kios-teal-dark);
+    margin-bottom: 6px;
+}
+
+.hero-prompt-text p {
+    font-size: 1.05rem;
+    color: var(--kios-text-secondary);
+}
+
+/* CARD READER & GUIDELINES GRID */
+.kios-card-reader-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    margin-bottom: 24px;
+}
+
+/* Left: Interactive Card Slot */
+.card-slot-box {
+    background: #F8FAFC;
+    border: 2px dashed #CBD5E1;
+    border-radius: var(--kios-radius);
+    padding: 28px 24px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+/* Thai ID Card Mockup */
+.thai-id-card {
+    width: 320px;
+    height: 190px;
+    background: linear-gradient(135deg, #FFFFFF 0%, #F1F5F9 100%);
+    border-radius: 12px;
+    border: 1px solid #CBD5E1;
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.12);
+    padding: 14px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: transform 0.3s ease;
+}
+
+.card-slot-box:hover .thai-id-card {
+    transform: translateY(-6px);
+}
+
+.card-chip-gold {
+    width: 44px;
+    height: 34px;
+    background: linear-gradient(135deg, #FCD34D 0%, #D97706 100%);
+    border-radius: 6px;
+    border: 1px solid #B45309;
+    position: absolute;
+    top: 50px;
+    left: 20px;
+}
+
+.card-emblem-wrap {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.card-gov-text strong {
+    display: block;
+    font-size: 0.65rem;
+    color: #1E293B;
+    letter-spacing: 0.5px;
+}
+
+.card-gov-text span {
+    font-size: 0.55rem;
+    color: #64748B;
+}
+
+.card-chip-arrow {
+    position: absolute;
+    top: 90px;
+    left: 20px;
+    font-size: 0.62rem;
+    font-weight: 700;
+    color: #2563EB;
+}
+
+.card-citizen-id {
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: #1E293B;
+    letter-spacing: 1.5px;
+    margin-left: 60px;
+}
+
+.card-citizen-name {
+    margin-left: 60px;
+}
+
+.card-citizen-name small {
+    display: block;
+    font-size: 0.55rem;
+    color: #64748B;
+}
+
+.card-citizen-name strong {
+    font-size: 0.8rem;
+    color: #0F172A;
+}
+
+.card-footer-strip {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.58rem;
+    color: #64748B;
+    border-top: 1px solid #E2E8F0;
+    padding-top: 4px;
+}
+
+.slot-arrow-indicator {
+    margin: 16px 0 12px;
+    text-align: center;
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: var(--kios-teal-dark);
+}
+
+.bouncing-arrows {
+    font-size: 1.1rem;
+    letter-spacing: 3px;
+    animation: bounceArrows 1.2s infinite ease-in-out;
+}
+
+@keyframes bounceArrows {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(4px); }
+}
+
+.btn-smart-card-slot {
+    width: 100%;
+    max-width: 320px;
+    padding: 14px 20px;
+    background: #1E293B;
+    color: #FFFFFF;
+    border: none;
+    border-radius: 12px;
+    font-family: inherit;
+    font-size: 0.92rem;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    cursor: pointer;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.25);
+    transition: all 0.2s ease;
+}
+
+.btn-smart-card-slot:hover {
+    background: #004D40;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 77, 64, 0.35);
+}
+
+/* Right: Guidelines Steps */
+.card-guidelines-box {
+    background: #F8FAFC;
+    border-radius: var(--kios-radius);
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 16px;
+    border: 1px solid #E2E8F0;
+}
+
+.guidelines-title {
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: var(--kios-teal-dark);
+    margin-bottom: 4px;
+}
+
+.guide-step-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    background: #FFFFFF;
+    padding: 14px 16px;
+    border-radius: 14px;
+    border: 1px solid #E2E8F0;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+}
+
+.guide-num {
+    width: 36px;
+    height: 36px;
+    background: var(--kios-teal-dark);
+    color: #FFFFFF;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.15rem;
+    font-weight: 800;
+    flex-shrink: 0;
+}
+
+.guide-desc strong {
+    display: block;
+    font-size: 0.92rem;
+    color: var(--kios-text-dark);
+    margin-bottom: 2px;
+}
+
+.guide-desc p {
+    font-size: 0.8rem;
+    color: var(--kios-text-secondary);
+    line-height: 1.35;
+}
+
+/* ALTERNATE BAR: SCAN QR CODE */
+.kios-alt-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 18px 24px;
+    background: #FFFFFF;
+    border: 2px solid #E2E8F0;
+    border-radius: var(--kios-radius);
+    margin-bottom: 20px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.kios-alt-bar:hover {
+    border-color: var(--kios-teal);
+    background: #F0FDF4;
+    transform: translateY(-2px);
+    box-shadow: var(--kios-shadow);
+}
+
+.alt-bar-left {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+}
+
+.qr-scan-icon-bubble {
+    width: 52px;
+    height: 52px;
+    background: var(--kios-teal-light);
+    color: var(--kios-teal-dark);
+    border-radius: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.alt-bar-text h3 {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--kios-text-dark);
+    margin-bottom: 2px;
+}
+
+.alt-bar-text p {
+    font-size: 0.82rem;
+    color: var(--kios-text-secondary);
+}
+
+.alt-bar-right {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.fast-tag {
+    padding: 4px 10px;
+    background: #DCFCE7;
+    color: #15803D;
+    border-radius: 9999px;
+    font-size: 0.72rem;
+    font-weight: 700;
+}
+
+.btn-action-alt {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    background: transparent;
+    border: none;
+    color: var(--kios-teal-dark);
+    font-family: inherit;
+    font-size: 0.95rem;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+/* BOTTOM ASSISTIVE BUTTONS */
+.kios-bottom-actions {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-top: auto;
+}
+
+.btn-kios-assist {
+    padding: 16px 20px;
+    border-radius: 16px;
+    border: 1px solid #E2E8F0;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    font-family: inherit;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    text-align: left;
+}
+
+.btn-kios-assist.help-btn {
+    background: #E0F7FA;
+    color: #006064;
+    border-color: #B2EBF2;
+    font-size: 0.95rem;
+    font-weight: 700;
+}
+
+.btn-kios-assist.help-btn:hover {
+    background: #B2EBF2;
+}
+
+.btn-kios-assist.manual-btn {
+    background: #FFFFFF;
+    border-color: #CBD5E1;
+}
+
+.btn-kios-assist.manual-btn:hover {
+    border-color: var(--kios-teal);
+    background: #F8FAFC;
+}
+
+.assist-icon {
+    font-size: 1.6rem;
+}
+
+.manual-btn-text strong {
+    display: block;
+    font-size: 0.92rem;
+    color: var(--kios-text-dark);
+}
+
+.manual-btn-text small {
+    font-size: 0.72rem;
+    color: var(--kios-text-secondary);
+}
+
+/* =========================================
+   MODAL / POPUPS
+   ========================================= */
+.kios-modal-overlay {
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(15, 23, 42, 0.75);
+    backdrop-filter: blur(6px);
+    z-index: 10000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+.kios-modal-card {
+    background: #FFFFFF;
+    border-radius: 28px;
+    width: 100%;
+    max-width: 580px;
+    padding: 36px 32px;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.35);
+    text-align: center;
+    animation: modalPop 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes modalPop {
+    from { opacity: 0; transform: scale(0.92); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+.reading-card-spinner {
+    width: 64px;
+    height: 64px;
+    border: 5px solid #E2E8F0;
+    border-top-color: var(--kios-teal);
+    border-radius: 50%;
+    margin: 0 auto 20px;
+    animation: spin 1s infinite linear;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+.success-badge-icon {
+    width: 68px;
+    height: 68px;
+    background: #10B981;
+    color: #FFFFFF;
+    border-radius: 50%;
+    font-size: 2rem;
+    font-weight: 800;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 16px;
+    box-shadow: 0 8px 20px rgba(16, 185, 129, 0.35);
+}
+
+.success-title {
+    font-size: 1.45rem;
+    font-weight: 800;
+    color: #065F46;
+    margin-bottom: 16px;
+}
+
+.patient-id-summary {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    background: #F8FAFC;
+    border: 1px solid #E2E8F0;
+    border-radius: 16px;
+    padding: 16px;
+    text-align: left;
+    margin-bottom: 20px;
+}
+
+.summary-avatar {
+    width: 54px;
+    height: 54px;
+    background: #E2E8F0;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.8rem;
+}
+
+.summary-info h4 {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--kios-text-dark);
+}
+
+.summary-info span {
+    display: block;
+    font-size: 0.78rem;
+    color: var(--kios-text-secondary);
+}
+
+.rights-badge {
+    margin-top: 4px;
+    color: #15803D !important;
+    font-weight: 600;
+}
+
+.kios-ticket-print-box {
+    background: #FFFBEB;
+    border: 2px dashed #F59E0B;
+    border-radius: 18px;
+    padding: 20px;
+    margin-bottom: 24px;
+}
+
+.print-ticket-badge {
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: #B45309;
+    margin-bottom: 6px;
+}
+
+.print-queue-num {
+    font-size: 3.5rem;
+    font-weight: 900;
+    color: #004D40;
+    line-height: 1;
+    letter-spacing: 2px;
+    margin-bottom: 6px;
+}
+
+.print-dept-name {
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: #1E293B;
+}
+
+.print-wait-info {
+    font-size: 0.82rem;
+    color: #64748B;
+    margin-top: 4px;
+}
+
+.btn-finish-kios {
+    width: 100%;
+    padding: 16px;
+    background: var(--kios-teal-dark);
+    color: #FFFFFF;
+    border: none;
+    border-radius: 16px;
+    font-family: inherit;
+    font-size: 1.1rem;
+    font-weight: 700;
+    cursor: pointer;
+    box-shadow: 0 6px 20px rgba(0, 77, 64, 0.3);
+    transition: all 0.2s ease;
+}
+
+.btn-finish-kios:hover {
+    background: var(--kios-teal);
+    transform: translateY(-2px);
+}
+
+/* KEYPAD MODAL */
+.manual-modal {
+    max-width: 500px;
+    padding: 28px;
+}
+
+.manual-modal-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 16px;
+}
+
+.manual-modal-header h3 {
+    font-size: 1.25rem;
+    font-weight: 700;
+}
+
+.btn-close-manual {
+    background: transparent;
+    border: none;
+    font-size: 1.8rem;
+    color: var(--kios-text-muted);
+    cursor: pointer;
+    line-height: 1;
+}
+
+.id-display-screen {
+    background: #0F172A;
+    color: #38BDF8;
+    font-size: 1.8rem;
+    font-weight: 700;
+    padding: 16px;
+    border-radius: 14px;
+    letter-spacing: 2px;
+    margin-bottom: 16px;
+    min-height: 64px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.id-display-screen .placeholder {
+    color: #475569;
+    font-size: 1.1rem;
+    letter-spacing: normal;
+}
+
+.kios-keypad-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    margin-bottom: 18px;
+}
+
+.keypad-btn {
+    padding: 16px;
+    background: #F1F5F9;
+    border: 1px solid #CBD5E1;
+    border-radius: 12px;
+    font-family: inherit;
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: #1E293B;
+    cursor: pointer;
+    transition: all 0.15s ease;
+}
+
+.keypad-btn:hover {
+    background: #E2E8F0;
+}
+
+.keypad-btn.clear-btn {
+    background: #FEE2E2;
+    color: #DC2626;
+    font-size: 1.05rem;
+}
+
+.keypad-btn.backspace-btn {
+    background: #FEF3C7;
+    color: #D97706;
+}
+
+.dept-select-group {
+    text-align: left;
+    margin-bottom: 18px;
+}
+
+.dept-select-group label {
+    display: block;
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: var(--kios-text-secondary);
+    margin-bottom: 6px;
+}
+
+.kios-dept-select {
+    width: 100%;
+    padding: 12px 14px;
+    border: 1.5px solid #CBD5E1;
+    border-radius: 10px;
+    font-family: inherit;
+    font-size: 0.95rem;
+    color: var(--kios-text-dark);
+    outline: none;
+}
+
+.btn-submit-manual-id {
+    width: 100%;
+    padding: 14px;
+    background: var(--kios-teal-dark);
+    color: #FFFFFF;
+    border: none;
+    border-radius: 14px;
+    font-family: inherit;
+    font-size: 1rem;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.kios-toast {
+    position: fixed;
+    top: 24px;
+    left: 50%;
+    transform: translateX(-50%) translateY(-20px);
+    background: rgba(15, 23, 42, 0.92);
+    color: #FFFFFF;
+    padding: 12px 24px;
+    border-radius: 9999px;
+    font-size: 0.92rem;
+    font-weight: 600;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+    z-index: 999999;
+    opacity: 0;
+    pointer-events: none;
+    transition: all 0.25s ease;
+}
+
+.kios-toast.show {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+}

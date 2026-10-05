@@ -1,0 +1,1336 @@
+/* ===================================================
+   SMART HOSPITAL MOBILE QUEUE APP - CSS STYLES
+   =================================================== */
+
+:root {
+    --primary-900: #004D40;
+    --primary-800: #005B5C;
+    --primary-700: #006D6F;
+    --primary-600: #00897B;
+    --primary-500: #009688;
+    --primary-400: #26A69A;
+    --primary-100: #E0F2F1;
+    --primary-50:  #F2FBF9;
+
+    --color-bg-desktop: #0F172A;
+    --color-bg-mobile:  #F4F7F9;
+    --color-card:       #FFFFFF;
+    
+    --text-primary:   #1E293B;
+    --text-secondary: #64748B;
+    --text-muted:     #94A3B8;
+
+    --accent-blue:   #2563EB;
+    --accent-amber:  #D97706;
+    --accent-green:  #059669;
+    --accent-rose:   #E11D48;
+
+    --radius-sm: 8px;
+    --radius-md: 14px;
+    --radius-lg: 20px;
+    --radius-xl: 28px;
+
+    --shadow-soft: 0 4px 18px rgba(0, 77, 64, 0.07);
+    --shadow-card: 0 8px 26px rgba(15, 23, 42, 0.08);
+}
+
+*, *::before, *::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body.mobile-body {
+    font-family: 'IBM Plex Sans Thai', -apple-system, BlinkMacSystemFont, sans-serif;
+    background: var(--color-bg-desktop);
+    color: var(--text-primary);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 24px 12px;
+    overflow-x: hidden;
+}
+
+/* ==============================================
+   DESKTOP SIMULATOR TOP CONTROLS
+   ============================================== */
+.desktop-view-controls {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    max-width: 440px;
+    margin-bottom: 16px;
+    padding: 10px 16px;
+    background: rgba(255, 255, 255, 0.09);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 9999px;
+    color: #FFFFFF;
+}
+
+.view-control-info {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.82rem;
+    font-weight: 500;
+}
+
+.view-toggle-btns {
+    display: flex;
+    gap: 4px;
+}
+
+.btn-view-toggle {
+    padding: 5px 12px;
+    border-radius: 9999px;
+    border: none;
+    background: transparent;
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 0.75rem;
+    font-family: inherit;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.btn-view-toggle.active {
+    background: #FFFFFF;
+    color: #0F172A;
+    font-weight: 600;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+}
+
+/* ==============================================
+   SMARTPHONE FRAME / CONTAINER
+   ============================================== */
+.mobile-outer-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.smartphone-frame {
+    width: 100%;
+    max-width: 430px;
+    height: 880px;
+    background: var(--color-bg-mobile);
+    border-radius: 46px;
+    box-shadow: 0 25px 70px -15px rgba(0, 0, 0, 0.65), 0 0 0 10px #1e293b, 0 0 0 12px #334155;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Full Width View mode */
+.smartphone-frame.full-width-mode {
+    max-width: 580px;
+    height: auto;
+    min-height: 94vh;
+    border-radius: 20px;
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
+}
+
+.smartphone-frame.full-width-mode .phone-notch-bar,
+.smartphone-frame.full-width-mode .phone-home-indicator {
+    display: none;
+}
+
+/* Notch Bar */
+.phone-notch-bar {
+    height: 28px;
+    background: var(--primary-900);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    flex-shrink: 0;
+    position: relative;
+    z-index: 100;
+}
+
+.phone-speaker {
+    width: 48px;
+    height: 4px;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 4px;
+}
+
+.phone-camera {
+    width: 8px;
+    height: 8px;
+    background: rgba(255, 255, 255, 0.25);
+    border-radius: 50%;
+}
+
+.phone-home-indicator {
+    height: 18px;
+    background: #FFFFFF;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.phone-home-indicator::after {
+    content: '';
+    width: 130px;
+    height: 4px;
+    background: #CBD5E1;
+    border-radius: 4px;
+}
+
+/* ==============================================
+   HEADER BAR
+   ============================================== */
+.mobile-header {
+    background: linear-gradient(135deg, var(--primary-900) 0%, var(--primary-700) 100%);
+    color: #FFFFFF;
+    padding: 14px 18px 12px;
+    flex-shrink: 0;
+    box-shadow: 0 4px 14px rgba(0, 77, 64, 0.2);
+}
+
+.header-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 8px;
+}
+
+.hospital-brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.brand-badge-icon {
+    width: 38px;
+    height: 38px;
+    background: rgba(255, 255, 255, 0.15);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.25rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+}
+
+.brand-text {
+    display: flex;
+    flex-direction: column;
+}
+
+.hospital-name {
+    font-size: 0.96rem;
+    font-weight: 700;
+    letter-spacing: 0.2px;
+    color: #FFFFFF;
+}
+
+.hospital-sub {
+    font-size: 0.7rem;
+    color: rgba(255, 255, 255, 0.75);
+}
+
+.live-pulse-badge {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 4px 10px;
+    background: rgba(16, 185, 129, 0.2);
+    border: 1px solid rgba(16, 185, 129, 0.4);
+    border-radius: 9999px;
+    font-size: 0.68rem;
+    font-weight: 600;
+    color: #A7F3D0;
+}
+
+.pulse-dot {
+    width: 6px;
+    height: 6px;
+    background: #34D399;
+    border-radius: 50%;
+    animation: pulseDotAnim 1.6s infinite ease-in-out;
+}
+
+@keyframes pulseDotAnim {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.4; transform: scale(1.4); }
+}
+
+.header-datetime-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 0.74rem;
+    color: rgba(255, 255, 255, 0.85);
+    border-top: 1px solid rgba(255, 255, 255, 0.12);
+    padding-top: 8px;
+}
+
+.mobile-time-wrap {
+    display: flex;
+    align-items: baseline;
+    gap: 2px;
+}
+
+.mobile-time {
+    font-weight: 700;
+    font-size: 0.95rem;
+    color: #FFFFFF;
+}
+
+/* ==============================================
+   MAIN SCROLL AREA
+   ============================================== */
+.mobile-main-scroll {
+    flex: 1;
+    overflow-y: auto;
+    padding: 16px 16px 24px;
+    -webkit-overflow-scrolling: touch;
+}
+
+.mobile-tab-view {
+    display: none;
+    flex-direction: column;
+    gap: 16px;
+    animation: fadeInView 0.25s ease-out;
+}
+
+.mobile-tab-view.active {
+    display: flex;
+}
+
+@keyframes fadeInView {
+    from { opacity: 0; transform: translateY(6px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* ==============================================
+   TAB 1: LIVE QUEUE TRACKER & E-TICKET
+   ============================================== */
+
+/* Search / Queue Selector Box */
+.queue-search-card {
+    background: #FFFFFF;
+    border-radius: var(--radius-md);
+    padding: 14px;
+    box-shadow: var(--shadow-soft);
+    border: 1px solid #E2E8F0;
+}
+
+.search-label {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.78rem;
+    font-weight: 600;
+    color: var(--text-secondary);
+    margin-bottom: 8px;
+}
+
+.search-input-group {
+    display: flex;
+    gap: 8px;
+}
+
+.input-track {
+    flex: 1;
+    padding: 9px 14px;
+    background: #F8FAFC;
+    border: 1.5px solid #CBD5E1;
+    border-radius: var(--radius-sm);
+    font-family: inherit;
+    font-size: 0.88rem;
+    color: var(--text-primary);
+    outline: none;
+    transition: all 0.18s ease;
+}
+
+.input-track:focus {
+    border-color: var(--primary-600);
+    background: #FFFFFF;
+    box-shadow: 0 0 0 3px rgba(0, 137, 123, 0.15);
+}
+
+.btn-track-submit {
+    padding: 9px 18px;
+    background: var(--primary-700);
+    color: #FFFFFF;
+    border: none;
+    border-radius: var(--radius-sm);
+    font-family: inherit;
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.18s ease;
+}
+
+.btn-track-submit:hover {
+    background: var(--primary-800);
+}
+
+/* Quick Pick Chips */
+.quick-queue-chips {
+    display: flex;
+    gap: 6px;
+    overflow-x: auto;
+    margin-top: 10px;
+    padding-bottom: 2px;
+}
+
+.quick-chip {
+    padding: 4px 10px;
+    background: #F1F5F9;
+    border: 1px solid #E2E8F0;
+    border-radius: 9999px;
+    font-size: 0.72rem;
+    font-weight: 500;
+    color: var(--text-secondary);
+    white-space: nowrap;
+    cursor: pointer;
+    transition: all 0.15s ease;
+}
+
+.quick-chip:hover, .quick-chip.active {
+    background: var(--primary-100);
+    border-color: var(--primary-500);
+    color: var(--primary-900);
+    font-weight: 600;
+}
+
+/* Virtual Digital e-Ticket */
+.virtual-ticket-card {
+    background: #FFFFFF;
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-card);
+    border: 1px solid #E2E8F0;
+    overflow: hidden;
+    position: relative;
+}
+
+.ticket-header-strip {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 18px;
+    background: #F8FAFC;
+    border-bottom: 1px solid #F1F5F9;
+}
+
+.ticket-type-pill {
+    padding: 3px 10px;
+    background: #EFF6FF;
+    color: #1D4ED8;
+    border: 1px solid #BFDBFE;
+    border-radius: 9999px;
+    font-size: 0.72rem;
+    font-weight: 600;
+}
+
+.ticket-dept-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: var(--primary-800);
+}
+
+.dept-badge-svg {
+    width: 16px;
+    height: 16px;
+    flex-shrink: 0;
+}
+
+.dept-tile-icon-wrap {
+    width: 44px;
+    height: 44px;
+    border-radius: 12px;
+    background: #FFFFFF;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--primary-700);
+    margin-bottom: 6px;
+    border: 1px solid #E2E8F0;
+    transition: all 0.2s ease;
+}
+
+.dept-tile.selected .dept-tile-icon-wrap {
+    background: var(--primary-600);
+    color: #FFFFFF;
+    border-color: var(--primary-600);
+    box-shadow: 0 4px 10px rgba(0, 137, 123, 0.25);
+}
+
+.traffic-icon-bubble {
+    width: 40px;
+    height: 40px;
+    border-radius: 12px;
+    background: var(--primary-50);
+    color: var(--primary-700);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.traffic-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    display: inline-block;
+    margin-right: 4px;
+}
+.traffic-dot.normal { background: #10B981; }
+.traffic-dot.moderate { background: #F59E0B; }
+.traffic-dot.high { background: #EF4444; }
+
+.service-title-row {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.appt-dept-icon {
+    display: inline-flex;
+    align-items: center;
+    color: var(--primary-700);
+}
+
+.ticket-main-info {
+    text-align: center;
+    padding: 22px 18px 18px;
+}
+
+.ticket-queue-label {
+    font-size: 0.78rem;
+    color: var(--text-secondary);
+    letter-spacing: 0.5px;
+    margin-bottom: 4px;
+}
+
+.ticket-queue-number {
+    font-size: 3.2rem;
+    font-weight: 800;
+    color: var(--primary-700);
+    line-height: 1;
+    letter-spacing: 2px;
+    margin-bottom: 8px;
+}
+
+.ticket-patient-name {
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 2px;
+}
+
+.ticket-patient-hn {
+    font-size: 0.78rem;
+    color: var(--text-muted);
+}
+
+/* Punch Holes & Divider */
+.ticket-divider {
+    display: flex;
+    align-items: center;
+    position: relative;
+    height: 24px;
+    margin: 4px 0;
+}
+
+.punch-hole {
+    width: 24px;
+    height: 24px;
+    background: var(--color-bg-mobile);
+    border-radius: 50%;
+    position: absolute;
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.08);
+}
+
+.punch-hole.left { left: -12px; }
+.punch-hole.right { right: -12px; }
+
+.dotted-line {
+    flex: 1;
+    border-top: 2px dashed #CBD5E1;
+    margin: 0 20px;
+}
+
+/* Ticket Status Section */
+.ticket-status-section {
+    padding: 10px 18px 16px;
+}
+
+.live-status-pill {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 8px 14px;
+    background: #FEF3C7;
+    color: #92400E;
+    border-radius: 9999px;
+    font-size: 0.84rem;
+    font-weight: 600;
+    margin-bottom: 14px;
+}
+
+.live-status-pill.examining {
+    background: #DBEAFE;
+    color: #1E40AF;
+}
+
+.live-status-pill.done {
+    background: #D1FAE5;
+    color: #065F46;
+}
+
+.status-indicator-dot {
+    width: 8px;
+    height: 8px;
+    background: currentColor;
+    border-radius: 50%;
+    animation: pulseDotAnim 1.4s infinite ease-in-out;
+}
+
+.ticket-stats-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+}
+
+.ticket-stat-box {
+    background: #F8FAFC;
+    border: 1px solid #E2E8F0;
+    border-radius: var(--radius-sm);
+    padding: 8px 6px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.stat-box-title {
+    font-size: 0.66rem;
+    color: var(--text-secondary);
+    margin-bottom: 2px;
+}
+
+.stat-box-val {
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    line-height: 1.2;
+}
+
+.stat-box-val.highlight {
+    color: var(--accent-amber);
+}
+
+.stat-box-val.room-name {
+    color: var(--primary-700);
+    font-size: 0.88rem;
+}
+
+.stat-box-sub {
+    font-size: 0.65rem;
+    color: var(--text-muted);
+}
+
+/* Stepper Progress Bar */
+.ticket-stepper-wrap {
+    padding: 14px 16px;
+    background: #F8FAFC;
+    border-top: 1px solid #F1F5F9;
+}
+
+.stepper-title {
+    font-size: 0.72rem;
+    font-weight: 600;
+    color: var(--text-secondary);
+    margin-bottom: 12px;
+}
+
+.stepper-timeline {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.step-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    position: relative;
+    z-index: 2;
+}
+
+.step-circle {
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    background: #E2E8F0;
+    color: #64748B;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.72rem;
+    font-weight: 700;
+    transition: all 0.25s ease;
+}
+
+.step-label {
+    font-size: 0.64rem;
+    color: var(--text-muted);
+    white-space: nowrap;
+}
+
+.step-item.completed .step-circle {
+    background: var(--accent-green);
+    color: #FFFFFF;
+}
+
+.step-item.completed .step-label {
+    color: var(--accent-green);
+    font-weight: 600;
+}
+
+.step-item.current .step-circle {
+    background: var(--primary-600);
+    color: #FFFFFF;
+    box-shadow: 0 0 0 4px var(--primary-100);
+}
+
+.step-item.current .step-label {
+    color: var(--primary-900);
+    font-weight: 700;
+}
+
+.step-line {
+    flex: 1;
+    height: 3px;
+    background: #E2E8F0;
+    margin: 0 -4px 16px;
+    position: relative;
+    z-index: 1;
+}
+
+.step-line.active {
+    background: var(--accent-green);
+}
+
+/* QR Code Section */
+.ticket-qr-area {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 14px 18px;
+    border-top: 1px solid #F1F5F9;
+}
+
+.qr-box {
+    width: 62px;
+    height: 62px;
+    background: #FFFFFF;
+    padding: 4px;
+    border: 1px solid #CBD5E1;
+    border-radius: 8px;
+    flex-shrink: 0;
+}
+
+.qr-svg {
+    width: 100%;
+    height: 100%;
+    display: block;
+}
+
+.qr-desc {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.qr-desc strong {
+    font-size: 0.82rem;
+    color: var(--text-primary);
+}
+
+.qr-desc span {
+    font-size: 0.7rem;
+    color: var(--text-muted);
+    line-height: 1.3;
+}
+
+/* Ticket Actions */
+.ticket-action-bar {
+    display: flex;
+    gap: 8px;
+    padding: 12px 18px;
+    background: #F8FAFC;
+    border-top: 1px solid #E2E8F0;
+}
+
+.btn-ticket-sound {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    padding: 9px 14px;
+    background: var(--primary-100);
+    color: var(--primary-800);
+    border: 1px solid var(--primary-400);
+    border-radius: var(--radius-sm);
+    font-family: inherit;
+    font-size: 0.82rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.18s ease;
+}
+
+.btn-ticket-sound:hover {
+    background: var(--primary-600);
+    color: #FFFFFF;
+}
+
+.btn-ticket-refresh {
+    width: 40px;
+    height: 38px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #FFFFFF;
+    border: 1px solid #CBD5E1;
+    border-radius: var(--radius-sm);
+    color: var(--text-secondary);
+    cursor: pointer;
+    transition: all 0.18s ease;
+}
+
+.btn-ticket-refresh:hover {
+    background: #F1F5F9;
+    color: var(--text-primary);
+}
+
+/* Notice Box */
+.mobile-notice-box {
+    display: flex;
+    gap: 12px;
+    padding: 14px 16px;
+    background: #EFF6FF;
+    border: 1px solid #BFDBFE;
+    border-radius: var(--radius-md);
+}
+
+.notice-icon {
+    font-size: 1.25rem;
+    flex-shrink: 0;
+}
+
+.notice-content strong {
+    font-size: 0.8rem;
+    color: #1E3A8A;
+    display: block;
+    margin-bottom: 2px;
+}
+
+.notice-content p {
+    font-size: 0.74rem;
+    color: #1E40AF;
+    line-height: 1.4;
+}
+
+/* ==============================================
+   TAB 2: BOOKING / NEW QUEUE
+   ============================================== */
+.booking-card {
+    background: #FFFFFF;
+    border-radius: var(--radius-lg);
+    padding: 18px;
+    box-shadow: var(--shadow-card);
+    border: 1px solid #E2E8F0;
+}
+
+.booking-header {
+    margin-bottom: 16px;
+}
+
+.booking-title {
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 2px;
+}
+
+.booking-sub {
+    font-size: 0.76rem;
+    color: var(--text-secondary);
+}
+
+.booking-group {
+    margin-bottom: 18px;
+}
+
+.booking-label {
+    display: block;
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 8px;
+}
+
+.booking-label .req {
+    color: var(--accent-rose);
+}
+
+/* Department Grid Tiles */
+.dept-tiles-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
+}
+
+.dept-tile {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 12px 8px;
+    background: #F8FAFC;
+    border: 1.5px solid #E2E8F0;
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    transition: all 0.18s ease;
+    user-select: none;
+    text-align: center;
+}
+
+.dept-tile:hover {
+    border-color: var(--primary-500);
+    background: #F0FDF4;
+}
+
+.dept-tile.selected {
+    background: var(--primary-50);
+    border-color: var(--primary-600);
+    box-shadow: 0 0 0 2px var(--primary-100);
+}
+
+.dept-tile-icon {
+    font-size: 1.4rem;
+    margin-bottom: 4px;
+}
+
+.dept-tile-name {
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+.dept-tile-tag {
+    font-size: 0.65rem;
+    color: var(--text-muted);
+}
+
+/* Form Fields */
+.form-field {
+    margin-bottom: 10px;
+    flex: 1;
+}
+
+.form-field-row {
+    display: flex;
+    gap: 10px;
+}
+
+.field-title {
+    display: block;
+    font-size: 0.74rem;
+    font-weight: 500;
+    color: var(--text-secondary);
+    margin-bottom: 4px;
+}
+
+.field-input, .field-textarea {
+    width: 100%;
+    padding: 10px 14px;
+    border: 1.5px solid #CBD5E1;
+    border-radius: var(--radius-sm);
+    font-family: inherit;
+    font-size: 0.86rem;
+    color: var(--text-primary);
+    background: #FFFFFF;
+    outline: none;
+    transition: all 0.18s ease;
+}
+
+.field-input:focus, .field-textarea:focus {
+    border-color: var(--primary-600);
+    box-shadow: 0 0 0 3px rgba(0, 137, 123, 0.15);
+}
+
+/* Service Type Radio Cards */
+.service-type-toggle {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.service-radio-card {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 14px;
+    background: #F8FAFC;
+    border: 1.5px solid #E2E8F0;
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    transition: all 0.18s ease;
+}
+
+.service-radio-card.active {
+    border-color: var(--primary-600);
+    background: var(--primary-50);
+}
+
+.radio-card-content {
+    display: flex;
+    flex-direction: column;
+}
+
+.radio-card-content strong {
+    font-size: 0.84rem;
+    color: var(--text-primary);
+}
+
+.radio-card-content span {
+    font-size: 0.72rem;
+    color: var(--text-muted);
+}
+
+.btn-confirm-booking {
+    width: 100%;
+    padding: 12px;
+    background: var(--primary-700);
+    color: #FFFFFF;
+    border: none;
+    border-radius: var(--radius-md);
+    font-family: inherit;
+    font-size: 0.95rem;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    cursor: pointer;
+    box-shadow: 0 4px 14px rgba(0, 109, 111, 0.3);
+    transition: all 0.2s ease;
+}
+
+.btn-confirm-booking:hover {
+    background: var(--primary-800);
+    transform: translateY(-1px);
+}
+
+/* ==============================================
+   TAB 3: APPOINTMENTS
+   ============================================== */
+.section-top-header {
+    margin-bottom: 12px;
+}
+
+.section-title {
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: var(--text-primary);
+}
+
+.section-subtitle {
+    font-size: 0.76rem;
+    color: var(--text-secondary);
+}
+
+.mobile-appt-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.mobile-appt-card {
+    background: #FFFFFF;
+    border-radius: var(--radius-md);
+    padding: 14px 16px;
+    box-shadow: var(--shadow-soft);
+    border: 1px solid #E2E8F0;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.appt-card-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.appt-date-chip {
+    padding: 4px 10px;
+    background: #F0FDF4;
+    border: 1px solid #86EFAC;
+    color: #15803D;
+    border-radius: 9999px;
+    font-size: 0.74rem;
+    font-weight: 600;
+}
+
+.appt-time-chip {
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: var(--primary-700);
+}
+
+.appt-patient-info strong {
+    display: block;
+    font-size: 0.92rem;
+    color: var(--text-primary);
+}
+
+.appt-patient-info span {
+    font-size: 0.74rem;
+    color: var(--text-secondary);
+}
+
+.appt-doctor-dept {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.78rem;
+    color: var(--text-secondary);
+    background: #F8FAFC;
+    padding: 6px 10px;
+    border-radius: var(--radius-sm);
+}
+
+.appt-actions-row {
+    display: flex;
+    gap: 8px;
+    margin-top: 2px;
+}
+
+.btn-appt-checkin-mobile {
+    flex: 1;
+    padding: 8px;
+    background: var(--primary-600);
+    color: #FFFFFF;
+    border: none;
+    border-radius: var(--radius-sm);
+    font-family: inherit;
+    font-size: 0.78rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.18s ease;
+}
+
+.btn-appt-checkin-mobile:hover {
+    background: var(--primary-700);
+}
+
+/* ==============================================
+   TAB 4: HOSPITAL DEPARTMENTS TRAFFIC
+   ============================================== */
+.dept-traffic-cards {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.traffic-card {
+    background: #FFFFFF;
+    border-radius: var(--radius-md);
+    padding: 12px 16px;
+    box-shadow: var(--shadow-soft);
+    border: 1px solid #E2E8F0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.traffic-left {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.traffic-icon {
+    font-size: 1.5rem;
+}
+
+.traffic-name-group strong {
+    display: block;
+    font-size: 0.88rem;
+    color: var(--text-primary);
+}
+
+.traffic-name-group span {
+    font-size: 0.7rem;
+    color: var(--text-muted);
+}
+
+.traffic-right {
+    text-align: right;
+}
+
+.traffic-pill {
+    padding: 3px 8px;
+    border-radius: 9999px;
+    font-size: 0.68rem;
+    font-weight: 700;
+    display: inline-block;
+    margin-bottom: 2px;
+}
+
+.traffic-pill.normal {
+    background: #D1FAE5;
+    color: #065F46;
+}
+
+.traffic-pill.moderate {
+    background: #FEF3C7;
+    color: #92400E;
+}
+
+.traffic-pill.high {
+    background: #FEE2E2;
+    color: #991B1B;
+}
+
+.traffic-est {
+    font-size: 0.7rem;
+    color: var(--text-secondary);
+}
+
+.hosp-contact-box {
+    margin-top: 14px;
+    background: #FFFFFF;
+    border-radius: var(--radius-md);
+    padding: 14px;
+    box-shadow: var(--shadow-soft);
+    border: 1px solid #E2E8F0;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.contact-box-title {
+    font-size: 0.84rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    border-bottom: 1px solid #F1F5F9;
+    padding-bottom: 6px;
+}
+
+.contact-row {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+}
+
+/* ==============================================
+   BOTTOM NAVIGATION
+   ============================================== */
+.mobile-bottom-nav {
+    height: 64px;
+    background: #FFFFFF;
+    border-top: 1px solid #E2E8F0;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    padding: 4px 6px;
+    flex-shrink: 0;
+}
+
+.nav-tab {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 3px;
+    background: transparent;
+    border: none;
+    color: #94A3B8;
+    cursor: pointer;
+    transition: all 0.18s ease;
+    padding: 6px 0;
+    outline: none;
+}
+
+.nav-tab.active {
+    color: var(--primary-700);
+}
+
+.nav-tab-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.nav-tab-label {
+    font-size: 0.68rem;
+    font-weight: 600;
+    font-family: inherit;
+}
+
+/* Mobile Toast */
+.mobile-toast {
+    position: fixed;
+    top: 38px;
+    left: 50%;
+    transform: translateX(-50%) translateY(-20px);
+    background: rgba(15, 23, 42, 0.92);
+    color: #FFFFFF;
+    padding: 10px 20px;
+    border-radius: 9999px;
+    font-size: 0.82rem;
+    font-weight: 500;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+    z-index: 999999;
+    opacity: 0;
+    pointer-events: none;
+    transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    white-space: nowrap;
+}
+
+.mobile-toast.show {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+}
+
+/* Mobile Screens Adjustments */
+@media (max-width: 640px) {
+    body.mobile-body {
+        padding: 0;
+        background: var(--color-bg-mobile);
+    }
+    .desktop-view-controls {
+        display: none;
+    }
+    .smartphone-frame {
+        max-width: 100%;
+        height: 100vh;
+        border-radius: 0;
+        box-shadow: none;
+    }
+    .phone-notch-bar {
+        display: none;
+    }
+}
