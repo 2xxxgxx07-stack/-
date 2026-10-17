@@ -130,9 +130,9 @@
         right: 16px;
     }
     .btn-floating-mode {
-        padding: 8px 20px;
+        padding: 8px 18px;
         height: 38px;
-        font-size: 0.92rem;
+        font-size: 0.9rem;
     }
     .mode-popup-menu {
         bottom: 48px;
@@ -141,3 +141,12 @@
         max-width: calc(100vw - 32px);
     }
 }
+
+/* When viewing mobile queue app on mobile screen, float Mode button above the bottom navigation bar */
+@media (max-width: 640px) {
+    body.mobile-body .floating-mode-container {
+        bottom: 72px;
+        right: 12px;
+    }
+}
+
