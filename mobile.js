@@ -3,7 +3,7 @@
    =================================================== */
 
 const mobileState = {
-    currentTab: 'view-my-queue',
+    currentTab: 'view-home',
     trackedQueueId: null,
     trackedQueueItem: null,
     selectedDeptBooking: 'อายุรกรรม',
@@ -465,6 +465,112 @@ function toggleBookingType(type) {
     });
 }
 
+// ============ NEW BOOKING FORM (MATCHING USER SCREENSHOT) ============
+function selectTimeChip(buttonEl) {
+    if (!buttonEl) return;
+    document.querySelectorAll('.time-chip').forEach(c => c.classList.remove('active'));
+    buttonEl.classList.add('active');
+    const timeVal = buttonEl.getAttribute('data-time') || '08:30 - 09:30';
+    const hidden = document.getElementById('selected-booking-time');
+    if (hidden) hidden.value = timeVal;
+}
+
+function openNativeDatePicker() {
+    const input = document.getElementById('new-book-date');
+    if (!input) return;
+    if (typeof input.showPicker === 'function') {
+        input.showPicker();
+    } else {
+        input.focus();
+        input.click();
+    }
+}
+
+function onDateSelected(inputEl) {
+    if (!inputEl || !inputEl.value) return;
+    const val = inputEl.value; // YYYY-MM-DD
+    const parts = val.split('-');
+    if (parts.length === 3) {
+        const thaiMonths = [
+            'มกราคม', 'กุมภาพันธ์', 'มีนาคม', 'เมษายน', 'พฤษภาคม', 'มิถุนายน',
+            'กรกฎาคม', 'สิงหาคม', 'กันยายน', 'ตุลาคม', 'พฤศจิกายน', 'ธันวาคม'
+        ];
+        const year = parseInt(parts[0], 10) + 543;
+        const month = thaiMonths[parseInt(parts[1], 10) - 1];
+        const day = parseInt(parts[2], 10);
+        const displayEl = document.getElementById('new-book-date-display');
+        if (displayEl) {
+            displayEl.value = `${day} ${month} ${year}`;
+        }
+    }
+}
+
+function submitNewBookingForm(e) {
+    if (e) e.preventDefault();
+
+    const deptEl = document.getElementById('new-book-dept');
+    const dept = deptEl?.value;
+    if (!dept) {
+        showMobileToast('กรุณาเลือกแผนกที่ต้องการตรวจ');
+        deptEl?.focus();
+        return;
+    }
+
+    const dateVal = document.getElementById('new-book-date-display')?.value || document.getElementById('new-book-date')?.value;
+    if (!dateVal) {
+        showMobileToast('กรุณาเลือกวันตรวจ');
+        openNativeDatePicker();
+        return;
+    }
+
+    const timeSlot = document.getElementById('selected-booking-time')?.value || '08:30 - 09:30';
+    const notes = document.getElementById('new-book-notes')?.value.trim() || '';
+
+    // Generate appointment ID: APT-XXXX
+    const apptId = 'APT-' + Math.floor(1000 + Math.random() * 9000);
+
+    // Patient info
+    const patientName = 'คุณสมศักดิ์ รักสงบ';
+    const hn = '67-048123';
+
+    loadSharedQueueState();
+    if (!mobileState.appointments) mobileState.appointments = [];
+
+    const newAppt = {
+        id: apptId,
+        name: patientName,
+        hn: hn,
+        department: dept,
+        date: dateVal,
+        time: timeSlot,
+        notes: notes,
+        doctor: `แพทย์เวรประจำแผนก${dept}`,
+        checkedIn: false
+    };
+
+    mobileState.appointments.unshift(newAppt);
+    localStorage.setItem('hospitalAppointments', JSON.stringify(mobileState.appointments));
+
+    // Play chime sound
+    playHospitalChime();
+
+    // Reset fields
+    if (deptEl) deptEl.selectedIndex = 0;
+    const dateDisp = document.getElementById('new-book-date-display');
+    if (dateDisp) dateDisp.value = '';
+    const dateNative = document.getElementById('new-book-date');
+    if (dateNative) dateNative.value = '';
+    const notesEl = document.getElementById('new-book-notes');
+    if (notesEl) notesEl.value = '';
+
+    showMobileToast(`✅ นัดหมายสำเร็จ! รหัส: ${apptId}`);
+
+    // Switch to appointments tab to see new appointment
+    setTimeout(() => {
+        switchMobileNav('view-appointments');
+    }, 600);
+}
+
 let mobileQueueCounter = 200;
 
 function submitMobileBooking(e) {
@@ -710,7 +816,17 @@ function renderDepartmentTraffic() {
 
 // ============ NAVIGATION TABS ============
 function switchMobileNav(viewId) {
+    if (viewId === 'view-hospital') {
+        viewId = 'view-history';
+    }
     mobileState.currentTab = viewId;
+
+    const frame = document.getElementById('smartphone-frame');
+    if (frame) {
+        frame.classList.toggle('home-tab-active', viewId === 'view-home');
+        frame.classList.toggle('booking-tab-active', viewId === 'view-booking');
+        frame.classList.toggle('history-tab-active', viewId === 'view-history');
+    }
 
     document.querySelectorAll('.mobile-tab-view').forEach(view => {
         view.classList.toggle('active', view.id === viewId);
@@ -724,13 +840,85 @@ function switchMobileNav(viewId) {
         renderTicket();
     } else if (viewId === 'view-appointments') {
         renderMobileAppointments();
-    } else if (viewId === 'view-hospital') {
-        renderDepartmentTraffic();
+    } else if (viewId === 'view-history') {
+        // Reset search and filters
+        const searchInput = document.getElementById('history-search-input');
+        if (searchInput) searchInput.value = '';
+        const allBtn = document.querySelector('.filter-chip[data-filter="all"]');
+        if (allBtn) filterHistoryItems('all', allBtn);
     }
 
     // Scroll to top
     const scrollContainer = document.getElementById('mobile-main-scroll');
     if (scrollContainer) scrollContainer.scrollTop = 0;
+}
+
+// ============ APPOINTMENT HISTORY HANDLERS ============
+function filterHistoryItems(category, buttonEl) {
+    document.querySelectorAll('.history-filter-chips .filter-chip').forEach(chip => {
+        chip.classList.toggle('active', chip === buttonEl);
+    });
+
+    const cards = document.querySelectorAll('#history-cards-container .history-record-card');
+    cards.forEach(card => {
+        if (category === 'all') {
+            card.style.display = '';
+        } else {
+            const cardCat = card.getAttribute('data-category');
+            card.style.display = (cardCat === category) ? '' : 'none';
+        }
+    });
+}
+
+function handleHistorySearch(keyword) {
+    const term = (keyword || '').trim().toLowerCase();
+    const cards = document.querySelectorAll('#history-cards-container .history-record-card');
+    cards.forEach(card => {
+        const text = card.textContent.toLowerCase();
+        if (!term || text.includes(term)) {
+            card.style.display = '';
+        } else {
+            card.style.display = 'none';
+        }
+    });
+}
+
+
+// ============ PATIENT HOME VIEW MODALS ============
+function openKioskGuideModal() {
+    const m = document.getElementById('modal-kiosk-guide');
+    if (m) m.classList.add('active');
+}
+function closeKioskGuideModal(e) {
+    const m = document.getElementById('modal-kiosk-guide');
+    if (m) m.classList.remove('active');
+}
+
+function openApptDetailModal() {
+    const m = document.getElementById('modal-appt-detail');
+    if (m) m.classList.add('active');
+}
+function closeApptDetailModal(e) {
+    const m = document.getElementById('modal-appt-detail');
+    if (m) m.classList.remove('active');
+}
+
+function openHospitalMapModal() {
+    const m = document.getElementById('modal-hospital-map');
+    if (m) m.classList.add('active');
+}
+function closeHospitalMapModal(e) {
+    const m = document.getElementById('modal-hospital-map');
+    if (m) m.classList.remove('active');
+}
+
+function openMedicalRecordsModal() {
+    const m = document.getElementById('modal-medical-records');
+    if (m) m.classList.add('active');
+}
+function closeMedicalRecordsModal(e) {
+    const m = document.getElementById('modal-medical-records');
+    if (m) m.classList.remove('active');
 }
 
 // ============ VIEW MODE TOGGLE (FRAME / FULL WIDTH) ============
@@ -794,6 +982,7 @@ function updateMobileClock() {
 // ============ INIT ============
 document.addEventListener('DOMContentLoaded', () => {
     loadSharedQueueState();
+    switchMobileNav('view-home');
     renderTicket();
     renderDepartmentTraffic();
     renderMobileAppointments();

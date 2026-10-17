@@ -54,7 +54,9 @@
     position: absolute;
     bottom: 54px;
     right: 0;
-    width: 215px;
+    min-width: 230px;
+    width: max-content;
+    max-width: 280px;
     background: #2e2e2e;
     border-radius: 12px;
     padding: 8px 0;
@@ -134,6 +136,8 @@
     }
     .mode-popup-menu {
         bottom: 48px;
-        width: 200px;
+        min-width: 215px;
+        width: max-content;
+        max-width: calc(100vw - 32px);
     }
 }

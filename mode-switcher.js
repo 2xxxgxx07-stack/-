@@ -3,9 +3,10 @@
    =================================================== */
 
 (function () {
-    // Mode Options matching user reference image Frame 1707480695.png
+    // Mode Options matching user reference
     const MODES = [
-        { title: 'ระบบจัดการคิว คัดกรอง', file: 'index.html' },
+        { title: 'ระบบจัดการคิว คัดกรอง v1', file: 'index.html' },
+        { title: 'ระบบจัดการคิว คัดกรอง v2', file: 'index_v2.html' },
         { title: 'ระบบจัดการคิว แพทย์', file: 'doctor.html' },
         { title: 'ระบบจองคิว ผู้ป่วย', file: 'mobile.html' },
         { title: 'ระบบ kios', file: 'kios.html' }

@@ -2,8 +2,8 @@
 <html lang="th">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=1920, initial-scale=1.0">
-    <meta name="description" content="ระบบตู้คีออสก์อัตโนมัติ ออกบัตรคิวผู้ป่วย - Smart Hospital Kiosk">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="ระบบตู้คีออสก์อัตโนมัติ ออกบัตรคิวผู้ป่วย - Smart Hospital Self-Service Kiosk">
     <title>ระบบตู้คีออสก์อัตโนมัติ | Smart Hospital Kiosk</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -13,202 +13,1727 @@
 </head>
 <body class="kios-body">
     <div class="kios-screen-container">
-        <!-- Top Status Bar -->
+        
+        <!-- ======== 1. TOP HEADER BAR ======== -->
         <header class="kios-top-bar">
+            <!-- Brand Left: Hospital Logo & Name -->
             <div class="kios-brand-left">
                 <div class="kios-logo-badge">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" width="22" height="22" style="color:var(--kios-teal-dark);"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/><circle cx="12" cy="10" r="1.5"/></svg>
+                    <div class="badge-icon-cross">
+                        <svg viewBox="0 0 24 24" fill="currentColor" width="22" height="22">
+                            <path d="M19 10.5h-5.5V5c0-.83-.67-1.5-1.5-1.5s-1.5.67-1.5 1.5v5.5H5c-.83 0-1.5.67-1.5 1.5s.67 1.5 1.5 1.5h5.5V19c0 .83.67 1.5 1.5 1.5s1.5-.67 1.5-1.5v-5.5H19c.83 0 1.5-.67 1.5-1.5s-.67-1.5-1.5-1.5z"/>
+                        </svg>
+                    </div>
                     <div class="badge-text">
-                        <strong>ระบบคิว.com</strong>
+                        <strong>หมอฟ้า.com</strong>
                         <small>SMART HOSPITAL KIOSK</small>
                     </div>
                 </div>
+
                 <div class="kios-hosp-divider"></div>
+
                 <div class="kios-hosp-info">
                     <h1 class="hosp-name">โรงพยาบาลกรุงเทพเมดิคอลเซ็นเตอร์</h1>
                     <span class="hosp-sub">Bangkok Medical Center • Smart Care Service</span>
                 </div>
             </div>
 
-            <div class="kios-tools-right">
-                <button type="button" class="btn-kios-sound" onclick="toggleKiosSound()" id="btn-kios-sound" title="เปิด/ปิดเสียง">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20" height="20"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"/></svg>
-                </button>
-                <button type="button" class="btn-call-nurse" onclick="callNurseAlert()">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" width="18" height="18"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/><line x1="12" y1="2" x2="12" y2="4"/></svg>
-                    <span>เรียกพยาบาลด่วน</span>
-                </button>
-            </div>
-        </header>
+            <!-- Header Right: Sound Toggle, Emergency Nurse Call & Live DateTime -->
+            <div class="kios-header-right">
+                <div class="header-action-buttons">
+                    <button type="button" class="btn-kios-sound" onclick="toggleKiosSound()" id="btn-kios-sound" title="เปิด/ปิดเสียง">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20" height="20">
+                            <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/>
+                            <path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"/>
+                        </svg>
+                    </button>
 
-        <!-- Sub Status Bar (Service Status, Location, Real-Time Clock, Language) -->
-        <div class="kios-sub-bar">
-            <div class="sub-status-item">
-                <span class="status-indicator-dot online"></span>
-                <span>สถานะตู้บริการ: <strong>พร้อมให้บริการตามปกติ</strong></span>
-            </div>
-            <div class="sub-status-item">
-                <span>อาคาร 1 ชั้น G แผนกผู้ป่วยนอก (OPD)</span>
-            </div>
-            <div class="sub-status-item clock-item">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
-                <span id="kios-live-datetime">10:42 AM | วันจันทร์ 24 พ.ย. 2568</span>
-            </div>
-            <div class="lang-switcher">
-                <button type="button" class="btn-lang active">ไทย TH</button>
-                <button type="button" class="btn-lang">English EN</button>
-            </div>
-        </div>
-
-        <!-- Main Step Flow Header -->
-        <div class="kios-step-banner">
-            <span class="step-badge">ขั้นตอนที่ 2 จาก 2</span>
-            <span class="step-title">ยืนยันตัวตนเข้ารับบริการ</span>
-            <div class="step-breadcrumbs">
-                <span class="breadcrumb-item passed">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="12" height="12" style="vertical-align:middle;margin-right:2px;"><polyline points="20 6 9 17 4 12"/></svg>
-                    <span>1. เลือกประเภทบริการ</span>
-                </span>
-                <span class="breadcrumb-arrow">›</span>
-                <span class="breadcrumb-item current">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14" style="vertical-align:middle;margin-right:2px;"><rect x="3" y="4" width="18" height="16" rx="2"/><circle cx="9" cy="10" r="2"/><line x1="15" y1="8" x2="17" y2="8"/><line x1="15" y1="12" x2="17" y2="12"/><line x1="7" y1="16" x2="17" y2="16"/></svg>
-                    <span>2. ยืนยันตัวตน (ปัจจุบัน)</span>
-                </span>
-            </div>
-        </div>
-
-        <!-- Main Content Area -->
-        <main class="kios-main-content">
-            <div class="hero-prompt-text">
-                <h2>กรุณาเสียบบัตรประจำตัวประชาชน</h2>
-                <p>เพื่อดึงข้อมูลสิทธิการรักษา และค้นหารอบนัดหมายแพทย์อัตโนมัติ</p>
-            </div>
-
-            <!-- Card Reader & Instructions Grid -->
-            <div class="kios-card-reader-grid">
-                <!-- Left: Interactive Card Slot Simulation -->
-                <div class="card-slot-box">
-                    <!-- Thai National ID Card Mockup -->
-                    <div class="thai-id-card" id="thai-id-card">
-                        <div class="card-chip-gold"></div>
-                        <div class="card-emblem-wrap">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="#D97706" stroke-width="2" width="22" height="22"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
-                            <div class="card-gov-text">
-                                <strong>THAI NATIONAL ID CARD</strong>
-                                <span>บัตรประจำตัวประชาชนไทย</span>
-                            </div>
-                        </div>
-                        <div class="card-chip-arrow">
-                            <span>↑ ชิปสีทองหงายขึ้น</span>
-                        </div>
-                        <div class="card-citizen-id">1 1004 00XXX XX X</div>
-                        <div class="card-citizen-name">
-                            <small>ชื่อ - สกุล / Name - Surname</small>
-                            <strong>นายแพทย์ / ประชาชนผู้รับบริการ</strong>
-                        </div>
-                        <div class="card-footer-strip">
-                            <span>SMART CARD</span>
-                            <span>VALID: 2024-2032</span>
-                        </div>
-                    </div>
-
-                    <div class="slot-arrow-indicator">
-                        <span>เสียบบัตรเข้าช่องนี้ (Push Inward)</span>
-                        <div class="bouncing-arrows">vvv</div>
-                    </div>
-
-                    <!-- Slot Button Trigger -->
-                    <button type="button" class="btn-smart-card-slot" id="btn-insert-card" onclick="simulateInsertCard()">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="24" height="24"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg>
-                        <span>ช่องเสียบบัตรประชาชน (คลิกเพื่อทดสอบเสียบบัตร)</span>
+                    <button type="button" class="btn-call-nurse-danger" onclick="callNurseAlert()">
+                        <span class="pulse-dot"></span>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" width="18" height="18">
+                            <rect x="2" y="7" width="20" height="14" rx="2" ry="2"/>
+                            <path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/>
+                            <line x1="12" y1="11" x2="12" y2="17"/>
+                            <line x1="9" y1="14" x2="15" y2="14"/>
+                        </svg>
+                        <span>เรียกพยาบาลด่วน</span>
                     </button>
                 </div>
 
-                <!-- Right: 3 Clear Visual Steps -->
-                <div class="card-guidelines-box">
-                    <div class="guidelines-title">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20" height="20" style="vertical-align:middle;margin-right:6px;color:var(--kios-teal);"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
-                        <span>คำแนะนำในการเสียบบัตร</span>
+                <div class="header-datetime-text">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14">
+                        <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+                        <line x1="16" y1="2" x2="16" y2="6"/>
+                        <line x1="8" y1="2" x2="8" y2="6"/>
+                        <line x1="3" y1="10" x2="21" y2="10"/>
+                    </svg>
+                    <span id="kios-live-datetime">10:42 AM | จันทร์ 24 พ.ย. 2568</span>
+                </div>
+            </div>
+        </header>
+
+        <!-- ======== 2. SUB-BAR: BACK BUTTON & LANGUAGE SWITCHER ======== -->
+        <div class="kios-lang-bar">
+            <button type="button" class="btn-subbar-back" id="btn-subbar-back" onclick="showKiosHomeView()" style="display: none;">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" width="18" height="18">
+                    <line x1="19" y1="12" x2="5" y2="12"></line>
+                    <polyline points="12 19 5 12 12 5"></polyline>
+                </svg>
+                <span>ย้อนกลับ (Back)</span>
+            </button>
+            <div class="lang-switcher-pill">
+                <button type="button" class="btn-lang active" onclick="switchLanguage('th')">ไทย TH</button>
+                <button type="button" class="btn-lang" onclick="switchLanguage('en')">English EN</button>
+            </div>
+        </div>
+
+        <!-- ======== 3. MAIN KIOSK CONTENT BODY ======== -->
+        <main class="kios-main-content">
+
+            <!-- ================= VIEW 1: HOME SCREEN ================= -->
+            <div id="kios-view-home" class="kios-view-content">
+
+                <!-- ---- TOP WELCOME / ONLINE BOOKING BANNER ---- -->
+                <section class="kios-welcome-section">
+                    <div class="welcome-heading">
+                        <h2>ยินดีต้อนรับสู่ระบบบริการลงทะเบียนและรับบัตรคิวอัตโนมัติ</h2>
+                        <p>Welcome to Smart Hospital Self-Service Kiosk • กรุณาเลือกรายการบริการเพื่อดำเนินการต่อ</p>
                     </div>
 
-                    <div class="guide-step-row">
-                        <div class="guide-num">1</div>
-                        <div class="guide-desc">
-                            <strong>หงายด้านชิปสีทองขึ้น</strong>
-                            <p>ตรวจดูให้แน่ใจว่าแถบชิปการ์ดสีทองหงายขึ้นด้านบนและหันด้านชิปมุ่งตรงเข้าหาตัวเครื่อง</p>
+                    <!-- White QR Card Promo -->
+                    <div class="qr-online-card" onclick="openQrMobileModal()">
+                        <div class="qr-code-box">
+                            <!-- Custom Medical QR SVG with decorative corners -->
+                            <svg viewBox="0 0 140 140" width="116" height="116" class="kios-qr-svg">
+                                <!-- Background -->
+                                <rect width="140" height="140" fill="#FFFFFF"/>
+                                <!-- Corner Frame Markers -->
+                                <rect x="10" y="10" width="36" height="36" rx="4" fill="none" stroke="#005459" stroke-width="4"/>
+                                <rect x="18" y="18" width="20" height="20" rx="2" fill="#005459"/>
+                                
+                                <rect x="94" y="10" width="36" height="36" rx="4" fill="none" stroke="#005459" stroke-width="4"/>
+                                <rect x="102" y="18" width="20" height="20" rx="2" fill="#005459"/>
+                                
+                                <rect x="10" y="94" width="36" height="36" rx="4" fill="none" stroke="#005459" stroke-width="4"/>
+                                <rect x="18" y="102" width="20" height="20" rx="2" fill="#005459"/>
+
+                                <!-- QR Pattern Matrix Dots -->
+                                <rect x="56" y="14" width="8" height="8" fill="#005459"/>
+                                <rect x="74" y="14" width="8" height="8" fill="#005459"/>
+                                <rect x="56" y="28" width="8" height="8" fill="#005459"/>
+                                <rect x="68" y="28" width="8" height="8" fill="#005459"/>
+                                <rect x="80" y="28" width="8" height="8" fill="#005459"/>
+                                
+                                <rect x="14" y="56" width="8" height="8" fill="#005459"/>
+                                <rect x="28" y="56" width="8" height="8" fill="#005459"/>
+                                <rect x="14" y="74" width="8" height="8" fill="#005459"/>
+                                <rect x="34" y="74" width="8" height="8" fill="#005459"/>
+
+                                <rect x="98" y="56" width="8" height="8" fill="#005459"/>
+                                <rect x="114" y="56" width="8" height="8" fill="#005459"/>
+                                <rect x="104" y="74" width="8" height="8" fill="#005459"/>
+                                <rect x="120" y="74" width="8" height="8" fill="#005459"/>
+
+                                <rect x="56" y="98" width="8" height="8" fill="#005459"/>
+                                <rect x="74" y="98" width="8" height="8" fill="#005459"/>
+                                <rect x="62" y="114" width="8" height="8" fill="#005459"/>
+                                <rect x="80" y="114" width="8" height="8" fill="#005459"/>
+                                <rect x="98" y="104" width="8" height="8" fill="#005459"/>
+                                <rect x="114" y="114" width="8" height="8" fill="#005459"/>
+
+                                <!-- Center Medical Cross Box -->
+                                <rect x="50" y="50" width="40" height="40" rx="8" fill="#FFFFFF" stroke="#005459" stroke-width="2"/>
+                                <path d="M70 58v24M58 70h24" stroke="#10B981" stroke-width="4.5" stroke-linecap="round"/>
+                            </svg>
+                        </div>
+
+                        <div class="qr-info-content">
+                            <div class="qr-badge-row">
+                                <span class="badge-online-booking">ONLINE BOOKING</span>
+                                <span class="badge-platform">รองรับทั้ง iOS และ Android</span>
+                            </div>
+                            <h3 class="qr-title">สแกนเพื่อเข้าสู่ระบบ"จองนัดหมายแพทย์ล่วงหน้า"</h3>
+                            <p class="qr-desc">เปิดกล้องมือถือ หรือแอป LINE สแกน QR เพื่อเลือกวันเวลาและนัดแพทย์ล่วงหน้าได้ทันทีโดยไม่ต้องรอคิวหน้าตู้</p>
+                            
+                            <div class="qr-features-list">
+                                <div class="qr-feature-item">
+                                    <svg class="check-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" width="16" height="16"><polyline points="20 6 9 17 4 12"/></svg>
+                                    <span>เช็คคิวเรียลไทม์</span>
+                                </div>
+                                <div class="qr-feature-item">
+                                    <svg class="check-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" width="16" height="16"><polyline points="20 6 9 17 4 12"/></svg>
+                                    <span>ไม่ต้องโหลดแอปพลิเคชัน</span>
+                                </div>
+                                <div class="qr-feature-item">
+                                    <svg class="check-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" width="16" height="16"><polyline points="20 6 9 17 4 12"/></svg>
+                                    <span>แจ้งเตือนผ่าน LINE</span>
+                                </div>
+                            </div>
                         </div>
                     </div>
+                </section>
 
-                    <div class="guide-step-row">
-                        <div class="guide-num">2</div>
-                        <div class="guide-desc">
-                            <strong>ดันบัตรเข้าไปจนสุดช่อง</strong>
-                            <p>เสียบบัตรเข้าไปในช่องอ่านจนรู้สึกว่าชนสุดระยะไฟเซ็นเซอร์หน้าช่องจะเริ่มกระพริบ</p>
+                <!-- ---- TWO MAIN ACTION CARDS (SIDE BY SIDE) ---- -->
+                <section class="kios-actions-grid">
+                    
+                    <!-- CARD 1: มีนัดหมายแล้ว (Appointment Check-in) -->
+                    <div class="kios-card card-appointment" onclick="openAppointmentModal()">
+                        <div class="card-top-row">
+                            <span class="card-pill fast-track">⚡ รวดเร็วใน 15 วินาที (FastTrack ~15s)</span>
+                            <div class="card-top-icon">
+                                <!-- Tap Hand Gesture SVG -->
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="28" height="28">
+                                    <path d="M12 2a3 3 0 0 0-3 3v7.5l-.8-.8a2.12 2.12 0 0 0-3 0 2.12 2.12 0 0 0 0 3l5.8 5.8a6 6 0 0 0 4.2 1.7h1.6a6 6 0 0 0 6-6V9a3 3 0 0 0-6 0v-2a3 3 0 0 0-3-3v0a3 3 0 0 0-1.8.6"/>
+                                    <path d="M12 2v3"/>
+                                </svg>
+                            </div>
                         </div>
+
+                        <div class="card-title-group">
+                            <h2 class="card-title">มีนัดหมายแล้ว</h2>
+                            <span class="card-subtitle">(Appointment Check-in)</span>
+                        </div>
+
+                        <!-- Inner Box: QR + Smart Card -->
+                        <div class="card-inner-box dark-translucent">
+                            <div class="inner-option">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="24" height="24">
+                                    <path d="M3 7V5a2 2 0 0 1 2-2h2M17 3h2a2 2 0 0 1 2 2v2M21 17v2a2 2 0 0 1-2 2h-2M7 21H5a2 2 0 0 1-2-2v-2"/>
+                                    <rect x="7" y="7" width="10" height="10"/>
+                                </svg>
+                                <span>สแกน QR นัด</span>
+                            </div>
+                            <div class="inner-divider"></div>
+                            <div class="inner-option">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="24" height="24">
+                                    <rect x="3" y="4" width="18" height="16" rx="2"/>
+                                    <circle cx="9" cy="10" r="2"/>
+                                    <line x1="15" y1="8" x2="17" y2="8"/>
+                                    <line x1="15" y1="12" x2="17" y2="12"/>
+                                    <line x1="7" y1="16" x2="17" y2="16"/>
+                                </svg>
+                                <span>สอดบัตรประชาชน</span>
+                            </div>
+                        </div>
+
+                        <p class="card-desc">สแกน QR Code ใบนัดหมาย หรือ สอดบัตรประชาชน Smart Card เพื่อยืนยันเวลานัดตรวจได้ทันที</p>
+
+                        <!-- Big Touch Button -->
+                        <button type="button" class="btn-card-cta btn-cta-white">
+                            <span>แตะเพื่อเริ่ม</span>
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="20" height="20">
+                                <line x1="5" y1="12" x2="19" y2="12"/>
+                                <polyline points="12 5 19 12 12 19"/>
+                            </svg>
+                        </button>
                     </div>
 
-                    <div class="guide-step-row">
-                        <div class="guide-num">3</div>
-                        <div class="guide-desc">
-                            <strong>รออ่านข้อมูลประมาณ 3 วินาที</strong>
-                            <p>อย่าเพิ่งดึงบัตรออกระบบจะทำการเชื่อมโยงข้อมูลและแสดงชื่อของท่านบนหน้าจออัตโนมัติ</p>
+                    <!-- CARD 2: ผู้ป่วยทั่วไป /ไม่มีนัด (Walk-in / New Patient) -->
+                    <div class="kios-card card-walkin" onclick="showKiosCardView('walkin')">
+                        <div class="card-top-row">
+                            <span class="card-pill triage-badge">📋 คัดกรองอาการและรับบัตรคิว</span>
+                            <div class="card-top-icon teal-icon">
+                                <!-- User Add Icon -->
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" width="28" height="28">
+                                    <path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+                                    <circle cx="8.5" cy="7" r="4"/>
+                                    <line x1="20" y1="8" x2="20" y2="14"/>
+                                    <line x1="23" y1="11" x2="17" y2="11"/>
+                                </svg>
+                            </div>
+                        </div>
+
+                        <div class="card-title-group">
+                            <h2 class="card-title text-teal">ผู้ป่วยทั่วไป /ไม่มีนัด</h2>
+                            <span class="card-subtitle text-cyan-dark">(Walk-in / New Patient)</span>
+                        </div>
+
+                        <!-- Inner Box: Stethoscope + New Ticket -->
+                        <div class="card-inner-box light-tint">
+                            <div class="inner-option">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="24" height="24">
+                                    <path d="M4.5 3v5a4.5 4.5 0 0 0 9 0V3"/>
+                                    <path d="M9 12.5v4a3 3 0 0 0 6 0v-2"/>
+                                    <circle cx="18" cy="14" r="2.5"/>
+                                    <path d="M3 3h3M12 3h3"/>
+                                </svg>
+                                <span>คัดกรองเบื้องต้น</span>
+                            </div>
+                            <div class="inner-divider light"></div>
+                            <div class="inner-option">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="24" height="24">
+                                    <rect x="3" y="6" width="18" height="12" rx="2"/>
+                                    <path d="M3 10a2 2 0 0 0 2 2 2 2 0 0 0-2 2"/>
+                                    <path d="M21 10a2 2 0 0 1-2 2 2 2 0 0 1 2 2"/>
+                                    <line x1="12" y1="9" x2="12" y2="15" stroke-dasharray="2 2"/>
+                                </svg>
+                                <span>ออกสลิปคิวใหม่</span>
+                            </div>
+                        </div>
+
+                        <p class="card-desc text-muted">สำหรับผู้ป่วยใหม่หรือผู้ป่วยเดิมที่ไม่มีนัดตรวจวันนี้ สามารถออกบัตรคิวเพื่อพบพยาบาลคัดกรองอาการ</p>
+
+                        <!-- Big Touch Button -->
+                        <button type="button" class="btn-card-cta btn-cta-cyan" onclick="showKiosCardView('walkin')">
+                            <span>แตะเพื่อกดบัตรคิวใหม่</span>
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="20" height="20">
+                                <line x1="5" y1="12" x2="19" y2="12"/>
+                                <polyline points="12 5 19 12 12 19"/>
+                            </svg>
+                        </button>
+                    </div>
+
+                </section>
+            </div>
+
+            <!-- ================= VIEW 2: THAI ID CARD INSERTION SCREEN (IMAGE 1) ================= -->
+            <div id="kios-view-id-card" class="kios-view-content" style="display: none;">
+                
+                <!-- Step Indicator Bar -->
+                <div class="kios-step-indicator-bar" id="id-card-step-bar">
+                    <div class="step-nav-left" id="id-card-steps-container">
+                        <div class="step-pill-item active" id="id-card-pill-1">
+                            <span>1. ยืนยันตัวตน</span>
+                        </div>
+                        <span class="step-separator" id="id-card-sep-1">›</span>
+                        <div class="step-pill-item inactive" id="id-card-pill-2">
+                            <span id="id-card-step-2-text">2. เลือกประเภทบริการ</span>
+                        </div>
+                        <span class="step-separator" id="id-card-sep-2">›</span>
+                        <div class="step-pill-item inactive" id="id-card-pill-3">
+                            <span id="id-card-step-3-text">3. รับบัตรคิว</span>
+                        </div>
+                    </div>
+                    <div class="step-nav-right">
+                        <span id="id-card-step-counter">ขั้นตอนที่ 1 จาก 3</span>
+                    </div>
+                </div>
+
+                <!-- Page Heading -->
+                <div class="id-card-view-header">
+                    <h2 class="id-view-title">กรุณาเสียบบัตรประจำตัวประชาชน</h2>
+                    <p class="id-view-subtitle">เพื่อดึงข้อมูลสิทธิการรักษา และค้นหารอบนัดหมายแพทย์อัตโนมัติ</p>
+                </div>
+
+                <!-- Main White Container (2 Columns Grid) -->
+                <div class="id-card-main-panel">
+                    
+                    <!-- Left Column: Thai ID Card & Slot Indicator -->
+                    <div class="id-card-slot-box">
+                        <!-- Thai National ID Card Component -->
+                        <div class="thai-national-id-card" onclick="simulateInsertCard()" title="แตะบัตรเพื่อจำลองการเสียบ">
+                            <!-- Card Header -->
+                            <div class="id-card-header-row">
+                                <div class="id-card-emblem-group">
+                                    <div class="id-card-garuda">
+                                        <!-- Realistic DOPA Pagoda / Emblem SVG -->
+                                        <svg viewBox="0 0 24 24" fill="#005459" width="22" height="22">
+                                            <path d="M12 2L4 6v6c0 5.55 3.84 10.74 8 12 4.16-1.26 8-6.45 8-12V6l-8-4zm0 4a3 3 0 1 1 0 6 3 3 0 0 1 0-6zm5 11.2c-1.4 1.4-3.1 2.3-5 2.8-1.9-.5-3.6-1.4-5-2.8v-1.6c0-1.7 3.3-2.6 5-2.6s5 .9 5 2.6v1.6z"/>
+                                        </svg>
+                                    </div>
+                                    <div class="id-card-titles">
+                                        <span class="id-card-en-title">THAI NATIONAL ID CARD</span>
+                                        <span class="id-card-th-title">บัตรประจำตัวประชาชนไทย</span>
+                                    </div>
+                                </div>
+                                <span class="id-card-smart-badge">SMART CARD</span>
+                            </div>
+
+                            <!-- Card Middle: Golden Chip & Identification -->
+                            <div class="id-card-body-row">
+                                <div class="id-card-chip-col">
+                                    <div class="gold-chip">
+                                        <div class="chip-circuit-lines">
+                                            <span class="chip-l-1"></span>
+                                            <span class="chip-l-2"></span>
+                                            <span class="chip-l-3"></span>
+                                        </div>
+                                    </div>
+                                    <div class="chip-guide-arrow">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" width="11" height="11">
+                                            <line x1="12" y1="19" x2="12" y2="5"></line>
+                                            <polyline points="5 12 12 5 19 12"></polyline>
+                                        </svg>
+                                        <span>ชิปสีทองหงายขึ้น</span>
+                                    </div>
+                                </div>
+
+                                <div class="id-card-info-col">
+                                    <div class="id-field-group">
+                                        <span class="id-field-label">เลขประจำตัวประชาชน / Identification No.</span>
+                                        <span class="id-field-value cid-bold">1 1004 00XXX XX X</span>
+                                    </div>
+                                    <div class="id-field-group">
+                                        <span class="id-field-label">ชื่อ - สกุล / Name - Surname</span>
+                                        <span class="id-field-value name-bold">นายแพทย์ / ประชาชนผู้รับบริการ</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Card Footer -->
+                            <div class="id-card-footer-row">
+                                <span class="id-card-dopa">กรมการปกครอง (DOPA)</span>
+                                <span class="id-card-valid">VALID: 2024-2032</span>
+                            </div>
+                        </div>
+
+                        <!-- Prompt text & Bouncing Arrow -->
+                        <div class="slot-arrow-container">
+                            <span class="slot-push-text">เสียบบัตรเข้าช่องนี้ (Push Inward)</span>
+                            <div class="slot-down-bounce">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" width="22" height="22">
+                                    <polyline points="6 9 12 15 18 9"></polyline>
+                                </svg>
+                            </div>
+                        </div>
+
+                        <!-- Slot Pill Button -->
+                        <button type="button" class="btn-card-slot" onclick="simulateInsertCard()" id="btn-insert-card-slot">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20" height="20">
+                                <rect x="3" y="4" width="18" height="16" rx="2"></rect>
+                                <line x1="3" y1="10" x2="21" y2="10"></line>
+                                <line x1="7" y1="15" x2="7.01" y2="15"></line>
+                            </svg>
+                            <span>ช่องเสียบบัตรประชาชน</span>
+                        </button>
+                    </div>
+
+                    <!-- Right Column: 3 Guidelines Steps -->
+                    <div class="id-card-instructions-box">
+                        <div class="instructions-header">
+                            <div class="lightbulb-icon-wrap">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" width="22" height="22">
+                                    <path d="M9 18h6M10 22h4M12 2a7 7 0 0 0-7 7c0 2.38 1.19 4.47 3 5.74V17a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1v-2.26c1.81-1.27 3-3.36 3-5.74a7 7 0 0 0-7-7z"/>
+                                </svg>
+                            </div>
+                            <h3>คำแนะนำในการเสียบบัตร</h3>
+                        </div>
+
+                        <div class="instruction-steps-list">
+                            <!-- Step 1 -->
+                            <div class="guide-step-item">
+                                <div class="guide-step-number">1</div>
+                                <div class="guide-step-text">
+                                    <h4>หงายด้านชิปสีทองขึ้น</h4>
+                                    <p>ตรวจดูให้แน่ใจว่าแถบชิปการ์ดสีทอง หงายขึ้นด้านบนและหันด้านชิปมุ่งตรงเข้าหาตัวเครื่อง</p>
+                                </div>
+                            </div>
+
+                            <!-- Step 2 -->
+                            <div class="guide-step-item">
+                                <div class="guide-step-number">2</div>
+                                <div class="guide-step-text">
+                                    <h4>ดันบัตรเข้าไปจนสุดช่อง</h4>
+                                    <p>เสียบบัตรเข้าไปในช่องอ่านจนรู้สึกว่าชนสุดระยะไฟเซ็นเซอร์หน้าช่องจะเริ่มกระพริบ</p>
+                                </div>
+                            </div>
+
+                            <!-- Step 3 -->
+                            <div class="guide-step-item">
+                                <div class="guide-step-number">3</div>
+                                <div class="guide-step-text">
+                                    <h4>รออ่านข้อมูลประมาณ 3 วินาที</h4>
+                                    <p>อย่าเพิ่งดึงบัตรออกระบบจะทำการเชื่อมโยงข้อมูลและแสดงชื่อของท่านบนหน้าจออัตโนมัติ</p>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
+
+                <!-- Bottom Alternate Bar (QR Scan) -->
+                <div class="kios-alt-bar" id="id-card-alt-qr" onclick="showKiosQrView()">
+                    <div class="alt-bar-left">
+                        <div class="alt-qr-icon-box">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" width="26" height="26">
+                                <path d="M3 7V5a2 2 0 0 1 2-2h2M17 3h2a2 2 0 0 1 2 2v2M21 17v2a2 2 0 0 1-2 2h-2M7 21H5a2 2 0 0 1-2-2v-2"></path>
+                                <rect x="7" y="7" width="10" height="10"></rect>
+                            </svg>
+                        </div>
+                        <div class="alt-bar-info">
+                            <h4>สแกน QR Code ใบนัดหมาย</h4>
+                            <p>เปิดใบนัดจากแอปฯ หมอพร้อม, SMS หรือสลิปกระดาษจากโรงพยาบาล เพื่อดึงข้อมูลนัดหมายทันที</p>
+                        </div>
+                    </div>
+                    <div class="alt-bar-right">
+                        <span class="alt-badge-fast">สะดวกรวดเร็ว</span>
+                        <button type="button" class="btn-alt-action">
+                            <span>สแกน QR Code</span>
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="18" height="18">
+                                <polyline points="9 18 15 12 9 6"></polyline>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+
             </div>
 
-            <!-- Alternate Methods: Scan QR Code -->
-            <div class="kios-alt-bar" onclick="simulateScanAppointmentQR()">
-                <div class="alt-bar-left">
-                    <div class="qr-scan-icon-bubble">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="28" height="28">
+            <!-- ================= VIEW 2.5: CARD SYNCING / NHSO CHECK SCREEN ================= -->
+            <div id="kios-view-card-syncing" class="kios-view-content" style="display: none;">
+                
+                <!-- Step Indicator Bar -->
+                <div class="kios-step-indicator-bar">
+                    <div class="step-nav-left">
+                        <div class="step-pill-item active">
+                            <span>1. ยืนยันตัวตน</span>
+                        </div>
+                        <span class="step-separator">›</span>
+                        <div class="step-pill-item inactive">
+                            <span>2. เลือกประเภทบริการ</span>
+                        </div>
+                        <span class="step-separator">›</span>
+                        <div class="step-pill-item inactive">
+                            <span>3. รับบัตรคิว</span>
+                        </div>
+                    </div>
+                    <div class="step-nav-right">
+                        <span>ขั้นตอนที่ 1 จาก 3</span>
+                    </div>
+                </div>
+
+                <!-- Main White Syncing Panel -->
+                <div class="card-syncing-main-card">
+                    <!-- Circular Animated Sync Badge -->
+                    <div class="syncing-icon-container">
+                        <div class="syncing-outer-ring"></div>
+                        <div class="syncing-inner-circle">
+                            <div class="syncing-card-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2" width="28" height="28">
+                                    <rect x="3" y="4" width="18" height="16" rx="2"></rect>
+                                    <circle cx="12" cy="10" r="3"></circle>
+                                    <path d="M7 17a5 5 0 0 1 10 0"></path>
+                                </svg>
+                            </div>
+                            <span class="syncing-badge-text">SYNCING</span>
+                        </div>
+                    </div>
+
+                    <!-- Headings -->
+                    <h2 class="syncing-title">ระบบกำลังตรวจสอบข้อมูลของท่าน</h2>
+                    <p class="syncing-subtitle">
+                        กรุณารอสักครู่ ระบบกำลังเชื่อมต่อฐานข้อมูลผู้ป่วยโรงพยาบาลและตรวจ<br>
+                        สอบสิทธิการรักษาพยาบาล (สปสช. / สิทธิบัตร)
+                    </p>
+
+                    <!-- Processing Time Pill -->
+                    <div class="syncing-time-pill">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" width="16" height="16">
+                            <circle cx="12" cy="12" r="10"></circle>
+                            <polyline points="12 6 12 12 16 14"></polyline>
+                        </svg>
+                        <span>ระยะเวลาประมวลผล: ประมาณ 2 - 3 วินาที</span>
+                    </div>
+
+                    <!-- Progress Bar -->
+                    <div class="syncing-progress-track">
+                        <div class="syncing-progress-bar" id="syncing-progress-bar"></div>
+                    </div>
+
+                    <!-- Checklist Cards (2 items) -->
+                    <div class="syncing-checklist">
+                        <!-- Item 1: Smart Card Read -->
+                        <div class="syncing-check-item item-success">
+                            <div class="check-item-left">
+                                <div class="check-icon-circle green-check">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" width="16" height="16">
+                                        <polyline points="20 6 9 17 4 12"></polyline>
+                                    </svg>
+                                </div>
+                                <span class="check-item-label">อ่านข้อมูลจากบัตรประชาชน (Smart Card Read)</span>
+                            </div>
+                            <div class="check-item-badge badge-done">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" width="12" height="12">
+                                    <polyline points="20 6 9 17 4 12"></polyline>
+                                </svg>
+                                <span>สำเร็จแล้ว</span>
+                            </div>
+                        </div>
+
+                        <!-- Item 2: NHSO / Rights Check -->
+                        <div class="syncing-check-item item-processing" id="sync-item-nhso">
+                            <div class="check-item-left">
+                                <div class="check-icon-circle teal-spin">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="16" height="16" class="spin-icon">
+                                        <path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38l5.67-5.67"></path>
+                                    </svg>
+                                </div>
+                                <span class="check-item-label">ตรวจสอบสิทธิการรักษาพยาบาล (NHSO / สปสช. & สังกัด)</span>
+                            </div>
+                            <div class="check-item-badge badge-pending" id="sync-nhso-badge">
+                                <span class="pulse-dot">●</span>
+                                <span id="sync-nhso-status-text">กำลังตรวจสอบ...</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Warning Notice Box (Red) -->
+                <div class="card-syncing-warning-box">
+                    <div class="warning-icon-box">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2.2" width="22" height="22">
+                            <rect x="2" y="5" width="20" height="14" rx="2"></rect>
+                            <line x1="2" y1="10" x2="22" y2="10"></line>
+                            <line x1="2" y1="2" x2="22" y2="22" stroke-width="2.5"></line>
+                        </svg>
+                    </div>
+                    <div class="warning-text-content">
+                        <h4 class="warning-heading">ห้ามดึงบัตรออกเด็ดขาด</h4>
+                        <p class="warning-desc">
+                            กรุณาเสียบบัตรประชาชนค้างไว้ที่ช่องอ่านบัตร (Smart Card Slot) จนกว่าหน้าจอจะแสดงข้อความว่า <strong>"นำบัตรออกได้"</strong> เพื่อป้องกันข้อมูลสูญหาย
+                        </p>
+                        <div class="warning-light-status">
+                            <span class="blinking-green-dot"></span>
+                            <span>ไฟแสดงสถานะช่องอ่านบัตรกำลังกะพริบสีเขียว</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Cancel / Eject Card Button -->
+                <div class="card-syncing-action-row">
+                    <button type="button" class="btn-cancel-sync" onclick="cancelCardSyncAndEject()">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="18" height="18">
+                            <line x1="18" y1="6" x2="6" y2="18"></line>
+                            <line x1="6" y1="6" x2="18" y2="18"></line>
+                        </svg>
+                        <span>ยกเลิกรายการ / คืนบัตร</span>
+                    </button>
+                </div>
+
+            </div>
+
+            <!-- ================= VIEW: SERVICE & DEPARTMENT SELECTION (STEP 2 OF 3) ================= -->
+            <div id="kios-view-service-selection" class="kios-view-content" style="display: none;">
+
+                <!-- Step Indicator Bar -->
+                <div class="kios-step-indicator-bar">
+                    <div class="step-nav-left">
+                        <div class="step-pill-item inactive">
+                            <span>1. ยืนยันตัวตน</span>
+                        </div>
+                        <span class="step-separator">›</span>
+                        <div class="step-pill-item active">
+                            <span>2. เลือกประเภทบริการ</span>
+                        </div>
+                        <span class="step-separator">›</span>
+                        <div class="step-pill-item inactive">
+                            <span>3. รับบัตรคิว</span>
+                        </div>
+                    </div>
+                    <div class="step-nav-right">
+                        <span>ขั้นตอนที่ 2 จาก 3</span>
+                    </div>
+                </div>
+
+                <!-- Patient Profile Card (with teal accent border) -->
+                <div class="service-patient-bar-card">
+                    <div class="service-patient-avatar">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="#004D54" stroke-width="2" width="28" height="28">
+                            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                            <circle cx="12" cy="7" r="4"></circle>
+                        </svg>
+                    </div>
+                    <div class="service-patient-info">
+                        <div class="patient-name-row">
+                            <h2 class="service-patient-name" id="service-patient-name">นายสมชาย ใจดี</h2>
+                            <span class="badge-verified-check">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" width="13" height="13">
+                                    <polyline points="20 6 9 17 4 12"></polyline>
+                                </svg>
+                                <span>ผ่านการตรวจสอบสิทธิ์</span>
+                            </span>
+                        </div>
+                        <div class="service-patient-meta">
+                            <span><strong>HN:</strong> <span id="service-patient-hn">67-0498124</span></span>
+                            <span class="meta-separator">•</span>
+                            <span><strong>เลขบัตรประชาชน:</strong> <span id="service-patient-cid">1-1004-00xxx-xx-9</span></span>
+                            <span class="meta-separator">•</span>
+                            <span><strong>อายุ:</strong> 48 ปี 3 เดือน (สัญชาติไทย)</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Section 1: เลือกสิทธิการรักษาพยาบาล -->
+                <div class="service-selection-section">
+                    <div class="section-title-wrap">
+                        <h3 class="section-main-title">เลือกสิทธิการรักษาพยาบาล</h3>
+                        <p class="section-sub-title">กรุณาตรวจสอบหรือแตะเลือกสิทธิการรักษาที่ประสงค์จะใช้บริการในครั้งนี้</p>
+                    </div>
+
+                    <div class="rights-card-grid" id="rights-card-grid">
+                        <!-- Right Card 1 (Selected default) -->
+                        <div class="service-choice-card rights-card selected" onclick="selectServiceRight(this, 'สิทธิประกันสุขภาพถ้วนหน้า (บัตรทอง 30 บาท)')">
+                            <div class="card-check-corner">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="3" width="12" height="12">
+                                    <polyline points="20 6 9 17 4 12"></polyline>
+                                </svg>
+                            </div>
+                            <div class="rights-card-top">
+                                <div class="rights-icon-box">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20" height="20">
+                                        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                                        <line x1="12" y1="8" x2="12" y2="14"></line>
+                                        <line x1="9" y1="11" x2="15" y2="11"></line>
+                                    </svg>
+                                </div>
+                            </div>
+                            <h4 class="rights-title">หลักประกันสุขภาพถ้วนหน้า</h4>
+                            <span class="rights-tag">(บัตรทอง 30 บาท)</span>
+                            <p class="rights-desc">สิทธิตามฐานข้อมูล สปสช. •รพ.กรุงเทพเมดิคอล</p>
+                            <div class="rights-action-link">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="14" height="14">
+                                    <polyline points="20 6 9 17 4 12"></polyline>
+                                </svg>
+                                <span>เลือกใช้สิทธินี้แล้ว</span>
+                            </div>
+                        </div>
+
+                        <!-- Right Card 2 -->
+                        <div class="service-choice-card rights-card" onclick="selectServiceRight(this, 'สิทธิประกันสังคม (Social Security Scheme)')">
+                            <div class="card-check-corner">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="3" width="12" height="12">
+                                    <polyline points="20 6 9 17 4 12"></polyline>
+                                </svg>
+                            </div>
+                            <div class="rights-card-top">
+                                <div class="rights-icon-box">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20" height="20">
+                                        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                                    </svg>
+                                </div>
+                            </div>
+                            <h4 class="rights-title">สิทธิประกันสังคม</h4>
+                            <span class="rights-tag">(Social Security Scheme)</span>
+                            <p class="rights-desc">ผู้ประกันตน ม.33 / ม.39 / ม.40 ตรวจสอบสถานะส่งเงินสมทบ</p>
+                            <div class="rights-action-link">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14">
+                                    <path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4M10 17l5-5-5-5M13.8 12H3"/>
+                                </svg>
+                                <span>แตะเพื่อเลือกสิทธินี้</span>
+                            </div>
+                        </div>
+
+                        <!-- Right Card 3 -->
+                        <div class="service-choice-card rights-card" onclick="selectServiceRight(this, 'ข้าราชการ / รัฐวิสาหกิจ (CSMBS)')">
+                            <div class="card-check-corner">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="3" width="12" height="12">
+                                    <polyline points="20 6 9 17 4 12"></polyline>
+                                </svg>
+                            </div>
+                            <div class="rights-card-top">
+                                <div class="rights-icon-box">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20" height="20">
+                                        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                                    </svg>
+                                </div>
+                            </div>
+                            <h4 class="rights-title">ข้าราชการ / รัฐวิสาหกิจ</h4>
+                            <span class="rights-tag">(CSMBS / State Enterprise)</span>
+                            <p class="rights-desc">สิทธิเบิกจ่ายตรงกรมบัญชีกลาง ข้าราชการและครอบครัว</p>
+                            <div class="rights-action-link">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14">
+                                    <path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4M10 17l5-5-5-5M13.8 12H3"/>
+                                </svg>
+                                <span>แตะเพื่อเลือกสิทธินี้</span>
+                            </div>
+                        </div>
+
+                        <!-- Right Card 4 -->
+                        <div class="service-choice-card rights-card" onclick="selectServiceRight(this, 'ชำระเงินเอง / ประกันสุขภาพ (Self-Pay)')">
+                            <div class="card-check-corner">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="3" width="12" height="12">
+                                    <polyline points="20 6 9 17 4 12"></polyline>
+                                </svg>
+                            </div>
+                            <div class="rights-card-top">
+                                <div class="rights-icon-box">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20" height="20">
+                                        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                                    </svg>
+                                </div>
+                            </div>
+                            <h4 class="rights-title">ชำระเงินเอง / ประกันสุขภาพ</h4>
+                            <span class="rights-tag">(Self-Pay / Private Ins.)</span>
+                            <p class="rights-desc">ชำระเงินสด, บัตรเครดิต หรือเคลมประกันสุขภาพเอกชน</p>
+                            <div class="rights-action-link">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14">
+                                    <path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4M10 17l5-5-5-5M13.8 12H3"/>
+                                </svg>
+                                <span>แตะเพื่อเลือกสิทธินี้</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Section 2: กรุณาเลือกแผนกที่ต้องการตรวจ -->
+                <div class="service-selection-section">
+                    <div class="section-title-wrap">
+                        <h3 class="section-main-title">กรุณาเลือกแผนกที่ต้องการตรวจ</h3>
+                        <p class="section-sub-title">Select primary symptoms or department to generate your consultation queue ticket</p>
+                    </div>
+
+                    <div class="dept-select-grid" id="dept-select-grid">
+                        <!-- Dept 1: อายุรกรรมทั่วไป (Selected) -->
+                        <div class="service-choice-card dept-item-card selected" onclick="selectServiceDept(this, 'อายุรกรรมทั่วไป', 'A')">
+                            <div class="card-check-corner">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="3" width="12" height="12">
+                                    <polyline points="20 6 9 17 4 12"></polyline>
+                                </svg>
+                            </div>
+                            <div class="dept-card-icon-wrap teal-bg">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="24" height="24">
+                                    <path d="M4.5 3v5a4.5 4.5 0 0 0 9 0V3"></path>
+                                    <path d="M9 12.5v4a3 3 0 0 0 6 0v-2"></path>
+                                    <circle cx="18" cy="14" r="2.5"></circle>
+                                    <path d="M3 3h3M12 3h3"></path>
+                                </svg>
+                            </div>
+                            <span class="dept-card-title">อายุรกรรมทั่วไป</span>
+                        </div>
+
+                        <!-- Dept 2: กระดูกและข้อ -->
+                        <div class="service-choice-card dept-item-card" onclick="selectServiceDept(this, 'กระดูกและข้อ', 'O')">
+                            <div class="card-check-corner">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="3" width="12" height="12">
+                                    <polyline points="20 6 9 17 4 12"></polyline>
+                                </svg>
+                            </div>
+                            <div class="dept-card-icon-wrap soft-bg">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="24" height="24">
+                                    <path d="M17 10c.7-.7 1.6-1 2.5-1a3.5 3.5 0 0 1 0 7c-.9 0-1.8-.3-2.5-1l-10 10c-.7.7-1.6 1-2.5 1a3.5 3.5 0 0 1 0-7c.9 0 1.8.3 2.5 1l10-10z"></path>
+                                </svg>
+                            </div>
+                            <span class="dept-card-title">กระดูกและข้อ</span>
+                        </div>
+
+                        <!-- Dept 3: ศัลยกรรมทั่วไป -->
+                        <div class="service-choice-card dept-item-card" onclick="selectServiceDept(this, 'ศัลยกรรมทั่วไป', 'S')">
+                            <div class="card-check-corner">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="3" width="12" height="12">
+                                    <polyline points="20 6 9 17 4 12"></polyline>
+                                </svg>
+                            </div>
+                            <div class="dept-card-icon-wrap soft-bg">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="24" height="24">
+                                    <rect x="3" y="9" width="18" height="6" rx="3" transform="rotate(-45 12 12)"></rect>
+                                    <line x1="12" y1="9" x2="12" y2="15" transform="rotate(-45 12 12)"></line>
+                                </svg>
+                            </div>
+                            <span class="dept-card-title">ศัลยกรรมทั่วไป</span>
+                        </div>
+
+                        <!-- Dept 4: หู คอ จมูก -->
+                        <div class="service-choice-card dept-item-card" onclick="selectServiceDept(this, 'หู คอ จมูก', 'E')">
+                            <div class="card-check-corner">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="3" width="12" height="12">
+                                    <polyline points="20 6 9 17 4 12"></polyline>
+                                </svg>
+                            </div>
+                            <div class="dept-card-icon-wrap soft-bg">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="24" height="24">
+                                    <path d="M6 8.5a6.5 6.5 0 1 1 13 0c0 6-6 6-6 10a3.5 3.5 0 1 1-7 0"></path>
+                                    <path d="M15 8.5a2.5 2.5 0 0 0-5 0v2a2 2 0 0 0 4 0"></path>
+                                </svg>
+                            </div>
+                            <span class="dept-card-title">หู คอ จมูก</span>
+                        </div>
+
+                        <!-- Dept 5: จักษุ (ตา) -->
+                        <div class="service-choice-card dept-item-card" onclick="selectServiceDept(this, 'จักษุ (ตา)', 'Y')">
+                            <div class="card-check-corner">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="3" width="12" height="12">
+                                    <polyline points="20 6 9 17 4 12"></polyline>
+                                </svg>
+                            </div>
+                            <div class="dept-card-icon-wrap soft-bg">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="24" height="24">
+                                    <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                                    <circle cx="12" cy="12" r="3"></circle>
+                                </svg>
+                            </div>
+                            <span class="dept-card-title">จักษุ (ตา)</span>
+                        </div>
+
+                        <!-- Dept 6: ทันตกรรม -->
+                        <div class="service-choice-card dept-item-card" onclick="selectServiceDept(this, 'ทันตกรรม', 'D')">
+                            <div class="card-check-corner">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="3" width="12" height="12">
+                                    <polyline points="20 6 9 17 4 12"></polyline>
+                                </svg>
+                            </div>
+                            <div class="dept-card-icon-wrap soft-bg">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="24" height="24">
+                                    <path d="M12 2C8.5 2 6 4 6 7c0 4 1.5 8 2.5 12 .5 2 1.5 3 3.5 3 1.5 0 2-.8 2-2 0 1.2.5 2 2 2 2 0 3-1 3.5-3 1-4 2.5-8 2.5-12 0-3-2.5-5-6-5z"></path>
+                                </svg>
+                            </div>
+                            <span class="dept-card-title">ทันตกรรม</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Section 3: กรุณาเลือกเวลาเข้ารับบริการ -->
+                <div class="service-selection-section">
+                    <div class="section-title-wrap">
+                        <h3 class="section-main-title">กรุณาเลือกเวลาเข้ารับบริการ</h3>
+                        <p class="section-sub-title">Select primary symptoms or department to generate your consultation queue ticket</p>
+                    </div>
+
+                    <div class="time-slot-grid" id="time-slot-grid">
+                        <!-- Slot 1 (Selected default) -->
+                        <div class="service-choice-card time-slot-card selected" onclick="selectServiceTime(this, '08:30 - 09:30 น.')">
+                            <div class="card-check-corner">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="3" width="12" height="12">
+                                    <polyline points="20 6 9 17 4 12"></polyline>
+                                </svg>
+                            </div>
+                            <div class="slot-header-row">
+                                <span class="slot-period-badge dark">รอบสาย (Morning Late)</span>
+                            </div>
+                            <strong class="slot-time-text">08:30 - 09:30 น.</strong>
+                        </div>
+
+                        <!-- Slot 2 -->
+                        <div class="service-choice-card time-slot-card" onclick="selectServiceTime(this, '09:30 - 10:30 น.')">
+                            <div class="card-check-corner">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="3" width="12" height="12">
+                                    <polyline points="20 6 9 17 4 12"></polyline>
+                                </svg>
+                            </div>
+                            <div class="slot-header-row">
+                                <span class="slot-period-badge light">รอบสาย (Morning Late)</span>
+                                <span class="slot-status-dot"></span>
+                            </div>
+                            <strong class="slot-time-text">09:30 - 10:30 น.</strong>
+                        </div>
+
+                        <!-- Slot 3 -->
+                        <div class="service-choice-card time-slot-card" onclick="selectServiceTime(this, '10:30 - 11:30 น.')">
+                            <div class="card-check-corner">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="3" width="12" height="12">
+                                    <polyline points="20 6 9 17 4 12"></polyline>
+                                </svg>
+                            </div>
+                            <div class="slot-header-row">
+                                <span class="slot-period-badge light">รอบสาย (Morning Late)</span>
+                                <span class="slot-status-dot"></span>
+                            </div>
+                            <strong class="slot-time-text">10:30 - 11:30 น.</strong>
+                        </div>
+
+                        <!-- Slot 4 -->
+                        <div class="service-choice-card time-slot-card" onclick="selectServiceTime(this, '11:30 - 12:30 น.')">
+                            <div class="card-check-corner">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="3" width="12" height="12">
+                                    <polyline points="20 6 9 17 4 12"></polyline>
+                                </svg>
+                            </div>
+                            <div class="slot-header-row">
+                                <span class="slot-period-badge light">รอบสาย (Morning Late)</span>
+                                <span class="slot-status-dot"></span>
+                            </div>
+                            <strong class="slot-time-text">11:30 - 12:30 น.</strong>
+                        </div>
+
+                        <!-- Slot 5 -->
+                        <div class="service-choice-card time-slot-card" onclick="selectServiceTime(this, '13:30 - 14:30 น.')">
+                            <div class="card-check-corner">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="3" width="12" height="12">
+                                    <polyline points="20 6 9 17 4 12"></polyline>
+                                </svg>
+                            </div>
+                            <div class="slot-header-row">
+                                <span class="slot-period-badge light">รอบสาย (Morning Late)</span>
+                            </div>
+                            <strong class="slot-time-text">13:30 - 14:30 น.</strong>
+                        </div>
+
+                        <!-- Slot 6 -->
+                        <div class="service-choice-card time-slot-card" onclick="selectServiceTime(this, '14:30 - 15:30 น.')">
+                            <div class="card-check-corner">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="3" width="12" height="12">
+                                    <polyline points="20 6 9 17 4 12"></polyline>
+                                </svg>
+                            </div>
+                            <div class="slot-header-row">
+                                <span class="slot-period-badge light">รอบสาย (Morning Late)</span>
+                            </div>
+                            <strong class="slot-time-text">14:30 - 15:30 น.</strong>
+                        </div>
+
+                        <!-- Slot 7 -->
+                        <div class="service-choice-card time-slot-card" onclick="selectServiceTime(this, '15:30 - 16:30 น.')">
+                            <div class="card-check-corner">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="3" width="12" height="12">
+                                    <polyline points="20 6 9 17 4 12"></polyline>
+                                </svg>
+                            </div>
+                            <div class="slot-header-row">
+                                <span class="slot-period-badge light">รอบสาย (Morning Late)</span>
+                                <span class="slot-status-dot"></span>
+                            </div>
+                            <strong class="slot-time-text">15:30 - 16:30 น.</strong>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Confirm & Print Button (Center Action) -->
+                <div class="service-action-row">
+                    <button type="button" class="btn-confirm-walkin-ticket" onclick="confirmAndPrintWalkinServiceTicket()">
+                        <div class="btn-print-left">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" width="24" height="24">
+                                <polyline points="6 9 6 2 18 2 18 9"></polyline>
+                                <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path>
+                                <rect x="6" y="14" width="12" height="8"></rect>
+                            </svg>
+                        </div>
+                        <div class="btn-print-text-wrap">
+                            <span class="btn-print-main">ยืนยันข้อมูลและพิมพ์บัตรคิว</span>
+                            <span class="btn-print-sub">Confirm & Print Queue Slip</span>
+                        </div>
+                        <div class="btn-print-arrow">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="20" height="20">
+                                <line x1="5" y1="12" x2="19" y2="12"></line>
+                                <polyline points="12 5 19 12 12 19"></polyline>
+                            </svg>
+                        </div>
+                    </button>
+                </div>
+
+            </div>
+
+            <!-- ================= VIEW 3: QR CODE SCAN SCREEN (IMAGE 2) ================= -->
+            <div id="kios-view-qr" class="kios-view-content" style="display: none;">
+
+                <!-- Step Indicator Bar -->
+                <div class="kios-step-indicator-bar">
+                    <div class="step-nav-left">
+                        <div class="step-pill-item active">
+                            <span>1. ยืนยันตัวตน</span>
+                        </div>
+                        <span class="step-separator">›</span>
+                        <div class="step-pill-item inactive">
+                            <span>2. รับบัตรคิว</span>
+                        </div>
+                    </div>
+                    <div class="step-nav-right">
+                        <span>ขั้นตอนที่ 1 จาก 2</span>
+                    </div>
+                </div>
+
+                <!-- Page Heading -->
+                <div class="qr-view-header">
+                    <h2 class="qr-view-title">กรุณาสแกน QR Code ใบนัดหมาย</h2>
+                    <p class="qr-view-subtitle">เปิดจากหน้าจอมือถือ (แอปฯ หมอพร้อม / SMS) หรือแสดง สลิปใบนัดกระดาษ ที่ได้รับจากโรงพยาบาล</p>
+                </div>
+
+                <!-- Main Scanner Card -->
+                <div class="qr-scanner-main-panel">
+                    <!-- Scanner Box with 4 corners and laser -->
+                    <div class="qr-scanner-frame-box" onclick="simulateScanAppointmentQR()" title="แตะเพื่อจำลองการสแกน QR Code">
+                        <!-- 4 Corner Brackets -->
+                        <div class="scan-bracket corner-tl"></div>
+                        <div class="scan-bracket corner-tr"></div>
+                        <div class="scan-bracket corner-bl"></div>
+                        <div class="scan-bracket corner-br"></div>
+
+                        <!-- Animated Laser Scanner Beam -->
+                        <div class="laser-scanner-beam"></div>
+
+                        <!-- Visual Content: Smartphone + Divider + Paper Slip -->
+                        <div class="scanner-visual-row">
+                            <!-- Left: Smartphone Mockup -->
+                            <div class="scanner-phone-mockup">
+                                <div class="mockup-speaker"></div>
+                                <div class="mockup-screen">
+                                    <div class="phone-app-header">
+                                        <div class="app-logo-badge">
+                                            <span class="cross-icon">✚</span>
+                                            <span>หมอพร้อม</span>
+                                        </div>
+                                        <span class="app-dept-text">คิวพยาบาล</span>
+                                    </div>
+                                    <div class="phone-qr-box">
+                                        <svg viewBox="0 0 100 100" class="mockup-qr-svg">
+                                            <rect width="100" height="100" fill="#FFFFFF"/>
+                                            <rect x="6" y="6" width="28" height="28" rx="4" fill="none" stroke="#004D54" stroke-width="4"/>
+                                            <rect x="12" y="12" width="16" height="16" fill="#004D54"/>
+                                            <rect x="66" y="6" width="28" height="28" rx="4" fill="none" stroke="#004D54" stroke-width="4"/>
+                                            <rect x="72" y="12" width="16" height="16" fill="#004D54"/>
+                                            <rect x="6" y="66" width="28" height="28" rx="4" fill="none" stroke="#004D54" stroke-width="4"/>
+                                            <rect x="12" y="72" width="16" height="16" fill="#004D54"/>
+                                            <rect x="42" y="12" width="8" height="8" fill="#004D54"/>
+                                            <rect x="52" y="24" width="8" height="8" fill="#004D54"/>
+                                            <rect x="40" y="40" width="20" height="20" rx="3" fill="#004D54"/>
+                                            <rect x="68" y="46" width="8" height="8" fill="#004D54"/>
+                                            <rect x="24" y="46" width="8" height="8" fill="#004D54"/>
+                                            <rect x="42" y="72" width="8" height="8" fill="#004D54"/>
+                                            <rect x="54" y="68" width="8" height="8" fill="#004D54"/>
+                                            <rect x="72" y="72" width="8" height="8" fill="#004D54"/>
+                                        </svg>
+                                    </div>
+                                    <div class="phone-patient-info">
+                                        <strong>นพ. อานนท์ วิจิตร</strong>
+                                        <small>คลินิกอายุรกรรม (MED)</small>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Middle: Dotted Divider with 'หรือ' -->
+                            <div class="scanner-or-divider">
+                                <span class="or-dot-line"></span>
+                                <div class="or-pill-badge">หรือ</div>
+                                <span class="or-dot-line"></span>
+                            </div>
+
+                            <!-- Right: Paper Appointment Slip Mockup -->
+                            <div class="scanner-slip-mockup">
+                                <div class="slip-header-row">
+                                    <div class="slip-hosp-icon">
+                                        <svg viewBox="0 0 24 24" fill="#00796B" width="14" height="14">
+                                            <rect x="3" y="3" width="18" height="18" rx="3" fill="none" stroke="#00796B" stroke-width="2"/>
+                                            <path d="M12 7v10M7 12h10" stroke="#00796B" stroke-width="2.5" stroke-linecap="round"/>
+                                        </svg>
+                                    </div>
+                                    <span class="slip-title-text">ใบนัดหมายแพทย์</span>
+                                </div>
+                                <div class="slip-skeleton-lines">
+                                    <span class="sk-line full"></span>
+                                    <span class="sk-line med"></span>
+                                </div>
+                                <div class="slip-qr-box">
+                                    <svg viewBox="0 0 70 70" class="slip-qr-svg">
+                                        <rect width="70" height="70" fill="#FFFFFF"/>
+                                        <rect x="4" y="4" width="20" height="20" fill="none" stroke="#0F172A" stroke-width="3"/>
+                                        <rect x="8" y="8" width="12" height="12" fill="#0F172A"/>
+                                        <rect x="46" y="4" width="20" height="20" fill="none" stroke="#0F172A" stroke-width="3"/>
+                                        <rect x="50" y="8" width="12" height="12" fill="#0F172A"/>
+                                        <rect x="4" y="46" width="20" height="20" fill="none" stroke="#0F172A" stroke-width="3"/>
+                                        <rect x="8" y="50" width="12" height="12" fill="#0F172A"/>
+                                        <rect x="30" y="8" width="6" height="6" fill="#0F172A"/>
+                                        <rect x="28" y="28" width="14" height="14" fill="#0F172A"/>
+                                        <rect x="48" y="32" width="6" height="6" fill="#0F172A"/>
+                                        <rect x="16" y="32" width="6" height="6" fill="#0F172A"/>
+                                        <rect x="30" y="52" width="6" height="6" fill="#0F172A"/>
+                                        <rect x="50" y="52" width="6" height="6" fill="#0F172A"/>
+                                    </svg>
+                                </div>
+                                <div class="slip-skeleton-lines bottom">
+                                    <span class="sk-line full"></span>
+                                    <span class="sk-line short"></span>
+                                </div>
+                                <div class="slip-footer-text">โรงพยาบาลกรุงเทพ</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Two Tip Cards (Side-by-side) -->
+                    <div class="qr-tips-grid">
+                        <!-- Tip 1 -->
+                        <div class="qr-tip-card">
+                            <div class="tip-icon-box">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" width="22" height="22">
+                                    <rect x="3" y="6" width="18" height="12" rx="2"></rect>
+                                    <line x1="7" y1="6" x2="7" y2="10"></line>
+                                    <line x1="11" y1="6" x2="11" y2="9"></line>
+                                    <line x1="15" y1="6" x2="15" y2="10"></line>
+                                    <line x1="19" y1="6" x2="19" y2="9"></line>
+                                </svg>
+                            </div>
+                            <div class="tip-content">
+                                <strong>ระยะห่างที่เหมาะสม</strong>
+                                <span>ถือห่างจากกล้องสแกนประมาณ 10 - 15 ซม.</span>
+                            </div>
+                        </div>
+
+                        <!-- Tip 2 -->
+                        <div class="qr-tip-card">
+                            <div class="tip-icon-box">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" width="22" height="22">
+                                    <circle cx="12" cy="12" r="3.5"></circle>
+                                    <line x1="12" y1="2" x2="12" y2="5"></line>
+                                    <line x1="12" y1="19" x2="12" y2="22"></line>
+                                    <line x1="2" y1="12" x2="5" y2="12"></line>
+                                    <line x1="19" y1="12" x2="22" y2="12"></line>
+                                    <line x1="5" y1="5" x2="7.2" y2="7.2"></line>
+                                    <line x1="16.8" y1="16.8" x2="19" y2="19"></line>
+                                    <line x1="5" y1="19" x2="7.2" y2="16.8"></line>
+                                    <line x1="16.8" y1="7.2" x2="19" y2="5"></line>
+                                </svg>
+                            </div>
+                            <div class="tip-content">
+                                <strong>ตำแหน่งหน้าจอหรือกระดาษ</strong>
+                                <span>หันตรงกับแสงไฟสีฟ้าของช่องสแกนด้านล่าง</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Divider: กรณีไม่มี QR Code หรือสแกนไม่ติด -->
+                <div class="kios-or-divider-bar">
+                    <span class="divider-line"></span>
+                    <span class="divider-pill-text">กรณีไม่มี QR Code หรือสแกนไม่ติด</span>
+                    <span class="divider-line"></span>
+                </div>
+
+                <!-- Alternative Action Card: Switch to Thai ID Card -->
+                <div class="kios-switch-method-card" onclick="showKiosCardView()">
+                    <div class="switch-card-left">
+                        <div class="mini-id-card-icon">
+                            <div class="mini-chip-gold"></div>
+                            <div class="mini-lines-wrap">
+                                <span class="mini-line bold"></span>
+                                <span class="mini-line thin"></span>
+                                <span class="mini-line thin"></span>
+                            </div>
+                        </div>
+                        <div class="switch-card-info">
+                            <h4>เปลี่ยนเป็นเสียบบัตรประจำตัวประชาชน</h4>
+                            <p>ระบบจะค้นหาประวัตินัดหมายและสิทธิการรักษาจากเลขประจำตัวประชาชน 13 หลักให้อัตโนมัติ</p>
+                        </div>
+                    </div>
+                    <div class="switch-card-right">
+                        <span class="badge-senior">แนะนำสำหรับผู้สูงอายุ</span>
+                        <button type="button" class="btn-switch-action">
+                            <span>เสียบบัตร</span>
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="18" height="18">
+                                <polyline points="9 18 15 12 9 6"></polyline>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Bottom Call-To-Action Scanning Banner -->
+                <div class="kios-scan-instruction-banner" onclick="simulateScanAppointmentQR()" title="แตะเพื่อจำลองการสแกน">
+                    <span class="arrow-down-icon">↓</span>
+                    <span>กรุณานำ QR Code หรือ มือถือ มาสแกนที่ช่องสแกนด้านล่างเครื่อง (SCAN HERE)</span>
+                    <span class="arrow-down-icon">↓</span>
+                </div>
+
+            </div>
+
+            <!-- ================= VIEW 4: QR CODE SUCCESS / APPOINTMENT CONFIRMATION (IMAGE 3) ================= -->
+            <div id="kios-view-qr-success" class="kios-view-content" style="display: none;">
+
+                <!-- Step Indicator Bar (Top) -->
+                <div class="kios-step-indicator-bar">
+                    <div class="step-nav-left">
+                        <div class="step-pill-item inactive">
+                            <span>1. ยืนยันตัวตน</span>
+                        </div>
+                        <span class="step-separator">›</span>
+                        <div class="step-pill-item active">
+                            <span>2. รับบัตรคิว</span>
+                        </div>
+                    </div>
+                    <div class="step-nav-right">
+                        <span>ขั้นตอนที่ 2 จาก 2</span>
+                    </div>
+                </div>
+
+                <!-- Top Verification Status Card -->
+                <div class="qr-success-status-card">
+                    <div class="status-card-left">
+                        <div class="success-check-circle">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" width="26" height="26">
+                                <polyline points="20 6 9 17 4 12"></polyline>
+                            </svg>
+                        </div>
+                        <div class="status-text-group">
+                            <div class="verified-tag-pill">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="13" height="13">
+                                    <circle cx="12" cy="12" r="10"></circle>
+                                    <polyline points="12 6 12 12 16 14"></polyline>
+                                </svg>
+                                <span>ระบบตรวจสอบสิทธิ์และข้อมูลนัดหมายเรียบร้อย • VERIFIED</span>
+                            </div>
+                            <h2 class="status-success-title" id="qr-success-title">อ่านบัตรประจำตัวประชาชน สำเร็จ</h2>
+                            <p class="status-success-desc">ระบบตรวจพบนัดหมายแพทย์ของท่านสำหรับวันนี้ กรุณาตรวจสอบความถูกต้องของข้อมูลก่อนสั่งพิมพ์บัตรคิว</p>
+                        </div>
+                    </div>
+
+                    <div class="status-card-right">
+                        <div class="timestamp-box">
+                            <span class="ts-label">บันทึกข้อมูลเมื่อ</span>
+                            <strong class="ts-date" id="qr-success-date">18 พ.ค. 2567</strong>
+                            <small class="ts-time" id="qr-success-time">08:42:15 น. (Kiosk 04)</small>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Two-Column Information Grid -->
+                <div class="qr-success-grid">
+                    
+                    <!-- Column 1: Patient Profile -->
+                    <div class="qr-info-card patient-card">
+                        <div class="card-section-header">
+                            <div class="header-title-left">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18" style="color:var(--kios-teal);">
+                                    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                                    <circle cx="12" cy="7" r="4"></circle>
+                                </svg>
+                                <h3>ข้อมูลผู้รับบริการ (PATIENTPROFILE)</h3>
+                            </div>
+                            <span class="badge-existing-patient">ผู้ป่วยเดิม</span>
+                        </div>
+
+                        <div class="patient-name-block">
+                            <h2 class="patient-name-th" id="qr-patient-name">คุณวิไลพร เมตตากรุณา</h2>
+                            <span class="patient-name-en">Mrs. Wilaiporn Metakaruna</span>
+                        </div>
+
+                        <!-- Patient ID Information Table Box -->
+                        <div class="patient-id-table-box">
+                            <div class="id-table-row">
+                                <span class="id-col-label">หมายเลข HN:</span>
+                                <strong class="id-col-value text-teal hn-value" id="qr-patient-hn">67-048219x</strong>
+                            </div>
+                            <div class="id-table-row">
+                                <span class="id-col-label">เลขบัตรประจำตัวประชาชน:</span>
+                                <strong class="id-col-value" id="qr-patient-cid">1 1004 00xxx xx 9</strong>
+                            </div>
+                            <div class="id-table-row">
+                                <span class="id-col-label">วันเกิด / อายุ:</span>
+                                <strong class="id-col-value">14 ม.ค. 2505 (62 ปี)</strong>
+                            </div>
+                        </div>
+
+                        <!-- Medical Rights Badge Box -->
+                        <div class="medical-rights-box">
+                            <div class="rights-header-row">
+                                <div class="rights-title-group">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" width="18" height="18" style="color:#059669;">
+                                        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                                    </svg>
+                                    <strong>สิทธิประกันสุขภาพถ้วนหน้า(บัตรทอง)</strong>
+                                </div>
+                            </div>
+                            <p class="rights-hospital-text">สถานพยาบาลหลัก: โรงพยาบาลกรุงเทพเมดิคอลเซ็นเตอร์</p>
+                            <div class="rights-verified-pill">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="13" height="13">
+                                    <polyline points="20 6 9 17 4 12"></polyline>
+                                </svg>
+                                <span>สิทธิ์พร้อมใช้งานตามนัดหมาย</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Column 2: Appointment Details Today -->
+                    <div class="qr-info-card appointment-card">
+                        <div class="card-section-header">
+                            <div class="header-title-left">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18" style="color:var(--kios-teal);">
+                                    <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                                    <line x1="16" y1="2" x2="16" y2="6"></line>
+                                    <line x1="8" y1="2" x2="8" y2="6"></line>
+                                    <line x1="3" y1="10" x2="21" y2="10"></line>
+                                </svg>
+                                <h3>รายละเอียดนัดหมายวันนี้</h3>
+                            </div>
+                            <span class="badge-on-time">
+                                <span class="dot-green"></span>
+                                <span>ตรงเวลานัดหมาย</span>
+                            </span>
+                        </div>
+
+                        <!-- Appointment Time Highlight Box -->
+                        <div class="apt-time-highlight-box">
+                            <div class="time-clock-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" width="22" height="22">
+                                    <circle cx="12" cy="12" r="10"></circle>
+                                    <polyline points="12 6 12 12 16 14"></polyline>
+                                </svg>
+                            </div>
+                            <div class="time-text-wrap">
+                                <span>เวลานัด:</span>
+                                <strong id="qr-apt-time">09:30 น.</strong>
+                            </div>
+                        </div>
+
+                        <!-- Department & Location Info -->
+                        <div class="dept-location-section">
+                            <div class="dept-label-row">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16" style="color:var(--kios-teal);">
+                                    <rect x="3" y="3" width="18" height="18" rx="2"></rect>
+                                    <path d="M3 9h18M9 21V9"></path>
+                                </svg>
+                                <span>แผนกคลินิกที่รับตรวจ</span>
+                            </div>
+                            <h3 class="dept-name-val" id="qr-apt-dept">แผนกอายุรกรรมทั่วไป</h3>
+                            <div class="location-building-tag">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14">
+                                    <path d="M12 2a8 8 0 0 0-8 8c0 5.25 8 12 8 12s8-6.75 8-12a8 8 0 0 0-8-8z"></path>
+                                    <circle cx="12" cy="10" r="3"></circle>
+                                </svg>
+                                <span>ชั้น 2 อาคาร 1</span>
+                            </div>
+                        </div>
+
+                        <!-- Clinical Purpose Box -->
+                        <div class="clinical-purpose-box">
+                            <div class="purpose-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18">
+                                    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                                    <polyline points="14 2 14 8 20 8"></polyline>
+                                    <line x1="16" y1="13" x2="8" y2="13"></line>
+                                    <line x1="16" y1="17" x2="8" y2="17"></line>
+                                </svg>
+                            </div>
+                            <div class="purpose-content">
+                                <h4>วัตถุประสงค์การนัดตรวจ (Clinical Purpose)</h4>
+                                <p>ตรวจติดตามอาการโรคความดันโลหิตและเบาหวาน (Follow-up Checkup) มีคำสั่งเจาะเลือดตรวจค่าน้ำตาลสะสม (HbA1c) และการทำงานของไต</p>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- Big Primary Action Button: พิมพ์บัตรคิว -->
+                <div class="qr-print-action-wrap">
+                    <button type="button" class="btn-print-kiosk-ticket" onclick="confirmAndPrintQrTicket()">
+                        <div class="btn-print-inner">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" width="24" height="24">
+                                <polyline points="6 9 6 2 18 2 18 9"></polyline>
+                                <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path>
+                                <rect x="6" y="14" width="12" height="8"></rect>
+                            </svg>
+                            <span>พิมพ์บัตรคิว</span>
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" width="20" height="20">
+                                <line x1="5" y1="12" x2="19" y2="12"></line>
+                                <polyline points="12 5 19 12 12 19"></polyline>
+                            </svg>
+                        </div>
+                    </button>
+                </div>
+
+            </div>
+
+            <!-- ================= VIEW 5: PRINTED TICKET DISPENSER SCREEN (IMAGE 4) ================= -->
+            <div id="kios-view-ticket-dispensed" class="kios-view-content" style="display: none;">
+
+                <!-- Step Indicator Bar -->
+                <div class="kios-step-indicator-bar" id="ticket-dispensed-step-bar">
+                    <div class="step-nav-left" id="ticket-dispensed-steps-left">
+                        <div class="step-pill-item inactive">
+                            <span>1. ยืนยันตัวตน</span>
+                        </div>
+                        <span class="step-separator">›</span>
+                        <div class="step-pill-item active">
+                            <span>2. รับบัตรคิว</span>
+                        </div>
+                    </div>
+                    <div class="step-nav-right">
+                        <span id="ticket-dispensed-step-counter">ขั้นตอนที่ 2 จาก 2</span>
+                    </div>
+                </div>
+
+                <!-- Page Heading -->
+                <div class="ticket-dispensed-header">
+                    <h2 class="dispensed-title">กรุณารับบัตรคิวที่ช่องด้านล่าง</h2>
+                    <p class="dispensed-subtitle">ออกบัตรคิวสำเร็จเรียบร้อย</p>
+                </div>
+
+                <!-- Thermal Printer & Dispensing Paper Slip Container -->
+                <div class="kiosk-printer-stage">
+                    <!-- Black Physical Slot at top -->
+                    <div class="printer-slot-mouth">
+                        <div class="slot-slit-inner"></div>
+                    </div>
+
+                    <!-- Realistic Physical Thermal Paper Ticket Slip -->
+                    <div class="thermal-ticket-slip" id="thermal-ticket-slip">
+                        <!-- Ticket Header -->
+                        <div class="ticket-slip-header">
+                            <div class="slip-brand-row">
+                                <div class="slip-hosp-logo">
+                                    <svg viewBox="0 0 24 24" fill="#00796B" width="16" height="16">
+                                        <rect x="3" y="3" width="18" height="18" rx="3" fill="none" stroke="#00796B" stroke-width="2"/>
+                                        <path d="M12 7v10M7 12h10" stroke="#00796B" stroke-width="2.5" stroke-linecap="round"/>
+                                    </svg>
+                                </div>
+                                <strong class="slip-hospital-title">โรงพยาบาลสมาร์ทแคร์</strong>
+                            </div>
+                            <span class="slip-hospital-sub">SMART CARE HOSPITAL (OPD QUEUE)</span>
+                            <span class="slip-print-timestamp" id="dispensed-timestamp">17 ต.ค. 2569 เวลา 10:35 น.</span>
+                        </div>
+
+                        <!-- Queue Box (Soft cyan/teal background) -->
+                        <div class="ticket-queue-highlight-box">
+                            <span class="queue-box-label">หมายเลขคิวของคุณ (YOUR QUEUE)</span>
+                            <h1 class="queue-box-number" id="dispensed-queue-number">A003</h1>
+                            <div class="queue-dept-pill" id="dispensed-dept-pill">
+                                <span>แผนกอายุรกรรม (Internal Medicine)</span>
+                            </div>
+                        </div>
+
+                        <!-- Detail Rows -->
+                        <div class="ticket-info-table">
+                            <div class="ticket-info-row">
+                                <span class="t-label">ชื่อผู้ป่วย:</span>
+                                <strong class="t-value" id="dispensed-patient-name">คุณวิไลพร เมตตากรุณา</strong>
+                            </div>
+                            <div class="ticket-info-row">
+                                <span class="t-label">เลข HN:</span>
+                                <strong class="t-value" id="dispensed-patient-hn">HN-689412</strong>
+                            </div>
+                            <div class="ticket-info-row">
+                                <span class="t-label">จุดบริการ:</span>
+                                <strong class="t-value" id="dispensed-service-point">ห้องตรวจ 1-3 (อายุรกรรม)</strong>
+                            </div>
+                            <div class="ticket-info-row">
+                                <span class="t-label">สถานที่:</span>
+                                <strong class="t-value" id="dispensed-location">ชั้น 2 อาคาร A</strong>
+                            </div>
+                            <div class="ticket-info-row">
+                                <span class="t-label">สิทธิการรักษา:</span>
+                                <span class="t-value" id="dispensed-rights">สิทธิประกันสุขภาพถ้วนหน้า (บั...</span>
+                            </div>
+                            <div class="ticket-info-row">
+                                <span class="t-label">รายการนัดเดิม:</span>
+                                <span class="t-value" id="dispensed-doctor-note">นัดหมายตรวจกับ นพ. วิจัย เปี่ยมประสิทธิ์ (อายุรแพทย์)</span>
+                            </div>
+                        </div>
+
+                        <!-- Barcode Graphic -->
+                        <div class="ticket-barcode-section">
+                            <div class="barcode-lines-graphic">
+                                <span class="bc-b w-2"></span><span class="bc-w w-1"></span>
+                                <span class="bc-b w-3"></span><span class="bc-w w-2"></span>
+                                <span class="bc-b w-1"></span><span class="bc-w w-1"></span>
+                                <span class="bc-b w-4"></span><span class="bc-w w-2"></span>
+                                <span class="bc-b w-2"></span><span class="bc-w w-1"></span>
+                                <span class="bc-b w-3"></span><span class="bc-w w-3"></span>
+                                <span class="bc-b w-1"></span><span class="bc-w w-1"></span>
+                                <span class="bc-b w-4"></span><span class="bc-w w-2"></span>
+                                <span class="bc-b w-2"></span><span class="bc-w w-1"></span>
+                                <span class="bc-b w-3"></span><span class="bc-w w-1"></span>
+                                <span class="bc-b w-1"></span><span class="bc-w w-2"></span>
+                                <span class="bc-b w-4"></span><span class="bc-w w-1"></span>
+                                <span class="bc-b w-2"></span><span class="bc-w w-2"></span>
+                                <span class="bc-b w-3"></span><span class="bc-w w-1"></span>
+                                <span class="bc-b w-1"></span><span class="bc-w w-3"></span>
+                                <span class="bc-b w-2"></span><span class="bc-w w-1"></span>
+                                <span class="bc-b w-4"></span><span class="bc-w w-2"></span>
+                                <span class="bc-b w-2"></span><span class="bc-w w-1"></span>
+                            </div>
+                            <span class="barcode-text-code" id="dispensed-barcode-text">*Q-A003-680412*</span>
+                        </div>
+
+                        <!-- Realtime Mobile QR Box -->
+                        <div class="ticket-realtime-qr-box">
+                            <div class="ticket-small-qr">
+                                <svg viewBox="0 0 50 50" width="38" height="38">
+                                    <rect width="50" height="50" fill="#FFFFFF"/>
+                                    <rect x="2" y="2" width="16" height="16" fill="none" stroke="#004D54" stroke-width="2.5"/>
+                                    <rect x="6" y="6" width="8" height="8" fill="#004D54"/>
+                                    <rect x="32" y="2" width="16" height="16" fill="none" stroke="#004D54" stroke-width="2.5"/>
+                                    <rect x="36" y="6" width="8" height="8" fill="#004D54"/>
+                                    <rect x="2" y="32" width="16" height="16" fill="none" stroke="#004D54" stroke-width="2.5"/>
+                                    <rect x="6" y="36" width="8" height="8" fill="#004D54"/>
+                                    <rect x="22" y="6" width="4" height="4" fill="#004D54"/>
+                                    <rect x="22" y="22" width="8" height="8" fill="#004D54"/>
+                                    <rect x="34" y="24" width="4" height="4" fill="#004D54"/>
+                                    <rect x="10" y="24" width="4" height="4" fill="#004D54"/>
+                                    <rect x="22" y="38" width="4" height="4" fill="#004D54"/>
+                                    <rect x="34" y="36" width="6" height="6" fill="#004D54"/>
+                                </svg>
+                            </div>
+                            <div class="ticket-qr-text-group">
+                                <strong>สแกน QR Code เพื่อดูคิวแบบเรียลไทม์บนมือถือ</strong>
+                                <small>ระบบจะส่งข้อความแจ้งเตือนเมื่อใกล้ถึงคิว</small>
+                            </div>
+                        </div>
+
+                        <!-- Ticket Footer Notes -->
+                        <div class="ticket-slip-footer">
+                            <p class="slip-notice-text">*** กรุณารอเรียกคิวตามหมายเลขในบัตรตรวจ ***</p>
+                            <span class="slip-thank-text">ขอบพระคุณที่ใช้บริการ</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Done & Return Button / Countdown -->
+                <div class="dispensed-action-row">
+                    <button type="button" class="btn-ticket-finish" onclick="finishKiosSession()">
+                        <span>เสร็จสิ้น / กลับสู่หน้าหลัก (<span id="auto-return-countdown">15</span>s)</span>
+                    </button>
+                </div>
+
+            </div>
+        </main>
+
+        <!-- ======== 4. BOTTOM ASSISTIVE BAR ======== -->
+        <footer class="kios-bottom-bar">
+            <!-- Left: Call Staff -->
+            <button type="button" class="btn-bottom-assist btn-assist-staff" onclick="callNurseAlert()">
+                <div class="assist-btn-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" width="22" height="22">
+                        <path d="M3 18v-6a9 9 0 0 1 18 0v6"/>
+                        <path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"/>
+                    </svg>
+                </div>
+                <span>ต้องการความช่วยเหลือ? (Call Staff)</span>
+            </button>
+
+            <!-- Right: Manual 13-digit Keypad -->
+            <button type="button" class="btn-bottom-assist btn-assist-manual" onclick="openManualIdModal()">
+                <div class="assist-btn-icon text-teal">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="22" height="22">
+                        <rect x="3" y="4" width="18" height="16" rx="2"/>
+                        <line x1="7" y1="8" x2="7.01" y2="8"/>
+                        <line x1="12" y1="8" x2="12.01" y2="8"/>
+                        <line x1="17" y1="8" x2="17.01" y2="8"/>
+                        <line x1="7" y1="12" x2="7.01" y2="12"/>
+                        <line x1="12" y1="12" x2="12.01" y2="12"/>
+                        <line x1="17" y1="12" x2="17.01" y2="12"/>
+                        <line x1="7" y1="16" x2="7.01" y2="16"/>
+                        <line x1="12" y1="16" x2="12.01" y2="16"/>
+                        <line x1="17" y1="16" x2="17.01" y2="16"/>
+                    </svg>
+                </div>
+                <div class="assist-manual-text">
+                    <strong>ไม่มีบัตรประชาชน? คีย์เลขบัตร 13 หลัก</strong>
+                    <small>Manual Input Thai Identification Number</small>
+                </div>
+            </button>
+        </footer>
+
+    </div>
+
+    <!-- ==================== MODAL: APPOINTMENT CHECK-IN ==================== -->
+    <div class="kios-modal-overlay" id="modal-appointment-options" style="display:none;" onclick="handleKiosModalBackdrop(event)">
+        <div class="kios-modal-card apt-checkin-modal" onclick="event.stopPropagation()">
+            <div class="modal-card-header">
+                <div class="header-title-wrap">
+                    <span class="modal-badge-cyan">มีนัดหมายตรวจวันนี้</span>
+                    <h3>กรุณาเลือกวิธียืนยันตัวตน</h3>
+                    <p>ระบบจะดึงรอบเวลาและแพทย์ผู้นัดตรวจของท่านอัตโนมัติ</p>
+                </div>
+                <button type="button" class="btn-close-modal" onclick="closeAppointmentModal()">&times;</button>
+            </div>
+
+            <div class="apt-options-grid">
+                <!-- Option A: Insert Thai ID Card -->
+                <div class="apt-method-card" onclick="startCardCheckin()">
+                    <div class="method-icon-circle bg-teal-soft">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="36" height="36" style="color:var(--kios-teal);">
+                            <rect x="2" y="5" width="20" height="14" rx="2"/>
+                            <line x1="2" y1="10" x2="22" y2="10"/>
+                        </svg>
+                    </div>
+                    <h4>สอดบัตรประชาชน</h4>
+                    <p>เสียบบัตรประชาชนเข้าช่องอ่านเพื่อค้นหาประวัตินัดหมายทันที</p>
+                    <button type="button" class="btn-method-select">เสียบบัตรประชาชน</button>
+                </div>
+
+                <!-- Option B: Scan Appointment QR -->
+                <div class="apt-method-card" onclick="startQrCheckin()">
+                    <div class="method-icon-circle bg-cyan-soft">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="36" height="36" style="color:#0284C7;">
                             <path d="M3 7V5a2 2 0 0 1 2-2h2M17 3h2a2 2 0 0 1 2 2v2M21 17v2a2 2 0 0 1-2 2h-2M7 21H5a2 2 0 0 1-2-2v-2"/>
                             <rect x="7" y="7" width="10" height="10"/>
                         </svg>
                     </div>
-                    <div class="alt-bar-text">
-                        <h3>สแกน QR Code ใบนัดหมาย</h3>
-                        <p>เปิดใบนัดจากแอปฯ หมอพร้อม, SMS หรือสลิปกระดาษจากโรงพยาบาล เพื่อดึงข้อมูลนัดหมายทันที</p>
-                    </div>
-                </div>
-                <div class="alt-bar-right">
-                    <span class="fast-tag">สะดวกรวดเร็ว</span>
-                    <button type="button" class="btn-action-alt">
-                        <span>สแกน QR Code</span>
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="18" height="18"><polyline points="9 18 15 12 9 6"/></svg>
-                    </button>
+                    <h4>สแกน QR ใบนัดหมาย</h4>
+                    <p>สแกนจากหน้าจอมือถือ (หมอพร้อม, SMS หรือใบนัดกระดาษ)</p>
+                    <button type="button" class="btn-method-select btn-cyan">สแกน QR Code</button>
                 </div>
             </div>
-
-            <!-- Bottom Assistive Buttons Bar -->
-            <div class="kios-bottom-actions">
-                <button type="button" class="btn-kios-assist help-btn" onclick="callNurseAlert()">
-                    <span class="assist-icon">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="24" height="24"><path d="M3 18v-6a9 9 0 0 1 18 0v6"/><path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"/></svg>
-                    </span>
-                    <span>ต้องการความช่วยเหลือ? (Call Staff)</span>
-                </button>
-
-                <button type="button" class="btn-kios-assist manual-btn" onclick="openManualIdModal()">
-                    <span class="assist-icon">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="24" height="24"><rect x="3" y="4" width="18" height="16" rx="2"/><line x1="7" y1="8" x2="7.01" y2="8"/><line x1="12" y1="8" x2="12.01" y2="8"/><line x1="17" y1="8" x2="17.01" y2="8"/><line x1="7" y1="12" x2="7.01" y2="12"/><line x1="12" y1="12" x2="12.01" y2="12"/><line x1="17" y1="12" x2="17.01" y2="12"/><line x1="7" y1="16" x2="7.01" y2="16"/><line x1="12" y1="16" x2="12.01" y2="16"/><line x1="17" y1="16" x2="17.01" y2="16"/></svg>
-                    </span>
-                    <div class="manual-btn-text">
-                        <strong>ไม่มีบัตรประชาชน? คีย์เลขบัตร 13 หลัก</strong>
-                        <small>Manual Input Thai Identification Number</small>
-                    </div>
-                </button>
-            </div>
-        </main>
+        </div>
     </div>
 
-    <!-- Modal: Reading Smart Card Animation & Patient Identity Result -->
+    <!-- ==================== MODAL: WALKIN SCREENING / NEW TICKET ==================== -->
+    <div class="kios-modal-overlay" id="modal-walkin-screening" style="display:none;" onclick="handleKiosModalBackdrop(event)">
+        <div class="kios-modal-card walkin-modal" onclick="event.stopPropagation()">
+            <div class="modal-card-header">
+                <div class="header-title-wrap">
+                    <span class="modal-badge-teal">ผู้ป่วยทั่วไป / ไม่มีนัด</span>
+                    <h3>เลือกแผนกที่ต้องการเข้ารับการรักษา</h3>
+                    <p>กรุณาแตะเลือกแผนก หรือระบุอาการเพื่อรับบัตรคิวพบพยาบาลคัดกรอง</p>
+                </div>
+                <button type="button" class="btn-close-modal" onclick="closeWalkinModal()">&times;</button>
+            </div>
+
+            <div class="dept-selection-grid">
+                <button type="button" class="dept-touch-btn active" onclick="issueWalkinQueue('อายุรกรรม')">
+                    <div class="dept-touch-icon med">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="30" height="30">
+                            <path d="M4.5 3v5a4.5 4.5 0 0 0 9 0V3"/><path d="M9 12.5v4a3 3 0 0 0 6 0v-2"/><circle cx="18" cy="14" r="2.5"/><path d="M3 3h3M12 3h3"/>
+                        </svg>
+                    </div>
+                    <div class="dept-touch-info">
+                        <strong>แผนกอายุรกรรม</strong>
+                        <span>ตรวจโรคทั่วไป ไข้หวัด ปวดศีรษะ</span>
+                    </div>
+                </button>
+
+                <button type="button" class="dept-touch-btn" onclick="issueWalkinQueue('ทันตกรรม')">
+                    <div class="dept-touch-icon dental">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="30" height="30">
+                            <path d="M7 3C4.5 3 3 5 3 7.5C3 10.5 4.5 12 5.5 14L7.5 21C8 22 9.5 22 10 21L12 16L14 21C14.5 22 16 22 16.5 21L18.5 14C19.5 12 21 10.5 21 7.5C21 5 19.5 3 17 3C14.5 3 13.5 4.5 12 4.5C10.5 4.5 9.5 3 7 3Z"/>
+                        </svg>
+                    </div>
+                    <div class="dept-touch-info">
+                        <strong>แผนกทันตกรรม</strong>
+                        <span>ปวดฟัน ขูดหินปูน อุดฟัน ถอนฟัน</span>
+                    </div>
+                </button>
+
+                <button type="button" class="dept-touch-btn" onclick="issueWalkinQueue('ศัลยกรรม')">
+                    <div class="dept-touch-icon surg">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="30" height="30">
+                            <circle cx="6" cy="6" r="3"/><circle cx="6" cy="18" r="3"/><line x1="20" y1="4" x2="8.12" y2="15.88"/><line x1="14.47" y1="14.48" x2="20" y2="20"/>
+                        </svg>
+                    </div>
+                    <div class="dept-touch-info">
+                        <strong>แผนกศัลยกรรม</strong>
+                        <span>ตรวจแผล ผ่าตัดเล็ก ไส้ติ่ง ล้างแผล</span>
+                    </div>
+                </button>
+
+                <button type="button" class="dept-touch-btn" onclick="issueWalkinQueue('กุมารเวชกรรม')">
+                    <div class="dept-touch-icon pedia">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="30" height="30">
+                            <circle cx="12" cy="12" r="9"/><circle cx="9" cy="10" r="1.2" fill="currentColor"/><circle cx="15" cy="10" r="1.2" fill="currentColor"/><path d="M8 15s1.5 2 4 2 4-2 4-2"/><path d="M12 3a2.5 2.5 0 0 1 2 2.5"/>
+                        </svg>
+                    </div>
+                    <div class="dept-touch-info">
+                        <strong>แผนกกุมารเวชกรรม</strong>
+                        <span>คลินิกเด็ก ฉีดวัคซีน ไข้หวัดเด็ก</span>
+                    </div>
+                </button>
+
+                <button type="button" class="dept-touch-btn" onclick="issueWalkinQueue('จักษุวิทยา')">
+                    <div class="dept-touch-icon eye">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="30" height="30">
+                            <path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7-10-7-10-7z"/><circle cx="12" cy="12" r="3"/>
+                        </svg>
+                    </div>
+                    <div class="dept-touch-info">
+                        <strong>แผนกจักษุวิทยา</strong>
+                        <span>ตรวจตา เคืองตา วัดสายตา ต้อกระจก</span>
+                    </div>
+                </button>
+
+                <button type="button" class="dept-touch-btn" onclick="issueWalkinQueue('กระดูกและข้อ')">
+                    <div class="dept-touch-icon ortho">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="30" height="30">
+                            <path d="M18 10a3 3 0 0 0-3-3l-6 6a3 3 0 1 0 4.24 4.24l6-6A3 3 0 0 0 18 10z"/>
+                        </svg>
+                    </div>
+                    <div class="dept-touch-info">
+                        <strong>แผนกกระดูกและข้อ</strong>
+                        <span>ปวดข้อ เข่าเสื่อม หลังเคล็ด กระดูกหัก</span>
+                    </div>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==================== MODAL: READING SMART CARD & TICKET PRINT ==================== -->
     <div class="kios-modal-overlay" id="modal-card-reading" style="display:none;">
         <div class="kios-modal-card">
             <!-- State 1: Reading Spinner -->
             <div id="state-reading-spinner" class="modal-state-content">
                 <div class="reading-card-spinner"></div>
-                <h3>กำลังอ่านข้อมูลชิปการ์ดบัตรประชาชน...</h3>
+                <h3 id="spinner-title">กำลังอ่านข้อมูลชิปการ์ดบัตรประชาชน...</h3>
                 <p>กรุณาอย่าดึงบัตรประชาชนออกจากช่องเสียบ</p>
             </div>
 
@@ -217,28 +1742,28 @@
                 <div class="success-badge-icon">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="24" height="24"><polyline points="20 6 9 17 4 12"/></svg>
                 </div>
-                <h3 class="success-title">อ่านบัตรประชาชนสำเร็จเรียบร้อย</h3>
+                <h3 class="success-title">ออกบัตรคิวสำเร็จเรียบร้อย</h3>
                 
                 <div class="patient-id-summary">
                     <div class="summary-avatar">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="28" height="28" style="color:var(--kios-teal-dark);"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="28" height="28" style="color:var(--kios-teal);"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
                     </div>
                     <div class="summary-info">
                         <h4 id="kios-result-name">นาย สมศักดิ์ มั่นคง</h4>
-                        <span>เลขบัตร: 1-1004-00123-45-6</span>
+                        <span id="kios-result-cid">เลขบัตร: 1-1004-00123-45-6</span>
                         <span id="kios-result-hn">รหัส HN: HN 67-048123</span>
-                        <span class="rights-badge">สิทธิการรักษา: บัตรทอง (UC) / สิทธิประกันสังคม</span>
+                        <span class="rights-badge" id="kios-result-rights">สิทธิการรักษา: บัตรทอง (UC) / สิทธิประกันสังคม</span>
                     </div>
                 </div>
 
                 <div class="kios-ticket-print-box">
                     <div class="print-ticket-badge">
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16" style="vertical-align:middle;margin-right:4px;"><rect x="3" y="4" width="18" height="16" rx="2"/><line x1="3" y1="10" x2="21" y2="10"/><line x1="7" y1="15" x2="7.01" y2="15"/><line x1="11" y1="15" x2="13" y2="15"/></svg>
-                        <span>ออกบัตรคิวอัตโนมัติ</span>
+                        <span>บัตรคิวอัตโนมัติ (Kiosk Ticket)</span>
                     </div>
                     <div class="print-queue-num" id="kios-print-queue">M-045</div>
-                    <div class="print-dept-name" id="kios-print-dept">แผนกอายุรกรรม • ห้องตรวจ 3-4</div>
-                    <div class="print-wait-info">คิวก่อนหน้า: 2 คิว • เวลารอโดยประมาณ 15 นาที</div>
+                    <div class="print-dept-name" id="kios-print-dept">แผนกอายุรกรรม • คัดกรอง</div>
+                    <div class="print-wait-info" id="kios-print-wait">คิวก่อนหน้า: 2 คิว • เวลารอโดยประมาณ 10 นาที</div>
                 </div>
 
                 <div class="modal-action-row">
@@ -250,7 +1775,7 @@
         </div>
     </div>
 
-    <!-- Modal: Manual Thai ID Input Keypad -->
+    <!-- ==================== MODAL: MANUAL THAI ID INPUT KEYPAD ==================== -->
     <div class="kios-modal-overlay" id="modal-manual-id" style="display:none;" onclick="handleKiosModalBackdrop(event)">
         <div class="kios-modal-card manual-modal" onclick="event.stopPropagation()">
             <div class="manual-modal-header">
@@ -277,22 +1802,49 @@
                     <button type="button" class="keypad-btn" onclick="pressKey('0')">0</button>
                     <button type="button" class="keypad-btn backspace-btn" onclick="backspaceKey()">⌫</button>
                 </div>
-
-                <div class="dept-select-group">
-                    <label>เลือกแผนกที่ต้องการเข้ารับการรักษา:</label>
-                    <select class="kios-dept-select" id="manual-kios-dept">
-                        <option value="อายุรกรรม">อายุรกรรม (ตรวจโรคทั่วไป)</option>
-                        <option value="ทันตกรรม">ทันตกรรม (ตรวจฟัน/ขูดหินปูน)</option>
-                        <option value="ศัลยกรรม">ศัลยกรรม (ตรวจแผล/ผ่าตัด)</option>
-                        <option value="กุมารเวชกรรม">กุมารเวชกรรม (คลินิกเด็ก)</option>
-                        <option value="จักษุวิทยา">จักษุวิทยา (ตรวจตา/สายตา)</option>
-                        <option value="กระดูกและข้อ">กระดูกและข้อ</option>
-                    </select>
-                </div>
-
-                <button type="button" class="btn-submit-manual-id" onclick="submitManualId()">
-                    <span>ยืนยันและออกบัตรคิว</span>
+ 
+                <button type="button" class="btn-submit-manual-id" id="btn-submit-manual-id" onclick="submitManualId()">
+                    <span>ยืนยันและไปหน้าเลือกประเภทบริการ</span>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="18" height="18">
+                        <line x1="5" y1="12" x2="19" y2="12"></line>
+                        <polyline points="12 5 19 12 12 19"></polyline>
+                    </svg>
                 </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==================== MODAL: ONLINE BOOKING QR INFO ==================== -->
+    <div class="kios-modal-overlay" id="modal-online-qr" style="display:none;" onclick="handleKiosModalBackdrop(event)">
+        <div class="kios-modal-card online-qr-modal" onclick="event.stopPropagation()">
+            <div class="modal-card-header">
+                <h3>ระบบจองนัดหมายแพทย์ล่วงหน้าออนไลน์</h3>
+                <button type="button" class="btn-close-modal" onclick="closeQrMobileModal()">&times;</button>
+            </div>
+            <div class="online-qr-modal-body">
+                <div class="big-qr-container">
+                    <svg viewBox="0 0 140 140" width="180" height="180">
+                        <rect width="140" height="140" fill="#FFFFFF"/>
+                        <rect x="10" y="10" width="36" height="36" rx="4" fill="none" stroke="#005459" stroke-width="4"/>
+                        <rect x="18" y="18" width="20" height="20" rx="2" fill="#005459"/>
+                        <rect x="94" y="10" width="36" height="36" rx="4" fill="none" stroke="#005459" stroke-width="4"/>
+                        <rect x="102" y="18" width="20" height="20" rx="2" fill="#005459"/>
+                        <rect x="10" y="94" width="36" height="36" rx="4" fill="none" stroke="#005459" stroke-width="4"/>
+                        <rect x="18" y="102" width="20" height="20" rx="2" fill="#005459"/>
+                        <rect x="56" y="14" width="8" height="8" fill="#005459"/>
+                        <rect x="74" y="14" width="8" height="8" fill="#005459"/>
+                        <rect x="56" y="28" width="8" height="8" fill="#005459"/>
+                        <rect x="68" y="28" width="8" height="8" fill="#005459"/>
+                        <rect x="80" y="28" width="8" height="8" fill="#005459"/>
+                        <rect x="50" y="50" width="40" height="40" rx="8" fill="#FFFFFF" stroke="#005459" stroke-width="2"/>
+                        <path d="M70 58v24M58 70h24" stroke="#10B981" stroke-width="4.5" stroke-linecap="round"/>
+                    </svg>
+                </div>
+                <h4>สแกนเพื่อเปิดระบบจองคิวบนมือถือ</h4>
+                <p>หรือสามารถเปิดระบบจำลองสำหรับผู้ป่วยได้ที่เมนู "ระบบจองคิว ผู้ป่วย"</p>
+                <div class="online-modal-actions">
+                    <a href="mobile.html" class="btn-go-mobile">เปิดหน้าระบบจองคิวผู้ป่วย (Mobile) ➔</a>
+                </div>
             </div>
         </div>
     </div>

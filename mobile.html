@@ -32,7 +32,7 @@
 
     <!-- Main Mobile Device Wrapper Container -->
     <div class="mobile-outer-container" id="mobile-outer">
-        <div class="smartphone-frame" id="smartphone-frame">
+        <div class="smartphone-frame home-tab-active" id="smartphone-frame">
             <!-- Smartphone Notch / Dynamic Island Header -->
             <div class="phone-notch-bar">
                 <div class="phone-speaker"></div>
@@ -72,8 +72,278 @@
             <!-- Mobile Scrollable Main Content -->
             <main class="mobile-main-scroll" id="mobile-main-scroll">
                 
+                <!-- ==================== TAB 0: หน้าหลัก (HOME VIEW FROM IMAGE) ==================== -->
+                <section class="mobile-tab-view active" id="view-home">
+                    <div class="patient-home-container">
+                        
+                        <!-- Top Date Pill -->
+                        <div class="home-date-pill">
+                            <span class="home-green-dot"></span>
+                            <span id="home-date-text">วันศุกร์ที่ 06 สิงหาคม 2569</span>
+                        </div>
+
+                        <!-- Greeting Title & Subtitle -->
+                        <div class="home-greeting-block">
+                            <h1 class="home-patient-name" id="home-greeting-name">สวัสดี, คุณสมศักดิ์</h1>
+                            <p class="home-patient-sub">ติดตามขั้นตอนการรับบริการของคุณวันนี้แบบเรียลไทม์</p>
+                        </div>
+
+                        <!-- Main Card 1: QR Code สำหรับตู้ Kios -->
+                        <div class="kiosk-qr-pass-card">
+                            <!-- Header Row of Card -->
+                            <div class="pass-card-header">
+                                <div class="pass-tag-pill">
+                                    <span class="pass-dot"></span>
+                                    <span>QR Code สำหรับตู้ Kios</span>
+                                </div>
+                                <span class="pass-sub-text">จุดลงทะเบียน</span>
+                            </div>
+
+                            <!-- Alert Notice Box (Pinkish-red) -->
+                            <div class="pass-alert-box">
+                                <div class="pass-alert-icon">!</div>
+                                <div class="pass-alert-text">
+                                    <strong class="pass-alert-title">โปรดไปที่ตู้ Kios เพื่อยืนยันตัวตน</strong>
+                                    <p class="pass-alert-desc">09 สิงหาคม 2569 มาก่อนเวลา 14:30 น. อย่างน้อย 30 นาที</p>
+                                </div>
+                            </div>
+
+                            <!-- Big Crisp QR Code Section -->
+                            <div class="pass-qr-display-wrap">
+                                <div class="pass-qr-white-box">
+                                    <!-- Crisp SVG QR Code -->
+                                    <svg class="pass-qr-svg" viewBox="0 0 160 160" width="180" height="180">
+                                        <rect width="160" height="160" fill="#FFFFFF"/>
+                                        <!-- Top-Left Corner -->
+                                        <rect x="10" y="10" width="38" height="38" fill="#000000" rx="3"/>
+                                        <rect x="16" y="16" width="26" height="26" fill="#FFFFFF" rx="2"/>
+                                        <rect x="22" y="22" width="14" height="14" fill="#000000" rx="1"/>
+                                        <!-- Top-Right Corner -->
+                                        <rect x="112" y="10" width="38" height="38" fill="#000000" rx="3"/>
+                                        <rect x="118" y="16" width="26" height="26" fill="#FFFFFF" rx="2"/>
+                                        <rect x="124" y="22" width="14" height="14" fill="#000000" rx="1"/>
+                                        <!-- Bottom-Left Corner -->
+                                        <rect x="10" y="112" width="38" height="38" fill="#000000" rx="3"/>
+                                        <rect x="16" y="118" width="26" height="26" fill="#FFFFFF" rx="2"/>
+                                        <rect x="22" y="124" width="14" height="14" fill="#000000" rx="1"/>
+                                        <!-- Alignment Pattern -->
+                                        <rect x="114" y="114" width="22" height="22" fill="#000000" rx="2"/>
+                                        <rect x="118" y="118" width="14" height="14" fill="#FFFFFF" rx="1"/>
+                                        <rect x="122" y="122" width="6" height="6" fill="#000000"/>
+                                        <!-- Timing Patterns -->
+                                        <rect x="54" y="26" width="6" height="6" fill="#000000"/>
+                                        <rect x="66" y="26" width="6" height="6" fill="#000000"/>
+                                        <rect x="78" y="26" width="6" height="6" fill="#000000"/>
+                                        <rect x="90" y="26" width="6" height="6" fill="#000000"/>
+                                        <rect x="102" y="26" width="6" height="6" fill="#000000"/>
+                                        <rect x="26" y="54" width="6" height="6" fill="#000000"/>
+                                        <rect x="26" y="66" width="6" height="6" fill="#000000"/>
+                                        <rect x="26" y="78" width="6" height="6" fill="#000000"/>
+                                        <rect x="26" y="90" width="6" height="6" fill="#000000"/>
+                                        <rect x="26" y="102" width="6" height="6" fill="#000000"/>
+                                        <!-- Data Blocks -->
+                                        <rect x="54" y="12" width="6" height="8" fill="#000000"/>
+                                        <rect x="66" y="12" width="12" height="6" fill="#000000"/>
+                                        <rect x="84" y="14" width="6" height="6" fill="#000000"/>
+                                        <rect x="96" y="12" width="10" height="6" fill="#000000"/>
+                                        <rect x="54" y="38" width="18" height="6" fill="#000000"/>
+                                        <rect x="78" y="38" width="12" height="12" fill="#000000"/>
+                                        <rect x="96" y="38" width="8" height="6" fill="#000000"/>
+                                        <rect x="110" y="54" width="6" height="14" fill="#000000"/>
+                                        <rect x="122" y="54" width="12" height="6" fill="#000000"/>
+                                        <rect x="138" y="54" width="8" height="12" fill="#000000"/>
+                                        <rect x="12" y="54" width="8" height="6" fill="#000000"/>
+                                        <rect x="12" y="66" width="6" height="12" fill="#000000"/>
+                                        <rect x="14" y="84" width="6" height="6" fill="#000000"/>
+                                        <rect x="12" y="96" width="8" height="10" fill="#000000"/>
+                                        <rect x="38" y="54" width="8" height="18" fill="#000000"/>
+                                        <rect x="54" y="54" width="18" height="12" fill="#000000"/>
+                                        <rect x="66" y="72" width="18" height="18" fill="#000000"/>
+                                        <rect x="90" y="66" width="14" height="6" fill="#000000"/>
+                                        <rect x="90" y="78" width="6" height="18" fill="#000000"/>
+                                        <rect x="102" y="72" width="12" height="12" fill="#000000"/>
+                                        <rect x="120" y="72" width="6" height="18" fill="#000000"/>
+                                        <rect x="132" y="72" width="16" height="6" fill="#000000"/>
+                                        <rect x="138" y="84" width="10" height="18" fill="#000000"/>
+                                        <rect x="38" y="78" width="18" height="12" fill="#000000"/>
+                                        <rect x="38" y="96" width="12" height="8" fill="#000000"/>
+                                        <rect x="54" y="96" width="6" height="18" fill="#000000"/>
+                                        <rect x="66" y="96" width="18" height="8" fill="#000000"/>
+                                        <rect x="90" y="102" width="18" height="8" fill="#000000"/>
+                                        <rect x="102" y="96" width="6" height="6" fill="#000000"/>
+                                        <rect x="114" y="96" width="14" height="6" fill="#000000"/>
+                                        <rect x="134" y="96" width="12" height="12" fill="#000000"/>
+                                        <rect x="54" y="120" width="8" height="18" fill="#000000"/>
+                                        <rect x="68" y="114" width="14" height="6" fill="#000000"/>
+                                        <rect x="68" y="126" width="8" height="12" fill="#000000"/>
+                                        <rect x="82" y="120" width="12" height="18" fill="#000000"/>
+                                        <rect x="100" y="120" width="8" height="10" fill="#000000"/>
+                                        <rect x="96" y="136" width="12" height="6" fill="#000000"/>
+                                        <rect x="142" y="120" width="8" height="18" fill="#000000"/>
+                                        <rect x="114" y="142" width="18" height="6" fill="#000000"/>
+                                        <rect x="138" y="142" width="12" height="6" fill="#000000"/>
+                                        <rect x="54" y="142" width="18" height="6" fill="#000000"/>
+                                        <rect x="78" y="142" width="12" height="6" fill="#000000"/>
+                                    </svg>
+                                </div>
+                                <span class="pass-qr-subtext">สแกนบาร์โค้ดที่กล้องตู้ Kios อัตโนมัติ</span>
+                            </div>
+
+                            <!-- Bottom Dark Teal Guide Banner -->
+                            <div class="pass-guide-banner" onclick="openKioskGuideModal()">
+                                <div class="guide-banner-left">
+                                    <div class="guide-icon-pill">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18">
+                                            <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/>
+                                            <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>
+                                        </svg>
+                                    </div>
+                                    <div class="guide-text-wrap">
+                                        <strong class="guide-title">ขั้นตอนการสแกน QR Code ที่ตู้ Kios</strong>
+                                        <span class="guide-desc">คู่มือการสแกน QR Code เพื่อยืนยันตัวตนที่ตู้ Kios</span>
+                                    </div>
+                                </div>
+                                <div class="guide-chevron">›</div>
+                            </div>
+                        </div>
+
+                        <!-- Section 2: นัดหมายครั้งถัดไป -->
+                        <div class="home-section-wrap">
+                            <h3 class="home-section-title">นัดหมายครั้งถัดไป</h3>
+
+                            <div class="next-appt-card">
+                                <div class="next-appt-top">
+                                    <div class="appt-status-tag">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" width="13" height="13">
+                                            <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+                                            <line x1="16" y1="2" x2="16" y2="6"/>
+                                            <line x1="8" y1="2" x2="8" y2="6"/>
+                                            <line x1="3" y1="10" x2="21" y2="10"/>
+                                        </svg>
+                                        <span>ยืนยันนัดตรวจแล้ว</span>
+                                    </div>
+                                    <span class="appt-code-label">รหัส: APT-9921</span>
+                                </div>
+
+                                <div class="next-appt-doctor-row">
+                                    <img src="doctor_consult_thumb.jpg" alt="Doctor" class="next-appt-avatar">
+                                    <div class="next-appt-info">
+                                        <h4 class="next-appt-dept">อายุรกรรม</h4>
+                                        <span class="next-appt-building">อาคาร 7 ชั้น 2</span>
+                                    </div>
+                                </div>
+
+                                <div class="next-appt-schedule-box">
+                                    <div class="schedule-item">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="15" height="15" class="schedule-icon">
+                                            <circle cx="12" cy="12" r="10"/>
+                                            <polyline points="12 6 12 12 16 14"/>
+                                        </svg>
+                                        <span>09 สิงหาคม 2569 • 14:30 - 15:30 น.</span>
+                                    </div>
+                                    <div class="schedule-item">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="15" height="15" class="schedule-icon">
+                                            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+                                            <circle cx="12" cy="10" r="3"/>
+                                        </svg>
+                                        <span>อาคารเฉลิมพระเกียรติ ชั้น 2 คลินิกอายุรกรรม 02</span>
+                                    </div>
+                                </div>
+
+                                <div class="next-appt-action-row">
+                                    <button type="button" class="btn-view-appt-details" onclick="openApptDetailModal()">
+                                        <span>ดูรายละเอียด</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Section 3: บริการด่วน (Quick Actions) -->
+                        <div class="home-section-wrap">
+                            <div class="section-header-row">
+                                <h3 class="home-section-title">บริการด่วน (Quick Actions)</h3>
+                                <span class="section-hint-text">เลือกใช้งาน</span>
+                            </div>
+
+                            <div class="quick-actions-list">
+                                <!-- Action 1: นัดหมายการตรวจ -->
+                                <div class="quick-action-item" onclick="switchMobileNav('view-booking')">
+                                    <div class="quick-icon-wrap teal-bg">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20" height="20">
+                                            <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+                                            <line x1="16" y1="2" x2="16" y2="6"/>
+                                            <line x1="8" y1="2" x2="8" y2="6"/>
+                                            <line x1="3" y1="10" x2="21" y2="10"/>
+                                        </svg>
+                                    </div>
+                                    <div class="quick-content-wrap">
+                                        <strong class="quick-title">นัดหมายการตรวจ</strong>
+                                        <span class="quick-desc">จองคิวล่วงหน้า/พบแพทย์</span>
+                                    </div>
+                                    <div class="quick-arrow">›</div>
+                                </div>
+
+                                <!-- Action 2: แผนที่โรงพยาบาล -->
+                                <div class="quick-action-item" onclick="openHospitalMapModal()">
+                                    <div class="quick-icon-wrap blue-bg">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20" height="20">
+                                            <circle cx="12" cy="12" r="10"/>
+                                            <polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/>
+                                        </svg>
+                                    </div>
+                                    <div class="quick-content-wrap">
+                                        <strong class="quick-title">แผนที่โรงพยาบาล</strong>
+                                        <span class="quick-desc">นำทางในอาคาร & แผนผัง</span>
+                                    </div>
+                                    <div class="quick-arrow">›</div>
+                                </div>
+
+                                <!-- Action 3: ประวัติการรักษา -->
+                                <div class="quick-action-item" onclick="switchMobileNav('view-history')">
+                                    <div class="quick-icon-wrap purple-bg">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20" height="20">
+                                            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                                            <polyline points="14 2 14 8 20 8"/>
+                                            <line x1="16" y1="13" x2="8" y2="13"/>
+                                            <line x1="16" y1="17" x2="8" y2="17"/>
+                                            <polyline points="10 9 9 9 8 9"/>
+                                        </svg>
+                                    </div>
+                                    <div class="quick-content-wrap">
+                                        <strong class="quick-title">ประวัติการรักษา</strong>
+                                        <span class="quick-desc">สรุปผลตรวจ & ใบสั่งยา</span>
+                                    </div>
+                                    <div class="quick-arrow">›</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Section 4: ศูนย์ช่วยเหลือและสอบถาม -->
+                        <div class="home-support-pill-bar">
+                            <div class="support-left-bubble">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18">
+                                    <path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/>
+                                    <path d="M19 10v2a7 7 0 0 1-14 0v-2"/>
+                                    <line x1="12" y1="19" x2="12" y2="23"/>
+                                    <line x1="8" y1="23" x2="16" y2="23"/>
+                                </svg>
+                            </div>
+                            <div class="support-text-wrap">
+                                <strong class="support-heading">ศูนย์ช่วยเหลือและสอบถาม</strong>
+                                <span class="support-tel">โทร 02-555-8900 หรือ ติดต่อเคาน์เตอร์พยาบาล</span>
+                            </div>
+                            <a href="tel:025558900" class="support-call-btn" title="โทรออก">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" width="16" height="16">
+                                    <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
+                                </svg>
+                            </a>
+                        </div>
+
+                    </div>
+                </section>
+
                 <!-- TAB 1: ติดตามคิวของฉัน (Live Queue Tracker) -->
-                <section class="mobile-tab-view active" id="view-my-queue">
+                <section class="mobile-tab-view" id="view-my-queue">
                     <!-- Digital e-Ticket (Virtual Queue Card) -->
                     <div class="virtual-ticket-card" id="virtual-ticket">
                         <!-- Ticket Header Cutout -->
@@ -221,135 +491,120 @@
                     </div>
                 </section>
 
-                <!-- TAB 2: จองคิวออนไลน์ / รับบัตรคิวใหม่ (Booking & New Queue) -->
+                <!-- TAB 2: จองคิวใหม่ / นัดหมายการตรวจ (New Booking matching user UI) -->
                 <section class="mobile-tab-view" id="view-booking">
-                    <div class="booking-card">
-                        <div class="booking-header">
-                            <h2 class="booking-title">จองคิวรับบริการตรวจออนไลน์</h2>
-                            <p class="booking-sub">เลือกแผนกและกรอกข้อมูลเพื่อรับบัตรคิวเข้ารับการรักษา</p>
-                        </div>
-
-                        <form id="form-mobile-booking" onsubmit="submitMobileBooking(event)">
-                            <!-- 1. Select Department -->
-                            <div class="booking-group">
-                                <label class="booking-label">1. เลือกแผนกที่ต้องการตรวจ <span class="req">*</span></label>
-                                <div class="dept-tiles-grid" id="mobile-dept-grid">
-                                    <div class="dept-tile selected" data-dept="อายุรกรรม" onclick="selectMobileDept('อายุรกรรม')">
-                                        <div class="dept-tile-icon-wrap">
-                                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="24" height="24"><path d="M4.5 3v5a4.5 4.5 0 0 0 9 0V3"/><path d="M9 12.5v4a3 3 0 0 0 6 0v-2"/><circle cx="18" cy="14" r="2.5"/><path d="M3 3h3M12 3h3"/></svg>
-                                        </div>
-                                        <span class="dept-tile-name">อายุรกรรม</span>
-                                        <span class="dept-tile-tag">ทั่วไป/เรื้อรัง</span>
-                                    </div>
-                                    <div class="dept-tile" data-dept="ทันตกรรม" onclick="selectMobileDept('ทันตกรรม')">
-                                        <div class="dept-tile-icon-wrap">
-                                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="24" height="24"><path d="M7 3C4.5 3 3 5 3 7.5C3 10.5 4.5 12 5.5 14L7.5 21C8 22 9.5 22 10 21L12 16L14 21C14.5 22 16 22 16.5 21L18.5 14C19.5 12 21 10.5 21 7.5C21 5 19.5 3 17 3C14.5 3 13.5 4.5 12 4.5C10.5 4.5 9.5 3 7 3Z"/></svg>
-                                        </div>
-                                        <span class="dept-tile-name">ทันตกรรม</span>
-                                        <span class="dept-tile-tag">ตรวจฟัน/ขูดหินปูน</span>
-                                    </div>
-                                    <div class="dept-tile" data-dept="ศัลยกรรม" onclick="selectMobileDept('ศัลยกรรม')">
-                                        <div class="dept-tile-icon-wrap">
-                                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="24" height="24"><circle cx="6" cy="6" r="3"/><circle cx="6" cy="18" r="3"/><line x1="20" y1="4" x2="8.12" y2="15.88"/><line x1="14.47" y1="14.48" x2="20" y2="20"/><line x1="8.12" y1="8.12" x2="12" y2="12"/></svg>
-                                        </div>
-                                        <span class="dept-tile-name">ศัลยกรรม</span>
-                                        <span class="dept-tile-tag">ผ่าตัด/แผล</span>
-                                    </div>
-                                    <div class="dept-tile" data-dept="กุมารเวชกรรม" onclick="selectMobileDept('กุมารเวชกรรม')">
-                                        <div class="dept-tile-icon-wrap">
-                                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="24" height="24"><circle cx="12" cy="12" r="9"/><circle cx="9" cy="10" r="1.2" fill="currentColor"/><circle cx="15" cy="10" r="1.2" fill="currentColor"/><path d="M8 15s1.5 2 4 2 4-2 4-2"/><path d="M12 3a2.5 2.5 0 0 1 2 2.5"/></svg>
-                                        </div>
-                                        <span class="dept-tile-name">กุมารเวชกรรม</span>
-                                        <span class="dept-tile-tag">คลินิกเด็ก</span>
-                                    </div>
-                                    <div class="dept-tile" data-dept="จักษุวิทยา" onclick="selectMobileDept('จักษุวิทยา')">
-                                        <div class="dept-tile-icon-wrap">
-                                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="24" height="24"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7-10-7-10-7z"/><circle cx="12" cy="12" r="3"/></svg>
-                                        </div>
-                                        <span class="dept-tile-name">จักษุวิทยา</span>
-                                        <span class="dept-tile-tag">ตรวจตา/สายตา</span>
-                                    </div>
-                                    <div class="dept-tile" data-dept="กระดูกและข้อ" onclick="selectMobileDept('กระดูกและข้อ')">
-                                        <div class="dept-tile-icon-wrap">
-                                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="24" height="24"><path d="M18 10a3 3 0 0 0-3-3l-6 6a3 3 0 1 0 4.24 4.24l6-6A3 3 0 0 0 18 10z"/><circle cx="19" cy="5" r="2.5"/><circle cx="15" cy="2" r="2.5"/><circle cx="5" cy="19" r="2.5"/><circle cx="9" cy="22" r="2.5"/></svg>
-                                        </div>
-                                        <span class="dept-tile-name">กระดูกและข้อ</span>
-                                        <span class="dept-tile-tag">ข้อต่อ/กระดูก</span>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- 2. Patient Identity Information -->
-                            <div class="booking-group">
-                                <label class="booking-label">2. ข้อมูลผู้เข้ารับบริการ <span class="req">*</span></label>
-                                
-                                <div class="form-field">
-                                    <label class="field-title">คำนำหน้า และ ชื่อ-นามสกุล</label>
-                                    <input type="text" class="field-input" id="book-patient-name" placeholder="เช่น คุณ สมชาย มั่นคง" required>
-                                </div>
-
-                                <div class="form-field-row">
-                                    <div class="form-field">
-                                        <label class="field-title">เบอร์โทรศัพท์ติดต่อ</label>
-                                        <input type="tel" class="field-input" id="book-patient-phone" placeholder="08X-XXX-XXXX" required>
-                                    </div>
-                                    <div class="form-field">
-                                        <label class="field-title">รหัส HN (ถ้ามี)</label>
-                                        <input type="text" class="field-input" id="book-patient-hn" placeholder="HN 67-XXXXXX">
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- 3. Service Type: Walk-in Today or Appointment Time -->
-                            <div class="booking-group">
-                                <label class="booking-label">3. รูปแบบการรับบริการ <span class="req">*</span></label>
-                                <div class="service-type-toggle">
-                                    <label class="service-radio-card active">
-                                        <input type="radio" name="book-service-type" value="walkin" checked onchange="toggleBookingType('walkin')">
-                                        <div class="radio-card-content">
-                                            <div class="service-title-row">
-                                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" width="16" height="16" style="color:var(--primary-600);"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
-                                                <strong>รับคิวตรวจวันนี้ (Walk-in)</strong>
-                                            </div>
-                                            <span>เข้าคิวตรวจทันทีตามลำดับคิวในระบบ</span>
-                                        </div>
-                                    </label>
-                                    <label class="service-radio-card">
-                                        <input type="radio" name="book-service-type" value="appointment" onchange="toggleBookingType('appointment')">
-                                        <div class="radio-card-content">
-                                            <div class="service-title-row">
-                                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" width="16" height="16" style="color:var(--accent-blue);"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
-                                                <strong>จองช่วงเวลานัดหมาย</strong>
-                                            </div>
-                                            <span>เลือกช่วงเวลาที่สะดวกเข้ารับการตรวจ</span>
-                                        </div>
-                                    </label>
-                                </div>
-
-                                <div class="appt-time-picker" id="appt-time-picker" style="display:none; margin-top:10px;">
-                                    <label class="field-title">เลือกช่วงเวลานัดตรวจ:</label>
-                                    <select class="field-input" id="book-appt-time">
-                                        <option value="09:00">09:00 - 09:30 น.</option>
-                                        <option value="10:00">10:00 - 10:30 น.</option>
-                                        <option value="11:00">11:00 - 11:30 น.</option>
-                                        <option value="13:30">13:30 - 14:00 น.</option>
-                                        <option value="14:30">14:30 - 15:00 น.</option>
-                                        <option value="15:30">15:30 - 16:00 น.</option>
-                                    </select>
-                                </div>
-                            </div>
-
-                            <!-- 4. Chief Complaint / Reason -->
-                            <div class="booking-group">
-                                <label class="booking-label">4. อาการเบื้องต้น / สาเหตุที่มารับการตรวจ</label>
-                                <textarea class="field-textarea" id="book-symptoms" rows="2" placeholder="เช่น ปวดศีรษะ มีไข้ 2 วัน, ตรวจติดตามผลความดัน, ขูดหินปูน"></textarea>
-                            </div>
-
-                            <!-- Submit Button -->
-                            <button type="submit" class="btn-confirm-booking" id="btn-submit-booking">
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="18" height="18"><polyline points="20 6 9 17 4 12"/></svg>
-                                <span>ออกบัตรคิวตรวจทันที</span>
+                    <!-- Top Green Header matching image -->
+                    <div class="booking-top-nav-bar">
+                        <div class="nav-bar-left">
+                            <button type="button" class="btn-booking-menu" onclick="switchMobileNav('view-home')" title="กลับหน้าหลัก">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" width="22" height="22">
+                                    <line x1="3" y1="12" x2="21" y2="12"></line>
+                                    <line x1="3" y1="6" x2="21" y2="6"></line>
+                                    <line x1="3" y1="18" x2="21" y2="18"></line>
+                                </svg>
                             </button>
+                            <h2 class="booking-screen-title">นัดหมายการตรวจ</h2>
+                        </div>
+                        <div class="nav-bar-right">
+                            <button type="button" class="btn-booking-bell" title="การแจ้งเตือน" onclick="showMobileToast('ไม่มีการแจ้งเตือนใหม่')">
+                                <svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18">
+                                    <path d="M12 22c1.1 0 2-.9 2-2h-4c0 1.1.9 2 2 2zm6-6v-5c0-3.07-1.63-5.64-4.5-6.32V4c0-.83-.67-1.5-1.5-1.5s-1.5.67-1.5 1.5v.68C7.64 5.36 6 7.92 6 11v5l-2 2v1h16v-1l-2-2zm-2 1H8v-6c0-2.48 1.51-4.5 4-4.5s4 2.02 4 4.5v6z"/>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="booking-form-page">
+                        <form id="form-mobile-booking-new" onsubmit="submitNewBookingForm(event)">
+                            
+                            <!-- 1. เลือกแผนกที่ต้องการ -->
+                            <div class="booking-step-block">
+                                <div class="step-label-row">
+                                    <span class="step-num-circle">1</span>
+                                    <label class="step-title-text" for="new-book-dept">เลือกแผนกที่ต้องการ</label>
+                                </div>
+                                <div class="step-input-wrapper">
+                                    <select id="new-book-dept" class="step-select-field" required>
+                                        <option value="" disabled selected>เลือกแผนกที่ต้องการ</option>
+                                        <option value="อายุรกรรม">อายุรกรรม</option>
+                                        <option value="ทันตกรรม">ทันตกรรม</option>
+                                        <option value="ศัลยกรรม">ศัลยกรรม</option>
+                                        <option value="กุมารเวชกรรม">กุมารเวชกรรม</option>
+                                        <option value="จักษุวิทยา">จักษุวิทยา</option>
+                                        <option value="กระดูกและข้อ">กระดูกและข้อ</option>
+                                    </select>
+                                    <div class="input-right-icon">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="16" height="16">
+                                            <polyline points="6 9 12 15 18 9"/>
+                                        </svg>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- 2. เลือกวันตรวจ -->
+                            <div class="booking-step-block">
+                                <div class="step-label-row">
+                                    <span class="step-num-circle">2</span>
+                                    <label class="step-title-text" for="new-book-date">เลือกวันตรวจ</label>
+                                </div>
+                                <div class="step-input-wrapper" onclick="openNativeDatePicker()">
+                                    <input type="text" id="new-book-date-display" class="step-date-display-field" placeholder="เลือกวันที่ต้องการตรวจ" readonly>
+                                    <input type="date" id="new-book-date" class="hidden-native-date" onchange="onDateSelected(this)">
+                                    <div class="input-right-icon calendar-btn">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18">
+                                            <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+                                            <line x1="16" y1="2" x2="16" y2="6"/>
+                                            <line x1="8" y1="2" x2="8" y2="6"/>
+                                            <line x1="3" y1="10" x2="21" y2="10"/>
+                                        </svg>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- 3. เลือกเวลาตรวจ -->
+                            <div class="booking-step-block">
+                                <div class="step-label-row">
+                                    <span class="step-num-circle">3</span>
+                                    <span class="step-title-text">เลือกเวลาตรวจ</span>
+                                </div>
+                                <div class="booking-time-grid">
+                                    <button type="button" class="time-chip active" data-time="08:30 - 09:30" onclick="selectTimeChip(this)">08:30 - 09:30</button>
+                                    <button type="button" class="time-chip" data-time="09:30 - 10:30" onclick="selectTimeChip(this)">09:30 - 10:30</button>
+                                    <button type="button" class="time-chip" data-time="10:30 - 11:30" onclick="selectTimeChip(this)">10:30 - 11:30</button>
+                                    <button type="button" class="time-chip" data-time="11:30 - 12:30" onclick="selectTimeChip(this)">11:30 - 12:30</button>
+                                    <button type="button" class="time-chip" data-time="13:30 - 14:30" onclick="selectTimeChip(this)">13:30 - 14:30</button>
+                                    <button type="button" class="time-chip" data-time="14:30 - 15:30" onclick="selectTimeChip(this)">14:30 - 15:30</button>
+                                    <button type="button" class="time-chip" data-time="15:30 - 16:30" onclick="selectTimeChip(this)">15:30 - 16:30</button>
+                                </div>
+                                <input type="hidden" id="selected-booking-time" value="08:30 - 09:30">
+                            </div>
+
+                            <!-- หมายเหตุ -->
+                            <div class="booking-step-block">
+                                <div class="step-label-row no-badge">
+                                    <label class="step-title-text" for="new-book-notes">หมายเหตุ</label>
+                                </div>
+                                <div class="step-textarea-wrapper">
+                                    <textarea id="new-book-notes" class="step-textarea-field" rows="3" placeholder="เพิ่มคำอธิบาย"></textarea>
+                                </div>
+                            </div>
+
+                            <!-- ปุ่มยืนยันการนัดหมาย -->
+                            <div class="booking-submit-wrapper">
+                                <button type="submit" class="btn-submit-appointment" id="btn-submit-appointment">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" width="20" height="20">
+                                        <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+                                        <line x1="16" y1="2" x2="16" y2="6"/>
+                                        <line x1="8" y1="2" x2="8" y2="6"/>
+                                        <line x1="3" y1="10" x2="21" y2="10"/>
+                                        <line x1="12" y1="13" x2="12" y2="17"/>
+                                        <line x1="10" y1="15" x2="14" y2="15"/>
+                                    </svg>
+                                    <span>ยืนยันการนัดหมาย</span>
+                                </button>
+                                <p class="booking-cancel-policy-note">ไม่มีค่าธรรมเนียมการจองล่วงหน้า ยกเลิกหรือเปลี่ยนเวลาก่อนนัดได้ 2 ชม.</p>
+                            </div>
+
                         </form>
                     </div>
                 </section>
@@ -371,37 +626,158 @@
                     </div>
                 </section>
 
-                <!-- TAB 4: สถานะความหนาแน่นรายแผนก (Hospital Live Load) -->
-                <section class="mobile-tab-view" id="view-hospital">
-                    <div class="mobile-hospital-container">
-                        <div class="section-top-header">
-                            <div>
-                                <h2 class="section-title">สถานะความหนาแน่นรายแผนก</h2>
-                                <p class="section-subtitle">ตรวจสอบเวลารอคอยแบบสด ก่อนเดินทางมาโรงพยาบาล</p>
-                            </div>
+                <!-- TAB 4: ประวัติการรักษา (Appointment History) -->
+                <section class="mobile-tab-view" id="view-history">
+                    <div class="history-content-page">
+                        <!-- Screen Heading (Clean Header without top bar) -->
+                        <div class="history-page-header">
+                            <h2 class="history-page-title">ประวัติการรักษา</h2>
+                            <p class="history-page-sub">ประวัติการนัดหมายและการตรวจย้อนหลัง</p>
+                        </div>
+                        <!-- Search Box -->
+                        <div class="history-search-box">
+                            <svg class="search-icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18">
+                                <circle cx="11" cy="11" r="8"></circle>
+                                <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                            </svg>
+                            <input type="text" id="history-search-input" class="history-search-input" placeholder="ค้นหาชื่อแพทย์ แผนก หรือวันที่นัด..." oninput="handleHistorySearch(this.value)">
                         </div>
 
-                        <div class="dept-traffic-cards" id="dept-traffic-cards">
-                            <!-- Populated dynamically by JS -->
+                        <!-- Filter Chips -->
+                        <div class="history-filter-chips">
+                            <button type="button" class="filter-chip active" data-filter="all" onclick="filterHistoryItems('all', this)">ทั้งหมด</button>
+                            <button type="button" class="filter-chip" data-filter="month" onclick="filterHistoryItems('month', this)">เดือนนี้</button>
+                            <button type="button" class="filter-chip" data-filter="week" onclick="filterHistoryItems('week', this)">สัปดาห์ที่แล้ว</button>
                         </div>
 
-                        <!-- Hospital Contact Card -->
-                        <div class="hosp-contact-box">
-                            <div class="contact-box-title">
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18" style="color:var(--primary-700);"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-                                <span>ข้อมูลติดต่อโรงพยาบาล</span>
+                        <!-- History Cards List -->
+                        <div class="history-cards-list" id="history-cards-container">
+
+                            <!-- Card 1 -->
+                            <div class="history-record-card" data-category="month">
+                                <div class="record-card-header">
+                                    <div class="record-date-wrap">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="17" height="17" class="record-cal-icon">
+                                            <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+                                            <line x1="16" y1="2" x2="16" y2="6"/>
+                                            <line x1="8" y1="2" x2="8" y2="6"/>
+                                            <line x1="3" y1="10" x2="21" y2="10"/>
+                                        </svg>
+                                        <strong class="record-date-text">จันทร์, 27 ต.ค. 2569</strong>
+                                    </div>
+                                    <span class="record-latest-tag">
+                                        <span class="tag-green-dot"></span>
+                                        <span>การนัดล่าสุด</span>
+                                    </span>
+                                </div>
+
+                                <div class="record-time-queue-bar">
+                                    <div class="time-part">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="15" height="15">
+                                            <circle cx="12" cy="12" r="10"/>
+                                            <polyline points="12 6 12 12 16 14"/>
+                                        </svg>
+                                        <span>10:30 - 11:00 น.</span>
+                                    </div>
+                                    <div class="queue-part">คิวที่ #A-024</div>
+                                </div>
+
+                                <div class="record-doctor-dept">
+                                    <div class="record-doc-name">ผู้ตรวจ : นพ. ธนกร กิตติศักดิ์</div>
+                                    <div class="record-dept-name">แผนก : คลินิกอายุรกรรม 02</div>
+                                </div>
+
+                                <button type="button" class="btn-record-details" onclick="openApptDetailModal()">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="15" height="15">
+                                        <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+                                        <line x1="16" y1="2" x2="16" y2="6"/>
+                                        <line x1="8" y1="2" x2="8" y2="6"/>
+                                        <line x1="3" y1="10" x2="21" y2="10"/>
+                                    </svg>
+                                    <span>ดูรายละเอียด</span>
+                                </button>
                             </div>
-                            <div class="contact-row">
-                                <span>ศูนย์บริการข้อมูลลูกค้า:</span>
-                                <strong>02-123-4567 ต่อ 101</strong>
+
+                            <!-- Card 2 -->
+                            <div class="history-record-card" data-category="month">
+                                <div class="record-card-header">
+                                    <div class="record-date-wrap">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="17" height="17" class="record-cal-icon">
+                                            <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+                                            <line x1="16" y1="2" x2="16" y2="6"/>
+                                            <line x1="8" y1="2" x2="8" y2="6"/>
+                                            <line x1="3" y1="10" x2="21" y2="10"/>
+                                        </svg>
+                                        <strong class="record-date-text">ศุกร์, 24 ต.ค. 2567</strong>
+                                    </div>
+                                </div>
+
+                                <div class="record-time-queue-bar">
+                                    <div class="time-part">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="15" height="15">
+                                            <circle cx="12" cy="12" r="10"/>
+                                            <polyline points="12 6 12 12 16 14"/>
+                                        </svg>
+                                        <span>14:30 - 15:00 น.</span>
+                                    </div>
+                                    <div class="queue-part">คิวที่ #A-024</div>
+                                </div>
+
+                                <div class="record-doctor-dept">
+                                    <div class="record-doc-name">ผู้ตรวจ : นพ. ธนกร กิตติศักดิ์</div>
+                                    <div class="record-dept-name">แผนก : คลินิกอายุรกรรม 02</div>
+                                </div>
+
+                                <button type="button" class="btn-record-details" onclick="openApptDetailModal()">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="15" height="15">
+                                        <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+                                        <line x1="16" y1="2" x2="16" y2="6"/>
+                                        <line x1="8" y1="2" x2="8" y2="6"/>
+                                        <line x1="3" y1="10" x2="21" y2="10"/>
+                                    </svg>
+                                    <span>ดูรายละเอียด</span>
+                                </button>
                             </div>
-                            <div class="contact-row">
-                                <span>สายด่วนอุบัติเหตุ-ฉุกเฉิน:</span>
-                                <strong style="color:#DC2626;">1669 (ฟรี 24 ชม.)</strong>
-                            </div>
-                            <div class="contact-row">
-                                <span>ที่ตั้ง:</span>
-                                <span>อาคารผู้ป่วยนอก (OPD) ชั้น 1-3</span>
+
+                            <!-- Card 3 -->
+                            <div class="history-record-card" data-category="week">
+                                <div class="record-card-header">
+                                    <div class="record-date-wrap">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="17" height="17" class="record-cal-icon">
+                                            <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+                                            <line x1="16" y1="2" x2="16" y2="6"/>
+                                            <line x1="8" y1="2" x2="8" y2="6"/>
+                                            <line x1="3" y1="10" x2="21" y2="10"/>
+                                        </svg>
+                                        <strong class="record-date-text">ศุกร์, 24 ต.ค. 2567</strong>
+                                    </div>
+                                </div>
+
+                                <div class="record-time-queue-bar">
+                                    <div class="time-part">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="15" height="15">
+                                            <circle cx="12" cy="12" r="10"/>
+                                            <polyline points="12 6 12 12 16 14"/>
+                                        </svg>
+                                        <span>10:30 - 11:00 น.</span>
+                                    </div>
+                                    <div class="queue-part">คิวที่ #A-024</div>
+                                </div>
+
+                                <div class="record-doctor-dept">
+                                    <div class="record-doc-name">ผู้ตรวจ : นพ. ธนกร กิตติศักดิ์</div>
+                                    <div class="record-dept-name">แผนก : คลินิกอายุรกรรม 02</div>
+                                </div>
+
+                                <button type="button" class="btn-record-details" onclick="openApptDetailModal()">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="15" height="15">
+                                        <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+                                        <line x1="16" y1="2" x2="16" y2="6"/>
+                                        <line x1="8" y1="2" x2="8" y2="6"/>
+                                        <line x1="3" y1="10" x2="21" y2="10"/>
+                                    </svg>
+                                    <span>ดูรายละเอียด</span>
+                                </button>
                             </div>
                         </div>
                     </div>
@@ -411,7 +787,16 @@
 
             <!-- Bottom Mobile Navigation Bar -->
             <nav class="mobile-bottom-nav">
-                <button type="button" class="nav-tab active" data-tab="view-my-queue" onclick="switchMobileNav('view-my-queue')">
+                <button type="button" class="nav-tab active" data-tab="view-home" onclick="switchMobileNav('view-home')">
+                    <div class="nav-tab-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" width="22" height="22">
+                            <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+                            <polyline points="9 22 9 12 15 12 15 22"/>
+                        </svg>
+                    </div>
+                    <span class="nav-tab-label">หน้าหลัก</span>
+                </button>
+                <button type="button" class="nav-tab" data-tab="view-my-queue" onclick="switchMobileNav('view-my-queue')">
                     <div class="nav-tab-icon">
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="22" height="22"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
                     </div>
@@ -429,11 +814,17 @@
                     </div>
                     <span class="nav-tab-label">นัดหมาย</span>
                 </button>
-                <button type="button" class="nav-tab" data-tab="view-hospital" onclick="switchMobileNav('view-hospital')">
+                <button type="button" class="nav-tab" data-tab="view-history" onclick="switchMobileNav('view-history')">
                     <div class="nav-tab-icon">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="22" height="22"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" width="22" height="22">
+                            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                            <polyline points="14 2 14 8 20 8"/>
+                            <line x1="16" y1="13" x2="8" y2="13"/>
+                            <line x1="16" y1="17" x2="8" y2="17"/>
+                            <polyline points="10 9 9 9 8 9"/>
+                        </svg>
                     </div>
-                    <span class="nav-tab-label">สถานะแผนก</span>
+                    <span class="nav-tab-label">ประวัติการรักษา</span>
                 </button>
             </nav>
 
@@ -444,6 +835,219 @@
 
     <!-- Mobile Toast Notification -->
     <div class="mobile-toast" id="mobile-toast"></div>
+
+    <!-- ==================== MODALS FOR PATIENT HOME VIEW ==================== -->
+    <!-- Modal 1: ขั้นตอนการสแกน QR Code ที่ตู้ Kios -->
+    <div class="mobile-modal-overlay" id="modal-kiosk-guide" onclick="closeKioskGuideModal(event)">
+        <div class="mobile-modal-sheet" onclick="event.stopPropagation()">
+            <div class="modal-drag-handle"></div>
+            <div class="modal-sheet-header">
+                <div class="modal-icon-badge teal">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="22" height="22">
+                        <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/>
+                        <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>
+                    </svg>
+                </div>
+                <div>
+                    <h3 class="modal-sheet-title">ขั้นตอนการสแกน QR Code ที่ตู้ Kios</h3>
+                    <p class="modal-sheet-sub">คู่มือยืนยันตัวตนอัตโนมัติด้วยตนเอง</p>
+                </div>
+                <button type="button" class="modal-close-btn" onclick="closeKioskGuideModal()">&times;</button>
+            </div>
+            <div class="modal-sheet-body">
+                <div class="guide-steps-list">
+                    <div class="guide-step-item">
+                        <div class="step-num">1</div>
+                        <div class="step-text">
+                            <strong>ไปที่ตู้บริการ Kios อัตโนมัติ</strong>
+                            <p>ตั้งอยู่บริเวณชั้น 1 หน้าแผนกเวชระเบียนและจุดต้อนรับผู้ป่วย</p>
+                        </div>
+                    </div>
+                    <div class="guide-step-item">
+                        <div class="step-num">2</div>
+                        <div class="step-text">
+                            <strong>เลือกเมนู "มีนัดหมายแล้ว"</strong>
+                            <p>กดปุ่มบนหน้าจอสัมผัสของตู้คีออสก์</p>
+                        </div>
+                    </div>
+                    <div class="guide-step-item">
+                        <div class="step-num">3</div>
+                        <div class="step-text">
+                            <strong>เลือก "สแกน QR Code"</strong>
+                            <p>หน้าจอตู้จะเปิดระบบกล้องพร้อมสแกนทันที</p>
+                        </div>
+                    </div>
+                    <div class="guide-step-item">
+                        <div class="step-num">4</div>
+                        <div class="step-text">
+                            <strong>นำหน้าจอนี้เข้าหากล้องของตู้</strong>
+                            <p>ถือสมาร์ทโฟนให้ QR Code ตรงกับกรอบกล้องของตู้ Kiosk ในระยะ 10-15 ซม.</p>
+                        </div>
+                    </div>
+                    <div class="guide-step-item">
+                        <div class="step-num">5</div>
+                        <div class="step-text">
+                            <strong>รับบัตรคิวและเอกสารนำทาง</strong>
+                            <p>เครื่องจะพิมพ์บัตรคิวตรวจพร้อมระบุห้องตรวจและเวลารอโดยอัตโนมัติ</p>
+                        </div>
+                    </div>
+                </div>
+                <button type="button" class="btn-modal-primary" onclick="closeKioskGuideModal()">เข้าใจแล้ว ปิดหน้าต่าง</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal 2: รายละเอียดการนัดหมาย APT-9921 -->
+    <div class="mobile-modal-overlay" id="modal-appt-detail" onclick="closeApptDetailModal(event)">
+        <div class="mobile-modal-sheet" onclick="event.stopPropagation()">
+            <div class="modal-drag-handle"></div>
+            <div class="modal-sheet-header">
+                <div class="modal-icon-badge blue">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="22" height="22">
+                        <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+                        <line x1="16" y1="2" x2="16" y2="6"/>
+                        <line x1="8" y1="2" x2="8" y2="6"/>
+                        <line x1="3" y1="10" x2="21" y2="10"/>
+                    </svg>
+                </div>
+                <div>
+                    <h3 class="modal-sheet-title">รายละเอียดใบนัดหมาย</h3>
+                    <p class="modal-sheet-sub">รหัสการนัด: APT-9921 (ยืนยันแล้ว)</p>
+                </div>
+                <button type="button" class="modal-close-btn" onclick="closeApptDetailModal()">&times;</button>
+            </div>
+            <div class="modal-sheet-body">
+                <div class="appt-detail-summary-card">
+                    <div class="detail-row">
+                        <span class="detail-label">ชื่อผู้ป่วย:</span>
+                        <strong class="detail-val">คุณสมศักดิ์ รักสงบ</strong>
+                    </div>
+                    <div class="detail-row">
+                        <span class="detail-label">เลขประจำตัวผู้ป่วย (HN):</span>
+                        <strong class="detail-val">67-048123</strong>
+                    </div>
+                    <div class="detail-row">
+                        <span class="detail-label">แผนก / คลินิก:</span>
+                        <strong class="detail-val" style="color:var(--primary-700);">คลินิกอายุรกรรม อาคาร 7 ชั้น 2</strong>
+                    </div>
+                    <div class="detail-row">
+                        <span class="detail-label">แพทย์ผู้ตรวจ:</span>
+                        <strong class="detail-val">นพ.ธนากร เกียรติวิทยา (ว.45102)</strong>
+                    </div>
+                    <div class="detail-row">
+                        <span class="detail-label">วัน-เวลานัดหมาย:</span>
+                        <strong class="detail-val" style="color:#0284C7;">09 สิงหาคม 2569 เวลา 14:30 - 15:30 น.</strong>
+                    </div>
+                    <div class="detail-row">
+                        <span class="detail-label">สถานที่ตรวจ:</span>
+                        <strong class="detail-val">อาคารเฉลิมพระเกียรติ ชั้น 2 ห้องตรวจ 02</strong>
+                    </div>
+                </div>
+
+                <div class="appt-notice-box">
+                    <div class="notice-title">📋 คำแนะนำก่อนเข้ารับการตรวจ:</div>
+                    <ul class="notice-list">
+                        <li>กรุณางดน้ำและอาหารหลัง 24:00 น. ก่อนวันตรวจ (กรณีเจาะเลือดตรวจน้ำตาล/ไขมัน)</li>
+                        <li>นำยาประจำตัวเดิมและสมุดบันทึกความดันมาด้วยทุกครั้ง</li>
+                        <li>กรุณามาถึงก่อนเวลานัดหมาย 30 นาที เพื่อยืนยันตัวตนที่ตู้ Kios</li>
+                    </ul>
+                </div>
+
+                <button type="button" class="btn-modal-primary" onclick="closeApptDetailModal()">ปิดหน้าต่าง</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal 3: แผนที่โรงพยาบาล & การนำทาง -->
+    <div class="mobile-modal-overlay" id="modal-hospital-map" onclick="closeHospitalMapModal(event)">
+        <div class="mobile-modal-sheet" onclick="event.stopPropagation()">
+            <div class="modal-drag-handle"></div>
+            <div class="modal-sheet-header">
+                <div class="modal-icon-badge blue">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="22" height="22">
+                        <circle cx="12" cy="12" r="10"/>
+                        <polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/>
+                    </svg>
+                </div>
+                <div>
+                    <h3 class="modal-sheet-title">แผนที่และเส้นทางในโรงพยาบาล</h3>
+                    <p class="modal-sheet-sub">อาคาร 7 และ อาคารเฉลิมพระเกียรติ</p>
+                </div>
+                <button type="button" class="modal-close-btn" onclick="closeHospitalMapModal()">&times;</button>
+            </div>
+            <div class="modal-sheet-body">
+                <div class="hospital-map-graphic">
+                    <div class="map-building-card active-bldg">
+                        <div class="bldg-badge">อาคารปัจจุบันที่คุณมีนัด</div>
+                        <h4>อาคารเฉลิมพระเกียรติ (อาคาร 7)</h4>
+                        <div class="floor-directory">
+                            <div class="floor-row active-floor">
+                                <span class="floor-badge">ชั้น 2</span>
+                                <div>
+                                    <strong>คลินิกอายุรกรรม 02 (จุดนัดหมาย)</strong>
+                                    <span class="floor-note">ออกจากลิฟต์เลี้ยวขวา เดินตรงไป 20 เมตร</span>
+                                </div>
+                            </div>
+                            <div class="floor-row">
+                                <span class="floor-badge">ชั้น 1</span>
+                                <div>
+                                    <strong>ตู้ Kios อัตโนมัติ & เวชระเบียน</strong>
+                                    <span class="floor-note">จุดยืนยันตัวตนและรับบัตรคิว</span>
+                                </div>
+                            </div>
+                            <div class="floor-row">
+                                <span class="floor-badge">ชั้น 3</span>
+                                <div>
+                                    <strong>ห้องปฏิบัติการ & เอ็กซเรย์ (Lab & X-Ray)</strong>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <button type="button" class="btn-modal-primary" onclick="closeHospitalMapModal()">ปิดหน้าต่าง</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal 4: ประวัติการรักษา & สรุปผลตรวจ -->
+    <div class="mobile-modal-overlay" id="modal-medical-records" onclick="closeMedicalRecordsModal(event)">
+        <div class="mobile-modal-sheet" onclick="event.stopPropagation()">
+            <div class="modal-drag-handle"></div>
+            <div class="modal-sheet-header">
+                <div class="modal-icon-badge purple">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="22" height="22">
+                        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                        <polyline points="14 2 14 8 20 8"/>
+                        <line x1="16" y1="13" x2="8" y2="13"/>
+                        <line x1="16" y1="17" x2="8" y2="17"/>
+                    </svg>
+                </div>
+                <div>
+                    <h3 class="modal-sheet-title">ประวัติการรักษา & ยาประจำตัว</h3>
+                    <p class="modal-sheet-sub">ข้อมูลสุขภาพส่วนบุคคล (EHR)</p>
+                </div>
+                <button type="button" class="modal-close-btn" onclick="closeMedicalRecordsModal()">&times;</button>
+            </div>
+            <div class="modal-sheet-body">
+                <div class="records-card">
+                    <div class="records-header">
+                        <span class="records-date">ตรวจล่าสุด: 15 พฤษภาคม 2569</span>
+                        <span class="records-status-pill">เสร็จสิ้น</span>
+                    </div>
+                    <div class="records-dept">คลินิกอายุรกรรม • นพ.ธนากร เกียรติวิทยา</div>
+                    <div class="records-diagnosis">การวินิจฉัย: ความดันโลหิตสูงระดับที่ 1 (Essential Hypertension)</div>
+                    <div class="records-prescriptions">
+                        <div class="rx-label">รายการยาประจำตัว:</div>
+                        <ul class="rx-list">
+                            <li>Amlodipine 5 mg (1 เม็ด หลังอาหารเช้า)</li>
+                            <li>Losartan Potassium 50 mg (1 เม็ด หลังอาหารเช้า)</li>
+                        </ul>
+                    </div>
+                </div>
+                <button type="button" class="btn-modal-primary" onclick="closeMedicalRecordsModal()">ปิดหน้าต่าง</button>
+            </div>
+        </div>
+    </div>
 
     <!-- Mode Switcher (Floating Button at bottom-right) -->
     <script src="mode-switcher.js"></script>
