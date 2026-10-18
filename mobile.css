@@ -2812,4 +2812,1175 @@ body.mobile-body {
     transform: translateY(1px);
 }
 
+/* =========================================================
+   APPOINTMENT TICKET & QR UI (MATCHING USER SCREENSHOT)
+   ========================================================= */
+
+/* Hide top hospital banner when on appointments tab so ticket sits at top */
+.smartphone-frame.appointments-tab-active .mobile-header {
+    display: none;
+}
+
+.mobile-appointments-view-content {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    padding: 4px 0 28px;
+    animation: fadeInView 0.25s ease-out;
+}
+
+/* CARD 1: E-Ticket / Appointment Pre-queue Voucher Card */
+.appt-ticket-card {
+    background: #FFFFFF;
+    border: 1.5px solid #2DD4BF;
+    border-radius: 22px;
+    padding: 18px 18px 20px;
+    position: relative;
+    box-shadow: 0 4px 20px rgba(13, 148, 136, 0.07);
+    overflow: visible;
+}
+
+/* Top Section: Date, Time, Location */
+.ticket-top-row {
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+    margin-bottom: 12px;
+}
+
+.ticket-cal-icon-wrap {
+    width: 44px;
+    height: 44px;
+    border: 1.5px solid #2DD4BF;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #0F766E;
+    background: #F0FDFA;
+    flex-shrink: 0;
+}
+
+.ticket-info-col {
+    flex: 1;
+    min-width: 0;
+}
+
+.ticket-date-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    margin-bottom: 4px;
+}
+
+.ticket-date-title {
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: #1E293B;
+    letter-spacing: -0.2px;
+}
+
+.ticket-days-badge {
+    background: #ECFDF5;
+    color: #059669;
+    border: 1px solid #A7F3D0;
+    font-size: 0.76rem;
+    font-weight: 600;
+    padding: 3px 10px;
+    border-radius: 9999px;
+    white-space: nowrap;
+}
+
+.ticket-time-row {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.82rem;
+    color: #64748B;
+    margin-bottom: 6px;
+}
+
+.ticket-time-row strong {
+    color: #1E293B;
+    font-weight: 700;
+}
+
+.ticket-location-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 6px;
+    font-size: 0.78rem;
+    color: #64748B;
+    line-height: 1.35;
+    padding-top: 2px;
+}
+
+.ticket-location-row svg {
+    flex-shrink: 0;
+    margin-top: 2px;
+    color: #94A3B8;
+}
+
+/* Coupon Perforation with Half-Circle Cutouts */
+.ticket-perforation-divider {
+    position: relative;
+    display: flex;
+    align-items: center;
+    margin: 16px -18px 16px -18px;
+    height: 26px;
+}
+
+.ticket-perforation-divider .ticket-dash-line {
+    width: 100%;
+    border-top: 1.5px dashed #CBD5E1;
+    margin: 0 18px;
+}
+
+.ticket-perforation-divider .ticket-notch {
+    position: absolute;
+    width: 14px;
+    height: 24px;
+    background: var(--color-bg-mobile, #F4F7F9);
+    border: 1.5px solid #2DD4BF;
+    top: 1px;
+    z-index: 2;
+}
+
+.ticket-perforation-divider .notch-left {
+    left: -1.5px;
+    border-left: none;
+    border-radius: 0 14px 14px 0;
+}
+
+.ticket-perforation-divider .notch-right {
+    right: -1.5px;
+    border-right: none;
+    border-radius: 14px 0 0 14px;
+}
+
+/* Bottom Section: Pre-queue, QR Code, Zoom Button */
+.ticket-prequeue-header {
+    text-align: center;
+    font-size: 0.88rem;
+    color: #1E293B;
+    font-weight: 500;
+    margin-bottom: 8px;
+}
+
+.ticket-prequeue-code {
+    color: #00564C;
+    font-size: 1.25rem;
+    font-weight: 800;
+    letter-spacing: 0.5px;
+    margin-left: 6px;
+}
+
+.ticket-qr-center-wrap {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Corner Brackets / Viewfinder Frame around QR */
+.qr-viewfinder-frame {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 14px;
+    margin: 4px auto 12px;
+}
+
+.qr-corner-bracket {
+    position: absolute;
+    width: 22px;
+    height: 22px;
+    border-color: #94A3B8;
+    border-style: solid;
+}
+
+.bracket-tl {
+    top: 0;
+    left: 0;
+    border-width: 2.5px 0 0 2.5px;
+    border-top-left-radius: 6px;
+}
+
+.bracket-tr {
+    top: 0;
+    right: 0;
+    border-width: 2.5px 2.5px 0 0;
+    border-top-right-radius: 6px;
+}
+
+.bracket-bl {
+    bottom: 0;
+    left: 0;
+    border-width: 0 0 2.5px 2.5px;
+    border-bottom-left-radius: 6px;
+}
+
+.bracket-br {
+    bottom: 0;
+    right: 0;
+    border-width: 0 2.5px 2.5px 0;
+    border-bottom-right-radius: 6px;
+}
+
+.qr-code-img-wrap {
+    width: 170px;
+    height: 170px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #FFFFFF;
+}
+
+.qr-code-img-wrap svg {
+    width: 100%;
+    height: 100%;
+    display: block;
+}
+
+.ticket-kiosk-hint {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    font-size: 0.78rem;
+    color: #64748B;
+    margin-bottom: 14px;
+    text-align: center;
+}
+
+.ticket-kiosk-hint svg {
+    color: #64748B;
+    flex-shrink: 0;
+}
+
+/* Deep Emerald / Dark Teal Tap to Zoom Button */
+.btn-zoom-qr {
+    width: 100%;
+    background: #00564C;
+    color: #FFFFFF;
+    font-weight: 600;
+    font-size: 0.92rem;
+    font-family: inherit;
+    border-radius: 12px;
+    padding: 13px 18px;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    transition: all 0.2s ease;
+    box-shadow: 0 4px 14px rgba(0, 86, 76, 0.22);
+}
+
+.btn-zoom-qr:hover {
+    background: #00433B;
+    transform: translateY(-1px);
+}
+
+.btn-zoom-qr:active {
+    transform: translateY(0);
+}
+
+/* CARD 2: Pre-examination Guidelines Card */
+.appt-guidelines-card {
+    background: #FFFFFF;
+    border-radius: 20px;
+    border: 1px solid #E2E8F0;
+    padding: 18px 18px 16px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.02);
+}
+
+.guidelines-header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 14px;
+}
+
+.guidelines-icon-box {
+    background: #FEF3C7;
+    color: #D97706;
+    width: 28px;
+    height: 28px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    flex-shrink: 0;
+}
+
+.guidelines-title {
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: #1E293B;
+}
+
+.guidelines-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-bottom: 16px;
+    padding: 0;
+}
+
+.guideline-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    font-size: 0.78rem;
+    color: #475569;
+    line-height: 1.45;
+}
+
+.guideline-check-icon {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: #E0F2FE;
+    color: #0284C7;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    margin-top: 1px;
+}
+
+.guideline-text strong {
+    color: #1E293B;
+}
+
+/* TWO ACTION BUTTONS (DIRECTLY UNDER TICKET CARD) */
+.appt-ticket-action-btns {
+    display: flex;
+    gap: 10px;
+    margin-top: 2px;
+    margin-bottom: 2px;
+}
+
+.btn-ticket-cancel {
+    flex: 1;
+    background: #E53935;
+    color: #FFFFFF;
+    border: none;
+    border-radius: 12px;
+    padding: 12px 14px;
+    font-size: 0.94rem;
+    font-weight: 700;
+    font-family: inherit;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    transition: all 0.2s ease;
+    box-shadow: 0 4px 12px rgba(229, 57, 53, 0.22);
+}
+
+.btn-ticket-cancel:hover {
+    background: #D32F2F;
+    transform: translateY(-1px);
+}
+
+.btn-ticket-cancel:active {
+    transform: translateY(0);
+}
+
+.btn-ticket-reschedule {
+    flex: 1;
+    background: #FFFFFF;
+    color: #0D9488;
+    border: 1.5px solid #2DD4BF;
+    border-radius: 12px;
+    padding: 12px 14px;
+    font-size: 0.94rem;
+    font-weight: 700;
+    font-family: inherit;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    transition: all 0.2s ease;
+    box-shadow: 0 2px 8px rgba(13, 148, 136, 0.08);
+}
+
+.btn-ticket-reschedule:hover {
+    background: #F0FDFA;
+    border-color: #0D9488;
+    transform: translateY(-1px);
+}
+
+.btn-ticket-reschedule:active {
+    transform: translateY(0);
+}
+
+/* =========================================================
+   CONVENIENCE SERVICES SECTION (บริการอำนวยความสะดวก)
+   ========================================================= */
+.appt-services-section {
+    margin-top: 8px;
+    margin-bottom: 4px;
+}
+
+.appt-services-title {
+    font-size: 0.92rem;
+    font-weight: 700;
+    color: #334155;
+    margin-bottom: 10px;
+    letter-spacing: -0.2px;
+}
+
+.appt-services-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.appt-service-card {
+    background: #FFFFFF;
+    border: 1px solid #E2E8F0;
+    border-radius: 16px;
+    padding: 12px 16px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.02);
+    cursor: pointer;
+    transition: all 0.2s ease;
+    text-decoration: none;
+    color: inherit;
+}
+
+.appt-service-card:hover {
+    transform: translateY(-1px);
+    border-color: #CBD5E1;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.05);
+}
+
+.appt-service-card:active {
+    transform: translateY(0);
+}
+
+.service-card-left {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex: 1;
+    min-width: 0;
+}
+
+.service-icon-box {
+    width: 42px;
+    height: 42px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.service-icon-box.green-tint {
+    background: #E8F5E9;
+    color: #2E7D32;
+}
+
+.service-icon-box.blue-tint {
+    background: #E0F2FE;
+    color: #0284C7;
+}
+
+.service-icon-box.teal-tint {
+    background: #E0F2F1;
+    color: #00897B;
+}
+
+.service-card-info {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    flex: 1;
+    min-width: 0;
+}
+
+.service-title-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.service-title {
+    font-size: 0.88rem;
+    font-weight: 700;
+    color: #1E293B;
+    line-height: 1.3;
+}
+
+.service-pill-badge {
+    background: #E0F2FE;
+    color: #0369A1;
+    font-size: 0.7rem;
+    font-weight: 600;
+    padding: 2px 8px;
+    border-radius: 9999px;
+}
+
+.service-desc {
+    font-size: 0.76rem;
+    color: #64748B;
+    line-height: 1.35;
+}
+
+.service-chevron {
+    color: #94A3B8;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+}
+
+/* Subtle workflow button to test completing appointment */
+.appt-dev-complete-row {
+    margin-top: 8px;
+    text-align: center;
+}
+
+.btn-appt-finish-subtle {
+    background: transparent;
+    border: none;
+    color: #94A3B8;
+    font-size: 0.72rem;
+    cursor: pointer;
+    text-decoration: underline;
+    padding: 6px;
+    transition: color 0.2s ease;
+}
+
+.btn-appt-finish-subtle:hover {
+    color: #0284C7;
+}
+
+/* RESCHEDULE MODAL STYLES */
+.reschedule-current-box {
+    background: #F8FAFC;
+    border: 1px solid #E2E8F0;
+    border-radius: 12px;
+    padding: 12px 14px;
+}
+
+.reschedule-label {
+    font-size: 0.75rem;
+    color: #64748B;
+    display: block;
+    margin-bottom: 2px;
+}
+
+.reschedule-val {
+    font-size: 0.88rem;
+    color: #00564C;
+    font-weight: 700;
+}
+
+/* =========================================================
+   COMPLETED / REBOOKING STATE (WHEN NO ACTIVE APPOINTMENT)
+   ========================================================= */
+.appt-no-active-wrap {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    padding: 10px 0 24px;
+}
+
+.appt-completed-banner-card {
+    background: #FFFFFF;
+    border-radius: 20px;
+    border: 1.5px solid #CBD5E1;
+    padding: 28px 20px;
+    text-align: center;
+    box-shadow: 0 4px 18px rgba(15, 23, 42, 0.05);
+}
+
+.completed-banner-icon {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: #ECFDF5;
+    color: #059669;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    margin: 0 auto 14px;
+    box-shadow: 0 4px 12px rgba(5, 150, 105, 0.15);
+}
+
+.completed-banner-title {
+    font-size: 1.12rem;
+    font-weight: 700;
+    color: #1E293B;
+    margin-bottom: 6px;
+}
+
+.completed-banner-desc {
+    font-size: 0.82rem;
+    color: #64748B;
+    line-height: 1.5;
+    margin-bottom: 20px;
+}
+
+.btn-start-rebooking {
+    width: 100%;
+    background: #00564C;
+    color: #FFFFFF;
+    border: none;
+    border-radius: 12px;
+    padding: 13px 20px;
+    font-size: 0.94rem;
+    font-weight: 600;
+    font-family: inherit;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    transition: all 0.2s ease;
+    box-shadow: 0 4px 14px rgba(0, 86, 76, 0.25);
+}
+
+.btn-start-rebooking:hover {
+    background: #00433B;
+    transform: translateY(-1px);
+}
+
+/* History preview card under no-active appointment */
+.appt-past-history-box {
+    background: #FFFFFF;
+    border-radius: 16px;
+    border: 1px solid #E2E8F0;
+    padding: 16px;
+}
+
+.past-history-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 12px;
+}
+
+.past-history-title {
+    font-size: 0.86rem;
+    font-weight: 700;
+    color: #1E293B;
+}
+
+.past-history-badge {
+    font-size: 0.72rem;
+    color: #64748B;
+}
+
+.past-history-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 12px;
+    background: #F8FAFC;
+    border-radius: 10px;
+    border: 1px solid #F1F5F9;
+}
+
+.past-item-info strong {
+    font-size: 0.82rem;
+    color: #1E293B;
+    display: block;
+}
+
+.past-item-info span {
+    font-size: 0.75rem;
+    color: #64748B;
+}
+
+.past-item-status {
+    font-size: 0.74rem;
+    font-weight: 600;
+    color: #059669;
+    background: #ECFDF5;
+    padding: 3px 8px;
+    border-radius: 9999px;
+}
+
+/* =========================================================
+   BOOKING TAB ACTIVE LIMITATION BANNER
+   ========================================================= */
+.booking-active-lock-banner {
+    background: #FFFBEB;
+    border: 1.5px solid #FCD34D;
+    border-radius: 16px;
+    padding: 14px;
+    margin-bottom: 18px;
+    box-shadow: 0 2px 8px rgba(245, 158, 11, 0.08);
+}
+
+.lock-banner-header {
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+    margin-bottom: 12px;
+}
+
+.lock-banner-icon {
+    font-size: 1.25rem;
+    line-height: 1;
+}
+
+.lock-banner-title {
+    font-size: 0.88rem;
+    font-weight: 700;
+    color: #92400E;
+    display: block;
+    margin-bottom: 2px;
+}
+
+.lock-banner-desc {
+    font-size: 0.78rem;
+    color: #B45309;
+    line-height: 1.4;
+    margin: 0;
+}
+
+.lock-banner-actions {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.btn-lock-view-ticket {
+    flex: 1;
+    min-width: 150px;
+    background: #00564C;
+    color: #FFFFFF;
+    border: none;
+    border-radius: 10px;
+    padding: 9px 12px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    font-family: inherit;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+}
+
+.btn-lock-finish-appt {
+    background: #FFFFFF;
+    color: #0284C7;
+    border: 1px solid #BAE6FD;
+    border-radius: 10px;
+    padding: 9px 12px;
+    font-size: 0.78rem;
+    font-weight: 600;
+    font-family: inherit;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+}
+
+/* =========================================================
+   ZOOMED QR CODE MODAL
+   ========================================================= */
+.qr-zoom-modal-sheet {
+    max-height: 92vh;
+    border-top-left-radius: 28px;
+    border-top-right-radius: 28px;
+}
+
+.qr-zoom-body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 8px 16px 24px;
+}
+
+.qr-zoom-card {
+    width: 100%;
+    background: #FFFFFF;
+    border: 2px solid #2DD4BF;
+    border-radius: 22px;
+    padding: 20px 16px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-shadow: 0 8px 30px rgba(0, 77, 84, 0.1);
+    margin-bottom: 14px;
+}
+
+.qr-zoom-prequeue-pill {
+    background: #F0FDFA;
+    border: 1px solid #99F6E4;
+    border-radius: 9999px;
+    padding: 4px 16px;
+    font-size: 0.84rem;
+    color: #0F766E;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-bottom: 16px;
+}
+
+.qr-zoom-prequeue-pill strong {
+    font-size: 1.15rem;
+    font-weight: 800;
+    color: #00564C;
+}
+
+.qr-zoom-svg-container {
+    width: 230px;
+    height: 230px;
+    background: #FFFFFF;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+    border-radius: 12px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    margin-bottom: 14px;
+}
+
+.qr-zoom-svg-container svg {
+    width: 100%;
+    height: 100%;
+    display: block;
+}
+
+.qr-zoom-details {
+    width: 100%;
+    border-top: 1px dashed #E2E8F0;
+    padding-top: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    text-align: center;
+}
+
+.zoom-detail-item {
+    font-size: 0.8rem;
+    color: #475569;
+    font-weight: 500;
+}
+
+.qr-zoom-hint-box {
+    width: 100%;
+    background: #F0FDF4;
+    border: 1px solid #DCFCE7;
+    border-radius: 12px;
+    padding: 10px 14px;
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    margin-bottom: 16px;
+}
+
+.qr-zoom-hint-box .hint-icon {
+    font-size: 1.1rem;
+}
+
+.qr-zoom-hint-box .hint-text {
+    font-size: 0.76rem;
+    color: #166534;
+    line-height: 1.4;
+}
+
+.qr-zoom-actions {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.btn-zoom-scan-sim {
+    width: 100%;
+    background: #00564C;
+    color: #FFFFFF;
+    border: none;
+    border-radius: 12px;
+    padding: 12px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    font-family: inherit;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    box-shadow: 0 4px 12px rgba(0, 86, 76, 0.25);
+}
+
+.btn-modal-close-subtle {
+    width: 100%;
+    background: transparent;
+    color: #64748B;
+    border: 1px solid #E2E8F0;
+    border-radius: 12px;
+    padding: 10px;
+    font-size: 0.84rem;
+    font-weight: 500;
+    font-family: inherit;
+    cursor: pointer;
+}
+
+/* =========================================================
+   MY QUEUE / DIGITAL E-TICKET (TAB 1) - EXACT IMAGE REPLICA
+   ========================================================= */
+
+.smartphone-frame.my-queue-tab-active .mobile-header {
+    display: none;
+}
+
+/* Card Container */
+.eticket-card {
+    background: #FFFFFF;
+    border-radius: 24px;
+    border: 1px solid #E2E8F0;
+    box-shadow: 0 4px 20px rgba(0, 77, 84, 0.05);
+    overflow: visible;
+    position: relative;
+    padding: 16px 16px 18px;
+    margin-bottom: 20px;
+}
+
+/* 1. Status Banner Pill */
+.eticket-status-banner {
+    background: #EEF2FF;
+    color: #1E40AF;
+    border-radius: 14px;
+    padding: 11px 16px;
+    text-align: center;
+    font-size: 0.94rem;
+    font-weight: 700;
+    letter-spacing: -0.2px;
+    margin-bottom: 22px;
+}
+
+/* 2. Queue & Patient Info */
+.eticket-info-section {
+    text-align: center;
+    margin-bottom: 16px;
+}
+
+.eticket-queue-label {
+    font-size: 0.88rem;
+    color: #64748B;
+    margin-bottom: 4px;
+    font-weight: 500;
+}
+
+.eticket-queue-number {
+    font-size: 3.5rem;
+    font-weight: 800;
+    color: #00564C;
+    line-height: 1;
+    letter-spacing: -0.5px;
+    margin-bottom: 8px;
+    font-family: inherit;
+}
+
+.eticket-patient-name {
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: #1E293B;
+    margin-bottom: 4px;
+}
+
+.eticket-patient-hn {
+    font-size: 0.85rem;
+    color: #94A3B8;
+    font-weight: 500;
+}
+
+/* 3. Perforation Divider with Half-Circle Cutouts */
+.eticket-perforation-divider {
+    position: relative;
+    display: flex;
+    align-items: center;
+    margin: 18px -16px 20px -16px;
+    height: 24px;
+}
+
+.eticket-perforation-divider .eticket-dash-line {
+    width: 100%;
+    border-top: 1.5px dashed #CBD5E1;
+    margin: 0 16px;
+}
+
+.eticket-perforation-divider .eticket-notch {
+    position: absolute;
+    width: 14px;
+    height: 22px;
+    background: #F4F7F9;
+    border: 1px solid #E2E8F0;
+    top: 1px;
+    z-index: 2;
+}
+
+.eticket-perforation-divider .notch-left {
+    left: -1px;
+    border-left: none;
+    border-radius: 0 14px 14px 0;
+}
+
+.eticket-perforation-divider .notch-right {
+    right: -1px;
+    border-right: none;
+    border-radius: 14px 0 0 14px;
+}
+
+/* 4. Three Metric Summary Boxes */
+.eticket-stats-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.eticket-stat-box {
+    background: #FFFFFF;
+    border: 1px solid #E2E8F0;
+    border-radius: 14px;
+    padding: 12px 6px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 3px;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.02);
+}
+
+.eticket-stat-title {
+    font-size: 0.74rem;
+    color: #64748B;
+    font-weight: 500;
+}
+
+.eticket-stat-val {
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: #1E293B;
+    line-height: 1.2;
+}
+
+.eticket-stat-val.val-ahead {
+    color: #D97706;
+}
+
+.eticket-stat-val.val-time {
+    color: #1E293B;
+}
+
+.eticket-stat-val.val-room {
+    color: #00564C;
+    font-size: 0.98rem;
+    font-weight: 800;
+    white-space: nowrap;
+}
+
+.eticket-stat-sub {
+    font-size: 0.72rem;
+    color: #94A3B8;
+}
+
+/* 5. Service Stepper (ลำดับขั้นตอนการรับบริการ:) */
+.eticket-stepper-section {
+    border-top: 1px solid #F1F5F9;
+    padding-top: 16px;
+}
+
+.eticket-stepper-title {
+    font-size: 0.88rem;
+    font-weight: 700;
+    color: #1E293B;
+    margin-bottom: 14px;
+}
+
+.eticket-stepper-timeline {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    position: relative;
+}
+
+.eticket-step-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 6px;
+    position: relative;
+    z-index: 2;
+    flex: 0 0 auto;
+    width: 52px;
+}
+
+.eticket-step-circle {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: #EEF2F6;
+    color: #64748B;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.8rem;
+    font-weight: 700;
+    transition: all 0.25s ease;
+}
+
+.eticket-step-item.active .eticket-step-circle {
+    background: #00564C;
+    color: #FFFFFF;
+}
+
+.eticket-step-label {
+    font-size: 0.68rem;
+    color: #64748B;
+    white-space: nowrap;
+    font-weight: 500;
+}
+
+.eticket-step-item.active .eticket-step-label {
+    color: #00564C;
+    font-weight: 700;
+}
+
+.eticket-step-line {
+    flex: 1;
+    height: 2.5px;
+    background: #E2E8F0;
+    margin-top: 13px;
+}
+
+.eticket-step-line.active {
+    background: #00564C;
+}
+
+/* Convenience section margin adjustments */
+.myqueue-services-section {
+    margin-top: 22px;
+    margin-bottom: 12px;
+}
+
+
+
 

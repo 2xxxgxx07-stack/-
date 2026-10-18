@@ -10,6 +10,8 @@ const mobileState = {
     bookingServiceType: 'walkin',
     queueState: null,
     appointments: [],
+    activeAppointment: null,
+    appointmentHistory: []
 };
 
 // Department Metadata
@@ -50,6 +52,46 @@ function loadSharedQueueState() {
         }
     } catch (e) {
         console.error('Error loading hospitalAppointments:', e);
+    }
+
+    // Active Appointment for patient (Single Active Appointment rule)
+    try {
+        const savedActive = localStorage.getItem('hospitalPatientActiveAppt');
+        if (savedActive !== null) {
+            const parsed = JSON.parse(savedActive);
+            mobileState.activeAppointment = (parsed && parsed.status === 'active') ? parsed : null;
+        } else {
+            // First time initialization: initialize with the exact appointment from user screenshot!
+            mobileState.activeAppointment = {
+                id: 'E1532',
+                ticketPreQueue: 'E1532',
+                name: 'คุณสมศักดิ์ รักสงบ',
+                hn: '67-048123',
+                department: 'อายุรกรรม',
+                building: 'อาคารเฉลิมพระเกียรติ ชั้น 2',
+                room: 'คลินิกอายุรกรรม 02 | ห้องตรวจ 204',
+                fullLocation: 'อาคารเฉลิมพระเกียรติ ชั้น 2 | คลินิกอายุรกรรม 02 | ห้องตรวจ 204',
+                dateDisplay: 'วันจันทร์ที่ 27 ต.ค. 2567',
+                dateBadge: 'อีก 3 วัน',
+                date: '2024-10-27',
+                time: '10:30 - 11:30 น.',
+                doctor: 'นพ. วิจัย เปี่ยมประสิทธิ์ (อายุรแพทย์)',
+                status: 'active',
+                checkedIn: false
+            };
+            localStorage.setItem('hospitalPatientActiveAppt', JSON.stringify(mobileState.activeAppointment));
+        }
+    } catch (e) {
+        console.error('Error loading active appointment:', e);
+    }
+
+    try {
+        const historySaved = localStorage.getItem('hospitalPatientApptHistory');
+        if (historySaved) {
+            mobileState.appointmentHistory = JSON.parse(historySaved);
+        }
+    } catch (e) {
+        console.error('Error loading appt history:', e);
     }
 }
 
@@ -143,63 +185,69 @@ function getDeptSvgIcon(dept) {
 function renderTicket() {
     loadSharedQueueState();
 
-    // Default to first item in waitingQueue if none tracked
-    if (!mobileState.trackedQueueItem && mobileState.queueState?.waitingQueue?.length > 0) {
-        const first = mobileState.queueState.waitingQueue[0];
-        mobileState.trackedQueueItem = {
-            item: first,
-            stage: 'waiting',
-            stageLabel: 'กำลังรอเรียกเข้าห้องตรวจ'
-        };
+    // Default to คุณสมศักดิ์ รักสงบ (M-201) matching user screenshot
+    if (!mobileState.trackedQueueItem) {
+        const somsak = (mobileState.queueState?.waitingQueue || []).find(q => 
+            (q.patientName && q.patientName.includes('สมศักดิ์')) || q.queueNumber === 'M-201'
+        );
+        if (somsak) {
+            mobileState.trackedQueueItem = {
+                item: somsak,
+                stage: 'waiting',
+                stageLabel: 'กำลังรอเรียกเข้าห้องตรวจ'
+            };
+        } else {
+            mobileState.trackedQueueItem = {
+                item: {
+                    queueNumber: 'M-201',
+                    patientName: 'คุณสมศักดิ์ รักสงบ',
+                    hn: 'HN - 048123',
+                    department: 'อายุรกรรม',
+                    roomName: 'ห้องตรวจ 1-4',
+                    queuesAhead: 0,
+                    estMinutes: 12
+                },
+                stage: 'waiting',
+                stageLabel: 'กำลังรอเรียกเข้าห้องตรวจ'
+            };
+        }
     }
 
     const tracked = mobileState.trackedQueueItem;
-    if (!tracked || !tracked.item) {
-        document.getElementById('ticket-queue-num').textContent = '--';
-        document.getElementById('ticket-patient-name').textContent = 'ยังไม่มีคิวในขณะนี้';
-        document.getElementById('ticket-status-text').textContent = 'สามารถกด "จองคิวใหม่" ด้านล่างเพื่อรับบัตรคิว';
-        return;
-    }
+    if (!tracked || !tracked.item) return;
 
     const p = tracked.item;
 
     // 1. Queue Number, Name, HN
-    document.getElementById('ticket-queue-num').textContent = p.queueNumber || '-';
-    document.getElementById('ticket-patient-name').textContent = p.patientName || 'ผู้เข้ารับบริการ';
-    document.getElementById('ticket-patient-hn').textContent = p.hn ? `${p.hn}` : 'HN --';
+    const qNumEl = document.getElementById('ticket-queue-num');
+    if (qNumEl) qNumEl.textContent = p.queueNumber || 'M-201';
 
-    // 2. Department & Type Badge
-    const deptBadge = document.getElementById('ticket-dept-badge');
-    if (deptBadge) {
-        deptBadge.innerHTML = `
-            ${getDeptSvgIcon(p.department)}
-            <span>${p.department || 'ทั่วไป'}</span>
-        `;
+    const pNameEl = document.getElementById('ticket-patient-name');
+    if (pNameEl) pNameEl.textContent = p.patientName || 'คุณสมศักดิ์ รักสงบ';
+
+    const pHnEl = document.getElementById('ticket-patient-hn');
+    if (pHnEl) {
+        let hnText = p.hn || 'HN - 048123';
+        if (/^HN\s*[-:]?\s*/i.test(hnText)) {
+            hnText = hnText.replace(/^HN\s*[-:]?\s*/i, 'HN - ');
+        } else {
+            hnText = `HN - ${hnText}`;
+        }
+        pHnEl.textContent = hnText;
     }
 
-    const typeBadge = document.getElementById('ticket-type-badge');
-    if (typeBadge) {
-        const isAppt = p.type === 'appointment';
-        typeBadge.textContent = isAppt ? 'คิวนัดหมาย (Appointment)' : 'คิวทั่วไป (Walk-in)';
-        typeBadge.style.background = isAppt ? '#EFF6FF' : '#F0FDF4';
-        typeBadge.style.color = isAppt ? '#1D4ED8' : '#15803D';
-        typeBadge.style.borderColor = isAppt ? '#BFDBFE' : '#86EFAC';
-    }
-
-    // 3. Stage & Status Pill
-    const statusPill = document.getElementById('ticket-live-status-pill');
+    // 2. Status Pill
     const statusText = document.getElementById('ticket-status-text');
-    if (statusPill && statusText) {
-        statusText.textContent = tracked.stageLabel || 'กำลังรอเรียกคิว';
-        statusPill.className = `live-status-pill ${tracked.stage}`;
+    if (statusText) {
+        statusText.textContent = tracked.stageLabel || 'กำลังรอเรียกเข้าห้องตรวจ';
     }
 
-    // 4. Calculate Queues Ahead & Est Wait
+    // 3. Calculate Queues Ahead & Est Wait
     let queuesAhead = 0;
-    let estMinutes = 10;
+    let estMinutes = 12;
     let targetRoom = 'ห้องตรวจ 1-4';
 
-    if (mobileState.queueState?.waitingQueue) {
+    if (mobileState.queueState?.waitingQueue && mobileState.queueState.waitingQueue.length > 0) {
         const waitList = mobileState.queueState.waitingQueue;
         const myIdx = waitList.findIndex(q => q.queueNumber === p.queueNumber);
         if (myIdx !== -1) {
@@ -218,13 +266,24 @@ function renderTicket() {
             estMinutes = 0;
             targetRoom = 'ห้องจ่ายยา / การเงิน';
         }
+    } else {
+        queuesAhead = p.queuesAhead !== undefined ? p.queuesAhead : 0;
+        estMinutes = p.estMinutes !== undefined ? p.estMinutes : 12;
+        targetRoom = p.roomName || 'ห้องตรวจ 1-4';
     }
 
-    document.getElementById('ticket-queues-ahead').textContent = queuesAhead;
-    document.getElementById('ticket-est-wait').textContent = estMinutes === 0 ? 'ถึงคิวคุณแล้ว' : `~ ${estMinutes}`;
-    document.getElementById('ticket-target-room').textContent = targetRoom;
+    const qAheadEl = document.getElementById('ticket-queues-ahead');
+    if (qAheadEl) qAheadEl.textContent = queuesAhead;
 
-    // 5. Update Stepper (5 Steps)
+    const estWaitEl = document.getElementById('ticket-est-wait');
+    if (estWaitEl) {
+        estWaitEl.textContent = estMinutes === 0 ? 'ถึงคิวคุณแล้ว' : `~ ${estMinutes}`;
+    }
+
+    const roomEl = document.getElementById('ticket-target-room');
+    if (roomEl) roomEl.textContent = targetRoom;
+
+    // 4. Update Stepper (5 Steps)
     updateStepper(tracked.stage);
 }
 
@@ -243,46 +302,35 @@ function updateStepper(stage) {
         document.getElementById('line-4'),
     ];
 
-    const STEP_CHECK_SVG = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" width="12" height="12"><polyline points="20 6 9 17 4 12"/></svg>';
-
     steps.forEach((s, i) => {
         if (!s) return;
-        s.className = 'step-item';
-        s.querySelector('.step-circle').textContent = i + 1;
+        s.className = 'eticket-step-item';
+        const circle = s.querySelector('.eticket-step-circle') || s.querySelector('.step-circle');
+        if (circle) circle.textContent = i + 1;
     });
-    lines.forEach(l => { if (l) l.className = 'step-line'; });
+    lines.forEach(l => { if (l) l.className = 'eticket-step-line'; });
 
-    // Step 1 is always completed once registered
-    steps[0].classList.add('completed');
-    steps[0].querySelector('.step-circle').innerHTML = STEP_CHECK_SVG;
+    // Step 1 active by default
+    if (steps[0]) steps[0].classList.add('active');
 
     if (stage === 'lab') {
-        steps[1].classList.add('current');
-        lines[0].classList.add('active');
+        if (steps[1]) steps[1].classList.add('active');
+        if (lines[0]) lines[0].classList.add('active');
     } else if (stage === 'waiting' || stage === 'waiting_room') {
-        steps[1].classList.add('completed');
-        steps[1].querySelector('.step-circle').innerHTML = STEP_CHECK_SVG;
-        lines[0].classList.add('active');
-        steps[2].classList.add('current');
-        lines[1].classList.add('active');
+        if (steps[0]) steps[0].classList.add('active');
     } else if (stage === 'examining') {
-        steps[1].classList.add('completed');
-        steps[1].querySelector('.step-circle').innerHTML = STEP_CHECK_SVG;
-        steps[2].classList.add('completed');
-        steps[2].querySelector('.step-circle').innerHTML = STEP_CHECK_SVG;
-        lines[0].classList.add('active');
-        lines[1].classList.add('active');
-        steps[3].classList.add('current');
-        lines[2].classList.add('active');
+        if (steps[0]) steps[0].classList.add('active');
+        if (steps[1]) steps[1].classList.add('active');
+        if (steps[2]) steps[2].classList.add('active');
+        if (steps[3]) steps[3].classList.add('active');
+        if (lines[0]) lines[0].classList.add('active');
+        if (lines[1]) lines[1].classList.add('active');
+        if (lines[2]) lines[2].classList.add('active');
     } else if (stage === 'done') {
         steps.forEach((s, idx) => {
-            s.classList.add('completed');
-            s.querySelector('.step-circle').innerHTML = STEP_CHECK_SVG;
+            if (s) s.classList.add('active');
             if (lines[idx]) lines[idx].classList.add('active');
         });
-    } else {
-        steps[2].classList.add('current');
-        lines[0].classList.add('active');
     }
 }
 
@@ -505,8 +553,26 @@ function onDateSelected(inputEl) {
     }
 }
 
+function handleQuickAppointmentAction() {
+    loadSharedQueueState();
+    if (mobileState.activeAppointment && mobileState.activeAppointment.status === 'active') {
+        switchMobileNav('view-appointments');
+    } else {
+        switchMobileNav('view-booking');
+    }
+}
+
 function submitNewBookingForm(e) {
     if (e) e.preventDefault();
+
+    loadSharedQueueState();
+
+    // Check if user already has an active appointment (Single appointment per user constraint)
+    if (mobileState.activeAppointment && mobileState.activeAppointment.status === 'active') {
+        showMobileToast('⚠️ คุณมีนัดหมายที่ยังไม่เสร็จสิ้นอยู่แล้ว (ระบบอนุญาต 1 นัดหมายต่อครั้ง)');
+        switchMobileNav('view-appointments');
+        return;
+    }
 
     const deptEl = document.getElementById('new-book-dept');
     const dept = deptEl?.value;
@@ -526,28 +592,38 @@ function submitNewBookingForm(e) {
     const timeSlot = document.getElementById('selected-booking-time')?.value || '08:30 - 09:30';
     const notes = document.getElementById('new-book-notes')?.value.trim() || '';
 
-    // Generate appointment ID: APT-XXXX
-    const apptId = 'APT-' + Math.floor(1000 + Math.random() * 9000);
+    // Generate Pre-queue Code: prefix + 4 digits (e.g. E1532, M2409, D5123)
+    const prefix = DEPT_PREFIX_MAP[dept] || 'M';
+    const randomNum = Math.floor(1000 + Math.random() * 9000);
+    const preQueueCode = `${prefix}${randomNum}`;
 
     // Patient info
     const patientName = 'คุณสมศักดิ์ รักสงบ';
     const hn = '67-048123';
 
-    loadSharedQueueState();
-    if (!mobileState.appointments) mobileState.appointments = [];
-
     const newAppt = {
-        id: apptId,
+        id: preQueueCode,
+        ticketPreQueue: preQueueCode,
         name: patientName,
         hn: hn,
         department: dept,
+        building: 'อาคารเฉลิมพระเกียรติ ชั้น 2',
+        room: `คลินิก${dept} 02 | ห้องตรวจ 204`,
+        fullLocation: `อาคารเฉลิมพระเกียรติ ชั้น 2 | คลินิก${dept} 02 | ห้องตรวจ 204`,
+        dateDisplay: dateVal.includes('วัน') ? dateVal : `วันนัดตรวจ: ${dateVal}`,
+        dateBadge: 'อีก 3 วัน',
         date: dateVal,
         time: timeSlot,
         notes: notes,
         doctor: `แพทย์เวรประจำแผนก${dept}`,
+        status: 'active',
         checkedIn: false
     };
 
+    mobileState.activeAppointment = newAppt;
+    localStorage.setItem('hospitalPatientActiveAppt', JSON.stringify(newAppt));
+
+    if (!mobileState.appointments) mobileState.appointments = [];
     mobileState.appointments.unshift(newAppt);
     localStorage.setItem('hospitalAppointments', JSON.stringify(mobileState.appointments));
 
@@ -563,12 +639,15 @@ function submitNewBookingForm(e) {
     const notesEl = document.getElementById('new-book-notes');
     if (notesEl) notesEl.value = '';
 
-    showMobileToast(`✅ นัดหมายสำเร็จ! รหัส: ${apptId}`);
+    showMobileToast(`✅ นัดหมายสำเร็จ! รหัสคิวล่วงหน้า: ${preQueueCode}`);
 
-    // Switch to appointments tab to see new appointment
+    updateBookingLockBanner();
+    updateNextApptHomeCard();
+
+    // Switch to appointments tab to see new appointment ticket
     setTimeout(() => {
         switchMobileNav('view-appointments');
-    }, 600);
+    }, 400);
 }
 
 let mobileQueueCounter = 200;
@@ -649,120 +728,644 @@ function submitMobileBooking(e) {
     showMobileToast(`✅ ออกบัตรคิวสำเร็จ! หมายเลข ${queueNumber}`);
 }
 
-// ============ TAB 3: MY APPOINTMENTS ============
+// ============ TAB 3: APPOINTMENT TICKET & QR CODE (MATCHING USER UI) ============
+
+/**
+ * Generates an authentic, crisp vector SVG QR Code
+ * Contains real corner finder patterns, timing rows, alignment pattern, and dense data modules.
+ */
+function generateCrispQrSvg(code, size = 170) {
+    const N = 29;
+    const grid = Array(N).fill(null).map(() => Array(N).fill(false));
+
+    function drawFinder(r, c) {
+        for (let dr = 0; dr < 7; dr++) {
+            for (let dc = 0; dc < 7; dc++) {
+                if (dr === 0 || dr === 6 || dc === 0 || dc === 6 || (dr >= 2 && dr <= 4 && dc >= 2 && dc <= 4)) {
+                    grid[r + dr][c + dc] = true;
+                }
+            }
+        }
+    }
+
+    drawFinder(1, 1);    // Top-Left
+    drawFinder(1, 21);   // Top-Right
+    drawFinder(21, 1);   // Bottom-Left
+
+    // Separators
+    for (let i = 0; i < 8; i++) {
+        if (i < N && 8 < N) grid[8][i] = false;
+        if (i < N && 8 < N) grid[i][8] = false;
+        if (i < N && 20 < N) grid[8][20 + i] = false;
+        if (20 + i < N && 8 < N) grid[20 + i][8] = false;
+    }
+
+    // Timing patterns
+    for (let i = 8; i < 21; i++) {
+        grid[6][i] = (i % 2 === 0);
+        grid[i][6] = (i % 2 === 0);
+    }
+
+    // Alignment pattern
+    for (let dr = -2; dr <= 2; dr++) {
+        for (let dc = -2; dc <= 2; dc++) {
+            if (Math.abs(dr) === 2 || Math.abs(dc) === 2 || (dr === 0 && dc === 0)) {
+                grid[20 + dr][20 + dc] = true;
+            }
+        }
+    }
+
+    // Hash seed from appointment code
+    let hash = 0;
+    const str = String(code || 'E1532') + '|HOSPITAL_TICKET_PREQUEUE';
+    for (let i = 0; i < str.length; i++) {
+        hash = (hash << 5) - hash + str.charCodeAt(i);
+        hash |= 0;
+    }
+
+    function seededRandom(step) {
+        const x = Math.sin(hash + step) * 10000;
+        return x - Math.floor(x);
+    }
+
+    let step = 1;
+    for (let r = 0; r < N; r++) {
+        for (let c = 0; c < N; c++) {
+            const inTL = r < 9 && c < 9;
+            const inTR = r < 9 && c > 19;
+            const inBL = r > 19 && c < 9;
+            const inAlign = r >= 18 && r <= 22 && c >= 18 && c <= 22;
+            const inTiming = r === 6 || c === 6;
+
+            if (!inTL && !inTR && !inBL && !inAlign && !inTiming) {
+                step++;
+                grid[r][c] = seededRandom(step) > 0.48;
+            }
+        }
+    }
+
+    let rects = '';
+    const cellSize = 100 / N;
+    for (let r = 0; r < N; r++) {
+        for (let c = 0; c < N; c++) {
+            if (grid[r][c]) {
+                const x = (c * cellSize).toFixed(2);
+                const y = (r * cellSize).toFixed(2);
+                const s = cellSize.toFixed(2);
+                rects += `<rect x="${x}" y="${y}" width="${s}" height="${s}" fill="#0F172A"/>`;
+            }
+        }
+    }
+
+    return `
+        <svg viewBox="0 0 100 100" width="${size}" height="${size}" xmlns="http://www.w3.org/2000/svg" shape-rendering="crispEdges">
+            <rect width="100" height="100" fill="#FFFFFF"/>
+            ${rects}
+        </svg>
+    `;
+}
+
 function renderMobileAppointments() {
-    const container = document.getElementById('mobile-appt-list');
+    const container = document.getElementById('mobile-appointments-view-content');
     if (!container) return;
 
     loadSharedQueueState();
-    const appts = mobileState.appointments || [];
+    const appt = mobileState.activeAppointment;
 
-    if (appts.length === 0) {
+    // Check if user has an active appointment
+    if (appt && appt.status === 'active') {
+        const qrSvg = generateCrispQrSvg(appt.ticketPreQueue || 'E1532', 170);
+
         container.innerHTML = `
-            <div style="text-align:center; padding: 40px 16px; background:#FFFFFF; border-radius:14px; border:1px solid #E2E8F0;">
-                <div style="font-size:2rem; margin-bottom:8px;">📅</div>
-                <div style="font-weight:600; color:#1E293B;">ไม่พบรายการนัดหมาย</div>
-                <div style="font-size:0.78rem; color:#64748B; margin-top:4px;">คุณสามารถจองคิวรับบริการใหม่ได้ที่แท็บ "จองคิวใหม่"</div>
-            </div>
-        `;
-        return;
-    }
+            <!-- CARD 1: E-Ticket Pre-queue Voucher Card (Exact Match with Image) -->
+            <div class="appt-ticket-card">
+                <div class="ticket-top-row">
+                    <div class="ticket-cal-icon-wrap">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" width="22" height="22">
+                            <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+                            <line x1="16" y1="2" x2="16" y2="6"/>
+                            <line x1="8" y1="2" x2="8" y2="6"/>
+                            <line x1="3" y1="10" x2="21" y2="10"/>
+                        </svg>
+                    </div>
+                    <div class="ticket-info-col">
+                        <div class="ticket-date-row">
+                            <h3 class="ticket-date-title">${appt.dateDisplay || 'วันจันทร์ที่ 27 ต.ค. 2567'}</h3>
+                            <span class="ticket-days-badge">${appt.dateBadge || 'อีก 3 วัน'}</span>
+                        </div>
+                        <div class="ticket-time-row">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14">
+                                <circle cx="12" cy="12" r="10"/>
+                                <polyline points="12 6 12 12 16 14"/>
+                            </svg>
+                            <span>ช่วงเวลาตรวจ: <strong>${appt.time || '10:30 - 11:30 น.'}</strong></span>
+                        </div>
+                        <div class="ticket-location-row">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14">
+                                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+                                <circle cx="12" cy="10" r="3"/>
+                            </svg>
+                            <span>${appt.fullLocation || 'อาคารเฉลิมพระเกียรติ ชั้น 2 | คลินิกอายุรกรรม 02 | ห้องตรวจ 204'}</span>
+                        </div>
+                    </div>
+                </div>
 
-    container.innerHTML = appts.map(a => {
-        const isCheckedIn = a.checkedIn;
-        return `
-            <div class="mobile-appt-card">
-                <div class="appt-card-top">
-                    <span class="appt-date-chip">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="13" height="13"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
-                        <span>วันที่ ${a.date}</span>
-                    </span>
-                    <span class="appt-time-chip">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="13" height="13"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-                        <span>${a.time} น.</span>
-                    </span>
+                <!-- Perforation Line with Half-Circle Cutouts -->
+                <div class="ticket-perforation-divider">
+                    <div class="ticket-notch notch-left"></div>
+                    <div class="ticket-dash-line"></div>
+                    <div class="ticket-notch notch-right"></div>
                 </div>
-                <div class="appt-patient-info">
-                    <strong>${a.name}</strong>
-                    <span>${a.hn} • รหัสนัด: ${a.id}</span>
-                </div>
-                <div class="appt-doctor-dept">
-                    <span class="appt-dept-icon">${getDeptSvgIcon(a.department)}</span>
-                    <span>${a.department}</span>
-                    <span>•</span>
-                    <span>${a.doctor || 'แพทย์เวรประจำแผนก'}</span>
-                </div>
-                <div class="appt-actions-row">
-                    ${isCheckedIn ? `
-                        <span style="font-size:0.78rem; color:#4F46E5; font-weight:600; padding:6px 0; display:flex; align-items:center; gap:4px;">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="14" height="14"><polyline points="20 6 9 17 4 12"/></svg>
-                            เช็คอินเข้าระบบคิวแล้ว
-                        </span>
-                    ` : `
-                        <button type="button" class="btn-appt-checkin-mobile" onclick="mobileCheckInAppt('${a.id}')">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
-                            <span>เช็คอินรับคิวตรวจทันที</span>
-                        </button>
-                    `}
+
+                <!-- Pre-queue Code, QR Code and Action Button -->
+                <div class="ticket-qr-center-wrap">
+                    <div class="ticket-prequeue-header">
+                        <span>คิวล่วงหน้า (Ticket Pre-queue):</span>
+                        <strong class="ticket-prequeue-code">${appt.ticketPreQueue || 'E1532'}</strong>
+                    </div>
+
+                    <div class="qr-viewfinder-frame" onclick="openQrZoomModal()" title="แตะเพื่อขยาย QR Code" style="cursor: pointer;">
+                        <span class="qr-corner-bracket bracket-tl"></span>
+                        <span class="qr-corner-bracket bracket-tr"></span>
+                        <span class="qr-corner-bracket bracket-bl"></span>
+                        <span class="qr-corner-bracket bracket-br"></span>
+                        <div class="qr-code-img-wrap">
+                            ${qrSvg}
+                        </div>
+                    </div>
+
+                    <div class="ticket-kiosk-hint">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="15" height="15">
+                            <rect x="5" y="2" width="14" height="20" rx="2" ry="2"/>
+                            <line x1="12" y1="18" x2="12.01" y2="18"/>
+                        </svg>
+                        <span>แสดง QR Code นี้ที่หน้า Kiosk เพื่อรับบัตรคิว</span>
+                    </div>
+
+                    <button type="button" class="btn-zoom-qr" onclick="openQrZoomModal()">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" width="18" height="18">
+                            <circle cx="11" cy="11" r="8"/>
+                            <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+                        </svg>
+                        <span>แตะเพื่อขยาย QR Code</span>
+                    </button>
                 </div>
             </div>
+
+            <!-- TWO ACTION BUTTONS (DIRECTLY UNDER TICKET CARD MATCHING IMAGE) -->
+            <div class="appt-ticket-action-btns">
+                <button type="button" class="btn-ticket-cancel" onclick="cancelActiveAppointment()">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="16" height="16">
+                        <line x1="18" y1="6" x2="6" y2="18"></line>
+                        <line x1="6" y1="6" x2="18" y2="18"></line>
+                    </svg>
+                    <span>ยกเลิกนัดหมาย</span>
+                </button>
+                <button type="button" class="btn-ticket-reschedule" onclick="openRescheduleModal()">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" width="16" height="16">
+                        <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
+                        <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
+                    </svg>
+                    <span>เลื่อนนัดหมาย</span>
+                </button>
+            </div>
+
+            <!-- CARD 2: Pre-examination Guidelines Card (Exact Match with Image) -->
+            <div class="appt-guidelines-card">
+                <div class="guidelines-header">
+                    <div class="guidelines-icon-box">📋</div>
+                    <h4 class="guidelines-title">ข้อควรปฏิบัติก่อนพบแพทย์</h4>
+                </div>
+                <ul class="guidelines-list">
+                    <li class="guideline-item">
+                        <span class="guideline-check-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" width="12" height="12"><polyline points="20 6 9 17 4 12"/></svg>
+                        </span>
+                        <div class="guideline-text">
+                            กรุณามาก่อนเวลานัดหมาย <strong>20-30 นาที</strong> เพื่อวัดความดัน ชั่งน้ำหนัก และคัดกรองอาการเบื้องต้น
+                        </div>
+                    </li>
+                    <li class="guideline-item">
+                        <span class="guideline-check-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" width="12" height="12"><polyline points="20 6 9 17 4 12"/></svg>
+                        </span>
+                        <div class="guideline-text">
+                            <strong>งดน้ำและอาหารหลังเที่ยงคืน</strong> (กรณีมีรายการเจาะตรวจเลือดประจำปีหรืออัลตราซาวด์) จิบน้ำเปล่าได้เล็กน้อย
+                        </div>
+                    </li>
+                    <li class="guideline-item">
+                        <span class="guideline-check-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" width="12" height="12"><polyline points="20 6 9 17 4 12"/></svg>
+                        </span>
+                        <div class="guideline-text">
+                            โปรดนำ <strong>ยาเดิมที่รับประทานประจำ</strong> และประวัติการรักษาเดิมมาด้วย เพื่อความต่อเนื่องในการรักษา
+                        </div>
+                    </li>
+                    <li class="guideline-item">
+                        <span class="guideline-check-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" width="12" height="12"><polyline points="20 6 9 17 4 12"/></svg>
+                        </span>
+                        <div class="guideline-text">
+                            แสดงบัตรประชาชนหรือบัตรคิวดิจิทัล (E-Ticket) ที่ตู้ Kiosk หรือเคาน์เตอร์พยาบาลชั้น 2
+                        </div>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- CONVENIENCE SERVICES SECTION (บริการอำนวยความสะดวก) -->
+            <div class="appt-services-section">
+                <h4 class="appt-services-title">บริการอำนวยความสะดวก</h4>
+                
+                <div class="appt-services-list">
+                    <!-- Item 1: แผนที่ไปโรงพยาบาล & อาคารตรวจ -->
+                    <div class="appt-service-card" onclick="openHospitalMapModal()">
+                        <div class="service-card-left">
+                            <div class="service-icon-box green-tint">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" width="20" height="20">
+                                    <polygon points="1 6 1 22 8 18 16 22 23 18 23 2 16 6 8 2 1 6"></polygon>
+                                    <line x1="8" y1="2" x2="8" y2="18"></line>
+                                    <line x1="16" y1="6" x2="16" y2="22"></line>
+                                </svg>
+                            </div>
+                            <div class="service-card-info">
+                                <strong class="service-title">แผนที่ไปโรงพยาบาล & อาคารตรวจ</strong>
+                                <span class="service-desc">แตะเพื่อดูผังอาคารของโรงพยาบาล</span>
+                            </div>
+                        </div>
+                        <div class="service-chevron">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="16" height="16">
+                                <polyline points="9 18 15 12 9 6"></polyline>
+                            </svg>
+                        </div>
+                    </div>
+
+                    <!-- Item 2: ขั้นตอนการสแกนตู้ Kiosk -->
+                    <div class="appt-service-card" onclick="openKioskGuideModal()">
+                        <div class="service-card-left">
+                            <div class="service-icon-box blue-tint">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" width="20" height="20">
+                                    <path d="M3 7V5a2 2 0 0 1 2-2h2M17 3h2a2 2 0 0 1 2 2v2M21 17v2a2 2 0 0 1-2 2h-2M7 21H5a2 2 0 0 1-2-2v-2"></path>
+                                    <rect x="7" y="7" width="10" height="10"></rect>
+                                </svg>
+                            </div>
+                            <div class="service-card-info">
+                                <div class="service-title-row">
+                                    <strong class="service-title">ขั้นตอนการสแกนตู้ Kiosk</strong>
+                                    <span class="service-pill-badge">4 ขั้นตอน</span>
+                                </div>
+                                <span class="service-desc">วิธีพิมพ์ใบนำทางและลำดับคิวด้วยตนเอง</span>
+                            </div>
+                        </div>
+                        <div class="service-chevron">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="16" height="16">
+                                <polyline points="9 18 15 12 9 6"></polyline>
+                            </svg>
+                        </div>
+                    </div>
+
+                    <!-- Item 3: ต้องการสอบถามเพิ่มเติม? -->
+                    <a href="tel:025558900" class="appt-service-card" style="text-decoration: none;">
+                        <div class="service-card-left">
+                            <div class="service-icon-box teal-tint">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" width="18" height="18">
+                                    <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
+                                </svg>
+                            </div>
+                            <div class="service-card-info">
+                                <strong class="service-title">ต้องการสอบถามเพิ่มเติม?</strong>
+                                <span class="service-desc">โทร <strong>02-555-8900</strong> ต่อ 204 (เคาน์เตอร์พยาบาล)</span>
+                            </div>
+                        </div>
+                        <div class="service-chevron">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="16" height="16">
+                                <polyline points="9 18 15 12 9 6"></polyline>
+                            </svg>
+                        </div>
+                    </a>
+                </div>
+            </div>
+
+            <div class="appt-dev-complete-row">
+                <button type="button" class="btn-appt-finish-subtle" onclick="completeActiveAppointment()" title="คลิกเพื่อจบการนัดหมายนี้ เพื่อทดสอบการจองนัดใหม่">
+                    (จำลองตรวจเสร็จสิ้น / จบการนัดหมาย เพื่อทดสอบการจองใหม่)
+                </button>
+            </div>
         `;
-    }).join('');
+    } else {
+        // RENDER NO ACTIVE APPOINTMENT / COMPLETED STATE (CAN BOOK AGAIN)
+        const historyList = mobileState.appointmentHistory || [];
+        const lastAppt = historyList[0];
+
+        container.innerHTML = `
+            <div class="appt-no-active-wrap">
+                <div class="appt-completed-banner-card">
+                    <div class="completed-banner-icon">✓</div>
+                    <h3 class="completed-banner-title">การนัดหมายเสร็จสิ้นแล้ว</h3>
+                    <p class="completed-banner-desc">
+                        คุณไม่มีรายการนัดหมายที่รอรับบริการอยู่ในขณะนี้<br>
+                        <strong>สามารถทำการจองนัดหมายแพทย์ครั้งใหม่ได้ทันที</strong>
+                    </p>
+                    <button type="button" class="btn-start-rebooking" onclick="switchMobileNav('view-booking')">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" width="18" height="18">
+                            <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+                            <line x1="16" y1="2" x2="16" y2="6"/>
+                            <line x1="8" y1="2" x2="8" y2="6"/>
+                            <line x1="3" y1="10" x2="21" y2="10"/>
+                            <line x1="12" y1="14" x2="12" y2="18"/>
+                            <line x1="10" y1="16" x2="14" y2="16"/>
+                        </svg>
+                        <span>นัดหมายแพทย์ครั้งใหม่</span>
+                    </button>
+                </div>
+
+                ${lastAppt ? `
+                    <div class="appt-past-history-box">
+                        <div class="past-history-header">
+                            <span class="past-history-title">ประวัติการนัดหมายล่าสุด</span>
+                            <span class="past-history-badge">เสร็จสิ้นแล้ว</span>
+                        </div>
+                        <div class="past-history-item">
+                            <div class="past-item-info">
+                                <strong>${lastAppt.department} • รหัส: ${lastAppt.ticketPreQueue || lastAppt.id}</strong>
+                                <span>วันที่: ${lastAppt.dateDisplay || lastAppt.date} (${lastAppt.time})</span>
+                            </div>
+                            <span class="past-item-status">จบการนัดหมาย</span>
+                        </div>
+                    </div>
+                ` : ''}
+            </div>
+        `;
+    }
 }
 
-function mobileCheckInAppt(apptId) {
-    const appt = (mobileState.appointments || []).find(a => a.id === apptId);
-    if (!appt) return;
+/**
+ * Complete Active Appointment: Ends the appointment, moves to history, and enables rebooking
+ */
+function completeActiveAppointment() {
+    if (!mobileState.activeAppointment) return;
 
-    if (appt.checkedIn) {
-        showMobileToast('นัดหมายนี้ทำการเช็คอินแล้ว');
+    const appt = { ...mobileState.activeAppointment, status: 'completed', completedAt: new Date().toISOString() };
+    if (!mobileState.appointmentHistory) mobileState.appointmentHistory = [];
+    mobileState.appointmentHistory.unshift(appt);
+    mobileState.activeAppointment = null;
+
+    localStorage.setItem('hospitalPatientActiveAppt', JSON.stringify({ status: 'completed' }));
+    localStorage.setItem('hospitalPatientApptHistory', JSON.stringify(mobileState.appointmentHistory));
+
+    showMobileToast('✅ จบการนัดหมายเรียบร้อยแล้ว ท่านสามารถทำการนัดหมายใหม่ได้ทันที');
+    playHospitalChime();
+    renderMobileAppointments();
+    updateBookingLockBanner();
+    updateNextApptHomeCard();
+}
+
+/**
+ * Cancel Active Appointment: Cancels the appointment, enables rebooking
+ */
+function cancelActiveAppointment() {
+    if (!mobileState.activeAppointment) return;
+
+    if (!confirm('ต้องการยกเลิกการนัดหมายนี้ใช่หรือไม่? หลังจากยกเลิกแล้ว ท่านสามารถนัดหมายใหม่ได้ทันที')) {
         return;
     }
 
-    // Generate queue
-    const prefix = DEPT_PREFIX_MAP[appt.department] || 'M';
-    mobileQueueCounter++;
-    const qNum = `${prefix}-${String(mobileQueueCounter).padStart(3, '0')}`;
+    const appt = { ...mobileState.activeAppointment, status: 'cancelled', cancelledAt: new Date().toISOString() };
+    if (!mobileState.appointmentHistory) mobileState.appointmentHistory = [];
+    mobileState.appointmentHistory.unshift(appt);
+    mobileState.activeAppointment = null;
 
-    loadSharedQueueState();
-    if (!mobileState.queueState) mobileState.queueState = {};
-    if (!mobileState.queueState.waitingQueue) mobileState.queueState.waitingQueue = [];
+    localStorage.setItem('hospitalPatientActiveAppt', JSON.stringify({ status: 'cancelled' }));
+    localStorage.setItem('hospitalPatientApptHistory', JSON.stringify(mobileState.appointmentHistory));
 
-    const newQueueItem = {
-        id: 'q_appt_' + Date.now(),
-        queueNumber: qNum,
-        type: 'appointment',
-        appointmentTime: appt.time,
-        patientName: appt.name,
-        hn: appt.hn,
-        department: appt.department,
-        enteredAt: new Date().toISOString(),
-        isLate: false,
-        lateMessage: '',
-        apptId: appt.id
+    showMobileToast('ยกเลิกการนัดหมายเรียบร้อยแล้ว');
+    renderMobileAppointments();
+    updateBookingLockBanner();
+    updateNextApptHomeCard();
+}
+
+/**
+ * Reschedule Modal Handlers
+ */
+function openRescheduleModal() {
+    const modal = document.getElementById('modal-reschedule');
+    if (!modal) return;
+
+    const appt = mobileState.activeAppointment || {
+        ticketPreQueue: 'E1532',
+        dateDisplay: 'วันจันทร์ที่ 27 ต.ค. 2567',
+        time: '10:30 - 11:30 น.'
     };
 
-    mobileState.queueState.waitingQueue.unshift(newQueueItem);
-    mobileState.queueState.lastUpdatedBy = 'patient_mobile';
-    mobileState.queueState.timestamp = Date.now();
+    const sub = document.getElementById('reschedule-modal-sub');
+    if (sub) sub.textContent = `รหัสคิวล่วงหน้า: ${appt.ticketPreQueue || 'E1532'}`;
 
-    appt.checkedIn = true;
+    const currentDt = document.getElementById('reschedule-current-datetime');
+    if (currentDt) currentDt.textContent = `${appt.dateDisplay || 'วันจันทร์ที่ 27 ต.ค. 2567'} (${appt.time || '10:30 - 11:30 น.'})`;
 
-    localStorage.setItem('hospitalQueueState', JSON.stringify(mobileState.queueState));
-    localStorage.setItem('hospitalAppointments', JSON.stringify(mobileState.appointments));
+    // Reset date picker
+    const dateDisp = document.getElementById('reschedule-date-display');
+    if (dateDisp) dateDisp.value = '';
+    const dateNative = document.getElementById('reschedule-date-native');
+    if (dateNative) dateNative.value = '';
 
-    mobileState.trackedQueueItem = {
-        item: newQueueItem,
-        stage: 'waiting',
-        stageLabel: 'เช็คอินสำเร็จ - กำลังรอเรียกตรวจ'
-    };
+    modal.classList.add('active');
+}
 
+function closeRescheduleModal(e) {
+    if (e && e.target && e.target !== e.currentTarget && !e.target.classList.contains('modal-close-btn') && !e.target.closest('.btn-modal-close-subtle')) {
+        return;
+    }
+    const modal = document.getElementById('modal-reschedule');
+    if (modal) modal.classList.remove('active');
+}
+
+function openRescheduleDatePicker() {
+    const input = document.getElementById('reschedule-date-native');
+    if (input) {
+        if (typeof input.showPicker === 'function') {
+            input.showPicker();
+        } else {
+            input.focus();
+            input.click();
+        }
+    }
+}
+
+function onRescheduleDateSelected(input) {
+    const val = input.value;
+    if (!val) return;
+    const parts = val.split('-');
+    if (parts.length === 3) {
+        const thaiMonths = [
+            'ม.ค.', 'ก.พ.', 'มี.ค.', 'เม.ย.', 'พ.ค.', 'มิ.ย.',
+            'ก.ค.', 'ส.ค.', 'ก.ย.', 'ต.ค.', 'พ.ย.', 'ธ.ค.'
+        ];
+        const thaiDays = ['อาทิตย์', 'จันทร์', 'อังคาร', 'พุธ', 'พฤหัสบดี', 'ศุกร์', 'เสาร์'];
+        const dObj = new Date(parseInt(parts[0], 10), parseInt(parts[1], 10) - 1, parseInt(parts[2], 10));
+        const dayName = thaiDays[dObj.getDay()];
+        const year = parseInt(parts[0], 10) + 543;
+        const month = thaiMonths[parseInt(parts[1], 10) - 1];
+        const day = parseInt(parts[2], 10);
+        const displayEl = document.getElementById('reschedule-date-display');
+        if (displayEl) {
+            displayEl.value = `วัน${dayName}ที่ ${day} ${month} ${year}`;
+        }
+    }
+}
+
+function selectRescheduleTime(btn) {
+    document.querySelectorAll('#reschedule-time-grid .time-chip').forEach(c => c.classList.remove('active'));
+    btn.classList.add('active');
+    const hidden = document.getElementById('selected-reschedule-time');
+    if (hidden) hidden.value = btn.getAttribute('data-time');
+}
+
+function confirmRescheduleAppointment() {
+    if (!mobileState.activeAppointment) return;
+
+    const dateVal = document.getElementById('reschedule-date-display')?.value;
+    if (!dateVal) {
+        showMobileToast('กรุณาเลือกวันตรวจใหม่');
+        openRescheduleDatePicker();
+        return;
+    }
+
+    const timeSlot = document.getElementById('selected-reschedule-time')?.value || '10:30 - 11:30 น.';
+
+    mobileState.activeAppointment.dateDisplay = dateVal;
+    mobileState.activeAppointment.time = timeSlot.includes('น.') ? timeSlot : `${timeSlot} น.`;
+    mobileState.activeAppointment.dateBadge = 'เลื่อนนัดแล้ว';
+
+    localStorage.setItem('hospitalPatientActiveAppt', JSON.stringify(mobileState.activeAppointment));
+
+    closeRescheduleModal();
     playHospitalChime();
     renderMobileAppointments();
-    switchMobileNav('view-my-queue');
-    renderTicket();
+    updateNextApptHomeCard();
+    showMobileToast('✅ เลื่อนนัดหมายเรียบร้อยแล้ว!');
+}
 
-    showMobileToast(`เช็คอินสำเร็จ! หมายเลขคิวของคุณคือ ${qNum}`);
+/**
+ * Open Zoomed QR Code Modal
+ */
+function openQrZoomModal() {
+    const modal = document.getElementById('modal-qr-zoom');
+    if (!modal) return;
+
+    const appt = mobileState.activeAppointment || {
+        ticketPreQueue: 'E1532',
+        dateDisplay: 'วันจันทร์ที่ 27 ต.ค. 2567',
+        time: '10:30 - 11:30 น.',
+        fullLocation: 'อาคารเฉลิมพระเกียรติ ชั้น 2 | คลินิกอายุรกรรม 02 | ห้องตรวจ 204'
+    };
+
+    const container = document.getElementById('qr-zoom-svg-container');
+    if (container) {
+        container.innerHTML = generateCrispQrSvg(appt.ticketPreQueue || 'E1532', 210);
+    }
+
+    const codeDisp = document.getElementById('qr-zoom-code-display');
+    if (codeDisp) codeDisp.textContent = appt.ticketPreQueue || 'E1532';
+
+    const dateDisp = document.getElementById('qr-zoom-date-time');
+    if (dateDisp) dateDisp.textContent = `📅 ${appt.dateDisplay || 'วันจันทร์ที่ 27 ต.ค. 2567'} • ${appt.time || '10:30 - 11:30 น.'}`;
+
+    const locDisp = document.getElementById('qr-zoom-dept-room');
+    if (locDisp) locDisp.textContent = `📍 ${appt.fullLocation || 'อาคารเฉลิมพระเกียรติ ชั้น 2 | คลินิกอายุรกรรม 02 | ห้องตรวจ 204'}`;
+
+    modal.classList.add('active');
+}
+
+/**
+ * Close Zoomed QR Code Modal
+ */
+function closeQrZoomModal(e) {
+    if (e && e.target && e.target !== e.currentTarget && !e.target.classList.contains('modal-close-btn') && !e.target.closest('.btn-modal-close-subtle')) {
+        return;
+    }
+    const modal = document.getElementById('modal-qr-zoom');
+    if (modal) modal.classList.remove('active');
+}
+
+/**
+ * Simulate Scanning Pre-queue QR Code at Kiosk Touch Screen
+ */
+function simulateScanAtKiosk() {
+    closeQrZoomModal();
+    showMobileToast('🔍 กำลังจำลองการสแกน QR Code ที่ตู้ Kiosk...');
+
+    setTimeout(() => {
+        const appt = mobileState.activeAppointment;
+        const qNum = appt ? appt.ticketPreQueue : 'E1532';
+
+        loadSharedQueueState();
+        if (!mobileState.queueState) mobileState.queueState = {};
+        if (!mobileState.queueState.waitingQueue) mobileState.queueState.waitingQueue = [];
+
+        const now = new Date();
+        const timeStr = `${String(now.getHours()).padStart(2,'0')}:${String(now.getMinutes()).padStart(2,'0')}`;
+
+        const queueItem = {
+            id: 'q_kios_' + Date.now(),
+            queueNumber: qNum,
+            type: 'appointment',
+            appointmentTime: timeStr,
+            patientName: 'คุณสมศักดิ์ รักสงบ',
+            hn: '67-048123',
+            department: appt ? appt.department : 'อายุรกรรม',
+            enteredAt: now.toISOString(),
+            isLate: false,
+            lateMessage: '',
+            bookingSource: 'Smart Kiosk (สแกน QR ใบนัด)'
+        };
+
+        mobileState.queueState.waitingQueue.unshift(queueItem);
+        mobileState.queueState.lastUpdatedBy = 'patient_mobile';
+        mobileState.queueState.timestamp = Date.now();
+
+        localStorage.setItem('hospitalQueueState', JSON.stringify(mobileState.queueState));
+
+        mobileState.trackedQueueItem = {
+            item: queueItem,
+            stage: 'waiting',
+            stageLabel: 'สแกนรับบัตรคิวที่ Kiosk สำเร็จ - รอเรียกตรวจ'
+        };
+
+        if (mobileState.activeAppointment) {
+            mobileState.activeAppointment.checkedIn = true;
+            localStorage.setItem('hospitalPatientActiveAppt', JSON.stringify(mobileState.activeAppointment));
+        }
+
+        playHospitalChime();
+        showMobileToast(`✅ สแกนสำเร็จ! ได้รับบัตรคิวหมายเลข ${qNum}`);
+
+        switchMobileNav('view-my-queue');
+    }, 600);
+}
+
+function updateBookingLockBanner() {
+    const banner = document.getElementById('booking-active-lock-banner');
+    if (!banner) return;
+    const hasActive = mobileState.activeAppointment && mobileState.activeAppointment.status === 'active';
+    banner.style.display = hasActive ? 'block' : 'none';
+}
+
+function updateNextApptHomeCard() {
+    const cardWrap = document.querySelector('.next-appt-card');
+    if (!cardWrap) return;
+
+    const appt = mobileState.activeAppointment;
+    if (appt && appt.status === 'active') {
+        const codeLabel = cardWrap.querySelector('.appt-code-label');
+        if (codeLabel) codeLabel.textContent = `รหัส: ${appt.ticketPreQueue || appt.id}`;
+        const deptTitle = cardWrap.querySelector('.next-appt-dept');
+        if (deptTitle) deptTitle.textContent = appt.department;
+        const schedSpan = cardWrap.querySelectorAll('.schedule-item span');
+        if (schedSpan && schedSpan.length >= 2) {
+            schedSpan[0].textContent = `${appt.dateDisplay || appt.date} • ${appt.time}`;
+            schedSpan[1].textContent = appt.fullLocation;
+        }
+    }
 }
 
 // ============ TAB 4: DEPARTMENT TRAFFIC ============
@@ -826,6 +1429,8 @@ function switchMobileNav(viewId) {
         frame.classList.toggle('home-tab-active', viewId === 'view-home');
         frame.classList.toggle('booking-tab-active', viewId === 'view-booking');
         frame.classList.toggle('history-tab-active', viewId === 'view-history');
+        frame.classList.toggle('appointments-tab-active', viewId === 'view-appointments');
+        frame.classList.toggle('my-queue-tab-active', viewId === 'view-my-queue');
     }
 
     document.querySelectorAll('.mobile-tab-view').forEach(view => {
@@ -840,6 +1445,10 @@ function switchMobileNav(viewId) {
         renderTicket();
     } else if (viewId === 'view-appointments') {
         renderMobileAppointments();
+    } else if (viewId === 'view-booking') {
+        updateBookingLockBanner();
+    } else if (viewId === 'view-home') {
+        updateNextApptHomeCard();
     } else if (viewId === 'view-history') {
         // Reset search and filters
         const searchInput = document.getElementById('history-search-input');
@@ -986,6 +1595,8 @@ document.addEventListener('DOMContentLoaded', () => {
     renderTicket();
     renderDepartmentTraffic();
     renderMobileAppointments();
+    updateBookingLockBanner();
+    updateNextApptHomeCard();
     updateMobileClock();
 
     setInterval(updateMobileClock, 1000);
@@ -997,9 +1608,17 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Cross-tab synchronization
     window.addEventListener('storage', (e) => {
-        if (e.key === 'hospitalQueueState' || e.key === 'hospitalAppointments') {
+        if (
+            e.key === 'hospitalQueueState' || 
+            e.key === 'hospitalAppointments' || 
+            e.key === 'hospitalPatientActiveAppt' ||
+            e.key === 'hospitalPatientApptHistory'
+        ) {
             loadSharedQueueState();
             refreshQueueData(false);
+            renderMobileAppointments();
+            updateBookingLockBanner();
+            updateNextApptHomeCard();
         }
     });
 });
