@@ -2243,34 +2243,25 @@ body.mobile-body {
    NEW APPOINTMENT BOOKING SCREEN (MATCHING USER SCREENSHOT)
    =================================================== */
 .smartphone-frame.booking-tab-active .phone-notch-bar {
-    background: #004D54;
-    border-bottom: none;
+    background: #F4F8F8;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
 }
 
 .smartphone-frame.booking-tab-active .phone-notch-bar .phone-speaker {
-    background: rgba(255, 255, 255, 0.2);
+    background: #D1D5DB;
 }
 
 .smartphone-frame.booking-tab-active .phone-notch-bar .phone-camera {
-    background: rgba(255, 255, 255, 0.25);
+    background: #9CA3AF;
 }
 
 .smartphone-frame.booking-tab-active .mobile-header {
     display: none;
 }
 
-/* Top Navigation Bar */
+/* Top Navigation Bar (Hidden per user request) */
 .booking-top-nav-bar {
-    background: #004D54;
-    padding: 12px 16px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    color: #FFFFFF;
-    box-shadow: 0 4px 14px rgba(0, 77, 84, 0.18);
-    position: sticky;
-    top: 0;
-    z-index: 10;
+    display: none !important;
 }
 
 .nav-bar-left {
