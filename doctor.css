@@ -3,56 +3,58 @@
    ============================================ */
 
 :root {
-    --teal-900: #004D40;
-    --teal-800: #00574B;
-    --teal-700: #005B5C;
-    --teal-600: #006D6F;
-    --teal-500: #00897B;
-    --teal-400: #009688;
-    --teal-300: #4DD0E1;
-    --teal-200: #80CBC4;
-    --teal-100: #B2DFDB;
-    --teal-50: #E0F7FA;
+    /* Primary Green Palette (Mood Board: #1B4D3E) */
+    --teal-900: #1B4D3E;
+    --teal-800: #163E32;
+    --teal-700: #1B4D3E;
+    --teal-600: #235F4D;
+    --teal-500: #2D7560;
+    --teal-400: #41967D;
+    --teal-300: #7BC1AC;
+    --teal-200: #B7DFD4;
+    --teal-100: #E6ECE8;
+    --teal-50: #EBF5F0;
 
-    --color-bg: #F0F4F7;
+    --color-bg: #F4F6F5;
     --color-card: #FFFFFF;
-    --color-sidebar: linear-gradient(180deg, #004D40 0%, #005B5C 100%);
+    --color-sidebar: linear-gradient(180deg, #1B4D3E 0%, #143A2F 100%);
 
     --color-red: #D32F2F;
     --color-red-light: #FFEBEE;
-    --color-orange: #F57C00;
-    --color-orange-light: #FFF3E0;
-    --color-green: #00695C;
-    --color-green-light: #E8F5E9;
+    --color-orange: #E0923C;
+    --color-orange-light: #F9F2EA;
+    --color-green: #1B4D3E;
+    --color-green-light: #EBF5F0;
     --color-blue: #1565C0;
     --color-blue-light: #E3F2FD;
 
-    --btn-primary: #006D6F;
-    --btn-primary-hover: #005B5C;
-    --btn-done: #00695C;
-    --btn-done-hover: #004D40;
-    --btn-examining: #F57C00;
-    --btn-examining-hover: #E65100;
+    --btn-primary: #1B4D3E;
+    --btn-primary-hover: #143A2F;
+    --btn-done: #1B4D3E;
+    --btn-done-hover: #143A2F;
+    --btn-examining: #E0923C;
+    --btn-examining-hover: #C87E2E;
 
-    --text-primary: #1A1A2E;
-    --text-secondary: #546E7A;
-    --text-muted: #90A4AE;
+    /* Text Colors (Mood Board Dark Slate: #2B3330) */
+    --text-primary: #2B3330;
+    --text-secondary: #586B64;
+    --text-muted: #8A9D96;
     --text-white: #FFFFFF;
 
-    --border-light: #E0E7EC;
-    --border-medium: #CFD8DC;
-    --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.06);
-    --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.08);
-    --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.12);
-    --shadow-card: 0 2px 8px rgba(0, 77, 64, 0.06);
+    --border-light: #E2E8E4;
+    --border-medium: #CBD5CF;
+    --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.05);
+    --shadow-md: 0 4px 14px rgba(27, 77, 62, 0.08);
+    --shadow-lg: 0 8px 24px rgba(27, 77, 62, 0.12);
+    --shadow-card: 0 2px 8px rgba(27, 77, 62, 0.05);
 
-    --sidebar-width: 220px;
+    --sidebar-width: 230px;
     --topbar-height: 64px;
 
-    --radius-sm: 6px;
-    --radius-md: 10px;
-    --radius-lg: 14px;
-    --radius-xl: 18px;
+    --radius-sm: 8px;
+    --radius-md: 12px;
+    --radius-lg: 16px;
+    --radius-xl: 20px;
 
     --transition-fast: 0.15s ease;
     --transition-normal: 0.25s ease;
@@ -63,7 +65,7 @@
 html { font-size: 14px; -webkit-font-smoothing: antialiased; }
 
 body {
-    font-family: 'IBM Plex Sans Thai', -apple-system, BlinkMacSystemFont, sans-serif;
+    font-family: 'Prompt', 'IBM Plex Sans Thai', -apple-system, BlinkMacSystemFont, sans-serif;
     background: var(--color-bg);
     color: var(--text-primary);
     overflow-x: hidden;
@@ -89,9 +91,52 @@ body {
     z-index: 100;
 }
 
-.sidebar-logo { padding: 22px 24px 10px; display: flex; flex-direction: column; gap: 2px; }
-.logo-text { font-size: 1.6rem; font-weight: 700; color: var(--text-white); letter-spacing: 2px; }
-.logo-version { font-size: 0.75rem; color: rgba(255,255,255,0.5); letter-spacing: 1px; }
+.sidebar-logo {
+    padding: 16px 18px 14px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.doctor-logo-badge {
+    width: 44px;
+    height: 44px;
+    background: #ffffff;
+    border-radius: 12px;
+    padding: 3px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.18);
+    flex-shrink: 0;
+}
+
+.doctor-logo-img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    display: block;
+}
+
+.doctor-logo-text-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.logo-text {
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--text-white);
+    letter-spacing: -0.2px;
+    line-height: 1.25;
+}
+
+.logo-version {
+    font-size: 0.7rem;
+    color: rgba(255, 255, 255, 0.8);
+    letter-spacing: 0.3px;
+}
 
 .sidebar-role {
     display: flex; align-items: center; gap: 8px;

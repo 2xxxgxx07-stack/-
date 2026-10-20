@@ -3,35 +3,39 @@
    =================================================== */
 
 :root {
-    --primary-900: #004D40;
-    --primary-800: #005B5C;
-    --primary-700: #006D6F;
-    --primary-600: #00897B;
-    --primary-500: #009688;
-    --primary-400: #26A69A;
-    --primary-100: #E0F2F1;
-    --primary-50:  #F2FBF9;
+    --primary-900: #1B4D3E;
+    --primary-800: #163E32;
+    --primary-700: #235F4D;
+    --primary-600: #2D7560;
+    --primary-500: #41967D;
+    --primary-400: #7BC1AC;
+    --primary-100: #EBF5F0;
+    --primary-50:  #F4F6F5;
 
-    --color-bg-desktop: #0F172A;
-    --color-bg-mobile:  #F4F7F9;
+    --secondary-orange: #E0923C;
+    --secondary-orange-hover: #C87E2E;
+    --soft-warm-amber: #F9F2EA;
+
+    --color-bg-desktop: #111E1A;
+    --color-bg-mobile:  #F4F6F5;
     --color-card:       #FFFFFF;
     
-    --text-primary:   #1E293B;
-    --text-secondary: #64748B;
-    --text-muted:     #94A3B8;
+    --text-primary:   #2B3330;
+    --text-secondary: #586B64;
+    --text-muted:     #8A9D96;
 
-    --accent-blue:   #2563EB;
-    --accent-amber:  #D97706;
-    --accent-green:  #059669;
-    --accent-rose:   #E11D48;
+    --accent-blue:   #1565C0;
+    --accent-amber:  #E0923C;
+    --accent-green:  #1B4D3E;
+    --accent-rose:   #D32F2F;
 
     --radius-sm: 8px;
     --radius-md: 14px;
-    --radius-lg: 20px;
-    --radius-xl: 28px;
+    --radius-lg: 18px;
+    --radius-xl: 24px;
 
-    --shadow-soft: 0 4px 18px rgba(0, 77, 64, 0.07);
-    --shadow-card: 0 8px 26px rgba(15, 23, 42, 0.08);
+    --shadow-soft: 0 4px 18px rgba(27, 77, 62, 0.08);
+    --shadow-card: 0 8px 26px rgba(27, 77, 62, 0.08);
 }
 
 *, *::before, *::after {
@@ -41,7 +45,7 @@
 }
 
 body.mobile-body {
-    font-family: 'IBM Plex Sans Thai', -apple-system, BlinkMacSystemFont, sans-serif;
+    font-family: 'Prompt', 'IBM Plex Sans Thai', -apple-system, BlinkMacSystemFont, sans-serif;
     background: var(--color-bg-desktop);
     color: var(--text-primary);
     min-height: 100vh;
@@ -184,21 +188,23 @@ body.mobile-body {
 }
 
 /* ==============================================
-   HEADER BAR
+   HEADER BAR (Mood Board Lush Primary Green + Warm Orange Curve)
    ============================================== */
 .mobile-header {
-    background: linear-gradient(135deg, var(--primary-900) 0%, var(--primary-700) 100%);
+    background: linear-gradient(175deg, #1B4D3E 0%, #153E32 75%, #E0923C 100%);
     color: #FFFFFF;
-    padding: 14px 18px 12px;
+    padding: 14px 18px 16px;
     flex-shrink: 0;
-    box-shadow: 0 4px 14px rgba(0, 77, 64, 0.2);
+    box-shadow: 0 6px 20px rgba(27, 77, 62, 0.28);
+    position: relative;
+    border-radius: 0 0 22px 22px;
 }
 
 .header-top {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin-bottom: 8px;
+    margin-bottom: 6px;
 }
 
 .hospital-brand {
@@ -210,13 +216,21 @@ body.mobile-body {
 .brand-badge-icon {
     width: 38px;
     height: 38px;
-    background: rgba(255, 255, 255, 0.15);
+    background: #FFFFFF;
     border-radius: 12px;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 1.25rem;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+    padding: 2px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.16);
+    flex-shrink: 0;
+}
+
+.mobile-logo-img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    display: block;
 }
 
 .brand-text {
@@ -233,7 +247,73 @@ body.mobile-body {
 
 .hospital-sub {
     font-size: 0.7rem;
-    color: rgba(255, 255, 255, 0.75);
+    color: rgba(255, 255, 255, 0.85);
+}
+
+.header-scanner-btn {
+    width: 36px;
+    height: 36px;
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.18);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    color: #FFFFFF;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.header-scanner-btn:hover {
+    background: rgba(255, 255, 255, 0.28);
+    transform: scale(1.05);
+}
+
+/* Mood Board Hero Block inside Header */
+.mb-header-hero {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 4px 8px;
+    margin-top: 4px;
+}
+
+.mb-hero-text {
+    display: flex;
+    flex-direction: column;
+}
+
+.mb-hero-title {
+    font-size: 1.45rem;
+    font-weight: 800;
+    color: #FFFFFF;
+    letter-spacing: -0.3px;
+    line-height: 1.2;
+}
+
+.mb-hero-sub {
+    font-size: 0.85rem;
+    color: rgba(255, 255, 255, 0.9);
+    font-weight: 500;
+}
+
+.mb-hero-logo-badge {
+    width: 52px;
+    height: 52px;
+    background: #FFFFFF;
+    border-radius: 50%;
+    padding: 5px;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.mb-hero-logo {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
 }
 
 .live-pulse-badge {
@@ -3736,32 +3816,131 @@ body.mobile-body {
    ========================================================= */
 
 .smartphone-frame.my-queue-tab-active .mobile-header {
-    display: none;
+    display: none !important;
+}
+
+.mobile-header {
+    display: none !important;
 }
 
 /* Card Container */
 .eticket-card {
     background: #FFFFFF;
-    border-radius: 24px;
-    border: 1px solid #E2E8F0;
-    box-shadow: 0 4px 20px rgba(0, 77, 84, 0.05);
+    border-radius: 16px;
+    border: 1px solid #E2E8E4;
+    box-shadow: 0 4px 20px rgba(27, 77, 62, 0.08);
     overflow: visible;
     position: relative;
-    padding: 16px 16px 18px;
-    margin-bottom: 20px;
+    padding: 18px 16px;
+    margin-bottom: 16px;
+}
+
+/* Mood Board Ticket Header & Subtitle */
+.mb-ticket-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-bottom: 12px;
+    margin-bottom: 12px;
+    border-bottom: 1px solid #F1F5F9;
+}
+
+.mb-ticket-tag-group {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.mb-ticket-badge {
+    background: #1B4D3E;
+    color: #FFFFFF;
+    font-size: 0.72rem;
+    font-weight: 700;
+    padding: 3px 10px;
+    border-radius: 9999px;
+    letter-spacing: 0.2px;
+}
+
+.mb-ticket-title-wrap {
+    display: flex;
+    flex-direction: column;
+}
+
+.mb-ticket-title {
+    font-size: 1.12rem;
+    font-weight: 800;
+    color: #1B4D3E;
+    line-height: 1.2;
+}
+
+.mb-ticket-sub {
+    font-size: 0.74rem;
+    color: #586B64;
+    font-weight: 500;
+}
+
+.btn-ticket-info-circle {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    border: 1px solid #CBD5CF;
+    background: #F4F6F5;
+    color: #586B64;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.btn-ticket-info-circle:hover {
+    background: #EBF5F0;
+    color: #1B4D3E;
+    border-color: #1B4D3E;
+}
+
+/* Mood Board CI Pills Row */
+.mb-ticket-pills-row {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 16px;
+    flex-wrap: wrap;
+}
+
+.mb-ci-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 12px;
+    border-radius: 9999px;
+    font-size: 0.75rem;
+    font-weight: 600;
+}
+
+.mb-ci-pill.pill-green {
+    background: #EBF5F0;
+    color: #1E5E48;
+    border: 1px solid #D1E5DC;
+}
+
+.mb-ci-pill.pill-orange {
+    background: #F9F2EA;
+    color: #E68842;
+    border: 1px solid #EEDCCE;
 }
 
 /* 1. Status Banner Pill */
 .eticket-status-banner {
-    background: #EEF2FF;
-    color: #1E40AF;
+    background: #EBF5F0;
+    color: #1B4D3E;
+    border: 1px solid #D1E5DC;
     border-radius: 14px;
-    padding: 11px 16px;
+    padding: 10px 16px;
     text-align: center;
-    font-size: 0.94rem;
+    font-size: 0.92rem;
     font-weight: 700;
     letter-spacing: -0.2px;
-    margin-bottom: 22px;
+    margin-bottom: 18px;
 }
 
 /* 2. Queue & Patient Info */
@@ -3772,7 +3951,7 @@ body.mobile-body {
 
 .eticket-queue-label {
     font-size: 0.88rem;
-    color: #64748B;
+    color: #586B64;
     margin-bottom: 4px;
     font-weight: 500;
 }
@@ -3780,7 +3959,7 @@ body.mobile-body {
 .eticket-queue-number {
     font-size: 3.5rem;
     font-weight: 800;
-    color: #00564C;
+    color: #1B4D3E;
     line-height: 1;
     letter-spacing: -0.5px;
     margin-bottom: 8px;
@@ -3790,17 +3969,17 @@ body.mobile-body {
 .eticket-patient-name {
     font-size: 1.15rem;
     font-weight: 700;
-    color: #1E293B;
+    color: #2B3330;
     margin-bottom: 4px;
 }
 
 .eticket-patient-hn {
     font-size: 0.85rem;
-    color: #94A3B8;
+    color: #8A9D96;
     font-weight: 500;
 }
 
-/* 3. Perforation Divider with Half-Circle Cutouts */
+/* 3. Perforation Divider with Half-Circle Cutouts (Mood Board Dashed Line) */
 .eticket-perforation-divider {
     position: relative;
     display: flex;
@@ -3811,7 +3990,7 @@ body.mobile-body {
 
 .eticket-perforation-divider .eticket-dash-line {
     width: 100%;
-    border-top: 1.5px dashed #CBD5E1;
+    border-top: 2px dashed #E0923C;
     margin: 0 16px;
 }
 
@@ -3819,8 +3998,8 @@ body.mobile-body {
     position: absolute;
     width: 14px;
     height: 22px;
-    background: #F4F7F9;
-    border: 1px solid #E2E8F0;
+    background: #F4F6F5;
+    border: 1px solid #E2E8E4;
     top: 1px;
     z-index: 2;
 }
@@ -3847,7 +4026,7 @@ body.mobile-body {
 
 .eticket-stat-box {
     background: #FFFFFF;
-    border: 1px solid #E2E8F0;
+    border: 1px solid #E2E8E4;
     border-radius: 14px;
     padding: 12px 6px;
     text-align: center;
@@ -3861,27 +4040,27 @@ body.mobile-body {
 
 .eticket-stat-title {
     font-size: 0.74rem;
-    color: #64748B;
+    color: #586B64;
     font-weight: 500;
 }
 
 .eticket-stat-val {
     font-size: 1.5rem;
     font-weight: 800;
-    color: #1E293B;
+    color: #2B3330;
     line-height: 1.2;
 }
 
 .eticket-stat-val.val-ahead {
-    color: #D97706;
+    color: #E0923C;
 }
 
 .eticket-stat-val.val-time {
-    color: #1E293B;
+    color: #2B3330;
 }
 
 .eticket-stat-val.val-room {
-    color: #00564C;
+    color: #1B4D3E;
     font-size: 0.98rem;
     font-weight: 800;
     white-space: nowrap;
@@ -3889,7 +4068,7 @@ body.mobile-body {
 
 .eticket-stat-sub {
     font-size: 0.72rem;
-    color: #94A3B8;
+    color: #8A9D96;
 }
 
 /* 5. Service Stepper (ลำดับขั้นตอนการรับบริการ:) */
@@ -3901,7 +4080,7 @@ body.mobile-body {
 .eticket-stepper-title {
     font-size: 0.88rem;
     font-weight: 700;
-    color: #1E293B;
+    color: #2B3330;
     margin-bottom: 14px;
 }
 
@@ -3939,19 +4118,55 @@ body.mobile-body {
 }
 
 .eticket-step-item.active .eticket-step-circle {
-    background: #00564C;
+    background: #1B4D3E;
     color: #FFFFFF;
+    box-shadow: 0 2px 8px rgba(27, 77, 62, 0.35);
 }
 
 .eticket-step-label {
     font-size: 0.68rem;
-    color: #64748B;
+    color: #586B64;
     white-space: nowrap;
     font-weight: 500;
 }
 
+/* Big Mood Board Orange CTA Button: สแกนคิว */
+.mb-scan-action-wrap {
+    margin: 4px 0 24px;
+    width: 100%;
+}
+
+.btn-mb-scan-queue {
+    width: 100%;
+    height: 52px;
+    background: #E0923C;
+    color: #FFFFFF;
+    border: none;
+    border-radius: 14px;
+    font-family: inherit;
+    font-size: 1.08rem;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    cursor: pointer;
+    box-shadow: 0 6px 18px rgba(224, 146, 60, 0.35);
+    transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.btn-mb-scan-queue:hover {
+    background: #C87E2E;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(224, 146, 60, 0.45);
+}
+
+.btn-mb-scan-queue:active {
+    transform: translateY(0);
+}
+
 .eticket-step-item.active .eticket-step-label {
-    color: #00564C;
+    color: #1B4D3E;
     font-weight: 700;
 }
 
@@ -3963,7 +4178,7 @@ body.mobile-body {
 }
 
 .eticket-step-line.active {
-    background: #00564C;
+    background: linear-gradient(90deg, #1B4D3E 0%, #E0923C 100%);
 }
 
 /* Convenience section margin adjustments */

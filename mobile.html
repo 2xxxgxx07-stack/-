@@ -3,11 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <meta name="description" content="ระบบจองคิวและติดตามสถานะคิวผู้ป่วยผ่านมือถือ - Smart Hospital Mobile Queue">
-    <title>ระบบจองคิวผู้ป่วย | Smart Hospital Mobile</title>
+    <meta name="description" content="ระบบคิวอัจฉริยะ เพื่อการดูแลที่อบอุ่น - Smart Hospital Mobile Queue">
+    <title>ระบบคิวอัจฉริยะ เพื่อการดูแลที่อบอุ่น | Smart Hospital Mobile</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700&family=IBM+Plex+Sans+Thai:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="mode-switcher.css?v=20261018">
     <link rel="stylesheet" href="mobile.css?v=20261018">
 </head>
@@ -39,35 +39,7 @@
                 <div class="phone-camera"></div>
             </div>
 
-            <!-- Mobile App Header Bar -->
-            <header class="mobile-header">
-                <div class="header-top">
-                    <div class="hospital-brand">
-                        <div class="brand-badge-icon">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" width="22" height="22"><path d="M3 21h18M5 21V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v16"/><path d="M12 7v6M9 10h6"/></svg>
-                        </div>
-                        <div class="brand-text">
-                            <span class="hospital-name">รพ.กรุงเทพเมดิคอล</span>
-                            <span class="hospital-sub">Smart Queue Hospital</span>
-                        </div>
-                    </div>
-                    <div class="header-tools">
-                        <div class="live-pulse-badge">
-                            <span class="pulse-dot"></span>
-                            <span>เปิดบริการปกติ</span>
-                        </div>
-                    </div>
-                </div>
 
-                <!-- Live Date & Clock Bar -->
-                <div class="header-datetime-bar">
-                    <div class="mobile-date" id="mobile-date">วันจันทร์ที่ 24 พ.ย. 2568</div>
-                    <div class="mobile-time-wrap">
-                        <span class="mobile-time" id="mobile-time">10:45</span>
-                        <span class="time-suffix">น.</span>
-                    </div>
-                </div>
-            </header>
 
             <!-- Mobile Scrollable Main Content -->
             <main class="mobile-main-scroll" id="mobile-main-scroll">
@@ -348,78 +320,126 @@
 
                 <!-- TAB 1: ติดตามคิวของฉัน (Live Queue Tracker) -->
                 <section class="mobile-tab-view" id="view-my-queue">
-                    <!-- Digital e-Ticket (Virtual Queue Card) -->
+                    <!-- Digital e-Ticket (Virtual Queue Card matching Mood Board) -->
                     <div class="eticket-card" id="virtual-ticket">
-                            <!-- 1. Top Status Banner Pill -->
-                            <div class="eticket-status-banner" id="ticket-live-status-pill">
-                                <span id="ticket-status-text">กำลังรอเรียกเข้าห้องตรวจ</span>
-                            </div>
-
-                            <!-- 2. Main Queue & Patient Details -->
-                            <div class="eticket-info-section">
-                                <div class="eticket-queue-label">หมายเลขคิวของคุณ</div>
-                                <div class="eticket-queue-number" id="ticket-queue-num">M-201</div>
-                                <div class="eticket-patient-name" id="ticket-patient-name">คุณสมศักดิ์ รักสงบ</div>
-                                <div class="eticket-patient-hn" id="ticket-patient-hn">HN - 048123</div>
-                            </div>
-
-                            <!-- 3. Perforation Divider with Half-Circle Cutouts -->
-                            <div class="eticket-perforation-divider">
-                                <div class="eticket-notch notch-left"></div>
-                                <div class="eticket-dash-line"></div>
-                                <div class="eticket-notch notch-right"></div>
-                            </div>
-
-                            <!-- 4. Three Metric Summary Boxes -->
-                            <div class="eticket-stats-grid">
-                                <div class="eticket-stat-box">
-                                    <span class="eticket-stat-title">คิวก่อนหน้า</span>
-                                    <strong class="eticket-stat-val val-ahead" id="ticket-queues-ahead">0</strong>
-                                    <span class="eticket-stat-sub">คิวรอตรวจ</span>
-                                </div>
-                                <div class="eticket-stat-box">
-                                    <span class="eticket-stat-title">เวลารอโดยประมาณ</span>
-                                    <strong class="eticket-stat-val val-time" id="ticket-est-wait">~ 12</strong>
-                                    <span class="eticket-stat-sub">นาที</span>
-                                </div>
-                                <div class="eticket-stat-box">
-                                    <span class="eticket-stat-title">ห้องตรวจเป้าหมาย</span>
-                                    <strong class="eticket-stat-val val-room" id="ticket-target-room">ห้องตรวจ 1-4</strong>
-                                    <span class="eticket-stat-sub" id="ticket-doctor-name">อายุรกรรม</span>
+                        <!-- Mood Board Ticket Header -->
+                        <div class="mb-ticket-header">
+                            <div class="mb-ticket-tag-group">
+                                <span class="mb-ticket-badge">ตั๋วส่วน</span>
+                                <div class="mb-ticket-title-wrap">
+                                    <span class="mb-ticket-title">ตั๋ว 02</span>
+                                    <span class="mb-ticket-sub" id="ticket-status-text">กรุณารอเรียกตรวจ</span>
                                 </div>
                             </div>
+                            <button type="button" class="btn-ticket-info-circle" onclick="openKioskGuideModal()" title="ข้อมูลคิว">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16">
+                                    <circle cx="12" cy="12" r="10"></circle>
+                                    <line x1="12" y1="16" x2="12" y2="12"></line>
+                                    <line x1="12" y1="8" x2="12.01" y2="8"></line>
+                                </svg>
+                            </button>
+                        </div>
 
-                            <!-- 5. Service Stepper (ลำดับขั้นตอนการรับบริการ:) -->
-                            <div class="eticket-stepper-section">
-                                <div class="eticket-stepper-title">ลำดับขั้นตอนการรับบริการ:</div>
-                                <div class="eticket-stepper-timeline" id="stepper-timeline">
-                                    <div class="eticket-step-item active" id="step-1">
-                                        <div class="eticket-step-circle">1</div>
-                                        <span class="eticket-step-label">1. คัดกรอง</span>
-                                    </div>
-                                    <div class="eticket-step-line" id="line-1"></div>
-                                    <div class="eticket-step-item" id="step-2">
-                                        <div class="eticket-step-circle">2</div>
-                                        <span class="eticket-step-label">3. ตรวจแล็บ</span>
-                                    </div>
-                                    <div class="eticket-step-line" id="line-2"></div>
-                                    <div class="eticket-step-item" id="step-3">
-                                        <div class="eticket-step-circle">3</div>
-                                        <span class="eticket-step-label">3. รอหน้าห้อง</span>
-                                    </div>
-                                    <div class="eticket-step-line" id="line-3"></div>
-                                    <div class="eticket-step-item" id="step-4">
-                                        <div class="eticket-step-circle">4</div>
-                                        <span class="eticket-step-label">4. พบแพทย์</span>
-                                    </div>
-                                    <div class="eticket-step-line" id="line-4"></div>
-                                    <div class="eticket-step-item" id="step-5">
-                                        <div class="eticket-step-circle">5</div>
-                                        <span class="eticket-step-label">5. รับยา</span>
-                                    </div>
+                        <!-- Mood Board CI Pills -->
+                        <div class="mb-ticket-pills-row">
+                            <div class="mb-ci-pill pill-green">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14">
+                                    <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+                                    <line x1="16" y1="2" x2="16" y2="6"/>
+                                    <line x1="8" y1="2" x2="8" y2="6"/>
+                                    <line x1="3" y1="10" x2="21" y2="10"/>
+                                </svg>
+                                <span>การนัดหมายตรงเวลา</span>
+                            </div>
+                            <div class="mb-ci-pill pill-orange">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14">
+                                    <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
+                                </svg>
+                                <span>อันดับคิว: รอตรวจ</span>
+                            </div>
+                        </div>
+
+                        <!-- 1. Top Status Banner Pill -->
+                        <div class="eticket-status-banner" id="ticket-live-status-pill">
+                            <span>กำลังรอเรียกเข้าห้องตรวจ</span>
+                        </div>
+
+                        <!-- 2. Main Queue & Patient Details -->
+                        <div class="eticket-info-section">
+                            <div class="eticket-queue-label">หมายเลขคิวของคุณ</div>
+                            <div class="eticket-queue-number" id="ticket-queue-num">M-201</div>
+                            <div class="eticket-patient-name" id="ticket-patient-name">คุณสมศักดิ์ รักสงบ</div>
+                            <div class="eticket-patient-hn" id="ticket-patient-hn">HN - 048123</div>
+                        </div>
+
+                        <!-- 3. Perforation Divider with Half-Circle Cutouts (Mood Board Dashed Divider) -->
+                        <div class="eticket-perforation-divider">
+                            <div class="eticket-notch notch-left"></div>
+                            <div class="eticket-dash-line"></div>
+                            <div class="eticket-notch notch-right"></div>
+                        </div>
+
+                        <!-- 4. Three Metric Summary Boxes -->
+                        <div class="eticket-stats-grid">
+                            <div class="eticket-stat-box">
+                                <span class="eticket-stat-title">คิวก่อนหน้า</span>
+                                <strong class="eticket-stat-val val-ahead" id="ticket-queues-ahead">0</strong>
+                                <span class="eticket-stat-sub">คิวรอตรวจ</span>
+                            </div>
+                            <div class="eticket-stat-box">
+                                <span class="eticket-stat-title">เวลารอโดยประมาณ</span>
+                                <strong class="eticket-stat-val val-time" id="ticket-est-wait">~ 12</strong>
+                                <span class="eticket-stat-sub">นาที</span>
+                            </div>
+                            <div class="eticket-stat-box">
+                                <span class="eticket-stat-title">ห้องตรวจเป้าหมาย</span>
+                                <strong class="eticket-stat-val val-room" id="ticket-target-room">ห้องตรวจ 1-4</strong>
+                                <span class="eticket-stat-sub" id="ticket-doctor-name">อายุรกรรม</span>
+                            </div>
+                        </div>
+
+                        <!-- 5. Service Stepper (ลำดับขั้นตอนการรับบริการ:) -->
+                        <div class="eticket-stepper-section">
+                            <div class="eticket-stepper-title">ลำดับขั้นตอนการรับบริการ:</div>
+                            <div class="eticket-stepper-timeline" id="stepper-timeline">
+                                <div class="eticket-step-item active" id="step-1">
+                                    <div class="eticket-step-circle">1</div>
+                                    <span class="eticket-step-label">1. คัดกรอง</span>
+                                </div>
+                                <div class="eticket-step-line" id="line-1"></div>
+                                <div class="eticket-step-item" id="step-2">
+                                    <div class="eticket-step-circle">2</div>
+                                    <span class="eticket-step-label">2. ตรวจแล็บ</span>
+                                </div>
+                                <div class="eticket-step-line" id="line-2"></div>
+                                <div class="eticket-step-item" id="step-3">
+                                    <div class="eticket-step-circle">3</div>
+                                    <span class="eticket-step-label">3. รอหน้าห้อง</span>
+                                </div>
+                                <div class="eticket-step-line" id="line-3"></div>
+                                <div class="eticket-step-item" id="step-4">
+                                    <div class="eticket-step-circle">4</div>
+                                    <span class="eticket-step-label">4. พบแพทย์</span>
+                                </div>
+                                <div class="eticket-step-line" id="line-4"></div>
+                                <div class="eticket-step-item" id="step-5">
+                                    <div class="eticket-step-circle">5</div>
+                                    <span class="eticket-step-label">5. รับยา</span>
                                 </div>
                             </div>
                         </div>
+                    </div>
+
+                    <!-- Mood Board Secondary Orange CTA: สแกนคิว -->
+                    <div class="mb-scan-action-wrap">
+                        <button type="button" class="btn-mb-scan-queue" onclick="openKioskGuideModal()">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" width="20" height="20">
+                                <path d="M3 7V5a2 2 0 0 1 2-2h2M17 3h2a2 2 0 0 1 2 2v2M21 17v2a2 2 0 0 1-2 2h-2M7 21H5a2 2 0 0 1-2-2v-2"></path>
+                                <rect x="7" y="7" width="10" height="10"></rect>
+                            </svg>
+                            <span>สแกนคิว</span>
+                        </button>
+                    </div>
 
                         <!-- บริการอำนวยความสะดวก Section (2 items exactly matching screenshot) -->
                         <div class="appt-services-section myqueue-services-section">

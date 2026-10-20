@@ -4,24 +4,24 @@
    =================================================== */
 
 :root {
-    --kios-teal: #00796B;
-    --kios-teal-dark: #004D54;
-    --kios-teal-deep: #003B40;
-    --kios-teal-light: #E0F2F1;
+    --kios-teal: #1B4D3E;
+    --kios-teal-dark: #163E32;
+    --kios-teal-deep: #0F2D24;
+    --kios-teal-light: #EBF5F0;
     
-    --kios-cyan-bright: #22D3EE;
-    --kios-cyan-dark: #0284C7;
-    --kios-cyan-soft: #E0F2FE;
-    --kios-cyan-border: #A5F3FC;
+    --kios-cyan-bright: #E0923C;
+    --kios-cyan-dark: #C87E2E;
+    --kios-cyan-soft: #F9F2EA;
+    --kios-cyan-border: #EEDCCE;
 
-    --kios-bg: #F4F7FB;
+    --kios-bg: #F4F6F5;
     --kios-card-bg: #FFFFFF;
     
-    --kios-text-dark: #0F172A;
-    --kios-text-secondary: #475569;
-    --kios-text-muted: #64748B;
+    --kios-text-dark: #2B3330;
+    --kios-text-secondary: #586B64;
+    --kios-text-muted: #8A9D96;
     
-    --kios-radius-lg: 24px;
+    --kios-radius-lg: 20px;
     --kios-radius-md: 16px;
     --kios-radius-sm: 12px;
 }
@@ -33,7 +33,7 @@
 }
 
 body.kios-body {
-    font-family: 'IBM Plex Sans Thai', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    font-family: 'Prompt', 'IBM Plex Sans Thai', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
     background: var(--kios-bg);
     color: var(--kios-text-dark);
     min-height: 100vh;
@@ -79,36 +79,45 @@ body.kios-body {
 .kios-logo-badge {
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 12px;
     padding: 6px 14px;
-    background: #F0FDF4;
-    border: 1px solid #DCFCE7;
+    background: #FFFFFF;
+    border: 1px solid #E2E8E4;
     border-radius: var(--kios-radius-sm);
+    box-shadow: 0 2px 8px rgba(27, 77, 62, 0.06);
 }
 
 .badge-icon-cross {
-    width: 32px;
-    height: 32px;
-    border-radius: 8px;
-    background: linear-gradient(135deg, #10B981 0%, #059669 100%);
-    color: #FFFFFF;
+    width: 38px;
+    height: 38px;
+    border-radius: 10px;
+    background: #FFFFFF;
     display: flex;
     align-items: center;
     justify-content: center;
-    box-shadow: 0 2px 6px rgba(16, 185, 129, 0.3);
+    overflow: hidden;
+    flex-shrink: 0;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+}
+
+.kios-logo-img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    display: block;
 }
 
 .badge-text strong {
     display: block;
-    font-size: 0.96rem;
+    font-size: 0.98rem;
     font-weight: 700;
-    color: #065F46;
+    color: #1B4D3E;
     line-height: 1.15;
 }
 
 .badge-text small {
-    font-size: 0.62rem;
-    color: #10B981;
+    font-size: 0.65rem;
+    color: #E0923C;
     font-weight: 700;
     letter-spacing: 0.4px;
 }
@@ -3318,12 +3327,21 @@ body.kios-body {
     display: flex;
     align-items: center;
     justify-content: center;
+    width: 26px;
+    height: 26px;
+    flex-shrink: 0;
+}
+
+.slip-logo-img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
 }
 
 .slip-hospital-title {
     font-size: 1.05rem;
     font-weight: 700;
-    color: #004D54;
+    color: #1B4D3E;
     letter-spacing: -0.2px;
 }
 
@@ -3331,7 +3349,7 @@ body.kios-body {
     display: block;
     font-size: 0.68rem;
     font-weight: 600;
-    color: #64748B;
+    color: #586B64;
     letter-spacing: 0.5px;
     margin-bottom: 6px;
 }
@@ -3339,12 +3357,13 @@ body.kios-body {
 .slip-print-timestamp {
     display: block;
     font-size: 0.72rem;
-    color: #64748B;
+    color: #8A9D96;
 }
 
-/* Queue Highlighting Box (Soft Mint/Cyan) */
+/* Queue Highlighting Box (Warm Amber Dashed Perforation) */
 .ticket-queue-highlight-box {
-    background: #EAF7F5;
+    background: #EBF5F0;
+    border: 1.5px dashed #E0923C;
     border-radius: 14px;
     padding: 16px 14px 14px;
     text-align: center;

@@ -4,70 +4,78 @@
 
 /* ---- CSS Custom Properties ---- */
 :root {
-    /* Primary Teal Palette */
-    --teal-900: #004D40;
-    --teal-800: #00574B;
-    --teal-700: #005B5C;
-    --teal-600: #006D6F;
-    --teal-500: #00897B;
-    --teal-400: #009688;
-    --teal-300: #4DD0E1;
-    --teal-200: #80CBC4;
-    --teal-100: #B2DFDB;
-    --teal-50: #E0F7FA;
+    /* Primary Green Palette (Mood Board: #1B4D3E) */
+    --teal-900: #1B4D3E;
+    --teal-800: #163E32;
+    --teal-700: #1B4D3E;
+    --teal-600: #235F4D;
+    --teal-500: #2D7560;
+    --teal-400: #41967D;
+    --teal-300: #7BC1AC;
+    --teal-200: #B7DFD4;
+    --teal-100: #E6ECE8;
+    --teal-50: #EBF5F0;
+
+    /* Secondary Orange Palette (Mood Board: #E0923C) */
+    --secondary-orange: #E0923C;
+    --secondary-orange-hover: #C87E2E;
+    --secondary-orange-light: #F9F2EA;
 
     /* Functional Colors */
-    --color-bg: #F0F4F7;
+    --color-bg: #F4F6F5;
     --color-card: #FFFFFF;
-    --color-sidebar: linear-gradient(180deg, #004D40 0%, #005B5C 100%);
-    --color-sidebar-solid: #004D40;
+    --color-sidebar: linear-gradient(180deg, #1B4D3E 0%, #143A2F 100%);
+    --color-sidebar-solid: #1B4D3E;
 
     /* Badge / Tag Colors */
-    --tag-appointment: #4DD0E1;
-    --tag-appointment-bg: #E0F7FA;
-    --tag-walkin: #66BB6A;
-    --tag-walkin-bg: #C8E6C9;
-    --tag-late: #FF9800;
-    --tag-late-bg: #FFF3E0;
+    --tag-appointment: #1E5E48;
+    --tag-appointment-bg: #EBF5F0;
+    --tag-walkin: #2E7D32;
+    --tag-walkin-bg: #E8F5E9;
+    --tag-late: #E0923C;
+    --tag-late-bg: #F9F2EA;
 
     /* Status Colors */
     --color-red: #D32F2F;
     --color-red-light: #FFEBEE;
-    --color-orange: #FF9800;
-    --color-green: #00695C;
-    --color-green-light: #E8F5E9;
+    --color-orange: #E0923C;
+    --color-orange-light: #F9F2EA;
+    --color-green: #1B4D3E;
+    --color-green-light: #EBF5F0;
     --color-blue: #1976D2;
 
     /* Button Colors */
-    --btn-primary: #006D6F;
-    --btn-primary-hover: #005B5C;
-    --btn-done: #00695C;
-    --btn-done-hover: #004D40;
+    --btn-primary: #1B4D3E;
+    --btn-primary-hover: #143A2F;
+    --btn-secondary: #E0923C;
+    --btn-secondary-hover: #C87E2E;
+    --btn-done: #1B4D3E;
+    --btn-done-hover: #143A2F;
 
-    /* Text Colors */
-    --text-primary: #1A1A2E;
-    --text-secondary: #546E7A;
-    --text-muted: #90A4AE;
+    /* Text Colors (Mood Board Dark Slate: #2B3330) */
+    --text-primary: #2B3330;
+    --text-secondary: #586B64;
+    --text-muted: #8A9D96;
     --text-white: #FFFFFF;
 
     /* Borders & Shadows */
-    --border-light: #E0E7EC;
-    --border-medium: #CFD8DC;
-    --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.06);
-    --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.08);
-    --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.12);
-    --shadow-card: 0 2px 8px rgba(0, 77, 64, 0.06);
+    --border-light: #E2E8E4;
+    --border-medium: #CBD5CF;
+    --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.05);
+    --shadow-md: 0 4px 14px rgba(27, 77, 62, 0.08);
+    --shadow-lg: 0 8px 24px rgba(27, 77, 62, 0.12);
+    --shadow-card: 0 2px 8px rgba(27, 77, 62, 0.05);
 
     /* Spacing */
     --sidebar-width: 256px;
     --sidebar-collapsed-width: 72px;
     --topbar-height: 64px;
 
-    /* Radius */
-    --radius-sm: 6px;
-    --radius-md: 10px;
-    --radius-lg: 14px;
-    --radius-xl: 18px;
+    /* Radius (Mood board: 12-16px) */
+    --radius-sm: 8px;
+    --radius-md: 12px;
+    --radius-lg: 16px;
+    --radius-xl: 20px;
 
     /* Transitions */
     --transition-fast: 0.15s ease;
@@ -89,7 +97,7 @@ html {
 }
 
 body {
-    font-family: 'IBM Plex Sans Thai', -apple-system, BlinkMacSystemFont, sans-serif;
+    font-family: 'Prompt', 'IBM Plex Sans Thai', -apple-system, BlinkMacSystemFont, sans-serif;
     background: var(--color-bg);
     color: var(--text-primary);
     overflow-x: hidden;
@@ -162,26 +170,41 @@ body {
 }
 
 .sidebar-mini-logo {
+    width: 42px;
+    height: 42px;
+    background: #ffffff;
+    border-radius: 12px;
     display: flex;
-    flex-direction: column;
     align-items: center;
     justify-content: center;
-    text-align: center;
-    line-height: 1.15;
+    padding: 3px;
     flex-shrink: 0;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.18);
+    transition: transform var(--transition-fast);
+}
+
+.sidebar-mini-logo:hover {
+    transform: scale(1.05);
+}
+
+.sidebar-logo-img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    display: block;
 }
 
 .mini-logo-title {
     font-size: 0.96rem;
     font-weight: 800;
-    color: #ffffff;
+    color: #1B4D3E;
     letter-spacing: 1.2px;
 }
 
 .mini-logo-sub {
     font-size: 0.68rem;
     font-weight: 600;
-    color: #4dd0e1;
+    color: var(--secondary-orange);
     letter-spacing: 0.5px;
 }
 
@@ -203,7 +226,7 @@ body {
 
 .brand-subtitle {
     font-size: 0.72rem;
-    color: rgba(255, 255, 255, 0.65);
+    color: rgba(255, 255, 255, 0.82);
     font-weight: 400;
 }
 
@@ -214,7 +237,7 @@ body {
     border-radius: 50%;
     background: #ffffff;
     border: 1px solid rgba(0, 0, 0, 0.08);
-    color: #005459;
+    color: #1B4D3E;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -230,7 +253,7 @@ body {
 
 .sidebar-collapse-btn:hover {
     background: #f1f5f9;
-    color: #00363a;
+    color: #163E32;
     transform: scale(1.12);
     box-shadow: 0 3px 10px rgba(0, 0, 0, 0.28);
 }
@@ -573,12 +596,12 @@ body {
 
 .sidebar.collapsed .nav-item.active {
     background: #ffffff;
-    color: #005459;
+    color: #1B4D3E;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
 
 .sidebar.collapsed .nav-item.active .nav-icon {
-    color: #005459;
+    color: #1B4D3E;
 }
 
 .sidebar.collapsed .nav-active-pill {
@@ -654,7 +677,7 @@ body {
 
 .sidebar.collapsed:hover .nav-item.active {
     background: #ffffff;
-    color: #005459;
+    color: #1B4D3E;
 }
 
 .sidebar.collapsed:hover .sidebar-actions-grid {
@@ -678,13 +701,13 @@ body {
     left: calc(100% + 10px);
     top: 50%;
     transform: translateY(-50%) translateX(-4px);
-    background: #004D40;
+    background: #1B4D3E;
     color: #ffffff;
     font-size: 0.78rem;
     font-weight: 600;
     padding: 5px 11px;
     border-radius: 7px;
-    border: 1px solid rgba(77, 208, 225, 0.3);
+    border: 1px solid rgba(224, 146, 60, 0.4);
     white-space: nowrap;
     opacity: 0;
     pointer-events: none;
@@ -700,7 +723,7 @@ body {
     top: 50%;
     transform: translateY(-50%);
     border: 5px solid transparent;
-    border-right-color: #004D40;
+    border-right-color: #1B4D3E;
     opacity: 0;
     pointer-events: none;
     transition: opacity 0.18s ease;
@@ -1209,13 +1232,13 @@ body {
 }
 
 .column-pill-badge {
-    background: #004d40;
+    background: #1B4D3E;
     color: #ffffff;
     padding: 3px 12px;
     border-radius: 999px;
     font-size: 0.76rem;
     font-weight: 600;
-    box-shadow: 0 2px 6px rgba(0, 77, 64, 0.2);
+    box-shadow: 0 2px 6px rgba(27, 77, 62, 0.25);
 }
 
 .column-header-sub {
@@ -1281,7 +1304,7 @@ body {
 }
 
 .filter-pill-btn.active {
-    background: #004d40;
+    background: #1B4D3E;
     color: #ffffff;
     font-weight: 600;
     box-shadow: 0 1px 4px rgba(0, 0, 0, 0.12);
@@ -1346,14 +1369,14 @@ body {
 }
 
 .btn-action.btn-call-lab {
-    background: #005459;
+    background: #1B4D3E;
     color: #ffffff;
     border: none;
     font-weight: 600;
 }
 
 .btn-action.btn-call-lab:hover {
-    background: #00363a;
+    background: #163E32;
     color: #ffffff;
 }
 
@@ -1392,7 +1415,7 @@ body {
 }
 
 .vitalsign-checkbox-label input[type="checkbox"] {
-    accent-color: #005459;
+    accent-color: #1B4D3E;
     width: 15px;
     height: 15px;
     cursor: pointer;
@@ -3346,7 +3369,7 @@ body {
     align-items: center;
     gap: 8px;
     padding: 10px 20px;
-    background: linear-gradient(135deg, #006D6F 0%, #004D40 100%);
+    background: linear-gradient(135deg, #1B4D3E 0%, #143A2F 100%);
     color: #FFFFFF;
     border: none;
     border-radius: var(--radius-md);
@@ -3354,14 +3377,14 @@ body {
     font-family: inherit;
     font-weight: 600;
     cursor: pointer;
-    box-shadow: 0 4px 12px rgba(0, 77, 64, 0.25);
+    box-shadow: 0 4px 12px rgba(27, 77, 62, 0.25);
     transition: all var(--transition-fast);
 }
 
 .btn-create-appt:hover {
-    background: linear-gradient(135deg, #00838F 0%, #005B5C 100%);
+    background: linear-gradient(135deg, #235F4D 0%, #1B4D3E 100%);
     transform: translateY(-1.5px);
-    box-shadow: 0 6px 18px rgba(0, 77, 64, 0.35);
+    box-shadow: 0 6px 18px rgba(27, 77, 62, 0.35);
 }
 
 .btn-create-appt:active {
@@ -3752,7 +3775,7 @@ body {
     align-items: center;
     gap: 5px;
     padding: 6px 12px;
-    background: #006D6F;
+    background: #1B4D3E;
     color: #FFFFFF;
     border: none;
     border-radius: var(--radius-sm);
@@ -3763,9 +3786,9 @@ body {
 }
 
 .btn-appt-checkin:hover {
-    background: #004D40;
+    background: #143A2F;
     transform: translateY(-1px);
-    box-shadow: 0 2px 8px rgba(0, 109, 111, 0.25);
+    box-shadow: 0 2px 8px rgba(27, 77, 62, 0.25);
 }
 
 .btn-appt-reschedule {
@@ -3817,7 +3840,7 @@ body {
 }
 
 .appt-modal-header {
-    background: linear-gradient(135deg, #004D40 0%, #006D6F 100%);
+    background: linear-gradient(135deg, #1B4D3E 0%, #235F4D 100%);
     color: #FFFFFF;
     padding: 16px 20px;
     border-radius: var(--radius-lg) var(--radius-lg) 0 0;
@@ -3940,7 +3963,7 @@ body {
     align-items: center;
     gap: 7px;
     padding: 9px 18px;
-    background: #006D6F;
+    background: #1B4D3E;
     color: #FFFFFF;
     border: none;
     border-radius: var(--radius-sm);
@@ -3951,7 +3974,7 @@ body {
 }
 
 .btn-confirm-appt:hover {
-    background: #004D40;
+    background: #143A2F;
 }
 
 .btn-confirm-reschedule {
@@ -3959,7 +3982,7 @@ body {
     align-items: center;
     gap: 7px;
     padding: 9px 18px;
-    background: #D97706;
+    background: #E0923C;
     color: #FFFFFF;
     border: none;
     border-radius: var(--radius-sm);
@@ -3970,7 +3993,7 @@ body {
 }
 
 .btn-confirm-reschedule:hover {
-    background: #B45309;
+    background: #C87E2E;
 }
 
 .btn-confirm-cancel {
@@ -4035,7 +4058,7 @@ body {
 
 .profile-hero-cover {
     height: 120px;
-    background: linear-gradient(135deg, #004D40 0%, #006D6F 50%, #00897B 100%);
+    background: linear-gradient(135deg, #1B4D3E 0%, #235F4D 50%, #E0923C 100%);
     position: relative;
     display: flex;
     justify-content: flex-end;
@@ -4819,7 +4842,7 @@ body {
     justify-content: center;
     overflow: hidden;
     flex-shrink: 0;
-    background: #006D6F;
+    background: #1B4D3E;
     position: relative;
 }
 
@@ -5070,11 +5093,11 @@ body {
     display: inline-flex;
     align-items: center;
     gap: 10px;
-    background: #004D40;
+    background: #1B4D3E;
     color: #FFFFFF;
     padding: 12px 20px;
     border-radius: var(--radius-md);
-    box-shadow: 0 6px 20px rgba(0, 77, 64, 0.35);
+    box-shadow: 0 6px 20px rgba(27, 77, 62, 0.35);
     border: 1px solid rgba(255, 255, 255, 0.2);
     font-size: 0.86rem;
     font-weight: 500;
